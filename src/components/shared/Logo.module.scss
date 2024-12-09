@@ -1,0 +1,39 @@
+@mixin font-weight-animation($weight, $delay) {
+  --target-weight: #{$weight};
+  animation: fontWeight 10s infinite both;
+  animation-delay: #{$delay}s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes fontWeight {
+  0% {
+    font-weight: 100;
+    opacity: 1;
+  }
+  10% {
+    font-weight: var(--target-weight);
+    opacity: 1;
+  }
+  95% {
+    font-weight: var(--target-weight);
+    opacity: 1;
+  }
+  100% {
+    font-weight: 100;
+    opacity: 1;
+  }
+}
+
+.logo {
+  span {
+    display: inline-block;
+    font-weight: 100;
+    opacity: 0;
+
+    @for $i from 1 through 9 {
+      &:nth-child(#{$i}) {
+        @include font-weight-animation(100 + ($i * 100), $i * 0.1);
+      }
+    }
+  }
+}

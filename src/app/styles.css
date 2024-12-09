@@ -1,0 +1,12 @@
+.hero {
+  @apply h-[100dvh] flex items-center justify-center;
+}
+.hero div {
+}
+.code {
+  @apply text-2xl;
+}
+.code span {
+  display: inline-block;
+  padding: 0 0.2em;
+}
