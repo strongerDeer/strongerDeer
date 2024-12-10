@@ -1,40 +1,14 @@
-"use client";
-import { useState } from "react";
+import Image from "next/image";
 
 export default function Experience() {
-  const [toggle, setToggle] = useState(false);
   return (
-    <section>
-      <h2>Work Experience</h2>
-      <ol>
-        <li>
-          <h3>위니브 Weniv</h3>
-          <p>2022.04 ~ 2024.07(2년 3개월)</p>
+    <div className="wrap" id="experience">
+      <section>
+        <h2>기타 경력 및 경험</h2>
 
-          <h4>프론트엔드 개발</h4>
-          <ul>
-            <li>내용 삽입</li>
-            <li>내용 삽입</li>
-            <li>내용 삽입</li>
-          </ul>
-        </li>
-      </ol>
-      {toggle ? (
-        <ol>
-          <li>
-            <h3>팀스톤</h3>
-            <ul>
-              <li>내용 삽입</li>
-              <li>내용 삽입</li>
-              <li>내용 삽입</li>
-            </ul>
-          </li>
-        </ol>
-      ) : (
-        <button type="button" onClick={() => setToggle((prev) => !prev)}>
-          이전 경력 보기
-        </button>
-      )}
-    </section>
+        <Image src="/book_github.webp" width="200" height="200" alt="" />
+        <Image src="/inflearn.png" width="200" height="200" alt="" />
+      </section>
+    </div>
   );
 }

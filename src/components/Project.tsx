@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
-import { I_PROJECTS, PROJECTS } from "@data";
-import { BarChart, BriefcaseBusiness, Cpu, Layout, User } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { I_PROJECTS, ICON_MAP, PROJECTS } from "@data";
+import { BarChart, BriefcaseBusiness, User } from "lucide-react";
 
 export default function Project() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
@@ -21,8 +21,7 @@ export default function Project() {
 
   return (
     <>
-      {/* Projects Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="wrap" id="project">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold text-center mb-16 text-gray-800">
             프로젝트
@@ -77,13 +76,14 @@ export default function Project() {
                   )}
                 </p>
                 <div className="flex items-center mb-4">
-                  {project.icon === "BarChart" ? (
+                  {/* {project.icon === "BarChart" ? (
                     <BarChart />
                   ) : project.icon === "Cpu" ? (
                     <Cpu />
                   ) : (
                     <Layout />
-                  )}
+                  )} */}
+                  {React.createElement(ICON_MAP[project.icon] || BarChart)}
                   <h3 className="text-xl font-bold ml-2 text-gray-800">
                     {project.title}
                   </h3>

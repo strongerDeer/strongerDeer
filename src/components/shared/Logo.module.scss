@@ -1,13 +1,22 @@
+@use "sass:math";
+
+// 애니메이션 관련 변수
+$animation-duration: 10s;
+$animation-timing: ease-in-out;
+$initial-weight: 100;
+$weight-increment: 100;
+$delay-increment: 0.1;
+
 @mixin font-weight-animation($weight, $delay) {
   --target-weight: #{$weight};
-  animation: fontWeight 10s infinite both;
+  animation: fontWeight $animation-duration infinite both;
   animation-delay: #{$delay}s;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: $animation-timing;
 }
 
 @keyframes fontWeight {
   0% {
-    font-weight: 100;
+    font-weight: $initial-weight;
     opacity: 1;
   }
   10% {
@@ -19,7 +28,7 @@
     opacity: 1;
   }
   100% {
-    font-weight: 100;
+    font-weight: $initial-weight;
     opacity: 1;
   }
 }
@@ -27,12 +36,15 @@
 .logo {
   span {
     display: inline-block;
-    font-weight: 100;
+    font-weight: $initial-weight;
     opacity: 0;
 
     @for $i from 1 through 9 {
-      &:nth-child(#{$i}) {
-        @include font-weight-animation(100 + ($i * 100), $i * 0.1);
+      &:nth-of-type(#{$i}) {
+        @include font-weight-animation(
+          $initial-weight + ($i * $weight-increment),
+          $i * $delay-increment
+        );
       }
     }
   }

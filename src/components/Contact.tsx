@@ -1,23 +1,23 @@
-import { BookOpen, Github, Linkedin, Mail } from "lucide-react";
+import { Github, Mail } from "lucide-react";
 
 export default function Contact() {
   return (
-    <section>
-      <h2>Contact</h2>
-      <div className="flex justify-center gap-6 mb-12">
+    <footer className="pt-8 pb-10">
+      <h2 className="text-center">Contact</h2>
+      <div className="center gap-6">
         <a
-          href="#"
-          className="transform hover:scale-110 transition-all p-3 bg-white rounded-xl shadow-lg"
+          href="https://github.com/strongerDeer"
+          target="_blank"
+          className="link"
         >
-          <Github className="w-6 h-6 text-gray-700" />
+          <Github />
+          <span>GitHub</span>
         </a>
-        <a
-          href="mailto:stronger_deer@naver.com"
-          className="transform hover:scale-110 transition-all p-3 bg-white rounded-xl shadow-lg"
-        >
-          <Mail className="w-6 h-6 text-gray-700" />
+        <a href="mailto:stronger_deer@naver.com" className="link">
+          <Mail />
+          <span>Email</span>
         </a>
       </div>
-    </section>
+    </footer>
   );
 }

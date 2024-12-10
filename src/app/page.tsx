@@ -7,21 +7,25 @@ import Certificate from "@components/Certificate";
 import Education from "@components/Education";
 import Experience from "@components/Experience";
 import Header from "@components/Header/Header";
-import Other from "@components/Other";
 
 export default function Home() {
   return (
     <div>
       <Header />
       <Hero />
-      <Career />
-      <Experience />
+
       <Achievements />
       <Project />
-      <Other />
-      <Education />
 
-      <Certificate />
+      <Career />
+      <Experience />
+
+      <div className="wrap">
+        <div>
+          <Education />
+          <Certificate />
+        </div>
+      </div>
 
       <Contact />
     </div>

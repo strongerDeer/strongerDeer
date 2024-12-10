@@ -1,0 +1,97 @@
+.code {
+  @apply text-xl sm:text-2xl;
+
+  span {
+    display: inline-block;
+    padding: 0 0.2em;
+  }
+}
+
+//section
+
+.wrap {
+  @apply min-h-[100dvh] 
+
+  flex items-center justify-center;
+
+  &:nth-child(odd) {
+    @apply bg-blue-50;
+  }
+
+  section {
+    @apply container mx-auto px-6;
+
+    h2 {
+      @apply text-3xl font-bold text-gray-800;
+
+      & + p {
+        @apply mt-4 mb-8 text-gray-600;
+      }
+    }
+  }
+}
+
+// 경력
+#career {
+  @apply py-16;
+
+  ol {
+    @apply relative flex flex-col;
+
+    & > li {
+      @apply flex gap-6 relative pl-8 pb-24;
+
+      &:last-child {
+        @apply pb-0;
+      }
+
+      &::before,
+      &::after {
+        @apply content-[''] absolute left-0 top-0 translate-y-2;
+      }
+      &::before {
+        @apply w-3 h-3 rounded-full border-4 border-blue-500 z-10;
+      }
+      &:not(:last-child):after {
+        @apply w-px h-full bg-gray-200 left-1.5 -translate-x-2/4;
+      }
+
+      div:first-child {
+        @apply basis-72;
+      }
+
+      h3 {
+        @apply text-sm font-normal text-gray-400 mb-3;
+
+        span {
+          @apply text-xl font-bold mb-2 text-gray-800 tracking-tight  mr-2;
+        }
+        & ~ p {
+          @apply text-sm text-gray-500 mt-1;
+        }
+      }
+      .content {
+        p {
+          @apply flex items-center gap-1 font-bold text-lg mb-4;
+          svg {
+            @apply h-4;
+          }
+        }
+        ul {
+          @apply list-disc list-inside text-gray-600 space-y-1 pl-3;
+        }
+      }
+    }
+  }
+
+  .list {
+    position: relative;
+    .blur {
+      @apply content-[''] block absolute left-0 bottom-0 w-full h-full bg-gradient-to-b
+      from-transparent from-70% via-blue-50/80 to-blue-50 pointer-events-none;
+    }
+  }
+  button {
+    @apply px-6 py-2 text-sm border border-gray-300 bg-white rounded-full hover:bg-gray-50 transition-colors mx-auto block relative;
+  }
+}
