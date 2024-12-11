@@ -8,11 +8,8 @@
 }
 
 //section
-
 .wrap {
-  @apply min-h-[100dvh] 
-
-  flex items-center justify-center;
+  @apply min-h-[100dvh] py-16 flex items-center justify-center;
 
   &:nth-child(odd) {
     @apply bg-blue-50;
@@ -39,7 +36,7 @@
     @apply relative flex flex-col;
 
     & > li {
-      @apply flex gap-6 relative pl-8 pb-24;
+      @apply flex flex-col md:flex-row gap-6  relative pl-8 pb-24;
 
       &:last-child {
         @apply pb-0;
@@ -57,7 +54,7 @@
       }
 
       div:first-child {
-        @apply basis-72;
+        @apply basis-0 md:basis-72;
       }
 
       h3 {
@@ -93,5 +90,73 @@
   }
   button {
     @apply px-6 py-2 text-sm border border-gray-300 bg-white rounded-full hover:bg-gray-50 transition-colors mx-auto block relative;
+  }
+}
+
+#education section:first-child {
+  @apply mb-16;
+}
+
+.card {
+  @apply grid gap-8 sm:grid-cols-2 xl:grid-cols-4;
+  & > li {
+    @apply flex flex-col   bg-white rounded-xl shadow-lg overflow-hidden;
+
+    .content {
+      @apply flex flex-col grow items-end justify-between  pt-4 px-6 pb-6;
+
+      h3 {
+        @apply font-bold text-lg  mb-4 flex gap-1 items-center;
+        svg {
+          @apply h-5;
+        }
+      }
+      ul,
+      p {
+        @apply pl-2;
+      }
+
+      & > div:not(.btn-group) {
+        @apply w-full grow;
+      }
+      h3 + ul li {
+        @apply mt-2;
+      }
+    }
+  }
+
+  div.thumb,
+  img {
+    @apply w-full aspect-video object-cover;
+  }
+  .thumb {
+    @apply relative  bg-gray-200;
+
+    p {
+      @apply absolute top-3 left-3  inline-flex items-center bg-white rounded-2xl py-1 px-2 text-xs text-gray-600;
+    }
+
+    img {
+    }
+  }
+
+  .tag {
+    @apply flex flex-wrap w-full gap-2 text-sm;
+  }
+  .btn-group {
+    @apply flex justify-end gap-2 mt-5;
+  }
+}
+
+#skill {
+  img {
+    @apply rounded-2xl block mx-auto;
+  }
+  .program {
+    @apply flex gap-2 p-4 bg-blue-100 rounded-2xl w-fit mx-auto;
+
+    img {
+      @apply w-14 h-14 rounded-2xl;
+    }
   }
 }

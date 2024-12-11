@@ -36,6 +36,14 @@ section,
 footer {
   h2 {
     @apply font-bold mb-6 text-2xl;
+
+    span {
+      @apply font-normal text-lg text-gray-600 relative pl-3 ml-2;
+
+      &::before {
+        @apply content-[''] inline-block w-px  h-3 bg-gray-400 absolute top-1/2 left-0 -translate-y-1/2;
+      }
+    }
   }
 }
 
@@ -69,5 +77,69 @@ footer {
         }
       }
     }
+  }
+}
+
+.list {
+  li {
+    @apply relative;
+    &::before {
+      @apply content-[''] block absolute left-0 -translate-y-1/2;
+    }
+  }
+
+  & > li {
+    @apply py-2 pl-4;
+
+    &::before {
+      @apply w-1.5 h-1.5 bg-blue-500 top-5 rounded-full;
+    }
+
+    ul,
+    ol {
+      @apply mt-1;
+
+      li {
+        @apply py-1 pl-4;
+
+        &::before {
+          @apply w-1.5 h-px bg-gray-500 top-4;
+        }
+      }
+    }
+  }
+}
+
+.list2 {
+  @apply mt-1 mb-4;
+  li {
+    @apply pl-3 relative;
+
+    &::before {
+      @apply content-[''] block absolute top-3 left-0 -translate-y-1/2 w-1.5 h-px bg-gray-500;
+    }
+  }
+}
+
+.point {
+  @apply inline-block text-gray-600  py-px px-1 -mx-1 bg-white;
+
+  strong {
+    @apply text-blue-500;
+  }
+}
+
+strong.point {
+  @apply text-blue-500;
+}
+
+//
+.go {
+  @apply inline-flex gap-1 items-center justify-center border border-blue-100 bg-blue-100 w-10 h-10 rounded-full hover:border-blue-200 hover:scale-110 transition-all duration-300;
+  svg {
+    @apply h-5 stroke-blue-500;
+  }
+  span {
+    @include a11y-hidden;
   }
 }

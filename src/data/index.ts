@@ -4,6 +4,7 @@ type IconName = "BarChart" | "Book" | "Layout" | "Code2" | "Users";
 
 export interface I_PROJECTS {
   type: string;
+  thumb: string;
   title: string;
   kor: string;
   description: string;
@@ -12,6 +13,7 @@ export interface I_PROJECTS {
   icon: IconName;
   metrics: string[];
   url: string;
+  github?: string;
 }
 
 export const ICON_MAP: Record<IconName, LucideIcon> = {
@@ -40,6 +42,7 @@ export const PROJECTS: I_PROJECTS[] = [
   {
     type: "개인",
     title: "page0127.",
+    thumb: "",
     kor: "페이지 읽다",
     description: "나만의 온라인 책장",
     longDesc: "",
@@ -53,11 +56,13 @@ export const PROJECTS: I_PROJECTS[] = [
     ],
     icon: "Book",
     metrics: ["성과1", "성과2"],
-    url: "",
+    url: "https://page0127.vercel.app/",
+    github: "https://github.com/strongerDeer/page0127",
   },
   {
     type: "업무",
     title: "Weniv Analytics",
+    thumb: "/project_analytics.jpg",
     kor: "위니브 분석 대시보드",
     description: "자사 서비스 맞춤형 데이터 분석 대시보드",
     longDesc: "",
@@ -69,6 +74,7 @@ export const PROJECTS: I_PROJECTS[] = [
   {
     type: "업무",
     title: "WeniVooks",
+    thumb: "/project_wenivooks.png",
     kor: "위니북스",
     description: "개발 입문자들을 위한 온라인 개발 교안 서비스",
     longDesc: "",
@@ -84,11 +90,12 @@ export const PROJECTS: I_PROJECTS[] = [
   {
     type: "업무",
     title: "2024 Jeju AI Conference",
+    thumb: "/project_jeju_ai_conf.png",
     kor: "제주 AI 컨퍼런스",
     description:
       "AI로 문제를 해결한 실제 경험과 통찰을 공유하는 컨퍼런스 사이트",
     longDesc: "초당 1000건 이상의 데이터 실시간 처리 및 시각화",
-    tags: ["WebSocket", "D3.js", "React"],
+    tags: ["React"],
     icon: "BarChart",
     metrics: [
       "데이터 처리 지연시간 300ms → 50ms",
@@ -96,12 +103,14 @@ export const PROJECTS: I_PROJECTS[] = [
       "시스템 안정성 99.9% 달성",
     ],
     url: "https://jejuai.kr/",
+    github: "https://github.com/weniv/jejuwebconf",
   },
 
   {
     type: "업무",
     title: "Weniv Link",
     kor: "위니브 링크",
+    thumb: "/project_wenivlink.png",
     description:
       "긴 URL를 짧게 단축시켜주는 서비스. QR 코드 생성 및 다운로드 기능 제공",
     longDesc: "초당 1000건 이상의 데이터 실시간 처리 및 시각화",
@@ -113,14 +122,52 @@ export const PROJECTS: I_PROJECTS[] = [
     ],
     url: "https://weniv.link/",
   },
+  {
+    type: "업무",
+    title: "Weniv Bootcamp",
+    kor: "위니브 부트캠프",
+    thumb: "/project_bootcamp.png",
+    description: "온라인 개발 강의 소개 및 수강생 모집용 홍보 사이트.",
+    longDesc: "",
+    tags: ["Next.js", "React", "Sass(scss)"],
+    icon: "BarChart",
+    metrics: ["", ""],
+    url: "https://bootcamp.weniv.co.kr/",
+    github: "https://github.com/weniv/bootcamp",
+  },
+  {
+    type: "업무",
+    title: "Jeju Algorithm Basecamp",
+    kor: "제주 알고리즘 베이스 캠프",
+    thumb: "/project_jeju_algorithm_basecamp.png",
+    description: "온라인 개발 강의 소개 및 수강생 모집용 홍보 사이트.",
+    longDesc: "",
+    tags: ["HTML", "CSS", "JavaScript", "anime.js"],
+    icon: "BarChart",
+    metrics: ["", ""],
+    url: "https://jejualcam.co.kr/",
+    github: "https://github.com/weniv/AlgorithmCamp",
+  },
+  {
+    type: "업무",
+    title: "TeemStone",
+    kor: "팀스톤",
+    thumb: "/project_teemstone.png",
+    description: "온라인 개발 강의 소개 및 수강생 모집용 홍보 사이트.",
+    longDesc: "",
+    tags: ["HTML", "CSS", "JavaScript", "jQuery"],
+    icon: "BarChart",
+    metrics: ["", ""],
+    url: "https://ontune.co.kr/",
+  },
 ];
 export const ACHIEVEMENTS = [
   {
-    title: "기술 성과",
+    title: "다양한 IT 경험",
     items: [
-      "GitHub 컨트리뷰션 1,200+",
-      "오픈소스 프로젝트 3개 메인테이너",
-      "기술 블로그 월 방문자 5,000+",
+      "많은 홈페이지 구축 및 다양한 디자인 경험",
+      "디자인 팀장 경험",
+      "업무 확장성 보유",
     ],
     icon: "Code2",
   },
@@ -178,7 +225,10 @@ export const CAREERS = [
     kor: "팀스톤",
     team: "기획팀",
     position: "웹 디자이너&퍼블리셔 / 선임연구원(과장)",
-    description: ["Vue.js 프로젝트 개발", "반응형 웹 디자인 구현"],
+    description: [
+      "자사 디자인 관련 모든 업무 (홈페이지, 소프트웨어 UI/UX, 브로슈어, 동영상)",
+      "웹 퍼블리싱(HTML,CSS,Sass,Javascript)",
+    ],
     location: "서울",
   },
   {
@@ -189,8 +239,8 @@ export const CAREERS = [
     team: "브랜드기획부 디자인팀",
     position: "웹 디자이너&퍼블리셔 / 팀장(대리)",
     description: [
-      "React 기반 웹 애플리케이션 개발",
-      "UI/UX 개선 및 성능 최적화",
+      "자사 브랜드 홈페이지 제작 / 기타 광고디자인 / 자사 디자인 업무 총괄",
+      "웹 퍼블리싱(HTML,CSS,Sass,Javascript)",
     ],
     location: "서울",
   },
@@ -201,7 +251,10 @@ export const CAREERS = [
     kor: "디유넷",
     team: "DBR,HBR 사업팀",
     position: "웹 디자이너&퍼블리셔 / 대리",
-    description: ["DBR 홈페이지 리뉴얼", "UI/UX 개선 및 성능 최적화"],
+    description: [
+      "DBR 홈페이지 리뉴얼",
+      "웹,모바일 디자인 및 퍼블리싱/ 자사 홈페이지 관리 등",
+    ],
     location: "서울",
   },
   {
@@ -211,7 +264,10 @@ export const CAREERS = [
     kor: "스코인포(부산)",
     team: "디자인팀",
     position: "웹 디자이너&퍼블리셔 / 대리",
-    description: ["웹접근성 인증마크"],
+    description: [
+      "웹/모바일 디자인 및 퍼블리싱, 웹표준, 웹접근성 등",
+      "웹 접근성 참여 이력 : 고성군청/거제시청/모바일 부산/부산진구청/군산시청 외 다수",
+    ],
     location: "부산",
   },
   ,
@@ -222,7 +278,7 @@ export const CAREERS = [
     kor: "기단 조경기술사 사무소",
     team: "설계팀",
     position: "조경설계사 / 기사",
-    description: [],
+    description: ["조경 설계 "],
     location: "부산",
   },
 ];

@@ -7,6 +7,7 @@ import Certificate from "@components/Certificate";
 import Education from "@components/Education";
 import Experience from "@components/Experience";
 import Header from "@components/Header/Header";
+import Skill from "@components/Skill";
 
 export default function Home() {
   return (
@@ -14,13 +15,14 @@ export default function Home() {
       <Header />
       <Hero />
 
+      <Skill />
       <Achievements />
       <Project />
 
       <Career />
       <Experience />
 
-      <div className="wrap">
+      <div className="wrap" id="education">
         <div>
           <Education />
           <Certificate />
