@@ -3,10 +3,11 @@ import { ACHIEVEMENTS } from "@data";
 
 export default function Achievements() {
   return (
-    <section className="wrap">
-      <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-16 text-gray-800">
-          주요 성과
+    <div className="wrap">
+      <section className="container mx-auto px-6">
+        <h2>
+          Achievements
+          <span>주요 성과</span>
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           {ACHIEVEMENTS.map((achievement, index) => (
@@ -35,7 +36,7 @@ export default function Achievements() {
             </div>
           ))}
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

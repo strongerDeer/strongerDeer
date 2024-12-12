@@ -7,6 +7,7 @@ import Certificate from "@components/Certificate";
 import Education from "@components/Education";
 import Experience from "@components/Experience";
 import Header from "@components/Header/Header";
+import Introduce from "@components/Introduce";
 import Skill from "@components/Skill";
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
     <div>
       <Header />
       <Hero />
+      <Introduce />
 
       <Skill />
       <Achievements />

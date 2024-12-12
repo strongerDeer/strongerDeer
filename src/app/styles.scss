@@ -149,14 +149,121 @@
 }
 
 #skill {
-  img {
-    @apply rounded-2xl block mx-auto;
-  }
-  .program {
-    @apply flex gap-2 p-4 bg-blue-100 rounded-2xl w-fit mx-auto;
+  .pc {
+    @apply container relative overflow-hidden rounded-2xl p-3;
 
     img {
-      @apply w-14 h-14 rounded-2xl;
+      @apply absolute top-0 left-0 w-full;
     }
+  }
+  .vs-viewer {
+    @apply relative z-10  bg-gray-700  text-gray-300 rounded-xl overflow-hidden;
+    .top {
+      @apply font-bold border-b  border-gray-900 py-2 px-4 flex items-center;
+      .dot {
+        @apply flex gap-1;
+
+        span {
+          @apply w-2 h-2 rounded block bg-yellow-500;
+
+          &:first-child {
+            @apply bg-red-500;
+          }
+
+          &:last-child {
+            @apply bg-green-500;
+          }
+        }
+      }
+      p {
+        @apply grow text-center;
+      }
+    }
+    &::after {
+      @apply content-[''] block w-full h-8 border-t border-gray-900 bg-gray-800;
+    }
+    .top + div {
+      @apply flex;
+
+      .icon {
+        @apply p-4;
+      }
+      .tab {
+        @apply flex flex-col  bg-gray-800 border-x border-gray-900;
+
+        li {
+          button {
+            @apply flex flex-col w-full px-3 py-2;
+
+            &.active {
+              @apply bg-gray-900;
+            }
+            span {
+              @apply px-3 py-1 flex gap-1 items-center;
+              &:first-child {
+                @apply p-0;
+              }
+              &:first-child + span {
+                @apply mt-1;
+              }
+            }
+          }
+        }
+        & > li:last-child {
+          @apply mb-6;
+        }
+      }
+      .viewer {
+        @apply grow;
+
+        .open_tab {
+          @apply bg-gray-800 shadow-[inset_0_-1px_0_0_rgba(0,0,0,1)];
+          div {
+            @apply flex text-sm items-center gap-2 bg-gray-700 border-r border-t-2 border-r-gray-900 border-t-orange-300 w-fit px-4 py-2;
+          }
+        }
+        .view-con {
+          @apply p-6;
+        }
+
+        h3 {
+          @apply text-2xl mb-4;
+        }
+      }
+    }
+  }
+  .program {
+    @apply relative mt-1 z-10 flex gap-4 px-6 p-3  rounded-2xl w-fit mx-auto backdrop-blur-sm bg-white/30 border border-white/20;
+
+    button {
+      @apply relative w-10 h-10;
+
+      &:first-child::after {
+        @apply content-[''] block w-1 h-1 rounded-full bg-black absolute -bottom-2 left-1/2 -translate-x-1/2;
+      }
+      img {
+        @apply rounded-lg overflow-hidden shadow-lg;
+      }
+
+      span {
+        @apply block text-sm opacity-0 transition-all duration-300 w-60 bg-white absolute bottom-16 left-1/2 -translate-x-1/2 rounded p-2;
+      }
+      &:hover {
+        @apply overflow-visible;
+        span {
+          @apply opacity-100 text-left shadow-xl;
+          strong {
+            @apply block text-base;
+          }
+        }
+      }
+    }
+  }
+}
+
+.hash_tag {
+  @apply flex gap-2 mb-4;
+  span {
+    @apply bg-gray-600 rounded px-2 py-1 text-xs;
   }
 }

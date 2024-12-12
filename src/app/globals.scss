@@ -62,7 +62,7 @@ footer {
 }
 
 .header {
-  @apply flex justify-between h-16 items-center px-6 fixed top-0 left-0 w-full bg-background z-10;
+  @apply flex justify-between h-16 items-center px-6 fixed top-0 left-0 w-full bg-background z-50;
 
   div {
     @apply flex items-center text-gray-600 text-sm  gap-3  md:gap-6;

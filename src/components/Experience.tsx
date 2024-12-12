@@ -26,7 +26,7 @@ export default function Experience() {
                   <li>5, 7기 HTML/CSS 메인 강의 </li>
                   <li>3, 4기 HTML/CSS 특강</li>
                   <li>3기 멘토</li>
-                  <li>2기 선배 특강 강사</li>
+                  <li>2기 선배 특강</li>
                 </ul>
                 <p>
                   <strong>이스트소프트 오르미 백엔드 스쿨</strong> 1, 3기

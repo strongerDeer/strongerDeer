@@ -29,7 +29,7 @@ export default function Hero() {
           <br />
           디테일한 사용자 경험을 고민하는
           <br />
-          <strong>강혜진</strong> 프론트엔드 개발자입니다.
+          <strong>강혜진</strong> 개발자입니다.
         </p>
       </section>
     </div>
