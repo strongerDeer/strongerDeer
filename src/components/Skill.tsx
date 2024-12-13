@@ -5,7 +5,8 @@ import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { DEV_ICON_MAP, DevIconName, PROGRAMS, TABS } from "@data/skill";
 import { Files } from "lucide-react";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import useInterval from "@hooks/useInterval";
 
 export const TabContents = {
   "README.md": () => (
@@ -91,12 +92,10 @@ export const TabContents = {
           Next.js App Router SSG, SSR, ISR로 데이터 처리 및 서버 작동방식을
           이해하고 있습니다.
         </li>
-
         <li>
           적절한 렌더링 방식 사용, 동적 import, Suspense 등을 활용하여 서비스의
           로딩 속도를 개선하기위해 노력합니다.
         </li>
-
         <li>
           CRUD 작업을 구현하면서, RESTful 서비스의 핵심 개념인 리소스 중심
           설계와 상태 없는 통신 원칙을 실제로 적용했습니다.(프로젝트 적용)
@@ -105,8 +104,6 @@ export const TabContents = {
           React의 Hook 기능을 활용하여 컴포넌트 로직을 모듈화하고 재사용성이
           높은 코드를 작성합니다.
         </li>
-        <li></li>
-
         <li>
           React Context API를 활용하여 전역 테마 관리 시스템을 구현, 사용자
           설정에 따른 동적 UI 변경 기능 개발(프로젝트 적용)
@@ -118,19 +115,29 @@ export const TabContents = {
     <SyntaxHighlighter
       language="json"
       style={a11yDark}
-      customStyle={{ backgroundColor: "#374151", padding: 0, margin: 0 }}
+      customStyle={{
+        backgroundColor: "transparent",
+        padding: 0,
+        margin: 0,
+        whiteSpace: "pre-wrap",
+        wordBreak: "break-word",
+        overflow: "wrap",
+        height: "100%",
+      }}
+      showLineNumbers={true}
+      wrapLines={true}
+      wrapLongLines={true}
     >
       {`{
-    "description":"필요에 따라 적절한 라이브러리 사용합니다", 
-    "dependencies": {
-      "firebase": "Firebase를 활용한 프로젝트 경험을 통해 REST API의 기본 원칙과 데이터
-          통신 방식에 대한 이해를 갖추었습니다",
-      "chart.js": "^4",
-      "lodash.debounce": "^4",
-      "react-query": "^3",
-      "recoil": "^0"
-    }
-  }`}
+  "description":"필요에 따라 적절한 라이브러리 사용합니다", 
+  "dependencies": {
+    "firebase": "Firebase를 활용한 프로젝트 경험을 통해 REST API의 기본 원칙과 데이터 통신 방식에 대한 이해를 갖추었습니다",
+    "chart.js": "^4",
+    "lodash.debounce": "^4",
+    "react-query": "^3",
+    "recoil": "^0"
+  }
+}`}
 
       {/* 
         <li>
@@ -153,6 +160,23 @@ const IconComponent = ({ icon }: { icon: DevIconName }) => {
 
 export default function Skill() {
   const [activeTab, setActiveTab] = useState<string>("README.md");
+  const [isPaused, setIsPaused] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const [isGlowing, setIsGlowing] = useState(false);
+
+  const currentIndex = TABS.findIndex((tab) => tab.name === activeTab);
+
+  const autoClick = () => {
+    const nextIndex = (currentIndex + 1) % TABS.length;
+    setActiveTab(TABS[nextIndex].name);
+  };
+
+  useInterval(
+    () => {
+      autoClick();
+    },
+    isPaused ? null : 3000
+  );
 
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
@@ -161,11 +185,24 @@ export default function Skill() {
   return (
     <div className="wrap" id="skill">
       <section>
-        <h2>
+        <h2 className="title">
           Skill <span>기술</span>
         </h2>
 
-        <div className="pc">
+        <div
+          className="pc"
+          onClick={() => {
+            setIsClicked(true);
+          }}
+          onMouseEnter={() => {
+            setIsPaused(true);
+            !isClicked && setIsGlowing(true);
+          }}
+          onMouseLeave={() => {
+            setIsPaused(false);
+            !isClicked && setIsGlowing(false);
+          }}
+        >
           <div className="vs-viewer">
             <div className="top">
               <span className="dot">
@@ -189,7 +226,10 @@ export default function Skill() {
                         <button
                           type="button"
                           onClick={() => handleTabClick(tab.name)}
-                          className={activeTab === tab.name ? "active" : ""}
+                          className={`
+                            ${activeTab === tab.name ? "active" : ""}
+                            ${isGlowing ? "glow" : ""}
+                          `}
                         >
                           <span>
                             <IconComponent icon={tab.icon} />
@@ -207,7 +247,10 @@ export default function Skill() {
                       <button
                         type="button"
                         onClick={() => handleTabClick(tab.name)}
-                        className={activeTab === tab.name ? "active" : ""}
+                        className={`
+                          ${activeTab === tab.name ? "active" : ""}
+                          ${isGlowing ? "glow" : ""}
+                        `}
                       >
                         <span>
                           <IconComponent icon={tab.icon} />
@@ -239,7 +282,11 @@ export default function Skill() {
 
           <div className="program">
             {PROGRAMS.map((program) => (
-              <button key={program.id} type="button">
+              <button
+                key={program.id}
+                type="button"
+                className={`${isGlowing ? "glow" : ""}`}
+              >
                 <Image src={program.image} alt="" width={100} height={100} />
                 <span>
                   <strong>{program.name}</strong>

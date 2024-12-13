@@ -5,7 +5,7 @@ export default function Experience() {
   return (
     <div className="wrap" id="experience">
       <section>
-        <h2>
+        <h2 className="title">
           Other Experience <span>기타 경력 및 경험</span>
         </h2>
 

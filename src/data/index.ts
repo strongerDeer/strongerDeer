@@ -3,7 +3,7 @@ import { BarChart, Book, Code2, Layout, LucideIcon, Users } from "lucide-react";
 type IconName = "BarChart" | "Book" | "Layout" | "Code2" | "Users";
 
 export interface I_PROJECTS {
-  type: string;
+  type: "개인" | "업무";
   thumb: string;
   title: string;
   kor: string;
@@ -14,6 +14,12 @@ export interface I_PROJECTS {
   metrics: string[];
   url: string;
   github?: string;
+
+  skills: string[];
+  person: string;
+  roles: string[];
+  insights: string[];
+  jobs: string[];
 }
 
 export const ICON_MAP: Record<IconName, LucideIcon> = {
@@ -52,6 +58,12 @@ export const PROJECTS: I_PROJECTS[] = [
     metrics: ["성과1", "성과2"],
     url: "https://page0127.vercel.app/",
     github: "https://github.com/strongerDeer/page0127",
+
+    skills: [],
+    person: "",
+    roles: [],
+    insights: [],
+    jobs: [],
   },
   {
     type: "업무",
@@ -61,11 +73,27 @@ export const PROJECTS: I_PROJECTS[] = [
     description: "자사 데이터 분석 대시보드",
     longDesc: "",
     tags: ["TypeScript", "Next.js", "Sass(scss)", "Design"],
+
+    skills: ["TypeScript", "Next.js", "Sass(scss)"],
+
+    person: "2인(디자인/프론트개발 1명, 백엔드/데이터분석 1명)",
+    roles: ["디자인 및 UI/UX", "프론트엔드 개발"],
+
+    jobs: [
+      "직관적인 UI/UX 디자인 설계 및 구현",
+      "디자인 시안 없이 웹사이트 제작",
+      "다양한 차트 라이브러리를 활용한 데이터 시각화",
+      "SQL 코드 에디터 기능 구현",
+    ],
     icon: "Layout",
     metrics: [
       "디자인, 프론트엔드 주도, 디자인 시안 작업 없이 빠르게 진행하여 프로젝트 일정 단축",
       "자사의 데이터를 시각화함(Chart.js 사용)으로 데이터 기반의 의사결정 지원",
       "자사 프로젝트 처음으로 TypeScript 도입, 코드 품질 향상 및 타입 안전성 강화",
+    ],
+    insights: [
+      "TypeScript 학습을 통한 프론트엔드 개발 역량 강화",
+      "데이터 엔지니어와의 협업으로 데이터 처리 및 커뮤니케이션 스킬 향상",
     ],
     url: "https://main.d393vrk35k9yt8.amplifyapp.com/",
   },
@@ -84,6 +112,11 @@ export const PROJECTS: I_PROJECTS[] = [
       "반응형, 테마 적용, 접근성 작업을 통해 다양한 사용자 환경 지원",
     ],
     url: "https://www.books.weniv.co.kr/",
+    skills: [],
+    person: "",
+    roles: [],
+    insights: [],
+    jobs: [],
   },
   {
     type: "업무",
@@ -102,6 +135,11 @@ export const PROJECTS: I_PROJECTS[] = [
     ],
     url: "https://jejuai.kr/",
     github: "https://github.com/weniv/jejuai-conf",
+    skills: [],
+    person: "",
+    roles: [],
+    insights: [],
+    jobs: [],
   },
 
   {
@@ -119,6 +157,11 @@ export const PROJECTS: I_PROJECTS[] = [
       "hover, click 등의 인터랙션을 통해 재미있고 디테일한 UX 디자인 적용",
     ],
     url: "https://weniv.link/",
+    skills: [],
+    person: "",
+    roles: [],
+    insights: [],
+    jobs: [],
   },
   {
     type: "업무",
@@ -132,6 +175,11 @@ export const PROJECTS: I_PROJECTS[] = [
     metrics: ["", ""],
     url: "https://bootcamp.weniv.co.kr/",
     github: "https://github.com/weniv/bootcamp",
+    skills: [],
+    person: "",
+    roles: [],
+    insights: [],
+    jobs: [],
   },
   {
     type: "업무",
@@ -145,6 +193,11 @@ export const PROJECTS: I_PROJECTS[] = [
     metrics: ["스크롤에 따라 움직이는 애니메이션 구현(anime.js 사용)", ""],
     url: "https://jejualcam.co.kr/",
     github: "https://github.com/weniv/AlgorithmCamp",
+    skills: [],
+    person: "",
+    roles: [],
+    insights: [],
+    jobs: [],
   },
   {
     type: "업무",
@@ -157,6 +210,11 @@ export const PROJECTS: I_PROJECTS[] = [
     icon: "BarChart",
     metrics: ["", ""],
     url: "https://ontune.co.kr/",
+    skills: [],
+    person: "",
+    roles: [],
+    insights: [],
+    jobs: [],
   },
 ];
 export const ACHIEVEMENTS = [

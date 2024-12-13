@@ -1,7 +1,7 @@
 export default function Certificate() {
   return (
     <section>
-      <h2>
+      <h2 className="title">
         Certificate <span>자격증</span>
       </h2>
       <ul className="list">

@@ -5,7 +5,7 @@ export default function Achievements() {
   return (
     <div className="wrap">
       <section className="container mx-auto px-6">
-        <h2>
+        <h2 className="title">
           Achievements
           <span>주요 성과</span>
         </h2>

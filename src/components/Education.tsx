@@ -1,7 +1,7 @@
 export default function Education() {
   return (
     <section>
-      <h2>
+      <h2 className="title">
         Education <span>교육</span>
       </h2>
       <ol className="list">
@@ -26,7 +26,6 @@ export default function Education() {
           <strong>부산대학교</strong> 조경학과 졸업 (2008.03 ~ 2012.02)
           <ul>
             <li>학점: 3.87/4.5</li>
-            <li>2학년 겨울방학부터 조경 설계 회사 인턴 시작</li>
             <li>
               2011.06 제 8회 도코모모 코리아 디자인 공모전 입선 (주제: 캠프
               하야리아의 미래는 / 작품: &quot;MOSAIC&quot;)

@@ -32,18 +32,19 @@ body {
   position: absolute;
 }
 
-section,
-footer {
-  h2 {
-    @apply font-bold mb-6 text-2xl;
+// title
+.title {
+  @apply font-bold;
+  span {
+    @apply font-normal text-lg text-gray-600 relative pl-3 ml-2;
 
-    span {
-      @apply font-normal text-lg text-gray-600 relative pl-3 ml-2;
-
-      &::before {
-        @apply content-[''] inline-block w-px  h-3 bg-gray-400 absolute top-1/2 left-0 -translate-y-1/2;
-      }
+    &::before {
+      @apply content-[''] inline-block w-px  h-3 bg-gray-400 absolute top-1/2 left-0 -translate-y-1/2;
     }
+  }
+  section &,
+  footer & {
+    @apply font-bold mb-6 text-2xl;
   }
 }
 
@@ -89,10 +90,10 @@ footer {
   }
 
   & > li {
-    @apply py-2 pl-4;
+    @apply py-1 pl-4;
 
     &::before {
-      @apply w-1.5 h-1.5 bg-blue-500 top-5 rounded-full;
+      @apply w-1.5 h-1.5 bg-blue-500 top-4 rounded-full;
     }
 
     ul,
@@ -135,11 +136,27 @@ strong.point {
 
 //
 .go {
-  @apply inline-flex gap-1 items-center justify-center border border-blue-100 bg-blue-100 w-10 h-10 rounded-full hover:border-blue-200 hover:scale-110 transition-all duration-300;
+  @apply inline-flex gap-1 items-center justify-center 
+  border hover:border-blue-200 hover:bg-blue-100 
+
+  w-10 h-10 rounded-full 
+hover:scale-110 transition-all duration-300;
   svg {
-    @apply h-5 stroke-blue-500;
+    @apply h-5;
   }
   span {
     @include a11y-hidden;
+  }
+}
+
+// iconType
+.iconType {
+  @apply inline-flex items-center bg-gray-100 border rounded-2xl py-1 px-2 text-xs text-gray-600;
+
+  .thumb & {
+    @apply absolute top-3 left-3 bg-white;
+  }
+  .modal & {
+    @apply mb-3;
   }
 }

@@ -20,7 +20,7 @@ export default function Career() {
   return (
     <div className="wrap" id="career">
       <section ref={sectionRef}>
-        <h2>Career</h2>
+        <h2 className="title">Career</h2>
         <p>
           프론트엔드 개발 경력: <strong>2년 3개월</strong> / IT 부문 경력: 총{" "}
           <strong>10년</strong>

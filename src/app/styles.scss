@@ -106,11 +106,15 @@
       @apply flex flex-col grow items-end justify-between  pt-4 px-6 pb-6;
 
       h3 {
-        @apply font-bold text-lg  mb-4 flex gap-1 items-center;
+        @apply font-bold text-lg  mb-1 flex gap-1 items-center;
         svg {
           @apply h-5;
         }
+        & + p {
+          @apply mb-6 text-gray-600;
+        }
       }
+
       ul,
       p {
         @apply pl-2;
@@ -127,17 +131,11 @@
 
   div.thumb,
   img {
-    @apply w-full aspect-video object-cover;
+    @apply w-full aspect-[3/2] object-cover;
   }
+
   .thumb {
-    @apply relative  bg-gray-200;
-
-    p {
-      @apply absolute top-3 left-3  inline-flex items-center bg-white rounded-2xl py-1 px-2 text-xs text-gray-600;
-    }
-
-    img {
-    }
+    @apply relative bg-gray-200;
   }
 
   .tag {
@@ -189,11 +187,11 @@
         @apply p-4;
       }
       .tab {
-        @apply flex flex-col  bg-gray-800 border-x border-gray-900;
+        @apply z-10 flex flex-col gap-1 bg-gray-800 border-x border-gray-900 transition-all duration-300;
 
         li {
           button {
-            @apply flex flex-col w-full px-3 py-2;
+            @apply flex flex-col w-full px-3 py-2 rounded;
 
             &.active {
               @apply bg-gray-900;
@@ -214,7 +212,7 @@
         }
       }
       .viewer {
-        @apply grow;
+        @apply flex flex-col w-full overflow-hidden;
 
         .open_tab {
           @apply bg-gray-800 shadow-[inset_0_-1px_0_0_rgba(0,0,0,1)];
@@ -223,7 +221,11 @@
           }
         }
         .view-con {
-          @apply p-6;
+          @apply grow p-6;
+
+          code {
+            white-space: pre-wrap !important;
+          }
         }
 
         h3 {
@@ -236,7 +238,7 @@
     @apply relative mt-1 z-10 flex gap-4 px-6 p-3  rounded-2xl w-fit mx-auto backdrop-blur-sm bg-white/30 border border-white/20;
 
     button {
-      @apply relative w-10 h-10;
+      @apply relative w-10 h-10 rounded-lg;
 
       &:first-child::after {
         @apply content-[''] block w-1 h-1 rounded-full bg-black absolute -bottom-2 left-1/2 -translate-x-1/2;
@@ -262,8 +264,77 @@
 }
 
 .hash_tag {
-  @apply flex gap-2 mb-4;
+  @apply flex gap-2;
   span {
     @apply bg-gray-600 rounded px-2 py-1 text-xs;
+  }
+}
+
+.modal {
+  @apply fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center;
+
+  .container {
+    @apply relative z-10 w-full max-w-3xl mx-6 rounded-lg  max-h-[70vh] overflow-hidden flex flex-col p-10 pb-12 bg-white;
+    .modalTop {
+      @apply sticky top-0 bg-white pb-2;
+
+      .title {
+        @apply text-2xl;
+      }
+    }
+    .modalContent {
+      @apply bg-white  grow h-full overflow-auto;
+      h4 {
+        @apply text-lg font-bold mt-8;
+
+        & + :not(.list) {
+          @apply mt-3;
+        }
+      }
+    }
+    .btn-close {
+      @apply absolute top-8 right-5 bg-gray-200 w-10 h-10 flex items-center justify-center rounded-full;
+
+      svg {
+        @apply text-blue-500;
+      }
+    }
+  }
+
+  .dim {
+    @apply absolute w-full h-full  bg-black bg-opacity-50;
+  }
+}
+
+.glow {
+  box-sizing: border-box;
+  outline-offset: 2px;
+  animation: glow 2s ease-in-out infinite;
+
+  .program & {
+    animation: glow2 2s ease-in-out infinite;
+  }
+}
+@keyframes glow {
+  0%,
+  100% {
+    outline: 2px solid transparent;
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0);
+  }
+  50% {
+    outline: 1px solid rgba(59, 130, 246, 0.2);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+  }
+}
+
+@keyframes glow2 {
+  0%,
+  100% {
+    outline: 2px solid transparent;
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0);
+  }
+  50% {
+    outline: 1px solid rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
   }
 }

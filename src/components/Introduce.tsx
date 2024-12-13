@@ -1,10 +1,10 @@
-import { ExternalLink, Figma } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 export default function Introduce() {
   return (
     <div className="wrap" id="Introduce">
       <section>
-        <h2>
+        <h2 className="title">
           Introduce <span>소개</span>
         </h2>
         <p className="tag">
@@ -55,7 +55,8 @@ export default function Introduce() {
             >
               <ExternalLink />
               <span>
-                [교안] 프론트엔드 부트캠프 스쿨 강의 '모두의 HTML/CSS' 중 일부
+                [교안] 프론트엔드 부트캠프 스쿨 강의 &quot;모두의 HTML/CSS&quot;
+                중 일부
               </span>
             </a>
           </li>
