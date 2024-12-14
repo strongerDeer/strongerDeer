@@ -98,7 +98,7 @@
 }
 
 .card {
-  @apply grid gap-8 sm:grid-cols-2 xl:grid-cols-4;
+  @apply grid gap-8;
   & > li {
     @apply flex flex-col   bg-white rounded-xl shadow-lg overflow-hidden;
 
@@ -187,7 +187,7 @@
         @apply p-4;
       }
       .tab {
-        @apply z-10 flex flex-col gap-1 bg-gray-800 border-x border-gray-900 transition-all duration-300;
+        @apply flex flex-col gap-1 bg-gray-800 border-x border-gray-900 transition-all duration-300;
 
         li {
           button {
@@ -266,7 +266,13 @@
 .hash_tag {
   @apply flex gap-2;
   span {
-    @apply bg-gray-600 rounded px-2 py-1 text-xs;
+    @apply bg-white text-blue-500 rounded px-2 py-1 text-sm;
+  }
+
+  .pc & {
+    span {
+      @apply bg-gray-600 text-gray-100 text-xs;
+    }
   }
 }
 

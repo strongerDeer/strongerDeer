@@ -1,5 +1,7 @@
 import { ExternalLink } from "lucide-react";
 
+import Check from "./Check";
+
 export default function Introduce() {
   return (
     <div className="wrap" id="Introduce">
@@ -7,13 +9,14 @@ export default function Introduce() {
         <h2 className="title">
           Introduce <span>소개</span>
         </h2>
-        <p className="tag">
+        <p className="hash_tag">
           <span>주도적</span>
           <span>계획적</span>
           <span>디자이너</span>
           <span>UI/UX</span>
           <span>디자인시스템</span>
         </p>
+        <Check />
         <p>
           <strong>사용자 중심의 웹 서비스를 구축하기 위해 노력합니다.</strong>
         </p>

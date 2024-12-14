@@ -1,5 +1,3 @@
-import Achievements from "@/components/Achievements";
-import Contact from "@/components/Contact";
 import Hero from "@/components/Hero";
 import Project from "@/components/Project";
 import Career from "@components/Career";
@@ -18,11 +16,11 @@ export default function Home() {
       <Introduce />
 
       <Skill />
-      <Achievements />
+
       <Project />
 
-      <Career />
       <Experience />
+      <Career />
 
       <div className="wrap" id="education">
         <div>
@@ -30,8 +28,6 @@ export default function Home() {
           <Certificate />
         </div>
       </div>
-
-      <Contact />
     </div>
   );
 }

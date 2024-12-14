@@ -9,7 +9,7 @@ export default function Experience() {
           Other Experience <span>기타 경력 및 경험</span>
         </h2>
 
-        <ul className="card">
+        <ul className="card sm:grid-cols-2 xl:grid-cols-4">
           <li>
             <Image src="/img2.jpg" width="200" height="200" alt="" />
             <div className="content">

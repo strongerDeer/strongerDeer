@@ -5,8 +5,9 @@ import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { DEV_ICON_MAP, DevIconName, PROGRAMS, TABS } from "@data/skill";
 import { Files } from "lucide-react";
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import useInterval from "@hooks/useInterval";
+import { AnimatePresence, motion } from "framer-motion";
 
 export const TabContents = {
   "README.md": () => (
@@ -193,6 +194,7 @@ export default function Skill() {
           className="pc"
           onClick={() => {
             setIsClicked(true);
+            setIsGlowing(false);
           }}
           onMouseEnter={() => {
             setIsPaused(true);
@@ -200,7 +202,7 @@ export default function Skill() {
           }}
           onMouseLeave={() => {
             setIsPaused(false);
-            !isClicked && setIsGlowing(false);
+            setIsGlowing(false);
           }}
         >
           <div className="vs-viewer">
@@ -274,7 +276,17 @@ export default function Skill() {
                   </div>
                 </div>
                 <div className="view-con">
-                  {TabContents[activeTab as keyof typeof TabContents]?.()}
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeTab}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {TabContents[activeTab as keyof typeof TabContents]?.()}
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
               </div>
             </div>
