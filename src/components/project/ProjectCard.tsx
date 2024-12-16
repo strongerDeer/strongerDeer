@@ -3,9 +3,9 @@ import { I_PROJECTS, ICON_MAP } from "@data";
 import { BarChart } from "lucide-react";
 
 import React from "react";
-import Tag from "./Tag";
 import ProjectThumb from "./ProjectThumb";
 import ProjectBtns from "./ProjectBtns";
+import Tag from "@components/shared/Tag";
 
 export default function ProjectCard({
   project,

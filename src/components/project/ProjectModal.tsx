@@ -1,7 +1,8 @@
 import { I_PROJECTS, ICON_MAP } from "@data";
-import Tag from "./Tag";
+
 import { LinkBtn } from "./ProjectBtns";
 import React from "react";
+import Tag from "@components/shared/Tag";
 import TypeIcon from "./TypeIcon";
 
 export default function ProjectModal({ project }: { project: I_PROJECTS }) {

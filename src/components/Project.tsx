@@ -1,11 +1,13 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useModalContext } from "@contexts/ModalContext";
-import { I_PROJECTS, PROJECTS } from "@data";
+import { I_PROJECTS } from "@data";
 
-import ProjectCard from "./ProjectCard";
-import ProjectModal from "./ProjectModal";
 import { AnimatePresence, motion } from "framer-motion";
+import { PROJECTS } from "@data/project";
+import ProjectCard from "./project/ProjectCard";
+import ProjectModal from "./project/ProjectModal";
+import MoreToggleBtn from "./shared/MoreToggleBtn";
 
 export default function Project() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
@@ -37,14 +39,10 @@ export default function Project() {
             Project <span>프로젝트</span>
           </h2>
 
-          <div className="flex gap-4 mb-12 flex-wrap">
+          <div className="projectTab">
             <button
               onClick={() => setActiveFilter("all")}
-              className={`px-4 py-2 rounded-lg transition-all duration-300 ${
-                activeFilter === "all"
-                  ? "bg-blue-600 text-white shadow-lg"
-                  : "bg-white text-gray-600 hover:bg-gray-100"
-              }`}
+              className={` ${activeFilter === "all" ? "active" : ""}`}
             >
               All
             </button>
@@ -52,11 +50,7 @@ export default function Project() {
               <button
                 key={tag}
                 onClick={() => setActiveFilter(tag)}
-                className={`px-4 py-2 rounded-lg transition-all duration-300 ${
-                  activeFilter === tag
-                    ? "bg-blue-600 text-white shadow-lg"
-                    : "bg-white text-gray-600 hover:bg-gray-100"
-                }`}
+                className={` ${activeFilter === tag ? "active" : ""}`}
               >
                 {tag}
               </button>
@@ -84,14 +78,13 @@ export default function Project() {
                     />
                   ))}
                 </motion.ul>
-                {filteredProjects.length > 4 && (
+                {filteredProjects.length > 3 && (
                   <div className="text-center mt-8">
-                    <button
+                    <MoreToggleBtn
+                      text="프로젝트 더 보기"
+                      showAll={showAll}
                       onClick={() => setShowAll(!showAll)}
-                      className="px-6 py-2 rounded-full border border-gray-300 hover:bg-gray-50 transition-colors"
-                    >
-                      {showAll ? "접기" : "더 보기"}
-                    </button>
+                    />
                   </div>
                 )}
               </>

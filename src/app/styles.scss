@@ -88,9 +88,6 @@
       from-transparent from-70% via-blue-50/80 to-blue-50 pointer-events-none;
     }
   }
-  button {
-    @apply px-6 py-2 text-sm border border-gray-300 bg-white rounded-full hover:bg-gray-50 transition-colors mx-auto block relative;
-  }
 }
 
 #education section:first-child {
@@ -111,7 +108,14 @@
           @apply h-5;
         }
         & + p {
-          @apply mb-6 text-gray-600;
+          #project & {
+            @apply mb-6 text-gray-600;
+          }
+
+          #experience &,
+          #experience & ~ p {
+            @apply mt-2;
+          }
         }
       }
 
@@ -131,7 +135,7 @@
 
   div.thumb,
   img {
-    @apply w-full aspect-[3/2] object-cover;
+    @apply w-full aspect-[4/3] object-cover;
   }
 
   .thumb {
@@ -343,4 +347,54 @@
     outline: 1px solid rgba(59, 130, 246, 0.5);
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
   }
+}
+
+.projectTab {
+  @apply flex gap-2 mb-12 flex-wrap;
+
+  button {
+    @apply bg-white text-gray-500 rounded px-2 py-1 text-sm hover:text-blue-500 transition-all duration-300;
+
+    &.active {
+      @apply bg-blue-600 text-white shadow-lg;
+    }
+  }
+}
+
+#introduce {
+  .contents {
+    @apply flex flex-col gap-12 mt-6 leading-relaxed;
+
+    h4 {
+      @apply font-bold text-xl mb-2;
+    }
+    .box {
+      // @apply p-6 border-8 border-white rounded-xl;
+    }
+  }
+}
+.text_link {
+  @apply text-blue-500 inline-flex gap-1 items-center;
+
+  svg {
+    @apply h-4;
+  }
+}
+
+.strength {
+  @apply grid md:grid-cols-3 gap-8;
+  div {
+    @apply p-6 bg-white rounded-xl;
+  }
+
+  h3 {
+    @apply flex items-center gap-1 mb-4 text-blue-600 text-lg font-bold;
+    svg {
+      @apply h-5;
+    }
+  }
+}
+
+.moreToggleBtn {
+  @apply px-6 py-2 text-sm border border-gray-300 bg-white rounded-full hover:text-blue-500 hover:border-blue-200 transition-colors mx-auto block relative;
 }

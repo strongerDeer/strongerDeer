@@ -119,11 +119,6 @@ interface I_Program {
 
 export const TABS: I_Tab[] = [
   {
-    id: 1,
-    name: "README.md",
-    icon: "MD",
-  },
-  {
     id: 2,
     name: "HTML.html",
     icon: "HTML",
@@ -177,7 +172,7 @@ export const PROGRAMS: I_Program[] = [
     name: "Chrome",
     image: "/program/chrome.jpg",
     description:
-      "크롬, 사파리, 오페라, 파이어폭스 등 다양한 브라우저 웹표준 작업 가능합니다.",
+      "크롬, 사파리, 오페라, 파이어폭스 등 다양한 브라우저 웹 표준 작업 가능합니다.",
   },
   {
     id: 3,

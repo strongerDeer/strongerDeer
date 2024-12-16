@@ -11,8 +11,8 @@ export default function Education() {
           <ul>
             <li>
               <span className="point">
-                <strong>중소벤처기업부 장관상 </strong>(프론트엔드 개발자 양성
-                부문)
+                <strong>중소벤처기업부장관상</strong> 수상 (프론트엔드 개발자
+                양성 부문)
               </span>
             </li>
             <li>
@@ -27,7 +27,7 @@ export default function Education() {
           <ul>
             <li>학점: 3.87/4.5</li>
             <li>
-              2011.06 제 8회 도코모모 코리아 디자인 공모전 입선 (주제: 캠프
+              2011.06 제8회 도코모모 코리아 디자인 공모전 입선 (주제: 캠프
               하야리아의 미래는 / 작품: &quot;MOSAIC&quot;)
             </li>
           </ul>

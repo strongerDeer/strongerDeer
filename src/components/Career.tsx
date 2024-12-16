@@ -1,8 +1,9 @@
 "use client";
 
-import { CAREERS, I_CAREERS } from "@data";
+import { CAREERS, I_CAREERS } from "@data/careers";
 import { Code, SquareMousePointer, Trees } from "lucide-react";
 import { useRef, useState } from "react";
+import MoreToggleBtn from "./shared/MoreToggleBtn";
 
 export default function Career() {
   const [showAll, setShowAll] = useState(false);
@@ -20,7 +21,9 @@ export default function Career() {
   return (
     <div className="wrap" id="career">
       <section ref={sectionRef}>
-        <h2 className="title">Career</h2>
+        <h2 className="title">
+          Career<span>경력</span>
+        </h2>
         <p>
           프론트엔드 개발 경력: <strong>2년 3개월</strong> / IT 부문 경력: 총{" "}
           <strong>10년</strong>
@@ -68,9 +71,12 @@ export default function Career() {
           {!showAll && CAREERS.length > 2 && <div className="blur" />}
         </div>
 
-        <button onClick={handleToggle} className={showAll ? "mt-6" : "-mt-16"}>
-          {showAll ? "접기" : "이전 경력 보기"}
-        </button>
+        <MoreToggleBtn
+          text="이전 경력 보기"
+          className={showAll ? "mt-6" : "-mt-16"}
+          showAll={showAll}
+          onClick={handleToggle}
+        />
       </section>
     </div>
   );

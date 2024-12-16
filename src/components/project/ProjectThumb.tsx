@@ -11,7 +11,7 @@ export default function ProjectThumb({
   return (
     <div className="thumb">
       <TypeIcon type={type} />
-      {thumb && <Image src={thumb} alt="" width={300} height={300} />}
+      {thumb && <Image src={thumb} alt="" width={480} height={360} />}
     </div>
   );
 }
