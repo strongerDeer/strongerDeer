@@ -10,8 +10,12 @@ export default function Header() {
         <Link href="#hero">
           <span>Home</span>
         </Link>
-        <Link href="#career">
-          <span>Career</span>
+        <Link href="#introduce">
+          <span>Introduce</span>
+        </Link>
+
+        <Link href="#skill">
+          <span>Skill</span>
         </Link>
         <Link href="#project">
           <span>Project</span>
@@ -19,17 +23,22 @@ export default function Header() {
         <Link href="#experience">
           <span>Experience</span>
         </Link>
+        <Link href="#career">
+          <span>Career</span>
+        </Link>
+
         <Link href="#education">
           <span>Education/Certificate</span>
         </Link>
-        <a
-          href="https://github.com/strongerDeer"
-          target="_blank"
-          className="flex items-center bg-blue-100 aspect-square rounded-full p-1.5"
-        >
-          <Github className="h-4" />
-        </a>
       </div>
+
+      <a
+        href="https://github.com/strongerDeer"
+        target="_blank"
+        className="flex items-center bg-gray-800 aspect-square rounded-full p-3 fixed bottom-4 right-4 shadow"
+      >
+        <Github className="h-5 text-white" />
+      </a>
     </header>
   );
 }

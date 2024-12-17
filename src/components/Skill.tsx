@@ -2,12 +2,14 @@
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-import { DEV_ICON_MAP, DevIconName, PROGRAMS, TABS } from "@data/skill";
+import { I_Tab, PROGRAMS, TABS } from "@data/skill";
 import { Files } from "lucide-react";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useInterval from "@hooks/useInterval";
 import { AnimatePresence, motion } from "framer-motion";
+import useWindowSize from "@utils/useWindowSize";
+import { FaHtml5 } from "react-icons/fa";
 
 export const TabContents = {
   "HTML.html": () => (
@@ -169,23 +171,18 @@ export const TabContents = {
   ),
 };
 
-const IconComponent = ({ icon }: { icon: DevIconName }) => {
-  const IconComponent = DEV_ICON_MAP[icon].icon;
-  const iconStyle = DEV_ICON_MAP[icon];
-
-  return <IconComponent color={iconStyle.color} size={iconStyle.size || 16} />;
-};
-
 export default function Skill() {
+  const { width } = useWindowSize();
+  const [tabs, setTabs] = useState<I_Tab[]>(TABS);
   const [activeTab, setActiveTab] = useState<string>("HTML.html");
   const [isPaused, setIsPaused] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isGlowing, setIsGlowing] = useState(false);
 
-  const currentIndex = TABS.findIndex((tab) => tab.name === activeTab);
+  const currentIndex = tabs.findIndex((tab) => tab.name === activeTab);
 
   const autoClick = () => {
-    const nextIndex = (currentIndex + 1) % TABS.length;
+    const nextIndex = (currentIndex + 1) % tabs.length;
     setActiveTab(TABS[nextIndex].name);
   };
 
@@ -199,6 +196,17 @@ export default function Skill() {
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
   };
+
+  useEffect(() => {
+    if (width <= 1024) {
+      setTabs(TABS.filter((tab) => tab.name !== "package.json"));
+      if (activeTab === "package.json") {
+        setActiveTab("HTML.html");
+      }
+    } else {
+      setTabs(TABS);
+    }
+  }, [width, activeTab]);
 
   return (
     <div className="wrap" id="skill">
@@ -235,13 +243,15 @@ export default function Skill() {
             </div>
 
             <div>
-              <div className="icon">
+              <div className="icon hidden lg:block">
                 <Files />
               </div>
               <div className="bg-gray-800">
-                <p className="py-2 px-3 text-xs text-gray-400 ">탐색기</p>
+                <p className="py-2 px-3 text-xs text-gray-400 hidden lg:block">
+                  탐색기
+                </p>
                 <ul className="tab">
-                  {TABS.map((tab) => (
+                  {tabs.map((tab) => (
                     <li key={tab.id}>
                       {tab.subItems ? (
                         <>
@@ -254,12 +264,25 @@ export default function Skill() {
                             `}
                           >
                             <span>
-                              <IconComponent icon={tab.icon} />
+                              {React.createElement(tab.icon, {
+                                color: tab.color,
+                                size: tab.size || 16,
+                                className: "all",
+                              })}
+                              {React.createElement(tab.subItems[0].icon, {
+                                className: "mobile",
+                                color: tab.subItems[0].color,
+                                size: tab.subItems[0].size || 16,
+                              })}
+
                               {tab.name}
                             </span>
                             {tab.subItems.map((subItem) => (
                               <span key={subItem.id}>
-                                <IconComponent icon={subItem.icon} />
+                                {React.createElement(subItem.icon, {
+                                  color: subItem.color,
+                                  size: subItem.size || 16,
+                                })}
                                 {subItem.name}
                               </span>
                             ))}
@@ -275,8 +298,14 @@ export default function Skill() {
                           `}
                         >
                           <span>
-                            <IconComponent icon={tab.icon} />
-                            {tab.name}
+                            {React.createElement(tab.icon, {
+                              color: tab.color,
+                              size: tab.size || 16,
+                            })}
+                            {tab.name.split(".")[0]}
+                            <span className="all">
+                              .{tab.name.split(".")[1]}
+                            </span>
                           </span>
                         </button>
                       )}
@@ -288,11 +317,28 @@ export default function Skill() {
               <div className="viewer">
                 <div className="open_tab">
                   <div>
-                    <IconComponent
-                      icon={
-                        TABS.find((tab) => tab.name === activeTab)?.icon || "MD"
-                      }
-                    />
+                    {(() => {
+                      const activeTabInfo = tabs.find(
+                        (tab) => tab.name === activeTab
+                      );
+                      // subItems가 있으면 첫 번째 subItem의 아이콘 정보 사용, 없으면 탭의 기본 아이콘 정보 사용
+                      const iconInfo = activeTabInfo?.subItems
+                        ? {
+                            icon: activeTabInfo.subItems[0].icon,
+                            color: activeTabInfo.subItems[0].color,
+                            size: activeTabInfo.subItems[0].size || 16,
+                          }
+                        : {
+                            icon: activeTabInfo?.icon || FaHtml5,
+                            color: activeTabInfo?.color || "#E34F26",
+                            size: activeTabInfo?.size || 16,
+                          };
+
+                      return React.createElement(iconInfo.icon, {
+                        color: iconInfo.color,
+                        size: iconInfo.size,
+                      });
+                    })()}
                     {activeTab}
                   </div>
                 </div>

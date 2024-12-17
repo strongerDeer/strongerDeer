@@ -14,7 +14,7 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
         >
           <motion.div
-            className={`code ${nanumCoding.className}`}
+            className={`code ${nanumCoding.className} `}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -48,12 +48,12 @@ export default function Hero() {
             👋 안녕하세요
           </motion.p>
           <motion.p
-            className="text-3xl leading-snug font-thin"
+            className="text-2xl leading-snug font-thin sm:text-3xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
           >
-            <span className=" border-b border-gray-500">
+            <span className="border-b border-gray-500">
               0.3초의 짧은 인터랙션,
             </span>
             <br />

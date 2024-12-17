@@ -9,7 +9,7 @@ export default function Experience() {
     <div className="wrap" id="experience">
       <section>
         <h2 className="title">
-          Other Experience <span>기타 경력 및 경험</span>
+          Experience <span>경험</span>
         </h2>
 
         <ul className="card sm:grid-cols-2 xl:grid-cols-4">

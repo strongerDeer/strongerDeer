@@ -1,5 +1,5 @@
 .code {
-  @apply text-xl sm:text-2xl;
+  @apply text-sm sm:text-2xl;
 
   span {
     display: inline-block;
@@ -155,10 +155,10 @@
 
 #skill {
   .pc {
-    @apply container relative overflow-hidden rounded-2xl p-3;
+    @apply container relative overflow-hidden rounded-xl lg:rounded-2xl lg:p-3;
 
-    img {
-      @apply absolute top-0 left-0 w-full;
+    & > img {
+      @apply absolute top-0 left-0 w-full h-full;
     }
   }
   .vs-viewer {
@@ -188,41 +188,60 @@
       @apply content-[''] block w-full h-8 border-t border-gray-900 bg-gray-800;
     }
     .top + div {
-      @apply flex;
+      @apply flex flex-col lg:flex-row;
 
       .icon {
         @apply p-4;
       }
       .tab {
-        @apply flex flex-col gap-1 bg-gray-800 border-x border-gray-900 transition-all duration-300;
+        @apply flex gap-0 bg-gray-800 border-x border-gray-900 transition-all duration-300 flex-wrap text-sm 
+        lg:text-base lg:gap-1 lg:flex-col;
+
+        .all {
+          @apply inline-block hidden lg:inline-block;
+          & + svg {
+            @apply inline-block lg:hidden;
+          }
+        }
+        .mobile {
+          @apply inline-block lg:hidden;
+        }
 
         li {
           button {
-            @apply flex flex-col w-full px-3 py-2 rounded;
+            @apply flex flex-col w-full px-2 py-2 lg:rounded lg:px-3;
 
             &.active {
-              @apply bg-gray-900;
+              @apply bg-gray-700  border-t-2 border-t-orange-300  lg:bg-gray-900 lg:border-0;
             }
-            span {
-              @apply px-3 py-1 flex gap-1 items-center;
+
+            & > span {
+              @apply px-3 py-1 flex items-center;
+
+              svg {
+                @apply mr-1;
+              }
               &:first-child {
                 @apply p-0;
               }
               &:first-child + span {
                 @apply mt-1;
               }
+              &:first-child ~ span {
+                @apply hidden lg:flex;
+              }
             }
           }
         }
         & > li:last-child {
-          @apply mb-6;
+          @apply lg:mb-6;
         }
       }
       .viewer {
         @apply flex flex-col w-full overflow-hidden;
 
         .open_tab {
-          @apply bg-gray-800 shadow-[inset_0_-1px_0_0_rgba(0,0,0,1)];
+          @apply bg-gray-800 shadow-[inset_0_-1px_0_0_rgba(0,0,0,1)] hidden lg:block;
           div {
             @apply flex text-sm items-center gap-2 bg-gray-700 border-r border-t-2 border-r-gray-900 border-t-orange-300 w-fit px-4 py-2;
           }
@@ -242,7 +261,8 @@
     }
   }
   .program {
-    @apply relative mt-1 z-10 flex gap-4 px-6 p-3  rounded-2xl w-fit mx-auto backdrop-blur-sm bg-white/30 border border-white/20;
+    @apply relative mt-1 z-10 gap-2 px-3 p-3  rounded-2xl w-fit
+    mx-auto backdrop-blur-sm border border-white/20 bg-white/30 gap-4 px-6 hidden lg:flex;
 
     button {
       @apply relative w-10 h-10 rounded-lg;
@@ -271,7 +291,7 @@
 }
 
 .hash_tag {
-  @apply flex gap-2;
+  @apply flex gap-2 flex-wrap;
   span {
     @apply bg-white text-blue-500 rounded px-2 py-1 text-sm;
   }
@@ -377,10 +397,10 @@
   }
 }
 .text_link {
-  @apply text-blue-500 inline-flex gap-1 items-center;
+  @apply text-blue-500 inline-flex gap-1;
 
   svg {
-    @apply h-4;
+    @apply h-4 mt-1;
   }
 }
 

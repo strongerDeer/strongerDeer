@@ -52,8 +52,8 @@ export default function Introduce() {
                       target="_blank"
                       className="text_link"
                     >
-                      브라우저 렌더링 다이어그램
                       <ExternalLink />
+                      브라우저 렌더링 다이어그램
                     </a>
                   </li>
                   <li>
@@ -62,11 +62,9 @@ export default function Introduce() {
                       target="_blank"
                       className="text_link"
                     >
-                      <span>
-                        프론트엔드 부트캠프 스쿨 강의 교안( &quot;모두의
-                        HTML/CSS&quot;) 중 일부
-                      </span>
                       <ExternalLink />
+                      프론트엔드 부트캠프 스쿨 강의 교안( &quot;모두의
+                      HTML/CSS&quot;) 중 일부
                     </a>
                   </li>
                 </ul>

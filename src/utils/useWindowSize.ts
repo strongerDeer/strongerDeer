@@ -1,29 +1,40 @@
-'use client';
-import { useEffect, useState } from 'react';
+"use client";
+import { useEffect, useState } from "react";
 
-interface WindowsSize {
+interface WindowSize {
   width: number;
   height: number;
 }
 
+const getWindowSize = (): WindowSize => {
+  const defaultSize = { width: 1200, height: 1200 };
+
+  if (typeof window === "undefined") {
+    return defaultSize;
+  }
+
+  return {
+    width: window.innerWidth,
+    height: window.innerHeight,
+  };
+};
+
 export default function useWindowSize() {
-  const [windowsSize, setWindowSize] = useState<WindowsSize>({
-    width: typeof window !== 'undefined' ? window.innerWidth : 1200,
-    height: typeof window !== 'undefined' ? window.innerHeight : 1200,
-  });
+  // 초기 상태를 null로 설정
+  const [windowSize, setWindowSize] = useState<WindowSize | null>(null);
 
   useEffect(() => {
+    // 컴포넌트 마운트 시 즉시 크기 설정
+    setWindowSize(getWindowSize());
+
     function handleResize() {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
+      setWindowSize(getWindowSize());
     }
 
-    window.addEventListener('resize', handleResize);
-    handleResize();
-
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
-  return windowsSize;
+
+  // windowSize가 null이면 기본값 반환
+  return windowSize || getWindowSize();
 }

@@ -7,106 +7,26 @@ import {
   FaCss3Alt,
   FaFolderOpen,
   FaHtml5,
-  FaMarkdown,
   FaNpm,
   FaReact,
 } from "react-icons/fa";
 import { RiNextjsFill, RiTailwindCssFill } from "react-icons/ri";
 
-export type DevIconName =
-  | "HTML"
-  | "CSS"
-  | "React"
-  | "JS"
-  | "TS"
-  | "Next"
-  | "MD"
-  | "npm"
-  | "Sass"
-  | "TW"
-  | "VE"
-  | "folder";
-
-interface IconStyle {
-  icon: IconType; // React 컴포넌트 타입
+interface I_SubItem {
+  id: string;
+  name: string;
+  icon: IconType;
   color: string;
   size?: number;
 }
 
-export const DEV_ICON_MAP: Record<DevIconName, IconStyle> = {
-  HTML: {
-    icon: FaHtml5,
-    color: "#E34F26",
-    size: 16,
-  },
-  CSS: {
-    icon: FaCss3Alt,
-    color: "#1572B6",
-    size: 16,
-  },
-  React: {
-    icon: FaReact,
-    color: "#61DAFB",
-    size: 16,
-  },
-  JS: {
-    icon: JS,
-    color: "#F7DF1E",
-    size: 16,
-  },
-  TS: {
-    icon: TS,
-    color: "#3178C6",
-    size: 16,
-  },
-  Next: {
-    icon: RiNextjsFill,
-    color: "#d2d2d2",
-    size: 18,
-  },
-  MD: {
-    icon: FaMarkdown,
-    color: "#a67b4c",
-    size: 16,
-  },
-  npm: {
-    icon: FaNpm,
-    color: "#CB3837",
-    size: 20,
-  },
-  Sass: {
-    icon: Sass,
-    color: "#CC6699",
-    size: 16,
-  },
-  TW: {
-    icon: RiTailwindCssFill,
-    color: "#06B6D4",
-    size: 18,
-  },
-  VE: {
-    icon: VE,
-    color: "#1572B6",
-    size: 16,
-  },
-  folder: {
-    icon: FaFolderOpen,
-    color: "#ddb67a",
-    size: 16,
-  },
-} as const;
-
-interface I_SubItem {
-  id: string;
-  name: string;
-  icon: DevIconName;
-}
-
-interface I_Tab {
+export interface I_Tab {
   id: number;
   name: string;
   subItems?: I_SubItem[];
-  icon: DevIconName;
+  icon: IconType;
+  color: string;
+  size?: number;
 }
 
 // 프로그램 아이템 인터페이스
@@ -121,41 +41,65 @@ export const TABS: I_Tab[] = [
   {
     id: 2,
     name: "HTML.html",
-    icon: "HTML",
+    icon: FaHtml5,
+    color: "#E34F26",
   },
   {
     id: 3,
     name: "CSS",
-    icon: "folder",
+    icon: FaFolderOpen,
+    color: "#ddb67a",
     subItems: [
-      { id: "css", name: "CSS.css", icon: "CSS" },
-      { id: "sass", name: "Sass.scss", icon: "Sass" },
-      { id: "vanilla", name: "VanillaExtract.css.ts", icon: "VE" },
-      { id: "tailwind", name: "tailwind.css", icon: "TW" },
+      { id: "css", name: "CSS.css", icon: FaCss3Alt, color: "#1572B6" },
+      { id: "sass", name: "Sass.scss", icon: Sass, color: "#CC6699" },
+      {
+        id: "vanilla",
+        name: "VanillaExtract.css.ts",
+        icon: VE,
+        color: "#1572B6",
+      },
+      {
+        id: "tailwind",
+        name: "tailwind.css",
+        icon: RiTailwindCssFill,
+        color: "#06B6D4",
+        size: 18,
+      },
     ],
   },
   {
     id: 4,
     name: "JavaScript",
-    icon: "folder",
+    icon: FaFolderOpen,
+    color: "#ddb67a",
     subItems: [
-      { id: "js", name: "JavaScript.js", icon: "JS" },
-      { id: "ts", name: "TypeScript.ts", icon: "TS" },
+      { id: "js", name: "JavaScript.js", icon: JS, color: "#F7DF1E" },
+      { id: "ts", name: "TypeScript.ts", icon: TS, color: "#3178C6" },
     ],
   },
+
   {
     id: 5,
     name: "React",
-    icon: "folder",
+    icon: FaFolderOpen,
+    color: "#ddb67a",
     subItems: [
-      { id: "react", name: "React.jsx", icon: "React" },
-      { id: "next", name: "Next.js", icon: "Next" },
+      { id: "react", name: "React.jsx", icon: FaReact, color: "#61DAFB" },
+      {
+        id: "next",
+        name: "Next.js",
+        icon: RiNextjsFill,
+        color: "#d2d2d2",
+        size: 18,
+      },
     ],
   },
   {
     id: 6,
     name: "package.json",
-    icon: "npm",
+    icon: FaNpm,
+    color: "#CB3837",
+    size: 20,
   },
 ];
 

@@ -25,8 +25,11 @@ export default function Career() {
           Career<span>경력</span>
         </h2>
         <p>
-          프론트엔드 개발 경력: <strong>2년 3개월</strong> / IT 부문 경력: 총{" "}
-          <strong>10년</strong>
+          프론트엔드 개발 경력: <strong>2년 3개월</strong>{" "}
+          <span className="block sm:inline">
+            <span className="hidden sm:inline">/</span> IT 부문 경력: 총{" "}
+            <strong>10년</strong>
+          </span>
         </p>
 
         <div className="list">
