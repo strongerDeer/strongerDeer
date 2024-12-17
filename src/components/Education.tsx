@@ -23,14 +23,14 @@ export default function Education() {
 
               <div className="grid grid-cols-2 gap-2 mt-2 max-w-screen-sm">
                 <Image
-                  src="/img.png"
+                  src="/strongerDeer/img.png"
                   alt=""
                   width={400}
                   height={400}
                   className="object-cover aspect-[5/3] rounded-lg"
                 />
                 <Image
-                  src="/img2.jpg"
+                  src="/strongerDeer/img2.jpg"
                   alt=""
                   width={400}
                   height={400}

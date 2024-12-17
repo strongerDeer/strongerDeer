@@ -15,7 +15,12 @@ export default function Experience() {
         <ul className="card sm:grid-cols-2 xl:grid-cols-4">
           {EXPERIENCES.map(({ id, thumb, icon, title, contents, link }) => (
             <li key={id}>
-              <Image src={thumb} width="400" height="300" alt="" />
+              <Image
+                src={`/strongerDeer${thumb}`}
+                width="400"
+                height="300"
+                alt=""
+              />
               <div className="content">
                 <div>
                   <h3>

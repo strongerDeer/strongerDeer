@@ -320,7 +320,12 @@ export default function Skill() {
                 type="button"
                 className={`${isGlowing ? "glow" : ""}`}
               >
-                <Image src={program.image} alt="" width={100} height={100} />
+                <Image
+                  src={`/strongerDeer${program.image}`}
+                  width={100}
+                  height={100}
+                  alt=""
+                />
                 <span>
                   <strong>{program.name}</strong>
                   {program.description}
@@ -329,7 +334,12 @@ export default function Skill() {
             ))}
           </div>
 
-          <Image src="/program/bg.png" alt="" width={1000} height={1000} />
+          <Image
+            src="/strongerDeer/program/bg.png"
+            alt=""
+            width={1000}
+            height={1000}
+          />
         </div>
       </section>
     </div>
