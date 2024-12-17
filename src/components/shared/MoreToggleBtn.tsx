@@ -4,7 +4,7 @@ export default function MoreToggleBtn({
   text,
   className,
 }: {
-  onClick: any;
+  onClick: () => void;
   showAll: boolean;
   text: string;
   className?: string;

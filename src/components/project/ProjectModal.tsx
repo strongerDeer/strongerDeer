@@ -1,9 +1,8 @@
-import { I_PROJECTS, ICON_MAP } from "@data";
-
 import { LinkBtn } from "./ProjectBtns";
 import React from "react";
 import Tag from "@components/shared/Tag";
 import TypeIcon from "./TypeIcon";
+import { I_PROJECTS } from "@data/project";
 
 export default function ProjectModal({ project }: { project: I_PROJECTS }) {
   const {
@@ -18,7 +17,7 @@ export default function ProjectModal({ project }: { project: I_PROJECTS }) {
 
     skills,
     person,
-    roles,
+    role,
     insights,
     jobs,
 
@@ -32,7 +31,7 @@ export default function ProjectModal({ project }: { project: I_PROJECTS }) {
         <TypeIcon type={type} />
         <div className="flex items-center justify-between">
           <h3 className="title flex items-center gap-2">
-            {React.createElement(ICON_MAP[icon])} {title} <span>{kor}</span>
+            {React.createElement(icon)} {title} <span>{kor}</span>
           </h3>
         </div>
       </div>
@@ -43,17 +42,15 @@ export default function ProjectModal({ project }: { project: I_PROJECTS }) {
 
         <h4>주요 기술 스택</h4>
         <Tag tags={skills} />
-        {roles.length > 0 && (
-          <section>
-            <h4>프로젝트 역할</h4>
-            <ul className="list">
-              <li>참여인원: {person}</li>
-              {roles.map((role, index) => (
-                <li key={index}>{role}</li>
-              ))}
-            </ul>
-          </section>
-        )}
+
+        <section>
+          <h4>프로젝트 역할</h4>
+          <ul className="list">
+            <li>참여인원: {person}</li>
+            <li>{role}</li>
+          </ul>
+        </section>
+
         <ProjectSection title="핵심 기능 및 작업 내역" items={jobs} />
         <ProjectSection title="성과 및 기여" items={metrics} />
         <ProjectSection title="프로젝트 인사이트" items={insights} />

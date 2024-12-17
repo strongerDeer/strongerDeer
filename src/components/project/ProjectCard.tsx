@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
-import { I_PROJECTS, ICON_MAP } from "@data";
-import { BarChart } from "lucide-react";
 
 import React from "react";
 import ProjectThumb from "./ProjectThumb";
 import ProjectBtns from "./ProjectBtns";
 import Tag from "@components/shared/Tag";
+import { I_PROJECTS } from "@data/project";
 
 export default function ProjectCard({
   project,
@@ -23,7 +22,7 @@ export default function ProjectCard({
     kor,
     description,
     longDesc,
-    tags,
+    skills,
     icon,
     metrics,
     url,
@@ -44,8 +43,9 @@ export default function ProjectCard({
 
       <div className="content">
         <div>
-          <h3>
-            {React.createElement(ICON_MAP[icon] || BarChart)} {title} {kor}
+          <h3 className="title">
+            {React.createElement(icon)} {title}
+            <span>{kor}</span>
           </h3>
 
           <p>{description}</p>
@@ -58,7 +58,7 @@ export default function ProjectCard({
           </ul>
         </div>
 
-        <Tag tags={tags} />
+        <Tag tags={skills} />
         <ProjectBtns url={url} github={github} onModalOpen={onModalOpen} />
       </div>
     </motion.li>

@@ -100,22 +100,25 @@
     @apply flex flex-col   bg-white rounded-xl shadow-lg overflow-hidden;
 
     .content {
-      @apply flex flex-col grow items-end justify-between  pt-4 px-6 pb-6;
+      @apply flex flex-col grow items-end justify-between pt-4 px-6 pb-6;
 
       h3 {
-        @apply font-bold text-lg  mb-1 flex gap-1 items-center;
-        svg {
-          @apply h-5;
+        @apply flex gap-2 font-bold;
+        &.title {
+          @apply text-lg flex items-center flex-wrap tracking-tight mb-2;
+          span {
+            @apply text-sm;
+          }
         }
-        & + p {
-          #project & {
-            @apply mb-6 text-gray-600;
-          }
+      }
+      h3 + p {
+        #project & {
+          @apply mb-6 text-gray-600;
+        }
 
-          #experience &,
-          #experience & ~ p {
-            @apply mt-2;
-          }
+        #experience &,
+        #experience & ~ p {
+          @apply mt-2;
         }
       }
 

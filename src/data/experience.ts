@@ -70,13 +70,13 @@ export const EXPERIENCES = [
 
     contents: [
       {
-        text: "<strong>제주 패스파인더</strong> 전지적 주니어 시점(2024.07.26)",
+        text: "<strong>제주 패스파인더</strong> 전지적 주니어 시점 <디자이너에서 개발자로>(2024.07.26)",
       },
       {
-        text: "<strong>제주대학교</strong> 계절학기 수업(2023.06.26)",
+        text: "<strong>제주대학교</strong> 계절학기 수업 <취업 멘토링>(2023.06.26)",
       },
       {
-        text: "<strong>제주 오현고등학교</strong> HTML/CSS(2022.06.10)",
+        text: "<strong>제주 오현고등학교</strong> HTML/CSS <나의 좌우명 꾸미기>(2022.06.10)",
       },
     ],
   },
