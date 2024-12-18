@@ -11,16 +11,14 @@ export default function ProjectModal({ project }: { project: I_PROJECTS }) {
     kor,
     icon,
     description,
-    longDesc,
-
+    background,
     metrics,
-
     skills,
     person,
     role,
     insights,
     jobs,
-
+    period,
     github,
     url,
   } = project;
@@ -38,16 +36,17 @@ export default function ProjectModal({ project }: { project: I_PROJECTS }) {
 
       <div className="modalContent">
         <p className="text-gray-500">{description}</p>
-        <p>{longDesc}</p>
 
         <h4>주요 기술 스택</h4>
         <Tag tags={skills} />
 
         <section>
-          <h4>프로젝트 역할</h4>
+          <h4>프로젝트 개요</h4>
+          <p className="mb-2">{background}</p>
           <ul className="list">
-            <li>참여인원: {person}</li>
-            <li>{role}</li>
+            <li>참여 인원: {person}</li>
+            <li>작업 기간: {period}</li>
+            <li>담당 역할: {role}</li>
           </ul>
         </section>
 

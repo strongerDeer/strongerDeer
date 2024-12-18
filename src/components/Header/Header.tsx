@@ -35,9 +35,11 @@ export default function Header() {
       <a
         href="https://github.com/strongerDeer"
         target="_blank"
+        title="GitHub"
         className="flex items-center bg-gray-800 aspect-square rounded-full p-3 fixed bottom-4 right-4 shadow"
       >
         <Github className="h-5 text-white" />
+        <span className="a11y-hidden">GitHub</span>
       </a>
     </header>
   );

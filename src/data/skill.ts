@@ -7,6 +7,7 @@ import {
   FaCss3Alt,
   FaFolderOpen,
   FaHtml5,
+  FaMarkdown,
   FaNpm,
   FaReact,
 } from "react-icons/fa";
@@ -38,6 +39,12 @@ interface I_Program {
 }
 
 export const TABS: I_Tab[] = [
+  {
+    id: 1,
+    name: "README.md",
+    icon: FaMarkdown,
+    color: "#765838",
+  },
   {
     id: 2,
     name: "HTML.html",
@@ -144,3 +151,17 @@ export const PROGRAMS: I_Program[] = [
     description: "다양한 벡터 이미지 작업이 가능합니다.",
   },
 ];
+
+export const skillData = {
+  설명: "필요에 따라 적절한 기술을 사용합니다. 아래 기술들을 사용한 경험이 있습니다.",
+  "주요 활용 기술": {
+    "상태 관리": ["React-Query", "Recoil", "Context API"],
+    데이터시각화: ["Chart.js"],
+    백엔드통신: ["Firebase", "REST API", "Axios"],
+    "성능 최적화": ["Lodash", "Date-fns"],
+    "코드 품질": ["ESLint", "Prettier"],
+    "버전 관리": ["Git", "GitHub"],
+    문서화: ["Storybook", "JSDoc"],
+    "배포/자동화": ["GitHub Actions", "Vercel", "AWS Amplify"],
+  },
+};

@@ -1,8 +1,6 @@
 "use client";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-import { I_Tab, PROGRAMS, TABS } from "@data/skill";
+import { I_Tab, PROGRAMS, skillData, TABS } from "@data/skill";
 import { Files } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -10,8 +8,40 @@ import useInterval from "@hooks/useInterval";
 import { AnimatePresence, motion } from "framer-motion";
 import useWindowSize from "@utils/useWindowSize";
 import { FaHtml5 } from "react-icons/fa";
+import { nanumCoding } from "@font";
 
 export const TabContents = {
+  "README.md": () => (
+    <>
+      <ul className="list">
+        <li>
+          <strong>HTML</strong>: 웹 표준/접근성, SEO를 고려한 시맨틱한 마크업을
+          작성합니다
+        </li>
+        <li>
+          <strong>CSS</strong>: 반응형 디자인, 테마 적용, 적절한 애니메이션
+          효과와 디테일한 속성을 사용하여 사용자 경험을 향상 시킵니다.
+        </li>
+        <li>
+          <strong>JavaScript</strong>: 바닐라 JS부터 프레임워크까지 다양한
+          프로젝트 경험을 통해 실무에 필요한 기술을 갖추고 있습니다.
+        </li>
+        <li>
+          <strong>TypeScript</strong>: 정적 타입 검사를 통해 코드의 안정성과
+          유지보수성을 향상시킵니다.
+        </li>
+        <li>
+          <strong>React</strong>: Custom Hook과 다양한 상태관리 도구를 활용하여
+          재사용 가능한 컴포넌트를 작성합니다.
+        </li>
+        <li>
+          <strong>Next.js</strong>: SSR/SSG/ISR 렌더링 방식을 이해하고, 동적
+          import, Suspense 등을 활용하여 성능 최적화된 웹서비스를 위해
+          노력합니다.
+        </li>
+      </ul>
+    </>
+  ),
   "HTML.html": () => (
     <>
       <h3>HTML</h3>
@@ -129,52 +159,49 @@ export const TabContents = {
     </>
   ),
   "package.json": () => (
-    <SyntaxHighlighter
-      language="json"
-      style={a11yDark}
-      customStyle={{
-        backgroundColor: "transparent",
-        padding: 0,
-        margin: 0,
-        whiteSpace: "pre-wrap",
-        wordBreak: "break-word",
-        overflow: "wrap",
-        height: "100%",
-      }}
-      showLineNumbers={true}
-      wrapLines={true}
-      wrapLongLines={true}
-    >
-      {`{
-  "설명": "필요에 따라 적절한 기술을 사용합니다. 아래 기술들을 사용한 경험이 있습니다.", 
-  "주요 활용 기술": {
-    "상태 관리": ["React-Query", "Recoil", "Context API"],
-    "데이터시각화": ["Chart.js"],
-    "백엔드통신": ["Firebase", "REST API", "Axios"],
-    "성능 최적화": ["Lodash", "Date-fns"],
-    "코드 품질": ["ESLint", "Prettier"],
-    "버전 관리": ["Git", "GitHub"],
-    "문서화": ["Storybook", "JSDoc"],
-    "배포/자동화": ["GitHub Actions", "Vercel", "AWS Amplify"]
-  }
-}`}
+    <div className={`json ${nanumCoding.className}`}>
+      <p className="colon">&#123;</p>
+      <div className="pl-4">
+        <p className="flex gap-1">
+          <span className="label">
+            &quot;설명&quot;<span className="colon">: </span>
+          </span>
 
-      {/* 
-        <li>
-          REST API를 통한 데이터 통신에 대한 이해도 및 프로젝트 경험이 있습니다.
-        </li>
-        <li>
-          CRUD 작업을 구현하면서, RESTful 서비스의 핵심 개념인 리소스 중심
-          설계와 상태 없는 통신 원칙을 실제로 적용했습니다.(프로젝트 적용)
-        </li> */}
-    </SyntaxHighlighter>
+          <span className="desc">&quot;{skillData.설명}&quot;</span>
+        </p>
+        <div className="pl-4">
+          <p>
+            <span className="label">&quot;주요 활용 기술&quot;</span>
+            <span className="colon">: &#123;</span>
+          </p>
+          {Object.entries(skillData["주요 활용 기술"]).map(
+            ([category, skills]) => (
+              <p key={category} className="pl-4 flex  gap-1">
+                <span className="label">
+                  &quot;{category}&quot;
+                  <span className="colon">: </span>
+                </span>
+
+                <span className="array">
+                  {skills.map((skill) => (
+                    <span key={skill}>&quot;{skill}&quot;</span>
+                  ))}
+                </span>
+              </p>
+            )
+          )}
+          <p className="colon">&#125;</p>
+        </div>
+      </div>
+      <p className="colon">&#125;</p>
+    </div>
   ),
 };
 
 export default function Skill() {
   const { width } = useWindowSize();
   const [tabs, setTabs] = useState<I_Tab[]>(TABS);
-  const [activeTab, setActiveTab] = useState<string>("HTML.html");
+  const [activeTab, setActiveTab] = useState<string>("README.md");
   const [isPaused, setIsPaused] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isGlowing, setIsGlowing] = useState(false);
@@ -183,7 +210,7 @@ export default function Skill() {
 
   const autoClick = () => {
     const nextIndex = (currentIndex + 1) % tabs.length;
-    setActiveTab(TABS[nextIndex].name);
+    setActiveTab(tabs[nextIndex].name);
   };
 
   useInterval(
@@ -200,6 +227,7 @@ export default function Skill() {
   useEffect(() => {
     if (width <= 1024) {
       setTabs(TABS.filter((tab) => tab.name !== "package.json"));
+
       if (activeTab === "package.json") {
         setActiveTab("HTML.html");
       }
@@ -228,8 +256,10 @@ export default function Skill() {
             }
           }}
           onMouseLeave={() => {
-            setIsPaused(false);
-            setIsGlowing(false);
+            if (!isClicked) {
+              setIsPaused(false);
+              setIsGlowing(false);
+            }
           }}
         >
           <div className="vs-viewer">
