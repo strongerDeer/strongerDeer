@@ -21,7 +21,6 @@ export default function ProjectCard({
     title,
     kor,
     description,
-    longDesc,
     skills,
     icon,
     metrics,
@@ -49,7 +48,6 @@ export default function ProjectCard({
           </h3>
 
           <p>{description}</p>
-          <p>{longDesc}</p>
 
           <ul className="list2">
             {metrics.map((metric, idx) => (
