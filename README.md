@@ -2,7 +2,9 @@
 
   <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Saluting%20Face.png" alt="Saluting Face" width="100" height="100" />
 
-  # 👨‍💻 strongerDeer
+<br>
+<img src="https://raw.githubusercontent.com/strongerDeer/strongerDeer/c205ea09381166a13d3a14eddb1da04cbe238dc2/public/strongerDeer.svg" alt="strongerDeer" height="80" />
+
 ```javascript
 <strong>De{sign || velop}er</strong>
 ```
