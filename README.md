@@ -1,6 +1,8 @@
 <div align="center">
 
-# 👨‍💻 strongerDeer
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Saluting%20Face.png" alt="Saluting Face" width="100" height="100" />
+
+  # 👨‍💻 strongerDeer
 ```javascript
 <strong>De{sign || velop}er</strong>
 ```
