@@ -44,10 +44,11 @@ export default function Career() {
                 <div>
                   <h3>
                     <span>{career.company}</span>
-                    {career.kor}
+                    {career.kor} / {career.location}
                   </h3>
+                  <p className="mb-3">{career.period}</p>
+                  <p className="mb-3">{career.info}</p>
                   {career.team && <p>{career.team}</p>}
-                  <p>{career.period}</p>
                 </div>
                 <div className="content">
                   <p>
