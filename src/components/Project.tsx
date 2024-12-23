@@ -8,14 +8,15 @@ import ProjectCard from "./project/ProjectCard";
 import ProjectModal from "./project/ProjectModal";
 import MoreToggleBtn from "./shared/MoreToggleBtn";
 import useWindowSize from "@utils/useWindowSize";
-import Tab from "./project/Tab";
+// import Tab from "./project/Tab";
 
 interface ProjectProps {
   initialProjects: I_PROJECTS[];
 }
 
 export default function Project({ initialProjects }: ProjectProps) {
-  const [activeFilter, setActiveFilter] = useState<SkillType | "all">("all");
+  // const [activeFilter, setActiveFilter] = useState<SkillType | "all">("all");
+  const [activeFilter] = useState<SkillType | "all">("all");
   const [filteredProjects, setFilteredProjects] = useState<I_PROJECTS[] | []>(
     initialProjects
   );
