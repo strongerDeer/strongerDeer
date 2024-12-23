@@ -6,11 +6,18 @@ import { remark } from "remark";
 import { visit } from "unist-util-visit";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
-
+import { Root } from "mdast";
 const projectsDirectory = path.join(process.cwd(), "projects");
 
+interface ElementNode extends Element {
+  tagName: string;
+  properties: {
+    className?: string[];
+  };
+}
+
 function adjustHeadingLevel() {
-  return (tree: any) => {
+  return (tree: Root) => {
     visit(tree, "heading", (node) => {
       // h2(##)를 h4로 변경
       if (node.depth === 2) {
@@ -21,8 +28,8 @@ function adjustHeadingLevel() {
 }
 
 function addClasses() {
-  return (tree: any) => {
-    visit(tree, "element", (node) => {
+  return (tree: Root) => {
+    visit(tree, "element", (node: ElementNode) => {
       if (node.tagName === "ul") {
         node.properties.className = ["list"];
       }
