@@ -7,8 +7,11 @@ import Experience from "@components/Experience";
 import Header from "@components/Header/Header";
 import Introduce from "@components/Introduce";
 import Skill from "@components/Skill";
+import { getAllProjects } from "@utils/projects";
 
-export default function Home() {
+export default async function Home() {
+  const projects = await getAllProjects();
+
   return (
     <div>
       <Header />
@@ -17,7 +20,7 @@ export default function Home() {
 
       <Skill />
 
-      <Project />
+      <Project initialProjects={projects} />
 
       <Experience />
       <Career />

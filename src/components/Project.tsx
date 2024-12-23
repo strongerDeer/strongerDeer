@@ -3,16 +3,21 @@ import React, { useEffect, useState } from "react";
 import { useModalContext } from "@contexts/ModalContext";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { I_PROJECTS, PROJECTS, SKILL, SkillType } from "@data/project";
+import { I_PROJECTS, SkillType } from "@data/project";
 import ProjectCard from "./project/ProjectCard";
 import ProjectModal from "./project/ProjectModal";
 import MoreToggleBtn from "./shared/MoreToggleBtn";
 import useWindowSize from "@utils/useWindowSize";
+import Tab from "./project/Tab";
 
-export default function Project() {
+interface ProjectProps {
+  initialProjects: I_PROJECTS[];
+}
+
+export default function Project({ initialProjects }: ProjectProps) {
   const [activeFilter, setActiveFilter] = useState<SkillType | "all">("all");
   const [filteredProjects, setFilteredProjects] = useState<I_PROJECTS[] | []>(
-    []
+    initialProjects
   );
   const [showAll, setShowAll] = useState(false);
 
@@ -22,8 +27,10 @@ export default function Project() {
   useEffect(() => {
     setFilteredProjects(
       activeFilter === "all"
-        ? PROJECTS
-        : PROJECTS.filter((project) => project.tags.includes(activeFilter))
+        ? initialProjects
+        : initialProjects.filter((project) =>
+            project.tags.includes(activeFilter)
+          )
     );
   }, [activeFilter]);
 
@@ -39,23 +46,7 @@ export default function Project() {
             Project <span>프로젝트</span>
           </h2>
 
-          <div className="projectTab">
-            <button
-              onClick={() => setActiveFilter("all")}
-              className={` ${activeFilter === "all" ? "active" : ""}`}
-            >
-              All
-            </button>
-            {SKILL.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => setActiveFilter(tag)}
-                className={` ${activeFilter === tag ? "active" : ""}`}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
+          {/* <Tab activeFilter={activeFilter} setActiveFilter={setActiveFilter} /> */}
 
           <AnimatePresence mode="wait">
             {displayProjects.length > 0 && (

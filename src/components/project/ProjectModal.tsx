@@ -2,7 +2,7 @@ import { LinkBtn } from "./ProjectBtns";
 import React from "react";
 import Tag from "@components/shared/Tag";
 import TypeIcon from "./TypeIcon";
-import { I_PROJECTS } from "@data/project";
+import { I_PROJECTS, ICON_MAP, ICON_TYPE } from "@data/project";
 
 export default function ProjectModal({ project }: { project: I_PROJECTS }) {
   const {
@@ -21,7 +21,10 @@ export default function ProjectModal({ project }: { project: I_PROJECTS }) {
     period,
     github,
     url,
+    content,
   } = project;
+
+  const IconComponent = ICON_MAP[icon as ICON_TYPE];
 
   return (
     <>
@@ -29,14 +32,15 @@ export default function ProjectModal({ project }: { project: I_PROJECTS }) {
         <TypeIcon type={type} />
         <div className="flex items-center justify-between">
           <h3 className="title flex items-center gap-2">
-            {React.createElement(icon)} {title} <span>{kor}</span>
+            <IconComponent />
+            {title} <span>{kor}</span>
           </h3>
         </div>
       </div>
 
       <div className="modalContent">
         <p className="text-gray-500">{description}</p>
-
+        <div dangerouslySetInnerHTML={{ __html: content }} />
         <h4>주요 기술 스택</h4>
         <Tag tags={skills} />
 

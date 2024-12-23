@@ -4,7 +4,7 @@ import React from "react";
 import ProjectThumb from "./ProjectThumb";
 import ProjectBtns from "./ProjectBtns";
 import Tag from "@components/shared/Tag";
-import { I_PROJECTS } from "@data/project";
+import { I_PROJECTS, ICON_MAP, ICON_TYPE } from "@data/project";
 
 export default function ProjectCard({
   project,
@@ -27,6 +27,8 @@ export default function ProjectCard({
     url,
     github,
   } = project;
+
+  const IconComponent = ICON_MAP[icon as ICON_TYPE];
   return (
     <motion.li
       initial={{ opacity: 0, y: 50 }}
@@ -43,7 +45,7 @@ export default function ProjectCard({
       <div className="content">
         <div>
           <h3 className="title">
-            {React.createElement(icon)} {title}
+            <IconComponent /> {title}
             <span>{kor}</span>
           </h3>
 
