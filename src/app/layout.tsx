@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={pretendard.variable}>
+    <html lang="ko-KR" className={pretendard.variable}>
       <body>
         <ModalContextProvider>{children}</ModalContextProvider>
       </body>
