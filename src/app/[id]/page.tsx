@@ -6,18 +6,17 @@ import { X } from "lucide-react";
 import Link from "next/link";
 
 import styles from "./page.module.scss";
-
+interface Props {
+  params: Promise<{
+    id: string;
+  }>;
+}
 export async function generateStaticParams() {
-  return [
-    { id: "page0127" },
-    { id: "weniv-analytics" },
-    { id: "wenivooks" },
-    { id: "weniv-bootcamp" },
-  ];
+  return [{ id: "page0127" }, { id: "weniv-analytics" }, { id: "wenivooks" }];
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default async function Page({ params }: Props) {
+  const { id } = await params;
   const project = await getProject(id);
 
   const { type, title, kor, icon, description, period, github, url, content } =
