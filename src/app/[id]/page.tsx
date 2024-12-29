@@ -2,39 +2,26 @@ import { LinkBtn } from "@components/project/ProjectBtns";
 import TypeIcon from "@components/project/TypeIcon";
 import { ICON_MAP, ICON_TYPE } from "@data/project";
 import { getProject } from "@utils/projects";
-import { ArrowLeft, X } from "lucide-react";
-import Image from "next/image";
+import { X } from "lucide-react";
 import Link from "next/link";
 
 import styles from "./page.module.scss";
 
 export async function generateStaticParams() {
-  return [{ id: "page0127" }];
+  return [
+    { id: "page0127" },
+    { id: "weniv-analytics" },
+    { id: "wenivooks" },
+    { id: "weniv-bootcamp" },
+  ];
 }
 
-export default async function page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: { id: string } }) {
   const { id } = params;
   const project = await getProject(id);
 
-  const {
-    type,
-    title,
-    kor,
-    icon,
-    thumb,
-    description,
-    background,
-    metrics,
-    skills,
-    person,
-    role,
-    insights,
-    jobs,
-    period,
-    github,
-    url,
-    content,
-  } = project;
+  const { type, title, kor, icon, description, period, github, url, content } =
+    project;
 
   const IconComponent = ICON_MAP[icon as ICON_TYPE];
   return (
@@ -47,6 +34,7 @@ export default async function page({ params }: { params: { id: string } }) {
             {title} <span>{kor}</span>
           </h2>
         </div>
+        <p className="text-gray-500 mt-2">{period}</p>
         <p className="text-gray-500 mt-2">{description}</p>
       </header>
 
@@ -57,7 +45,7 @@ export default async function page({ params }: { params: { id: string } }) {
         {github && <LinkBtn type="github" url={github} />}
         {url && <LinkBtn type="url" url={url} />}
 
-        <Link href="../strongerDeer#project" className={styles.back}>
+        <Link href={`../strongerDeer#${id}`} className={styles.back}>
           <X className="w-6 h-6" />
         </Link>
       </div>

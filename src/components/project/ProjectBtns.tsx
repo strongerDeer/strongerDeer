@@ -1,24 +1,20 @@
 import { ExternalLink, Github, Search } from "lucide-react";
+import Link from "next/link";
 
 export default function ProjectBtns({
   url,
   github,
-  onModalOpen,
+  projectId,
 }: {
   url: string;
   github?: string;
-  onModalOpen: () => void;
+  projectId: string;
 }) {
   return (
     <div className="btn-group">
-      <button
-        type="button"
-        className="go border-gray-150"
-        onClick={onModalOpen}
-      >
+      <Link href={`/${projectId}`} className="go border-gray-150">
         <Search className="stroke-gray-700" />
-        <span>{url}</span>
-      </button>
+      </Link>
 
       {github && <LinkBtn type="github" url={github} />}
       {url && <LinkBtn type="url" url={url} />}

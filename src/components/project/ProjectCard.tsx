@@ -8,14 +8,13 @@ import { I_PROJECTS, ICON_MAP, ICON_TYPE } from "@data/project";
 
 export default function ProjectCard({
   project,
-  onModalOpen,
   index,
 }: {
   project: I_PROJECTS;
-  onModalOpen: () => void;
   index: number;
 }) {
   const {
+    id,
     type,
     thumb,
     title,
@@ -31,6 +30,7 @@ export default function ProjectCard({
   const IconComponent = ICON_MAP[icon as ICON_TYPE];
   return (
     <motion.li
+      id={id}
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }} // exit 애니메이션 추가
@@ -59,7 +59,7 @@ export default function ProjectCard({
         </div>
 
         <Tag tags={skills} />
-        <ProjectBtns url={url} github={github} onModalOpen={onModalOpen} />
+        <ProjectBtns url={url} github={github} projectId={id} />
       </div>
     </motion.li>
   );

@@ -37,6 +37,7 @@ export const SKILL = [
 export type SkillType = (typeof SKILL)[number];
 
 export interface I_PROJECTS {
+  id: string;
   type: "개인" | "업무";
   period: string;
   thumb: string;
