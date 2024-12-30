@@ -30,65 +30,10 @@ function adjustHeadingLevel() {
 
 function addClasses() {
   return (tree: Root) => {
-    visit(
-      tree,
-      "element",
-      (node: Element, index: number, parent: Element | null) => {
-        if (node.tagName === "h4" && parent) {
-          // 현재 노드 이후의 요소들을 수집
-          const nextElements = [];
-          let currentIndex = index + 1;
-
-          while (
-            currentIndex < parent.children.length &&
-            (parent.children[currentIndex] as Element).tagName !== "h3" &&
-            (parent.children[currentIndex] as Element).tagName !== "h4"
-          ) {
-            nextElements.push(parent.children[currentIndex]);
-            currentIndex++;
-          }
-
-          // 새로운 div 요소 생성
-          if (nextElements.length > 0) {
-            const wrapperDiv: Element = {
-              type: "element",
-              tagName: "div",
-              properties: { className: ["items"] },
-              children: [node, ...nextElements],
-            };
-
-            // 원래 요소들을 div로 교체
-            parent.children.splice(index, nextElements.length + 1, wrapperDiv);
-          }
-        }
-      }
-    );
-
     visit(tree, "element", (node: Element) => {
       if (node.tagName === "ul") {
         node.properties = node.properties || {};
         node.properties.className = ["list"];
-      }
-    });
-
-    visit(tree, "element", (node: Element) => {
-      if (node.tagName === "section") {
-        // section의 첫 번째 자식이 div인지 확인
-        const firstChild = node.children[0] as Element;
-        if (firstChild?.tagName === "div") {
-          // div의 첫 번째 자식이 h4인지 확인
-          const h4Element = firstChild.children[0] as Element;
-          if (
-            h4Element?.tagName === "h4" &&
-            h4Element.children[0]?.type === "text" &&
-            h4Element.children[0]?.value === "Next.js"
-          ) {
-            node.properties = node.properties || {};
-            const existingClasses =
-              (node.properties.className as string[]) || [];
-            node.properties.className = [...existingClasses, "skill"];
-          }
-        }
       }
     });
   };
