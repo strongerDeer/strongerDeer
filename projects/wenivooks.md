@@ -59,8 +59,9 @@ jobs:
 
 - **Next.js**: SEO 최적화를 위한 SSR 구현 / 체계적인 교안 구조화를 위한 페이지 기반 라우팅
 - **Sass**: 테마 변수 관리 및 스타일 모듈화 / 다크모드 등 테마 스타일링
-- `CodeMirror`: 실시간 코드 에디터 구현
-- `unified`, `remark`, `rehype`, `rehype-pretty-code`, `gray-matter` 등 마크다운 문서 변환
+- **기타 라이브러리**:
+  - `CodeMirror`: 실시간 코드 에디터 구현
+  - `unified`, `remark`, `rehype`, `rehype-pretty-code`, `gray-matter` 등 마크다운 문서 변환
 
 ## 배포
 
@@ -69,37 +70,32 @@ jobs:
 
 # 🔍 기능
 
-## 향상된 교안 네비게이션
-
 :::div{.function}
 
-- 전체 책 목차 제공
+- 전체 책 목차
   ![](/strongerDeer/project/wenivooks_list.jpg)
-
-- 하단 이동 버튼으로 페이지 이동 원활
+  - 전체 책 목차 토글 메뉴 제공
+- 페이지 목차  
+  ![](/strongerDeer/project/wenivooks_toc.gif)
+  - 해당 페이지에 대한 목차 토글 메뉴 제공
+  - 스크롤에 이동에 따라 해당 위치 정보 안내
+  - 목차 클릭스 해당 영역으로 이동
+- 페이지 이동 버튼 제공
   ![](/strongerDeer/project/wenivooks_page.gif)
 
-- 페이지 목차 제공 및 현재 학습 위치 표시
-  ![](/strongerDeer/project/wenivooks_toc.gif)
+  - 고정된 하단 페이지 이동 버튼으로 책 흐름에 방해 받지 않고 페이지 이동 가능
 
-## 고도화된 마크다운 렌더링
+- HTML/CSS 코드 에디터
+  ![](/strongerDeer/project/wenivooks_editor.gif)
 
-- 커스텀 마크다운 디렉티브 지원
-- 자동 목차 생성
-- 코드 블록 하이라이팅
-
-## 통합 코드 에디터
-
-- HTML/CSS 실시간 미리보기
-- 코드 하이라이팅
-- VS Code 없이 바로 실습 가능한 환경
-
-##
+  - 실시간 미리보기
+  - 코드 하이라이팅
+  - VS Code 없이 바로 실습 가능한 환경
 
 - 사용자 맞춤 환경
   ![](/strongerDeer/project/wenivooks_theme.gif)
   - 라이트/다크 모드 지원
-  - 폰트 종류 및 크기 조절
+  - 기본/세리프 형태 폰트 및 크기 조절 가능
   - 사용자 설정 로컬스토리지 저장 및 적용
 
 :::
