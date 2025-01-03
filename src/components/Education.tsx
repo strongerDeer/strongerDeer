@@ -12,6 +12,10 @@ export default function Education() {
           <span className="text-gray-500 text-sm">(2021.11 ~ 2022.01)</span>
           <ul>
             <li>
+              HTML, CSS, Sass, Bootstrap, TailWind, JavaScript, GitHub, Node.js,
+              jQuery 등 학습
+            </li>
+            <li>
               개근상, 동료 칭찬상, CSS 캐릭터 웹 디자인 대회 최우수상, 천하제일
               이력서 만들기 최우수상 수상
             </li>

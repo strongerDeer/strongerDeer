@@ -46,12 +46,15 @@ url: "https://main.d393vrk35k9yt8.amplifyapp.com/"
 - **통합 모니터링**: 다양한 서비스의 사용자 데이터 통합 관리
 - **유연한 분석**: SQL 쿼리 에디터를 통한 심층 데이터 분석 지원
 
+---
+
 # 📝 기획
 
 - 복잡한 데이터를 이해하기 쉽게 시각화
 - 실시간 데이터 모니터링 및 분석
-- 다양한 데이터 소스 통합 가능한 구조
 - SQL 쿼리 에디터로 데이터 분석 지원
+
+---
 
 # 🛠️ 사용 기술과 선정한 이유
 
@@ -68,6 +71,8 @@ url: "https://main.d393vrk35k9yt8.amplifyapp.com/"
 
 - **AWS Amplify**: 회사에서 AWS 사용 중, 순수 프론트엔드 프로젝트 배포에 적합한 간단한 설정
 
+---
+
 # 🔍 기능
 
 :::div{.function}
@@ -77,23 +82,28 @@ url: "https://main.d393vrk35k9yt8.amplifyapp.com/"
 - 기간별 데이터 시각화
   ![](/strongerDeer/project/analytics_date.gif)
 
-  - 달력으로 시작일-종료일 직접 선택
-  - 최근 한주/ 최근한달 빠른 버튼 제공
+  - 최근 한주/최근한달 빠른 버튼 제공
+  - 달력으로 시작일-종료일 직접 선택 가능
 
 - 메뉴: 최근 7일 접속자수 추이 그래프 형태 제공
   ![](/strongerDeer/project/analytics_line7.jpg)
 
+  - 전체적인 추이 파악
+  - 지난주 대비 증감수 파악
+
 - 서비스별 접속자 수 추이 비교
   ![](/strongerDeer/project/analytics_line.jpg)
 
-  - 낮은 접속자수를 보이는 서비스: 운영 리소스 대비 실사용이 저조함으로 서비스 종료 제안
   - 서비스 개선 우선순위 설정 및 개발 리소스 배분
+  - 운영 리소스 대비 실사용이 저조한 서비스 종료 제안
 
 - 기간별 DAU, WAU, MAU 지표 모니터링
   ![](/strongerDeer/project/analytics_dau.jpg)
 
 - 기간별 접속자수/접속건수
   ![](/strongerDeer/project/analytics_chart.jpg)
+
+  - 접속량과 접속자수 구분하여 사용자 접속량 파악
 
 - 요일별 평균 접속자수/접속건수
   ![](/strongerDeer/project/analytics_day.jpg)
@@ -105,12 +115,12 @@ url: "https://main.d393vrk35k9yt8.amplifyapp.com/"
   ![](/strongerDeer/project/analytics_donut.jpg)
 
   - 모바일/PC 사용 비율, 운영체제별 사용자 분포, 브라우저별 점유율 분석
-  - 서비스 QA 체크 우선 진행
+  - 해당 데이터 기반 서비스 QA 체크 우선 진행 제안
 
 - 국내 지도 히트맵: 국내 지역별 사용자 분포 히트맵
   ![](/strongerDeer/project/analytics_map.gif)
 
-  - 지역별 사용자 분포로 마케팅 활용
+  - 지역별 사용자 분포로 마케팅 활용 제안
 
 - 키워드 데이터 시각화: 서비스(위니북스) 내 검색 키워드
   ![](/strongerDeer/project/analytics_keyword.jpg)
@@ -121,12 +131,20 @@ url: "https://main.d393vrk35k9yt8.amplifyapp.com/"
 - SQL 코드 에디터
   ![](/strongerDeer/project/analytics_editor.gif)
   - 복사 및 CSV 다운로드 기능 제공
+  - SQL 활용한 데이터 분석 지원
 
 :::
+
+---
 
 # 🚨 트러블슈팅
 
 ## 문제: API 성능 최적화
+
+:::details
+::summary[🔍 상세내용 보기]
+
+:::div
 
 ### 문제
 
@@ -136,16 +154,18 @@ url: "https://main.d393vrk35k9yt8.amplifyapp.com/"
 ### 원인
 
 - 다수의 API 개별 호출
+- 동일한 데이터를 재호출하는 문제 발생
 
 ### 개선 시도
 
 - 백엔드 API 구조 개선 요청
   - 데이터를 받은후, 프론트에서 차트를 표현하기 위한 데이터 재가공 작업이 있었음. 이것을 위해 API 데이터 수정 제안
-- 프론트엔드 Promise.all 을 사용한 병렬 처리
+- React-Query 도입
+  - 중복 API 호출 방지 및 성능 최적화
 
 ### 한계 및 개선 방향
 
-- 프로젝트 초기 API 설계의 중요성 인식
+- 프로젝트 초기 API 설계의 중요성
 - GraphQL 도입을 통한 선택적 데이터 요청 검토 필요
 - 서버 사이드 캐싱 전략 수립 필요
 
@@ -153,27 +173,35 @@ url: "https://main.d393vrk35k9yt8.amplifyapp.com/"
 
 - 초기 설계 단계에서 API 구조의 중요성 인식
 - 프론트엔드에서 할 수 있는 최적화의 한계 경험
-- GraphQL에 대한 정보 및 관심이 생김
+- React Query를 활용한 서버 상태 관리 방법 습득
+- 캐싱 전략의 중요성과 구현 방법에 대한 이해
 
-# 🎯 인사이트
+:::
+
+---
+
+# 🎯 성과
+
+- 사내 첫 TypeScript 프로젝트로 기술력 및 코드 품질 향상
+- 디자인 시안 없이 UI/UX 구현, 약 2달간의 짧은 프로젝트 기간 내에 기능 완성
+- 실제 데이터를 통한 서비스 가치 평가, 다양한 활용 제안
+
+---
+
+# 💡 인사이트
 
 - 기술적 성장
 
-  - 사내 첫 TypeScript 도입 프로젝트 경험
+  - TypeScript 학습 및 첫 실무 적용
   - Next.js와 데이터 시각화 라이브러리 실무 적용
   - API 구조 설계의 중요성 인식
 
 - 협업
 
-  - 데이터분석/백엔드 개발자와의 효율적인 커뮤니케이션 경험
+  - 데이터분석/백엔드 개발자와의 커뮤니케이션 경험
   - 프로젝트 용어 정리, API 명세 작성 및 공유
   - 정기적인 오프라인 회의와 회의록 작성
   - 다양한 레퍼런스 자료 및 아이디어 공유
-
-- 프로젝트 관리
-
-  - 디자인 시안 없이 UI/UX 구현
-  - 약 2달간의 짧은 프로젝트 기간 내에 기능 완성
 
 - 데이터 기반 의사결정
   - 실제 데이터를 통한 서비스 가치 평가 경험

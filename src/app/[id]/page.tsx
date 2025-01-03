@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import Link from "next/link";
 
 import styles from "./page.module.scss";
+import Image from "next/image";
 interface Props {
   params: Promise<{
     id: string;
@@ -19,8 +20,18 @@ export default async function Page({ params }: Props) {
   const { id } = await params;
   const project = await getProject(id);
 
-  const { type, title, kor, icon, description, period, github, url, content } =
-    project;
+  const {
+    type,
+    title,
+    kor,
+    thumb,
+    icon,
+    description,
+    period,
+    github,
+    url,
+    content,
+  } = project;
 
   const IconComponent = ICON_MAP[icon as ICON_TYPE];
   return (
@@ -36,7 +47,13 @@ export default async function Page({ params }: Props) {
         <p className="text-gray-500 mt-2">{period}</p>
         <p className="text-gray-500 mt-2">{description}</p>
       </header>
-
+      <Image
+        className="mb-16 m-auto rounded-xl"
+        src={`/strongerDeer/${thumb}`}
+        alt=""
+        width={500}
+        height={500}
+      />
       <div className={styles.contents}>
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>
