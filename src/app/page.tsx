@@ -18,11 +18,10 @@ export default async function Home() {
       <Hero />
       <Introduce />
 
+      <Project initialProjects={projects} />
+      <Experience />
       <Skill />
 
-      <Project initialProjects={projects} />
-
-      <Experience />
       <Career />
 
       <div className="wrap" id="education">
