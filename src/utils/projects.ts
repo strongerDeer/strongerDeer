@@ -6,7 +6,7 @@ import { remark } from "remark";
 import { visit } from "unist-util-visit";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
-import { Root } from "mdast";
+import { Heading, Root } from "mdast";
 import { Element } from "hast";
 import { h } from "hastscript";
 import remarkDirective from "remark-directive";
@@ -15,7 +15,7 @@ const projectsDirectory = path.join(process.cwd(), "projects");
 
 function adjustHeadingLevel() {
   return (tree: Root) => {
-    visit(tree, "heading", (node) => {
+    visit(tree, "heading", (node: Heading) => {
       // h1(#)를 h3로 변경
       if (node.depth === 1) {
         node.depth = 3;
@@ -23,6 +23,28 @@ function adjustHeadingLevel() {
         node.depth = 4;
       } else if (node.depth === 3) {
         node.depth = 5;
+      }
+
+      const headingText = node.children
+        .map((child) => (child.type === "text" ? child.value : ""))
+        .join("");
+
+      if (headingText === "🤔 배경") {
+        node.data = { ...node.data, hProperties: { id: "section1" } };
+      } else if (headingText === "📝 기획") {
+        node.data = { ...node.data, hProperties: { id: "section2" } };
+      } else if (headingText === "🛠️ 기술 스택") {
+        node.data = { ...node.data, hProperties: { id: "section3" } };
+      } else if (headingText === "🔍 기능") {
+        node.data = { ...node.data, hProperties: { id: "section4" } };
+      } else if (headingText === "🚨 트러블슈팅") {
+        node.data = { ...node.data, hProperties: { id: "section5" } };
+      } else if (headingText === "🎯 성과 및 기여") {
+        node.data = { ...node.data, hProperties: { id: "section6" } };
+      } else if (headingText === "💡 인사이트") {
+        node.data = { ...node.data, hProperties: { id: "section7" } };
+      } else if (headingText === "📈 향후 개선 계획") {
+        node.data = { ...node.data, hProperties: { id: "section8" } };
       }
     });
   };

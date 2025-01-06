@@ -5,6 +5,7 @@ import ProjectThumb from "./ProjectThumb";
 import ProjectBtns from "./ProjectBtns";
 import Tag from "@components/shared/Tag";
 import { I_PROJECTS, ICON_MAP, ICON_TYPE } from "@data/project";
+import Link from "next/link";
 
 export default function ProjectCard({
   project,
@@ -40,7 +41,9 @@ export default function ProjectCard({
         delay: index * 0.1,
       }}
     >
-      <ProjectThumb type={type} thumb={thumb} />
+      <Link href={`/${id}`}>
+        <ProjectThumb type={type} thumb={thumb} />
+      </Link>
 
       <div className="content">
         <div>

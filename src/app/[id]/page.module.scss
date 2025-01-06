@@ -2,7 +2,7 @@
   @apply max-w-screen-2xl m-auto px-10 pb-10;
 
   header {
-    @apply bg-white sticky top-0 pt-10 pb-4 z-10 border-b mb-6;
+    @apply bg-white sticky top-0 pt-10 z-10 border-b mb-6;
   }
 }
 
@@ -22,11 +22,13 @@
   }
 
   h3 {
-    @apply text-xl mb-2;
+    @apply text-xl mb-2 -mt-60 pt-60;
 
-    & ~ h3,
-    & ~ h4 {
-      @apply mt-10;
+    & ~ h3 {
+      @apply -mt-40 pt-60;
+    }
+    & + h4 {
+      @apply mt-0;
     }
   }
 
@@ -35,7 +37,7 @@
 
     & ~ h4,
     & ~ h5 {
-      @apply mt-4;
+      @apply mt-8;
     }
   }
 

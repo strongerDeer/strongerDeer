@@ -7,6 +7,7 @@ import Link from "next/link";
 
 import styles from "./page.module.scss";
 import Image from "next/image";
+import Nav from "@components/project/Nav";
 interface Props {
   params: Promise<{
     id: string;
@@ -23,6 +24,7 @@ export default async function Page({ params }: Props) {
   const {
     type,
     title,
+    role,
     kor,
     thumb,
     icon,
@@ -45,7 +47,10 @@ export default async function Page({ params }: Props) {
           </h2>
         </div>
         <p className="text-gray-500 mt-2">{period}</p>
+        <p className="text-gray-500 mt-2">{role}</p>
         <p className="text-gray-500 mt-2">{description}</p>
+
+        <Nav />
       </header>
       <Image
         className="mb-16 m-auto rounded-xl"

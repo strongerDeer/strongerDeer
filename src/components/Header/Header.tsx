@@ -10,23 +10,20 @@ export default function Header() {
         <Link href="#hero">
           <span>Home</span>
         </Link>
-        <Link href="#introduce">
-          <span>Introduce</span>
-        </Link>
 
-        <Link href="#skill">
-          <span>Skill</span>
-        </Link>
         <Link href="#project">
           <span>Project</span>
         </Link>
         <Link href="#experience">
           <span>Experience</span>
         </Link>
+
         <Link href="#career">
           <span>Career</span>
         </Link>
-
+        <Link href="#skill">
+          <span>Skill</span>
+        </Link>
         <Link href="#education">
           <span>Education/Certificate</span>
         </Link>

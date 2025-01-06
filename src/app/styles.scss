@@ -415,7 +415,7 @@
 }
 
 .strength {
-  @apply grid md:grid-cols-3 gap-8;
+  @apply grid md:grid-cols-3 gap-8 mt-8;
   div {
     @apply p-6 bg-white rounded-xl;
   }
@@ -488,17 +488,10 @@ code {
   }
 }
 
-details {
-  @apply p-2 pb-8;
-  summary {
-    @apply mb-4 text-blue-500 underline-offset-2;
-  }
-
-  div {
-    @apply p-6 border-4 border-gray-100 rounded-xl;
-    h5 ~ h5 {
-      @apply mt-8;
-    }
+.details {
+  @apply p-6 border-4 border-gray-100 rounded-xl;
+  h5 ~ h5 {
+    @apply mt-8;
   }
 }
 
