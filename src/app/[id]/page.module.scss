@@ -22,10 +22,10 @@
   }
 
   h3 {
-    @apply text-xl mb-2 -mt-60 pt-60;
+    @apply text-xl mb-2 -mt-72 pt-72;
 
     & ~ h3 {
-      @apply -mt-40 pt-60;
+      @apply -mt-56 pt-72;
     }
     & + h4 {
       @apply mt-0;

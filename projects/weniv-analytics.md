@@ -1,4 +1,5 @@
 ---
+index: 2
 id: "weniv-analytics"
 type: "업무"
 title: "Weniv Analytics"

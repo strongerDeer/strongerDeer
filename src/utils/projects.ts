@@ -67,29 +67,12 @@ export async function getAllProjects() {
   const allProjectsData = await Promise.all(
     fileNames.map(async (fileName) => {
       const id = fileName.replace(/\.md$/, "");
-      const fullPath = path.join(projectsDirectory, fileName);
-      const fileContents = fs.readFileSync(fullPath, "utf8");
-      const matterResult = matter(fileContents);
-
-      // MD -> HTML 전환
-      const processedContent = await remark()
-        .use(adjustHeadingLevel)
-        .use(remarkRehype)
-        .use(addClasses)
-        .use(rehypeStringify)
-        .process(matterResult.content);
-
-      const contentHtml = processedContent.toString();
-
-      return {
-        id,
-        ...(matterResult.data as Omit<I_PROJECTS, "id">),
-        content: contentHtml,
-      };
+      const project = await getProject(id);
+      return project;
     })
   );
 
-  return allProjectsData;
+  return allProjectsData.sort((a, b) => a.index - b.index);
 }
 
 export async function getProject(fileName: string) {
