@@ -6,6 +6,10 @@ import { pretendard } from "@font";
 import { ModalContextProvider } from "@contexts/ModalContext";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL ||
+      "https://strongerdeer.github.io/strongerDeer/"
+  ),
   title: "강혜진 | 프론트엔드 개발자",
   description:
     "0.3초의 짧은 인터랙션, 디테일한 사용자 경험을 고민하는 강혜진 개발자입니다.",
