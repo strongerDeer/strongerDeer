@@ -7,8 +7,7 @@ import { ModalContextProvider } from "@contexts/ModalContext";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL ||
-      "https://strongerdeer.github.io/strongerDeer/"
+    process.env.NEXT_PUBLIC_BASE_URL || "https://strongerdeer.github.io/"
   ),
   title: "강혜진 | 프론트엔드 개발자",
   description:
