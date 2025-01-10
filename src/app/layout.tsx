@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description:
     "0.3초의 짧은 인터랙션, 디테일한 사용자 경험을 고민하는 강혜진 개발자입니다.",
 
-  icons: { icon: "/favicon.ico" },
+  icons: { icon: "/strongerDeer/favicon.ico" },
   openGraph: {
     type: "website",
     title: "강혜진 | 프론트엔드 개발자",
