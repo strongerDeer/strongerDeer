@@ -8,6 +8,7 @@ export interface I_CAREERS {
   info: string;
   description: string[];
   location: string;
+  images?: string[];
 }
 
 export const CAREERS: I_CAREERS[] = [
@@ -34,13 +35,18 @@ export const CAREERS: I_CAREERS[] = [
     kor: "팀스톤",
     team: "기획팀",
     position: "웹 디자이너&퍼블리셔 / 선임연구원(과장)",
-    info: "실시간 모니터링 솔루션 기업",
+    info: "기업용 IT 인프라 모니터링 및 성능 관리 솔루션 개발 전문기업",
     description: [
       "실시간 모니터링 솔루션 UI/UX 디자인",
-      "자사 디자인 관련 모든 업무(홈페이지, 소프트웨어 UI/UX, 브로슈어, 동영상)",
-      "웹 퍼블리싱: 자사 홈페이지 리뉴얼, 대시보드",
+      "자사 디자인 관련 모든 업무(홈페이지, 브로슈어, 홍보영상, PPT)",
+      "웹퍼블리싱(자사 홈페이지 리뉴얼, 웹대시보드 프로토타입 등)",
     ],
     location: "서울",
+    images: [
+      "/career/teemstone_1.jpg",
+      "/career/teemstone_2.jpg",
+      "/career/teemstone_3.jpg",
+    ],
   },
   {
     id: 3,
@@ -49,26 +55,36 @@ export const CAREERS: I_CAREERS[] = [
     kor: "게리온",
     team: "브랜드기획부 디자인팀",
     position: "웹 디자이너&퍼블리셔 / 팀장(대리)",
-    info: "",
+    info: "투자 상담 및 자문 서비스 제공 기업",
     description: [
       "자사 브랜드 홈페이지 제작 / 기타 광고디자인 / 자사 디자인 업무 총괄",
-      "자사 브랜드 홈페이지 퍼블리싱",
+      "자사 브랜드 홈페이지 디자인 및 퍼블리싱 / 기타 광고디자인 / 자사 디자인 업무 총괄",
     ],
     location: "서울",
+    images: [
+      "/career/geryon_1.jpg",
+      "/career/geryon_2.jpg",
+      "/career/geryon_3.jpg",
+    ],
   },
   {
     id: 4,
     period: "2016.03 ~ 2017.07 (1년 5개월)",
     company: "DNUNET",
-    kor: "디유넷",
+    kor: "디유넷(현: 동아미디어엔)",
     team: "DBR,HBR 사업팀",
     position: "웹 디자이너&퍼블리셔 / 대리",
-    info: "",
+    info: "동아미디어그룹의 방송솔루션 및 디지털서비스 운영 전문기업",
     description: [
-      "웹/앱 디자인 및 퍼블리싱, 자사 홈페이지 관리 등",
-      "주요 프로젝트: DBR(동아비즈니스리뷰), 대한간호협회 에듀센터, 동아 인턴UP 등",
+      "동아미디어 관련 웹,모바일 디자인 및 퍼블리싱/ 자사 홈페이지 관리 등",
+      "주요 프로젝트: DBR(동아비즈니스리뷰), 대한간호협회 에듀센터, 동아 인턴UP, 도담촌 등",
     ],
     location: "서울",
+    images: [
+      "/career/dunet_1.jpg",
+      "/career/dunet_2.jpg",
+      "/career/dunet_3.jpg",
+    ],
   },
   {
     id: 5,
@@ -77,12 +93,17 @@ export const CAREERS: I_CAREERS[] = [
     kor: "스코인포(부산)",
     team: "디자인팀",
     position: "웹 디자이너&퍼블리셔 / 대리",
-    info: "",
+    info: "전자정부표준프레임워크 기반의 공공데이터 솔루션 개발 및 구축 전문기업",
     description: [
-      "웹/앱 디자인 및 퍼블리싱(웹 표준, 웹 접근성)",
-      "웹 접근성 참여: 고성군청, 거제시청, 모바일 부산, 부산진구청, 군산시청 등",
+      "공공기관 웹/모바일 디자인 및 퍼블리싱, 웹표준, 웹접근성 인증마크 프로젝트 등",
+      "웹 접근성 인증마크 프로젝트: 고성군청, 거제시청, 모바일 부산, 부산진구청, 군산시청 등",
     ],
     location: "부산",
+    images: [
+      "/career/skoinfo_1.jpg",
+      "/career/skoinfo_2.jpg",
+      "/career/skoinfo_3.jpg",
+    ],
   },
   {
     id: 6,

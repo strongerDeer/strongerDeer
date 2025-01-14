@@ -54,7 +54,7 @@
       }
 
       div:first-child {
-        @apply basis-0 md:basis-72;
+        @apply basis-0 md:basis-72 shrink-0;
       }
 
       h3 {

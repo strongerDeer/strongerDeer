@@ -4,6 +4,7 @@ import { CAREERS, I_CAREERS } from "@data/careers";
 import { Code, SquareMousePointer, Trees } from "lucide-react";
 import { useRef, useState } from "react";
 import MoreToggleBtn from "./shared/MoreToggleBtn";
+import Image from "next/image";
 
 export default function Career() {
   const [showAll, setShowAll] = useState(false);
@@ -68,6 +69,20 @@ export default function Career() {
                       </li>
                     ))}
                   </ul>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4 full">
+                    {career.images &&
+                      career.images.map((image, i) => (
+                        <Image
+                          key={i}
+                          src={`/strongerDeer${image}`}
+                          alt=""
+                          width={200}
+                          height={200}
+                          className="rounded-xl w-full max-w-72"
+                        />
+                      ))}
+                  </div>
                 </div>
               </li>
             ))}
