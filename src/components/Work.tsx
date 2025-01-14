@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import MoreToggleBtn from "./shared/MoreToggleBtn";
 import Image from "next/image";
 
-export default function Career() {
+export default function Work() {
   const [showAll, setShowAll] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -20,10 +20,10 @@ export default function Career() {
   };
 
   return (
-    <div className="wrap" id="career">
+    <div className="wrap" id="works">
       <section ref={sectionRef}>
         <h2 className="title">
-          Career<span>경력</span>
+          Work Experience<span>경력</span>
         </h2>
         <p>
           프론트엔드 개발 경력: <strong>2년 3개월</strong>{" "}

@@ -198,7 +198,7 @@ export const TabContents = {
   ),
 };
 
-export default function Skill() {
+export default function Skills() {
   const { width } = useWindowSize();
   const [tabs, setTabs] = useState<I_Tab[]>(TABS);
   const [activeTab, setActiveTab] = useState<string>("README.md");
@@ -237,10 +237,10 @@ export default function Skill() {
   }, [width, activeTab]);
 
   return (
-    <div className="wrap" id="skill">
+    <div className="wrap" id="skills">
       <section>
         <h2 className="title">
-          Skill <span>기술</span>
+          Skills <span>기술</span>
         </h2>
 
         <div

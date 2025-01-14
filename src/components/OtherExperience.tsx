@@ -4,12 +4,12 @@ import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import React, { Fragment } from "react";
 
-export default function Experience() {
+export default function OtherExperience() {
   return (
-    <div className="wrap" id="experience">
+    <div className="wrap" id="otherExperience">
       <section>
         <h2 className="title">
-          Experience <span>경험</span>
+          Other Experience <span>기타 경력 및 경험</span>
         </h2>
 
         <ul className="card sm:grid-cols-2 xl:grid-cols-4">

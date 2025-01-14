@@ -10,12 +10,12 @@
 ```
 
 ### 👋 안녕하세요
+
 0.3초의 짧은 인터랙션,<br>
 디테일한 사용자 경험을 고민하는 <strong>강혜진</strong> 개발자입니다.
 
+### 🛠️ Skills
 
-
-### 🛠️ Skill
 ![Next.js](https://img.shields.io/badge/Next.js-f9f9f9?style=flat-square&logo=Next.js&logoColor=000000)
 ![React](https://img.shields.io/badge/React-f9f9f9?style=flat-square&logo=React&logoColor=61DAFB)
 ![Recoil](https://img.shields.io/badge/Recoil-f9f9f9?style=flat-square&logo=React&logoColor=3578E5)
@@ -36,7 +36,6 @@
 ![Illustrator](https://img.shields.io/badge/Illustrator-f9f9f9?style=flat-square&logo=adobe-illustrator&logoColor=FF9A00)
 ![Notion](https://img.shields.io/badge/Notion-f9f9f9?style=flat-square&logo=notion&logoColor=000000)
 
-
-
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=strongerDeer&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
+
 </div>

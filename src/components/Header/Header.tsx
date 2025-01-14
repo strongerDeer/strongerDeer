@@ -11,21 +11,23 @@ export default function Header() {
           <span>Home</span>
         </Link>
 
-        <Link href="#project">
-          <span>Project</span>
-        </Link>
-        <Link href="#experience">
-          <span>Experience</span>
+        <Link href="#projects">
+          <span>Projects</span>
         </Link>
 
-        <Link href="#career">
-          <span>Career</span>
+        <Link href="#work">
+          <span>Work</span>
         </Link>
-        <Link href="#skill">
-          <span>Skill</span>
+
+        <Link href="#otherExperience">
+          <span>Other Experience</span>
+        </Link>
+
+        <Link href="#skills">
+          <span>Skills</span>
         </Link>
         <Link href="#education">
-          <span>Education/Certificate</span>
+          <span>Education/Certifications</span>
         </Link>
       </div>
 

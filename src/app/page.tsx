@@ -1,11 +1,11 @@
 import Hero from "@/components/Hero";
-import Project from "@/components/Project";
-import Career from "@components/Career";
-import Certificate from "@components/Certificate";
+import Projects from "@/components/Projects";
+import Work from "@components/Work";
+import Certifications from "@components/Certifications";
 import Education from "@components/Education";
-import Experience from "@components/Experience";
+import OtherExperience from "@components/OtherExperience";
 import Header from "@components/Header/Header";
-import Skill from "@components/Skill";
+import Skills from "@components/Skills";
 import { getAllProjects } from "@utils/projects";
 
 export default async function Home() {
@@ -16,16 +16,16 @@ export default async function Home() {
       <Header />
       <Hero />
 
-      <Project initialProjects={projects} />
-      <Experience />
+      <Projects initialProjects={projects} />
+      <Work />
+      <OtherExperience />
 
-      <Career />
-      <Skill />
+      <Skills />
 
       <div className="wrap" id="education">
         <div>
           <Education />
-          <Certificate />
+          <Certifications />
         </div>
       </div>
     </div>

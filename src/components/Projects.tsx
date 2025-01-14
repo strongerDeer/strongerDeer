@@ -11,7 +11,7 @@ interface ProjectProps {
   initialProjects: I_PROJECTS[];
 }
 
-export default function Project({ initialProjects }: ProjectProps) {
+export default function Projects({ initialProjects }: ProjectProps) {
   const [showAll, setShowAll] = useState(false);
   const { width } = useWindowSize();
 
@@ -21,10 +21,10 @@ export default function Project({ initialProjects }: ProjectProps) {
 
   return (
     <>
-      <div className="wrap" id="project">
+      <div className="wrap" id="projects">
         <section>
           <h2 className="title">
-            Project <span>프로젝트</span>
+            Projects <span>프로젝트</span>
           </h2>
 
           <AnimatePresence mode="wait">
