@@ -14,7 +14,16 @@ interface Props {
   }>;
 }
 export async function generateStaticParams() {
-  return [{ id: "page0127" }, { id: "weniv-analytics" }, { id: "wenivooks" }];
+  return [
+    { id: "jeju-ai" },
+    { id: "jeju-algorithm" },
+    { id: "page0127" },
+    { id: "teemstone" },
+    { id: "weniv-analytics" },
+    { id: "weniv-bootcamp" },
+    { id: "weniv-link" },
+    { id: "wenivooks" },
+  ];
 }
 
 export default async function Page({ params }: Props) {
