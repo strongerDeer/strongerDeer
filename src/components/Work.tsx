@@ -77,9 +77,11 @@ export default function Work() {
                           key={i}
                           src={`/strongerDeer${image}`}
                           alt=""
-                          width={200}
-                          height={200}
+                          width={288}
+                          height={216}
                           className="rounded-xl w-full max-w-72"
+                          quality={75}
+                          loading="lazy"
                         />
                       ))}
                   </div>
