@@ -14,7 +14,7 @@ export interface I_CAREERS {
 export const CAREERS: I_CAREERS[] = [
   {
     id: 1,
-    period: "2022.04 ~ 2024.07 (2년 3개월)",
+    period: "2022.04 ~ 2024.07 (2년 4개월)",
     company: "Weniv",
     kor: "위니브",
     position: "프론트엔드 개발자",
