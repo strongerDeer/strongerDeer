@@ -20,7 +20,7 @@ export default function Work() {
   };
 
   return (
-    <div className="wrap" id="works">
+    <div className="wrap" id="work">
       <section ref={sectionRef}>
         <h2 className="title">
           Work Experience<span>경력</span>
