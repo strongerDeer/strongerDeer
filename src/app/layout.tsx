@@ -4,6 +4,7 @@ import "./globals.scss";
 import "./styles.scss";
 import { pretendard } from "@font";
 import { ModalContextProvider } from "@contexts/ModalContext";
+import GA from "@utils/GA";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -41,6 +42,7 @@ export default function RootLayout({
     <html lang="ko-KR" className={pretendard.variable}>
       <body>
         <ModalContextProvider>{children}</ModalContextProvider>
+        <GA />
       </body>
     </html>
   );
