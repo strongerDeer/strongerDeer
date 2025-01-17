@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  basePath: "/strongerDeer",
-  assetPrefix: "/strongerDeer",
   output: "export",
+  basePath: "/strongerDeer",
+  assetPrefix: "/strongerDeer/",
   images: {
     unoptimized: true,
   },
