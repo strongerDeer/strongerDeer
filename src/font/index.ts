@@ -5,14 +5,13 @@ export const raleway = Raleway({ subsets: ["latin"] });
 
 export const nanumCoding = Nanum_Gothic_Coding({
   weight: ["400", "700"],
-  preload: true,
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const pretendard = localFont({
   src: "./PretendardVariable.woff2",
   display: "swap",
-  preload: true,
   weight: "100 900",
   fallback: [
     "-apple-system",
