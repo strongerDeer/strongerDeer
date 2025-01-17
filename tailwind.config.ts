@@ -10,8 +10,8 @@ export default {
     extend: {
       colors: {
         primary: "var(--primary)",
+        primaryA11y: "var(--primary-a11y)",
         point: "var(--point)",
-
         background: "var(--background)",
         foreground: "var(--foreground)",
       },

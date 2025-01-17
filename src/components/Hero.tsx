@@ -19,7 +19,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <span className="text-primary">{`<strong>`}</span>
+            <span className="text-primaryA11y">{`<strong>`}</span>
             <wbr />
             <span className="font-bold">De</span>
             {`{`}
@@ -29,7 +29,7 @@ export default function Hero() {
             {`}`}
             <span className="font-bold">er</span>
             <wbr />
-            <span className="text-primary">{`<strong>`}</span>
+            <span className="text-primaryA11y">{`<strong>`}</span>
           </motion.div>
 
           <motion.div
