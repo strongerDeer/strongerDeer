@@ -26,10 +26,10 @@ export default function Work() {
           Work Experience<span>경력</span>
         </h2>
         <p>
-          프론트엔드 개발 경력: <strong>2년 4개월</strong>{" "}
+          프론트엔드 개발 경력: <strong>3년 10개월</strong>{" "}
           <span className="block sm:inline">
-            <span className="hidden sm:inline">/</span> IT 부문 경력: 총{" "}
-            <strong>10년</strong>
+            <span className="hidden sm:inline">/</span> 웹/IT 실무 경력: 총{" "}
+            <strong>11년 6개월</strong>
           </span>
         </p>
 

@@ -1,5 +1,5 @@
 ---
-index: 5
+index: 9
 id: "weniv-link"
 type: "업무"
 title: "Weniv Link"
@@ -13,9 +13,7 @@ skills: ["HTML", "Sass", "JavaScript"]
 icon: "Link"
 metrics:
   [
-    "캐릭터를 활용한 애니메이션 UI 디자인으로 친근하고 재미있는 사용자 경험 제공",
-    "QR 코드 생성 및 다운로드 기능 구현 (QRCode.js 사용)",
-    "hover, click 등의 인터랙션을 통해 재미있고 디테일한 UX 디자인 적용",
+    "QR 코드 생성 및 다운로드 기능 구현, 캐릭터 기반 인터랙션 UI 디자인",
   ]
 url: "https://weniv.link/"
 role: "2인 프로젝트(디자인/프론트엔드1, 백엔드1) - 디자인/프론트엔드 100% 기여"
@@ -37,13 +35,12 @@ role: "2인 프로젝트(디자인/프론트엔드1, 백엔드1) - 디자인/프
 
 HTML, Sass, JavaScript, QRCode.js
 
-# 🎯 성과 및 기여
+# 결과
 
 - 클립보드 API를 활용한 간편한 URL 복사 기능 구현
 - QRCode.js를 활용한 QR코드 생성 및 다운로드 기능 구현
 - 캐릭터 애니메이션을 통한 차별화된 사용자 경험 제공
 - hover, click 등 다양한 인터랙션 요소 적용
-- 디자인/프론트엔드 개발 100% 기여
 
 # 💡 인사이트
 

@@ -1,5 +1,5 @@
 ---
-index: 7
+index: 10
 id: "jeju-algorithm"
 type: "업무"
 title: "Jeju Algorithm Basecamp"
@@ -30,11 +30,10 @@ role: "1인 프로젝트(디자인/프론트엔드 100%)"
 
 HTML, Sass, JavaScript, anime.js
 
-# 🎯 성과 및 기여
+# 결과
 
 - anime.js를 활용한 스크롤 기반 인터랙티브 애니메이션 구현
 - 모바일 환경을 고려한 반응형 디자인 설계 및 구현
-- 디자인/프론트엔드 전 과정 100% 기여
 
 # 💡 인사이트
 

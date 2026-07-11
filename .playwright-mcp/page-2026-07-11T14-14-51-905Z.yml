@@ -1,0 +1,174 @@
+- generic [active] [ref=f2e1]:
+  - generic [ref=f2e3]:
+    - banner [ref=f2e4]:
+      - paragraph [ref=f2e5]: 업무
+      - heading "NOVERA Shop 커머스 프론트엔드 구축·운영" [level=2] [ref=f2e11]:
+        - text: NOVERA Shop
+        - generic [ref=f2e15]: 커머스 프론트엔드 구축·운영
+      - paragraph [ref=f2e16]: 2025.02~재직중
+      - paragraph [ref=f2e17]: TF(백엔드1·프론트엔드1·디자인1·사업2) 내 프론트엔드 개발 담당
+      - paragraph [ref=f2e18]: 전담 기획자 없이 상품 탐색부터 주문·클레임·운영 어드민까지 화면 흐름과 상태 표현을 정리한 커머스 프론트엔드 구축·운영
+      - navigation [ref=f2e19]:
+        - link "소개" [ref=f2e20] [cursor=pointer]:
+          - /url: "#section1"
+        - link "문제" [ref=f2e21] [cursor=pointer]:
+          - /url: "#section2"
+        - link "역할" [ref=f2e22] [cursor=pointer]:
+          - /url: "#section3"
+        - link "해결" [ref=f2e23] [cursor=pointer]:
+          - /url: "#section4"
+        - link "기술 문제" [ref=f2e24] [cursor=pointer]:
+          - /url: "#section5"
+        - link "결과" [ref=f2e25] [cursor=pointer]:
+          - /url: "#section6"
+        - link "판단 기준" [ref=f2e26] [cursor=pointer]:
+          - /url: "#section7"
+        - link "공개 근거" [ref=f2e27] [cursor=pointer]:
+          - /url: "#section8"
+    - generic [ref=f2e29]:
+      - heading "이 프로젝트를 보는 방법" [level=3] [ref=f2e30]
+      - paragraph [ref=f2e31]: NOVERA Shop은 주문·클레임·고객 정보가 포함된 화면 캡처가 제한적인 회사 프로젝트입니다. 따라서 포트폴리오에서는 로그인 없이 접근 가능한 공개 화면(상품 탐색·상품 상세·캠페인 랜딩)만 일부 보여주고, 나머지는 신규 커머스에서 사용자가 헷갈리기 쉬운 상태와 운영자가 반복 처리하던 업무를 어떻게 화면 흐름으로 정리했는지에 집중했습니다.
+      - paragraph [ref=f2e32]: 2026년 4월 오픈 이후 별도 대규모 마케팅 없이 MAU 최대 3,436명을 기록한 운영 쇼핑몰 프로젝트이며, 이 상세에서는 매출 같은 내부 지표는 제외하고 공개 가능한 사용자 규모와 프론트엔드 개선 범위만 다룹니다.
+      - paragraph [ref=f2e33]:
+        - text: 검토하실 때는 단순 구현 범위보다
+        - strong [ref=f2e34]: 기획 공백이 있는 상황에서 어떤 기준으로 UI 상태와 운영 흐름을 정리했는지
+        - text: ", 그리고 그 판단을 어떤 지표와 운영 신호로 확인하려 했는지를 중심으로 봐주시면 좋습니다."
+      - heading "문제" [level=3] [ref=f2e35]
+      - paragraph [ref=f2e36]: 전담 기획자가 없는 신규 커머스에서 상품 탐색, 주문, 취소, 반품, 운영 어드민까지 정보 구조와 상태 표현을 정리해야 했습니다. 구매자에게는 진행 상태와 안내가 불명확했고, 운영자에게는 반복 확인과 수동 처리 비용이 컸습니다.
+      - heading "역할" [level=3] [ref=f2e37]
+      - paragraph [ref=f2e38]: 백엔드 1명, 프론트엔드 1명, 디자인 1명, 사업 2명으로 구성된 신규 커머스 런칭 TF에서 프론트엔드 개발을 맡았습니다. 팀 내 프론트엔드 개발자가 한 명이었기에 화면 정책 정리, 화면 기획, UI 설계, 개발, 운영 검증까지 프론트엔드 영역 전반을 담당했습니다. 디자이너와는 화면 시안을, 백엔드와는 결제·주문·취소·반품 API 연동 기준을, 사업팀과는 운영 정책을 협의하며 구현했습니다.
+      - paragraph [ref=f2e39]
+      - paragraph [ref=f2e40]: 사용자 화면과 운영 관리 화면이 하나의 백엔드 API를 공유하고, 성과 지표는 별도로 수집해 품질 대시보드로 연결되는 구조입니다. 디자인 시스템은 Figma 토큰과 공통 컴포넌트를 기반으로 두 화면에서 함께 사용할 수 있도록 구성했습니다.
+      - heading "해결" [level=3] [ref=f2e41]
+      - paragraph [ref=f2e42]:
+        - img "상품 목록(PLP) — 카테고리 필터·정렬·상품 카드 상태 배지" [ref=f2e43]
+      - paragraph [ref=f2e44]: 상품 목록 화면입니다. 카테고리 필터, 정렬(최신/인기/할인율/가격), 상품 카드의 무료배송·품절임박 등 상태 배지까지 커머스 탐색에 필요한 상태 표현을 정리했습니다.
+      - list [ref=f2e45]:
+        - listitem [ref=f2e46]: 상품 카드, 상품 목록, 상품 상세, 주문내역, 주문상세 등 커머스 핵심 화면 구현
+        - listitem [ref=f2e47]: 취소·반품 요청/거절 사유를 상품 인라인으로 개편하고, 클레임 상세에 반품배송비·환불금액 breakdown을 통합해 구매자가 예상 환불금액을 결제 전 확인하도록 구성
+        - listitem [ref=f2e48]: 주문·배송·반품·클레임·이벤트 매출 등 운영 어드민 기능 구현, 다중 상품 일괄처리와 외부 택배 배송조회 연동, 배송중 주문 송장번호 수정 구현
+        - listitem [ref=f2e49]: 상품별 안내문구 영역을 신설해 해외결제·예약 판매·배송 안내를 사전에 노출
+        - listitem [ref=f2e50]: DANAL SQUARE, SPHERE(FANCAST 포토카드·덕력고사 퀴즈·호흡 투표 등 다회차) 캠페인/이벤트 페이지를 개발하고 댓글·투표·공유·상품 연결 등 참여형 인터랙션 구현
+        - listitem [ref=f2e51]:
+          - text: 로그인 진입 경로를
+          - code [ref=f2e52]: /sign-in
+          - text: 으로 통일하고 로그인·가입 후 원래 페이지로 복귀하도록 정리
+        - listitem [ref=f2e53]: 백엔드 응답 형식을 정규화해 데이터 연동 오류 가능성 감소
+      - heading "기술적으로 어려웠던 문제" [level=3] [ref=f2e54]
+      - heading "서버 렌더링과 클라이언트 캐시의 경계" [level=4] [ref=f2e55]
+      - paragraph [ref=f2e56]: 상품 목록, 상세, 마이페이지는 첫 화면 노출 속도와 이후 상호작용 속도를 모두 고려해야 했습니다. 서버에서 미리 가져와도 되는 데이터와 클라이언트에서 사용자 행동에 따라 갱신되어야 하는 데이터를 분리하고, TanStack Query의 prefetch/dehydrate 패턴으로 서버 데이터와 클라이언트 캐시를 연결했습니다.
+      - figure [ref=f2e57]:
+        - code [ref=f2e59]:
+          - generic [ref=f2e60]: "const queryClient = new QueryClient({"
+          - generic [ref=f2e61]: "defaultOptions: {"
+          - generic [ref=f2e62]: "queries: {"
+          - generic [ref=f2e63]: "retry: false,"
+          - generic [ref=f2e64]: "staleTime: 1000 * 60 * 5,"
+          - generic [ref=f2e65]: "refetchOnWindowFocus: false,"
+          - generic [ref=f2e66]: "refetchOnMount: false,"
+          - generic [ref=f2e67]: "refetchOnReconnect: false,"
+          - generic [ref=f2e68]: "},"
+          - generic [ref=f2e69]: "},"
+          - generic [ref=f2e70]: "});"
+      - paragraph [ref=f2e71]: 이 구조로 초기 렌더링은 서버 데이터를 활용하고, 장바구니·주문·클레임처럼 사용자 상태가 바뀌는 화면은 mutation 이후 관련 query를 무효화하는 방식으로 일관성을 맞췄습니다.
+      - heading "무한 스크롤에서 필터 후 빈 화면이 생기는 문제" [level=4] [ref=f2e72]
+      - paragraph [ref=f2e73]: 목록 데이터에 클라이언트 필터가 추가되면, 현재 로드된 페이지 안에서는 결과가 0개지만 다음 페이지에는 결과가 있는 상황이 생깁니다. 단순히 빈 화면을 노출하면 사용자는 데이터가 없다고 오해합니다. 그래서 필터 결과가 비었고 다음 페이지가 남아 있으며 현재 fetch 중이 아닐 때만 다음 페이지를 자동으로 한 번 더 가져오도록 제어했습니다.
+      - list [ref=f2e74]:
+        - listitem [ref=f2e75]:
+          - code [ref=f2e76]: loadedPageCount
+          - text: 를 ref로 기억해 같은 페이지에서 중복 fetch 방지
+        - listitem [ref=f2e77]:
+          - code [ref=f2e78]: isFetching
+          - text: 과
+          - code [ref=f2e79]: isFetchingNextPage
+          - text: 를 함께 확인해 연속 호출 방지
+        - listitem [ref=f2e80]:
+          - text: 에러 상태와 빈 상태를 분리해
+          - code [ref=f2e81]: ListErrorComponent
+          - text: 와
+          - code [ref=f2e82]: ListEmptyComponent
+          - text: 를 따로 노출
+      - heading "SEO metadata 병합에서 robots가 의도치 않게 풀리는 문제" [level=4] [ref=f2e83]
+      - paragraph [ref=f2e84]:
+        - text: Next.js metadata 병합 과정에서
+        - code [ref=f2e85]: "robots: undefined"
+        - text: 가 하위 페이지에 포함되면 상위 layout의
+        - code [ref=f2e86]: noindex
+        - text: 정책이 덮이는 문제가 있었습니다. 비기본 locale과 민감 페이지 색인 차단이 중요했기 때문에,
+        - code [ref=f2e87]: robots
+        - text: 를 명시한 경우에만 metadata 객체에 포함하도록 방어했습니다.
+      - figure [ref=f2e88]:
+        - code [ref=f2e90]:
+          - generic [ref=f2e91]: "return {"
+          - generic [ref=f2e92]: "title: finalTitle,"
+          - generic [ref=f2e93]: "description: finalDescription,"
+          - generic [ref=f2e94]: "...(robots !== undefined && { robots }),"
+          - generic [ref=f2e95]: "openGraph: { title: ogTitle, description: finalDescription, url },"
+          - generic [ref=f2e96]: "};"
+      - heading "운영 어드민의 다중 처리와 캐시 무효화" [level=4] [ref=f2e97]
+      - paragraph [ref=f2e98]:
+        - text: 취소·반품·구매확정 처리는 한 주문 안의 여러 상품 상태가 서로 다르게 움직입니다. 운영자가 여러 건을 선택해 처리할 수 있도록 선택 상태와 상세 조회를 분리하고, 선택된 id 목록은
+        - code [ref=f2e99]: useQueries
+        - text: 로 병렬 조회했습니다. 처리 mutation 이후에는 주문 도메인 query를 한 번에 무효화해 목록·상세·대시보드의 상태가 어긋나지 않도록 했습니다.
+      - figure [ref=f2e100]:
+        - code [ref=f2e102]:
+          - generic [ref=f2e103]: "useQueries({"
+          - generic [ref=f2e104]: "queries: ids.map((id) => ({"
+          - generic [ref=f2e105]: "queryKey: ['order', 'cancel', id],"
+          - generic [ref=f2e106]: "queryFn: () => getOrderCancel(id),"
+          - generic [ref=f2e107]: "enabled: session.status === 'authenticated',"
+          - generic [ref=f2e108]: "})),"
+          - generic [ref=f2e109]: "});"
+      - heading "결과" [level=3] [ref=f2e110]
+      - list [ref=f2e111]:
+        - listitem [ref=f2e112]:
+          - text: 구글·카카오 간편가입 도입 후 7일간 신규 가입자의
+          - strong [ref=f2e113]: 79.4%가 SNS 간편가입을 선택
+          - text: (어드민 가입 통계 기준)
+        - listitem [ref=f2e114]:
+          - text: 메인 페이지 이미지 전송량 약 6.6MB → 381KB,
+          - strong [ref=f2e115]: 94% 경량화
+        - listitem [ref=f2e116]:
+          - text: Pretendard 3종 전체 로드(약 2.15MB)를 페이지당 필요 글자 조각만 내려받는
+          - strong [ref=f2e117]: 다이나믹 서브셋(페이지당 ~320KB)
+          - text: 방식으로 전환하고, GA·픽셀 등 마케팅 스크립트를 지연 로드해 초기 렌더 부담을 줄임
+        - listitem [ref=f2e118]: 주문·배송·반품·클레임·이벤트 매출 관리 화면을 정리해 운영자가 반복 확인하던 업무 흐름을 줄임
+        - listitem [ref=f2e119]: SPHERE 이벤트를 1회차(포토카드)부터 다회차(덕력고사 퀴즈·호흡 투표)까지 확장 개발하며, 오픈 전 가드·URL 진행 복원·전용 OG 정비 등 캠페인 운영에 필요한 프론트엔드 기반을 함께 정리함
+      - paragraph [ref=f2e120]:
+        - img "SPHERE 호흡 투표 이벤트 랜딩 — 발동 카운터·투표·공유·상품 연결" [ref=f2e121]
+      - paragraph [ref=f2e122]: 공개 캠페인 랜딩 예시입니다. 심볼을 눌러 반응을 발동하는 참여형 인터랙션과 누적 발동 카운터, 투표·공유·상품보기 연결을 한 화면에서 처리합니다. 이런 참여형 이벤트를 회차마다 다른 형식(포토카드·퀴즈·투표)으로 반복 개발했습니다.
+      - paragraph [ref=f2e123]: 개선 이후 성능·SEO 상태는 별도 성과·품질 대시보드에서 Core Web Vitals, Lighthouse, 이미지 전송량 기준으로 지속 확인했습니다. 이 상세에서는 화면 흐름과 상태 설계에 집중하고, 측정 체계는 대시보드 프로젝트에서 따로 설명합니다.
+      - heading "설계 판단 기준 — 데이터가 없는 초기 단계에서" [level=3] [ref=f2e124]
+      - paragraph [ref=f2e125]: 초기 운영 단계라 A/B 테스트나 충분한 사용자 행동 데이터로 개선 효과를 증명하기는 이른 상황이었습니다. 대신 CS 이력, 운영자의 반복 작업 패턴처럼 관찰 가능한 신호를 근거로 아래 세 가지를 우선 판단했습니다.
+      - list [ref=f2e126]:
+        - listitem [ref=f2e127]:
+          - paragraph [ref=f2e128]:
+            - strong [ref=f2e129]: 상품별 안내문구 영역 신설
+            - text: ": 해외결제, 예약 판매처럼 일반 주문과 조건이 다른 상품은 구매 전 안내가 없으면 결제 후 CS로 이어질 가능성이 높다고 판단해, 상품 상세 화면에 조건을 사전 노출하는 영역을 구조적으로 분리했습니다. 사용자 데이터로 검증하기 전이지만, CS 발생 지점을 사후 대응이 아니라 사전 안내로 옮기는 것을 원칙으로 삼았습니다."
+          - paragraph [ref=f2e130]:
+            - img "상품 상세(PDP) — 가격·배송 조건과 상품별 안내사항 영역" [ref=f2e131]
+          - paragraph [ref=f2e132]:
+            - text: 실제 상품 상세 화면입니다. 가격·배송비·무료배송 조건 아래에 별도
+            - strong [ref=f2e133]: 안내사항 영역
+            - text: 을 두어, 이벤트/응모 상품의 발송 시점·주문 변경 불가·해외 진행 방식 등을 한국어와 영어로 결제 전에 노출합니다.
+        - listitem [ref=f2e134]:
+          - paragraph [ref=f2e135]:
+            - strong [ref=f2e136]: 운영 어드민 다중 상품 일괄처리
+            - text: ": 운영자가 이벤트 매출·클레임을 건별로 처리하던 반복 작업을 관찰하고, 목록에서 여러 건을 선택해 한 번에 처리할 수 있는 흐름을 우선 구현했습니다. 사용자 만족도 데이터는 없지만, 반복 작업 횟수 자체가 명확한 비효율 신호였기 때문입니다."
+        - listitem [ref=f2e137]:
+          - paragraph [ref=f2e138]:
+            - strong [ref=f2e139]: 응답 형식 정규화
+            - text: ": 여러 API의 응답 형식이 제각각이면 화면마다 로딩·오류 처리가 다르게 구현되어 사용자 경험이 흔들립니다. 데이터가 쌓이기 전 단계이므로, 일단 상태 표현(로딩/빈 값/오류)을 화면 간에 일관되게 만드는 것을 성능 지표보다 먼저 우선했습니다."
+      - paragraph [ref=f2e140]: 이후에는 CS 이력, 전환 흐름, 품질 대시보드 지표를 함께 보며 초기 판단을 계속 보정하고 있습니다.
+      - heading "공개 가능한 근거 방식" [level=3] [ref=f2e141]
+      - paragraph [ref=f2e142]: 로그인 없이 접근 가능한 공개 화면(상품 목록·상품 상세·캠페인 랜딩)만 캡처로 담고, 나머지는 구현 범위와 성과 수치 중심으로 정리했습니다. 주문, 클레임, 어드민, 매출, 고객 정보가 포함된 화면은 포트폴리오에서 제외했습니다.
+      - list [ref=f2e143]:
+        - listitem [ref=f2e144]: "공개 가능한 근거: 공개 상품·캠페인 화면, 화면 구조도, 구현 범위, 최적화 전후 수치, 어드민 집계 기준"
+        - listitem [ref=f2e145]: "비공개 처리: 주문/클레임 상세, 고객 정보, 매출 원본, 내부 URL, 운영자 계정 흐름, 어드민 화면"
+    - link [ref=f2e147] [cursor=pointer]:
+      - /url: ../strongerDeer#novera-shop
+  - status [ref=f2e151]:
+    - generic [ref=f2e156]:
+      - text: Static route
+      - button "Hide static indicator" [ref=f2e157] [cursor=pointer]
+  - alert [ref=f2e161]

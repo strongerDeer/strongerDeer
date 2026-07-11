@@ -6,29 +6,29 @@ import { pretendard } from "@font";
 import { ModalContextProvider } from "@contexts/ModalContext";
 import GA from "@utils/GA";
 
+const SITE_TITLE = "강혜진 | 프론트엔드 개발자";
+const SITE_DESCRIPTION =
+  "0.1초의 피드백을 데이터로 증명하는 강혜진 개발자입니다. 사용자가 머뭇거리는 순간을 지표로 찾아 줄입니다.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_BASE_URL || "https://strongerdeer.github.io/"
   ),
-  title: "강혜진 | 프론트엔드 개발자",
-  description:
-    "0.3초의 짧은 인터랙션, 디테일한 사용자 경험을 고민하는 강혜진 개발자입니다.",
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
 
-  icons: { icon: "/strongerDeer/favicon.ico" },
   openGraph: {
     type: "website",
-    title: "강혜진 | 프론트엔드 개발자",
-    description:
-      "0.3초의 짧은 인터랙션, 디테일한 사용자 경험을 고민하는 강혜진 개발자입니다.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     locale: "ko_KR",
-    siteName: "강혜진 | 프론트엔드 개발자",
+    siteName: SITE_TITLE,
     images: ["/strongerDeer/og-image.jpg"],
   },
   twitter: {
-    card: "summary",
-    title: "강혜진 | 프론트엔드 개발자",
-    description:
-      "0.3초의 짧은 인터랙션, 디테일한 사용자 경험을 고민하는 강혜진 개발자입니다.",
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: ["/strongerDeer/og-image.jpg"],
   },
 };

@@ -11,10 +11,6 @@
 .wrap {
   @apply min-h-[100dvh] py-16 flex items-center justify-center;
 
-  &:nth-child(odd) {
-    @apply bg-blue-50;
-  }
-
   section {
     @apply container mx-auto px-6;
 
@@ -26,6 +22,18 @@
       }
     }
   }
+}
+
+#hero,
+#skills,
+#work,
+#education {
+  @apply bg-white;
+}
+
+#projects,
+#otherExperience {
+  @apply bg-blue-50;
 }
 
 // 경력
@@ -83,9 +91,10 @@
 
   .list {
     position: relative;
+    // Projects와 동일한 레이어 방식: 하단만 덮고 65%부터 불투명 배경색으로 마감.
     .blur {
-      @apply content-[''] block absolute left-0 bottom-0 w-full h-full bg-gradient-to-b
-      from-transparent from-70% via-white/80 to-white pointer-events-none;
+      @apply content-[''] block absolute left-0 -bottom-8 w-full z-20 h-60 bg-gradient-to-b
+      from-transparent from-0% via-white via-65% to-white pointer-events-none;
     }
   }
 }
@@ -145,160 +154,123 @@
     @apply relative bg-gray-200;
   }
 
+  .thumb-fallback {
+    @apply w-full aspect-[4/3] flex flex-col items-center justify-center gap-2 text-center p-6;
+
+    strong {
+      @apply text-lg;
+    }
+
+    p {
+      @apply text-sm text-gray-500;
+    }
+  }
+
   .tag {
     @apply flex flex-wrap w-full gap-2 text-sm;
   }
   .btn-group {
     @apply flex justify-end gap-2 mt-5;
   }
+
+  & > li.compact {
+    .thumb-fallback {
+      @apply p-3;
+
+      strong {
+        @apply text-sm;
+      }
+
+      p {
+        @apply text-xs;
+      }
+    }
+
+    .content {
+      @apply pt-3 pb-4;
+    }
+  }
+}
+
+#projects {
+  .list {
+    position: relative;
+    // 카드(흰 배경+그림자) 위를 균일하게 덮는 상위 레이어.
+    // -inset-x로 카드 바깥 여백/그림자까지 함께 덮어 경계에서 색이 어긋나지 않게 한다.
+    .blur {
+      @apply content-[''] block absolute -inset-x-4 -bottom-8 z-20 h-60 bg-gradient-to-b
+      from-transparent from-0% via-blue-50 via-65% to-blue-50 pointer-events-none;
+    }
+  }
 }
 
 #skills {
-  .pc {
-    @apply container relative overflow-hidden rounded-xl lg:rounded-2xl lg:p-3;
+  .domains {
+    @apply grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4;
 
-    & > img {
-      @apply absolute top-0 left-0 w-full h-full;
-    }
-  }
-  .vs-viewer {
-    @apply relative z-10  bg-gray-700  text-gray-300 rounded-xl overflow-hidden;
-    .top {
-      @apply font-bold border-b  border-gray-900 py-2 px-4 flex items-center;
-      .dot {
-        @apply flex gap-1;
+    .domain {
+      @apply rounded-xl border border-gray-200 h-full p-5;
 
-        span {
-          @apply w-2 h-2 rounded block bg-yellow-500;
+      .domainHead {
+        @apply flex items-center gap-2 mb-3;
 
-          &:first-child {
-            @apply bg-red-500;
-          }
+        .domainIcon {
+          @apply flex items-center justify-center w-9 h-9 rounded-lg bg-blue-500/10 text-blue-500 shrink-0;
+        }
 
-          &:last-child {
-            @apply bg-green-500;
-          }
+        strong {
+          @apply text-base;
         }
       }
+
       p {
-        @apply grow text-center;
+        @apply text-sm text-gray-500 font-light leading-relaxed;
       }
-    }
-    &::after {
-      @apply content-[''] block w-full h-8 border-t border-gray-900 bg-gray-800;
-    }
-    .top + div {
-      @apply flex flex-col lg:flex-row;
 
-      .icon {
-        @apply p-4;
-      }
-      .tab {
-        @apply flex gap-0 bg-gray-800 border-x border-gray-900 transition-all duration-300 flex-wrap text-sm 
-        lg:text-base lg:gap-1 lg:flex-col;
-
-        .all {
-          @apply inline-block hidden lg:inline-block;
-          & + svg {
-            @apply inline-block lg:hidden;
-          }
-        }
-        .mobile {
-          @apply inline-block lg:hidden;
-        }
-
-        li {
-          button {
-            @apply flex flex-col w-full px-2 py-2 lg:rounded lg:px-3;
-
-            &.active {
-              @apply bg-gray-700  border-t-2 border-t-orange-300  lg:bg-gray-900 lg:border-0;
-            }
-
-            & > span {
-              @apply px-3 py-1 flex items-center;
-
-              svg {
-                @apply mr-1;
-              }
-              &:first-child {
-                @apply p-0;
-              }
-              &:first-child + span {
-                @apply mt-1;
-              }
-              &:first-child ~ span {
-                @apply hidden lg:flex;
-              }
-            }
-          }
-        }
-        & > li:last-child {
-          @apply lg:mb-6;
-        }
-      }
-      .viewer {
-        @apply flex flex-col w-full overflow-hidden;
-
-        .open_tab {
-          @apply bg-gray-800 shadow-[inset_0_-1px_0_0_rgba(0,0,0,1)] hidden lg:block;
-          div {
-            @apply flex text-sm items-center gap-2 bg-gray-700 border-r border-t-2 border-r-gray-900 border-t-orange-300 w-fit px-4 py-2;
-          }
-        }
-        .view-con {
-          @apply grow p-6;
-
-          code {
-            white-space: pre-wrap !important;
-          }
-        }
-
-        h3 {
-          @apply text-2xl mb-4;
-        }
+      .evidence {
+        @apply mt-3 pt-3 border-t border-gray-100 text-gray-800 font-normal;
       }
     }
   }
-  .program {
-    @apply relative mt-1 z-10 gap-2 px-3 p-3  rounded-2xl w-fit
-    mx-auto backdrop-blur-sm border border-white/20 bg-white/30 gap-4 px-6 hidden lg:flex;
 
-    button {
-      @apply relative w-10 h-10 rounded-lg;
+  .stack {
+    @apply flex flex-wrap gap-2 mt-6;
 
-      &:first-child::after {
-        @apply content-[''] block w-1 h-1 rounded-full bg-black absolute -bottom-2 left-1/2 -translate-x-1/2;
-      }
-      img {
-        @apply rounded-lg overflow-hidden shadow-lg;
-      }
+    li {
+      @apply text-sm px-3 py-1 rounded-full bg-gray-100 text-gray-800;
+    }
+  }
 
-      span {
-        @apply block text-sm opacity-0 transition-all duration-300 w-60 bg-white absolute bottom-16 left-1/2 -translate-x-1/2 rounded p-2;
-      }
-      &:hover {
-        @apply overflow-visible;
-        span {
-          @apply opacity-100 text-left shadow-xl;
+  .tools {
+    @apply mt-8 rounded-xl border border-gray-200;
+
+    summary {
+      @apply cursor-pointer select-none px-5 py-3 text-sm text-gray-500;
+    }
+
+    .program {
+      @apply grid grid-cols-1 sm:grid-cols-2 gap-3 px-5 pb-5;
+
+      .tool {
+        @apply flex items-start gap-3;
+
+        img,
+        .iconProgram {
+          @apply w-10 h-10 rounded-lg overflow-hidden shrink-0;
+        }
+
+        .iconProgram {
+          @apply flex items-center justify-center bg-gray-800 text-white;
+        }
+
+        .toolName {
+          @apply text-sm text-gray-500 font-light leading-relaxed;
+
           strong {
-            @apply block text-base;
+            @apply block text-gray-800 font-medium;
           }
         }
       }
-    }
-  }
-}
-
-.hash_tag {
-  @apply flex gap-2 flex-wrap;
-  span {
-    @apply bg-white text-blue-500 rounded px-2 py-1 text-sm;
-  }
-
-  .pc & {
-    span {
-      @apply bg-gray-600 text-gray-100 text-xs;
     }
   }
 }
@@ -349,39 +321,6 @@
   }
 }
 
-.glow {
-  box-sizing: border-box;
-  outline-offset: 2px;
-  animation: glow 2s ease-in-out infinite;
-
-  .program & {
-    animation: glow2 2s ease-in-out infinite;
-  }
-}
-@keyframes glow {
-  0%,
-  100% {
-    outline: 2px solid transparent;
-    box-shadow: 0 0 5px rgba(59, 130, 246, 0);
-  }
-  50% {
-    outline: 1px solid rgba(59, 130, 246, 0.2);
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
-  }
-}
-
-@keyframes glow2 {
-  0%,
-  100% {
-    outline: 2px solid transparent;
-    box-shadow: 0 0 5px rgba(59, 130, 246, 0);
-  }
-  50% {
-    outline: 1px solid rgba(59, 130, 246, 0.5);
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
-  }
-}
-
 .projectTab {
   @apply flex gap-2 mb-12 flex-wrap;
 
@@ -429,7 +368,7 @@
 }
 
 .moreToggleBtn {
-  @apply px-6 py-2 text-sm border border-gray-300 bg-white rounded-full hover:text-blue-500 hover:border-blue-200 transition-colors mx-auto block relative;
+  @apply px-6 py-2 text-sm border border-gray-300 bg-white rounded-full hover:text-blue-500 hover:border-blue-200 transition-colors mx-auto block relative z-30;
 }
 
 .json {

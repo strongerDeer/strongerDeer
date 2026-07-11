@@ -1,14 +1,37 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { I_PROJECTS } from "@data/project";
 import ProjectCard from "./project/ProjectCard";
+import MoreToggleBtn from "./shared/MoreToggleBtn";
 interface ProjectProps {
   projects: I_PROJECTS[];
 }
 
+const FEATURED_COUNT = 4;
+const OTHER_COLLAPSED_COUNT = 3;
+const HIDDEN_PROJECT_IDS = ["teemstone"];
+
 export default function Projects({ projects }: ProjectProps) {
+  const [showAllOther, setShowAllOther] = useState(false);
+  const otherSectionRef = React.useRef<HTMLDivElement>(null);
+
+  const featured = projects.filter((p) => p.index <= FEATURED_COUNT);
+  const other = projects.filter(
+    (p) => p.index > FEATURED_COUNT && !HIDDEN_PROJECT_IDS.includes(p.id)
+  );
+  const displayOther = showAllOther
+    ? other
+    : other.slice(0, OTHER_COLLAPSED_COUNT);
+
+  const handleToggle = () => {
+    setShowAllOther((prev) => !prev);
+    if (showAllOther) {
+      otherSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <div className="wrap" id="projects">
@@ -25,7 +48,7 @@ export default function Projects({ projects }: ProjectProps) {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              {projects.map((project, index) => (
+              {featured.map((project, index) => (
                 <ProjectCard
                   key={`${project.title}-${index}`}
                   index={index}
@@ -34,6 +57,47 @@ export default function Projects({ projects }: ProjectProps) {
               ))}
             </motion.ul>
           </AnimatePresence>
+
+          {other.length > 0 && (
+            <div ref={otherSectionRef}>
+              <h2 className="title mt-16">
+                Other Projects <span>보조 프로젝트</span>
+              </h2>
+
+              <div className="list">
+                <AnimatePresence mode="wait">
+                  <motion.ul
+                    className="card md:grid-cols-3"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {displayOther.map((project, index) => (
+                      <ProjectCard
+                        key={`${project.title}-${index}`}
+                        index={index}
+                        project={project}
+                        compact
+                      />
+                    ))}
+                  </motion.ul>
+                </AnimatePresence>
+                {!showAllOther && other.length > OTHER_COLLAPSED_COUNT && (
+                  <div className="blur" />
+                )}
+              </div>
+
+              {other.length > OTHER_COLLAPSED_COUNT && (
+                <MoreToggleBtn
+                  text="보조 프로젝트 더보기"
+                  className={showAllOther ? "mt-6" : "-mt-12"}
+                  showAll={showAllOther}
+                  onClick={handleToggle}
+                />
+              )}
+            </div>
+          )}
         </section>
       </div>
     </>

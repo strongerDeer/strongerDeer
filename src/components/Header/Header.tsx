@@ -12,6 +12,10 @@ export default function Header() {
           <span>Home</span>
         </Link>
 
+        <Link href="#skills">
+          <span>Skills</span>
+        </Link>
+
         <Link href="#projects">
           <span>Projects</span>
         </Link>
@@ -23,10 +27,6 @@ export default function Header() {
         <Link href="#otherExperience">
           <span>Other Experience</span>
         </Link>
-
-        <Link href="#skills">
-          <span>Skills</span>
-        </Link>
         <Link href="#education">
           <span>Education/Certifications</span>
         </Link>
@@ -36,7 +36,7 @@ export default function Header() {
         <a
           href="https://strongerdeer.notion.site/strongerDeer-Archive-17e01a7a57f1804a8248c430448d5417?pvs=74"
           target="_blank"
-          title="GitHub"
+          title="Notion"
           className="w-12 flex items-center justify-center bg-gray-200 border border-gray-300 aspect-square rounded-full shadow"
         >
           <NotionIcon />

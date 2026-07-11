@@ -1,13 +1,4 @@
 import localFont from "next/font/local";
-import { Raleway, Nanum_Gothic_Coding } from "next/font/google";
-
-export const raleway = Raleway({ subsets: ["latin"] });
-
-export const nanumCoding = Nanum_Gothic_Coding({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const pretendard = localFont({
   src: "./PretendardVariable.woff2",

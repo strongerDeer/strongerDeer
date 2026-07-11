@@ -1,31 +1,19 @@
-import { Brush, ChartPie, NotebookPen } from "lucide-react";
+import { ChartPie, MessageSquareText, Palette } from "lucide-react";
 
-export const STRENGTHS = [
+export const HERO_KEYWORDS = [
   {
-    title: "웹 디자인/퍼블리셔 출신",
-    items: [
-      "UI/UX에 대한 높은 이해도",
-      "디자인부터 개발까지 주도적 진행",
-      "다수의 웹 서비스 구축 경험",
-    ],
-    icon: Brush,
+    title: "UI 피드백",
+    description: "버튼 상태, 로딩, 오류, 화면 전환처럼 사용자가 머뭇거리는 순간을 줄이는 UI 피드백을 설계합니다.",
+    icon: MessageSquareText,
   },
   {
-    title: "지속적인 성장과 지식 공유",
-    items: [
-      "부트캠프 HTML/CSS 강의 경험",
-      "개발 강의 및 전자책 집필 경험",
-      "지속적 학습을 통한 프로젝트 적용",
-    ],
-    icon: NotebookPen,
-  },
-  {
-    title: "사용자 경험 개선",
-    items: [
-      "웹 성능 최적화 경험",
-      "SEO(검색엔진최적화) 개선 경험",
-      "대시보드 시각화 구현 경험",
-    ],
+    title: "성과·품질 대시보드",
+    description: "GA4, Search Console, 실사용자 속도 지표를 통합해 성과와 품질을 확인하는 대시보드를 구축합니다.",
     icon: ChartPie,
+  },
+  {
+    title: "디자인 시스템",
+    description: "디자인 토큰과 공통 컴포넌트를 기준으로 제품 간 UI 상태와 동작 차이를 줄입니다.",
+    icon: Palette,
   },
 ];

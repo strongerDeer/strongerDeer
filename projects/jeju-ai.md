@@ -1,5 +1,5 @@
 ---
-index: 4
+index: 8
 id: "jeju-ai"
 type: "업무"
 title: "2024 Jeju AI Conference"
@@ -35,7 +35,7 @@ role: "2인 프로젝트(디자인1/프론트엔드1) - 디자인 20%, 프론트
 
 Next.js, TypeScript, Sass, GitHub Actions
 
-# 🎯 성과 및 기여
+# 결과
 
 - 3일이라는 짧은 기간 내에 성공적인 사이트 개발 및 배포 완료
 - JSON 파일로 컨텐츠 관리, 컨텐츠 수정 용이

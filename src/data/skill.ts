@@ -1,167 +1,138 @@
-import JS from "@components/icon/JS";
-import Sass from "@components/icon/Sass";
-import TS from "@components/icon/TS";
-import VE from "@components/icon/VE";
-import { IconType } from "react-icons";
 import {
-  FaCss3Alt,
-  FaFolderOpen,
-  FaHtml5,
-  FaMarkdown,
-  FaNpm,
-  FaReact,
-} from "react-icons/fa";
-import { RiNextjsFill, RiTailwindCssFill } from "react-icons/ri";
+  Boxes,
+  Gauge,
+  LayoutDashboard,
+  LucideIcon,
+  Palette,
+  SquareStack,
+} from "lucide-react";
+import { IconType } from "react-icons";
+import { FaGithub } from "react-icons/fa";
+import { SiClaude } from "react-icons/si";
 
-interface I_SubItem {
+export interface I_SkillDomain {
   id: string;
-  name: string;
-  icon: IconType;
-  color: string;
-  size?: number;
+  title: string;
+  description: string;
+  evidence: string;
+  projectId?: string;
+  icon: LucideIcon;
 }
 
-export interface I_Tab {
-  id: number;
-  name: string;
-  subItems?: I_SubItem[];
-  icon: IconType;
-  color: string;
-  size?: number;
-}
+// 이력서의 "맡길 수 있는 기술 영역"을 실무 근거(evidence)와 함께 정리.
+// evidence는 실제 프로젝트에서 만든 결과라 "할 수 있다"가 아니라 "해봤다"로 읽힌다.
+export const SKILL_DOMAINS: I_SkillDomain[] = [
+  {
+    id: "product-ui",
+    title: "Product UI",
+    description:
+      "상품 탐색, 주문/클레임, 운영 어드민처럼 상태가 복잡한 화면의 로딩·오류·빈 화면·권한 상태를 일관되게 설계하고 구현합니다.",
+    evidence:
+      "NOVERA Shop 커머스 핵심 화면의 상태 표현을 정리해 CS 발생 지점을 사전 안내로 전환",
+    projectId: "novera-shop",
+    icon: SquareStack,
+  },
+  {
+    id: "frontend-architecture",
+    title: "Frontend Architecture",
+    description:
+      "Next.js App Router, React 19, TypeScript strict, TanStack Query v5 기반으로 서버/클라이언트 경계, 데이터 캐싱, 폼 흐름을 구성합니다.",
+    evidence:
+      "SSR 데이터와 클라이언트 캐시를 prefetch/dehydrate로 연결하고, 무한 스크롤 필터 빈 화면까지 방어",
+    projectId: "novera-shop",
+    icon: Boxes,
+  },
+  {
+    id: "design-system",
+    title: "Design System",
+    description:
+      "Vanilla Extract, Style Dictionary, Storybook 기반으로 공통 컴포넌트와 디자인 토큰을 정리하고 제품 간 UI 기준을 맞춥니다.",
+    evidence:
+      "NDS 공통 컴포넌트 30종, Figma 토큰 변환 흐름, 런타임 스타일 계산을 줄이는 타입 안전한 variant 구조 구성",
+    projectId: "nds",
+    icon: Palette,
+  },
+  {
+    id: "performance-seo",
+    title: "Performance & SEO",
+    description:
+      "Core Web Vitals, Lighthouse, 이미지 전송량, 웹폰트, canonical, JSON-LD, sitemap/robots를 점검해 검색 노출과 초기 경험을 개선합니다.",
+    evidence:
+      "이미지 전송량·웹폰트 로드 방식을 실사용자 지표와 Lighthouse로 교차 확인해 개선 우선순위를 도출(운영 사이트 SEO 100·접근성 96)",
+    projectId: "novera-shop",
+    icon: Gauge,
+  },
+  {
+    id: "data-dashboard",
+    title: "Data Dashboard",
+    description:
+      "GA4 Data API, Google Search Console, 어드민 데이터를 연결해 이벤트 성과와 품질 지표를 Recharts 기반 대시보드로 시각화합니다.",
+    evidence:
+      "이벤트 성과 분석 체계와 대시보드 6종을 구축하고, SPHERE 1회차 DAU를 사업팀과 합의한 내부 목표 대비 122%로 추적",
+    projectId: "novera-dashboard",
+    icon: LayoutDashboard,
+  },
+];
 
-// 프로그램 아이템 인터페이스
+export const MAIN_STACK = [
+  "React 19",
+  "Next.js 16",
+  "TypeScript",
+  "TanStack Query v5",
+  "Vanilla Extract",
+  "Style Dictionary",
+  "Storybook",
+  "Recharts",
+  "GA4 Data API",
+  "Tailwind CSS",
+  "AWS Amplify",
+];
+
+// 도구 아이템 인터페이스
 interface I_Program {
   id: number;
   name: string;
-  image: string;
+  image?: string;
+  icon?: IconType;
   description: string;
 }
-
-export const TABS: I_Tab[] = [
-  {
-    id: 1,
-    name: "README.md",
-    icon: FaMarkdown,
-    color: "#765838",
-  },
-  {
-    id: 2,
-    name: "HTML.html",
-    icon: FaHtml5,
-    color: "#E34F26",
-  },
-  {
-    id: 3,
-    name: "CSS",
-    icon: FaFolderOpen,
-    color: "#ddb67a",
-    subItems: [
-      { id: "css", name: "CSS.css", icon: FaCss3Alt, color: "#1572B6" },
-      { id: "sass", name: "Sass.scss", icon: Sass, color: "#CC6699" },
-      {
-        id: "vanilla",
-        name: "VanillaExtract.css.ts",
-        icon: VE,
-        color: "#1572B6",
-      },
-      {
-        id: "tailwind",
-        name: "tailwind.css",
-        icon: RiTailwindCssFill,
-        color: "#06B6D4",
-        size: 18,
-      },
-    ],
-  },
-  {
-    id: 4,
-    name: "JavaScript",
-    icon: FaFolderOpen,
-    color: "#ddb67a",
-    subItems: [
-      { id: "js", name: "JavaScript.js", icon: JS, color: "#F7DF1E" },
-      { id: "ts", name: "TypeScript.ts", icon: TS, color: "#3178C6" },
-    ],
-  },
-
-  {
-    id: 5,
-    name: "React",
-    icon: FaFolderOpen,
-    color: "#ddb67a",
-    subItems: [
-      { id: "react", name: "React.jsx", icon: FaReact, color: "#61DAFB" },
-      {
-        id: "next",
-        name: "Next.js",
-        icon: RiNextjsFill,
-        color: "#d2d2d2",
-        size: 18,
-      },
-    ],
-  },
-  {
-    id: 6,
-    name: "package.json",
-    icon: FaNpm,
-    color: "#CB3837",
-    size: 20,
-  },
-];
 
 export const PROGRAMS: I_Program[] = [
   {
     id: 1,
     name: "VS Code",
     image: "/program/vsc.jpg",
-    description:
-      "확장프로그램, 코드 스니펫, 다양한 설정들을 활용하여 개발합니다.",
+    description: "기술 스택 관점 — 확장 프로그램, 스니펫 등 코드 작성 환경.",
   },
   {
     id: 2,
     name: "Chrome",
     image: "/program/chrome.jpg",
-    description:
-      "크롬, 사파리, 오페라, 파이어폭스 등 다양한 브라우저 웹 표준 작업 가능합니다.",
+    description: "사용자 관점 — 개발자 도구로 실제 사용자가 보는 화면을 점검.",
   },
   {
     id: 3,
     name: "Notion",
     image: "/program/notion.png",
-    description:
-      "문서작업은 노션을 주로 사용합니다. PPT, Word, Excel 등 다양한 문서 작업이 가능합니다.",
+    description: "협업 관점 — 정책·기준·문서를 팀이 함께 참고하도록 정리.",
   },
   {
     id: 4,
     name: "Figma",
     image: "/program/figma.jpg",
-    description: "프로토타입, 베리언트 기능 등 다양한 작업에 능숙합니다.",
+    description: "디자인·협업 관점 — 디자이너와 화면 시안, 토큰을 함께 검토.",
   },
   {
     id: 5,
-    name: "Photoshop",
-    image: "/program/ps.jpg",
-    description: "다양한 이미지 작업이 가능합니다.",
+    name: "GitHub",
+    icon: FaGithub,
+    description: "버전관리 관점 — 코드 리뷰, 커밋 컨벤션으로 협업 이력 관리.",
   },
   {
     id: 6,
-    name: "Illustrator",
-    image: "/program/ai.jpg",
-    description: "다양한 벡터 이미지 작업이 가능합니다.",
+    name: "Claude",
+    icon: SiClaude,
+    description:
+      "AI 도구 활용 — 품질 측정 해석, 문서 동기화를 보조로 활용하고 최종 판단은 직접 수행.",
   },
 ];
-
-export const skillData = {
-  설명: "필요에 따라 적절한 기술을 사용합니다. 아래 기술들을 사용한 경험이 있습니다.",
-  "주요 활용 기술": {
-    "상태 관리": ["React-Query", "Recoil", "Context API"],
-    데이터시각화: ["Chart.js"],
-    백엔드통신: ["Firebase", "REST API", "Axios"],
-    "성능 최적화": ["Lodash", "Date-fns"],
-    "코드 품질": ["ESLint", "Prettier"],
-    "버전 관리": ["Git", "GitHub"],
-    문서화: ["Storybook", "JSDoc"],
-    "배포/자동화": ["GitHub Actions", "Vercel", "AWS Amplify"],
-  },
-};

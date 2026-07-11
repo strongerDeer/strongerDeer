@@ -10,9 +10,11 @@ import Link from "next/link";
 export default function ProjectCard({
   project,
   index,
+  compact = false,
 }: {
   project: I_PROJECTS;
   index: number;
+  compact?: boolean;
 }) {
   const {
     id,
@@ -25,13 +27,18 @@ export default function ProjectCard({
     icon,
     metrics,
     url,
+    urlType,
+    urlLabel,
     github,
   } = project;
 
   const IconComponent = ICON_MAP[icon as ICON_TYPE];
+  const displayMetrics = compact ? metrics.slice(0, 1) : metrics;
+
   return (
     <motion.li
       id={id}
+      className={compact ? "compact" : ""}
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }} // exit 애니메이션 추가
@@ -42,27 +49,35 @@ export default function ProjectCard({
       }}
     >
       <Link href={`/${id}`}>
-        <ProjectThumb type={type} thumb={thumb} />
+        <ProjectThumb type={type} thumb={thumb} title={title} metrics={metrics} />
       </Link>
 
       <div className="content">
         <div>
-          <h3 className="title">
-            <IconComponent /> {title}
-            <span>{kor}</span>
-          </h3>
+          <Link href={`/${id}`} aria-label={`${title} 상세 보기`}>
+            <h3 className="title">
+              <IconComponent /> {title}
+              <span>{kor}</span>
+            </h3>
+          </Link>
 
-          <p>{description}</p>
+          {!compact && <p>{description}</p>}
 
           <ul className="list2">
-            {metrics.map((metric, idx) => (
+            {displayMetrics.map((metric, idx) => (
               <li key={idx}>{metric}</li>
             ))}
           </ul>
         </div>
 
         <Tag tags={skills} />
-        <ProjectBtns url={url} github={github} projectId={id} />
+        <ProjectBtns
+          url={url}
+          urlType={urlType}
+          urlLabel={urlLabel}
+          github={github}
+          projectId={id}
+        />
       </div>
     </motion.li>
   );

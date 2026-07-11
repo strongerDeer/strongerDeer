@@ -1,0 +1,418 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: s
+      - generic [ref=e6]: t
+      - generic [ref=e7]: r
+      - generic [ref=e8]: o
+      - generic [ref=e9]: "n"
+      - generic [ref=e10]: g
+      - generic [ref=e11]: e
+      - generic [ref=e12]: r
+      - generic [ref=e13]: Deer
+    - generic [ref=e14]:
+      - link "Home" [ref=e15] [cursor=pointer]:
+        - /url: "#hero"
+      - link "Skills" [ref=e16] [cursor=pointer]:
+        - /url: "#skills"
+      - link "Projects" [ref=e17] [cursor=pointer]:
+        - /url: "#projects"
+      - link "Work" [ref=e18] [cursor=pointer]:
+        - /url: "#work"
+      - link "Other Experience" [ref=e19] [cursor=pointer]:
+        - /url: "#otherExperience"
+      - link "Education/Certifications" [ref=e20] [cursor=pointer]:
+        - /url: "#education"
+    - generic [ref=e21]:
+      - link "Notion" [ref=e22] [cursor=pointer]:
+        - /url: https://strongerdeer.notion.site/strongerDeer-Archive-17e01a7a57f1804a8248c430448d5417?pvs=74
+      - link "GitHub" [ref=e27] [cursor=pointer]:
+        - /url: https://github.com/strongerDeer
+  - generic [ref=e33]:
+    - generic [ref=e34]:
+      - generic [ref=e35]: <strong>
+      - generic [ref=e36]: De
+      - text: "{"
+      - generic [ref=e37]: sign
+      - text: "||"
+      - generic [ref=e38]: velop
+      - text: "}"
+      - generic [ref=e39]: er
+      - generic [ref=e40]: <strong>
+    - generic [ref=e42]:
+      - generic [ref=e43]: s
+      - generic [ref=e44]: t
+      - generic [ref=e45]: r
+      - generic [ref=e46]: o
+      - generic [ref=e47]: "n"
+      - generic [ref=e48]: g
+      - generic [ref=e49]: e
+      - generic [ref=e50]: r
+      - generic [ref=e51]: Deer
+    - paragraph [ref=e52]: 👋 안녕하세요
+    - paragraph [ref=e53]:
+      - generic [ref=e54]: 0.1초의 피드백을데이터로 증명하는
+      - strong [ref=e55]: 강혜진
+      - text: 개발자입니다.
+    - paragraph [ref=e56]: 커머스의 상품 탐색, 주문/클레임, 운영 어드민처럼 상태가 복잡한 화면을 사용자가 이해하기 쉬운 흐름으로 정리하고, 성능·SEO·이벤트 지표로 개선 결과를 확인합니다.
+    - list [ref=e57]:
+      - listitem [ref=e58]:
+        - strong [ref=e61]: UI 피드백
+        - paragraph [ref=e62]: 버튼 상태, 로딩, 오류, 화면 전환처럼 사용자가 머뭇거리는 순간을 줄이는 UI 피드백을 설계합니다.
+      - listitem [ref=e63]:
+        - strong [ref=e67]: 성과·품질 대시보드
+        - paragraph [ref=e68]: GA4, Search Console, 실사용자 속도 지표를 통합해 성과와 품질을 확인하는 대시보드를 구축합니다.
+      - listitem [ref=e69]:
+        - strong [ref=e76]: 디자인 시스템
+        - paragraph [ref=e77]: 디자인 토큰과 공통 컴포넌트를 기준으로 제품 간 UI 상태와 동작 차이를 줄입니다.
+  - generic [ref=e79]:
+    - heading "Skills 기술" [level=2] [ref=e80]
+    - list [ref=e81]:
+      - listitem [ref=e82]:
+        - strong [ref=e89]: Product UI
+        - paragraph [ref=e90]: 상품 탐색, 주문/클레임, 운영 어드민처럼 상태가 복잡한 화면의 로딩·오류·빈 화면·권한 상태를 일관되게 설계하고 구현합니다.
+        - paragraph [ref=e91]: NOVERA Shop 커머스 핵심 화면의 상태 표현을 정리해 CS 발생 지점을 사전 안내로 전환
+      - listitem [ref=e92]:
+        - strong [ref=e105]: Frontend Architecture
+        - paragraph [ref=e106]: Next.js App Router, React 19, TypeScript strict, TanStack Query v5 기반으로 서버/클라이언트 경계, 데이터 캐싱, 폼 흐름을 구성합니다.
+        - paragraph [ref=e107]: SSR 데이터와 클라이언트 캐시를 prefetch/dehydrate로 연결하고, 무한 스크롤 필터 빈 화면까지 방어
+      - listitem [ref=e108]:
+        - strong [ref=e117]: Design System
+        - paragraph [ref=e118]: Vanilla Extract, Style Dictionary, Storybook 기반으로 공통 컴포넌트와 디자인 토큰을 정리하고 제품 간 UI 기준을 맞춥니다.
+        - paragraph [ref=e119]: NDS 공통 컴포넌트 30종, Figma 토큰 변환 흐름, 런타임 스타일 계산을 줄이는 타입 안전한 variant 구조 구성
+      - listitem [ref=e120]:
+        - strong [ref=e126]: Performance & SEO
+        - paragraph [ref=e127]: Core Web Vitals, Lighthouse, 이미지 전송량, 웹폰트, canonical, JSON-LD, sitemap/robots를 점검해 검색 노출과 초기 경험을 개선합니다.
+        - paragraph [ref=e128]: 메인 이미지 전송량 94% 경량화(6.6MB→381KB), 운영 사이트 Lighthouse SEO 100·접근성 96
+      - listitem [ref=e129]:
+        - strong [ref=e137]: Data Dashboard
+        - paragraph [ref=e138]: GA4 Data API, Google Search Console, 어드민 데이터를 연결해 이벤트 성과와 품질 지표를 Recharts 기반 대시보드로 시각화합니다.
+        - paragraph [ref=e139]: 이벤트 성과 분석 체계와 대시보드 6종을 구축하고, SPHERE 1회차 DAU 목표 대비 122%를 추적
+    - list [ref=e140]:
+      - listitem [ref=e141]: React 19
+      - listitem [ref=e142]: Next.js 16
+      - listitem [ref=e143]: TypeScript
+      - listitem [ref=e144]: TanStack Query v5
+      - listitem [ref=e145]: Vanilla Extract
+      - listitem [ref=e146]: Style Dictionary
+      - listitem [ref=e147]: Storybook
+      - listitem [ref=e148]: Recharts
+      - listitem [ref=e149]: GA4 Data API
+      - listitem [ref=e150]: Tailwind CSS
+      - listitem [ref=e151]: AWS Amplify
+    - group [ref=e152]:
+      - generic "작업 환경 · 협업 도구" [ref=e153] [cursor=pointer]
+  - generic [ref=e155]:
+    - heading "Projects 프로젝트" [level=2] [ref=e156]
+    - list [ref=e157]:
+      - listitem [ref=e158]:
+        - link [ref=e159] [cursor=pointer]:
+          - /url: /strongerDeer/novera-shop
+          - paragraph [ref=e161]: 업무
+        - generic [ref=e166]:
+          - generic [ref=e167]:
+            - link "NOVERA Shop 상세 보기" [ref=e168] [cursor=pointer]:
+              - /url: /strongerDeer/novera-shop
+              - heading "NOVERA Shop 커머스 프론트엔드 구축·운영" [level=3] [ref=e169]:
+                - text: NOVERA Shop
+                - generic [ref=e173]: 커머스 프론트엔드 구축·운영
+            - paragraph [ref=e174]: 전담 기획자 없이 상품 탐색부터 주문·클레임·운영 어드민까지 화면 흐름과 상태 표현을 정리한 커머스 프론트엔드 구축·운영
+            - list [ref=e175]:
+              - listitem [ref=e176]: 2026년 4월 오픈 후 MAU 최대 3,436명을 기록한 운영 서비스
+              - listitem [ref=e177]: SNS 간편가입 도입 후 7일간 신규 가입자의 79.4%가 선택
+              - listitem [ref=e178]: 메인 페이지 이미지 전송량 6.6MB → 381KB, 94% 경량화
+          - paragraph [ref=e179]:
+            - generic [ref=e180]: Next.js 16
+            - generic [ref=e181]: React 19
+            - generic [ref=e182]: TypeScript
+            - generic [ref=e183]: TanStack Query v5
+            - generic [ref=e184]: next-intl
+            - generic [ref=e185]: Tailwind CSS
+            - generic [ref=e186]: AWS Amplify
+          - link [ref=e188] [cursor=pointer]:
+            - /url: /strongerDeer/novera-shop
+      - listitem [ref=e192]:
+        - link [ref=e193] [cursor=pointer]:
+          - /url: /strongerDeer/novera-dashboard
+          - paragraph [ref=e195]: 업무
+        - generic [ref=e200]:
+          - generic [ref=e201]:
+            - link "NAD 상세 보기" [ref=e202] [cursor=pointer]:
+              - /url: /strongerDeer/novera-dashboard
+              - heading "NAD NOVERA Analytics Dashboard" [level=3] [ref=e203]:
+                - text: NAD
+                - generic [ref=e207]: NOVERA Analytics Dashboard
+            - paragraph [ref=e208]: 이벤트 성과와 Shop 운영 품질을 한 곳에서 확인하고 개선 우선순위를 판단하는 사내 분석·품질 대시보드(NAD) 구축
+            - list [ref=e209]:
+              - listitem [ref=e210]: 이벤트 성과 분석 대시보드 6종 구축, SPHERE 1회차 DAU 목표 대비 122% 달성 추적
+              - listitem [ref=e211]: "운영 사이트 실사용자 속도 지표 통과: LCP 1.44초·INP 88ms·CLS 0"
+              - listitem [ref=e212]: 이벤트 성과와 NOVERA Shop 품질 지표를 함께 보며 개선 우선순위를 판단하는 내부 도구로 사용
+          - paragraph [ref=e213]:
+            - generic [ref=e214]: Next.js 16
+            - generic [ref=e215]: React 19
+            - generic [ref=e216]: TypeScript
+            - generic [ref=e217]: GA4 Data API
+            - generic [ref=e218]: Google Search Console
+            - generic [ref=e219]: Recharts
+            - generic [ref=e220]: Lighthouse
+            - generic [ref=e221]: Core Web Vitals
+            - generic [ref=e222]: AWS Amplify
+          - link [ref=e224] [cursor=pointer]:
+            - /url: /strongerDeer/novera-dashboard
+      - listitem [ref=e228]:
+        - link [ref=e229] [cursor=pointer]:
+          - /url: /strongerDeer/nds
+          - paragraph [ref=e231]: 업무
+        - generic [ref=e236]:
+          - generic [ref=e237]:
+            - link "NDS 상세 보기" [ref=e238] [cursor=pointer]:
+              - /url: /strongerDeer/nds
+              - heading "NDS 디자인 시스템 구축" [level=3] [ref=e239]:
+                - text: NDS
+                - generic [ref=e243]: 디자인 시스템 구축
+            - paragraph [ref=e244]: 여러 프로덕트에서 재사용 가능한 공통 컴포넌트와 Figma-코드 디자인 토큰 변환 흐름 구축
+            - list [ref=e245]:
+              - listitem [ref=e246]: Button, Input, Modal, Table 등 공통 컴포넌트 30종 구축
+              - listitem [ref=e247]: Figma 토큰 → Style Dictionary → 코드 토큰 변환 흐름 구성
+              - listitem [ref=e248]: Storybook에 컴포넌트 사용 예시와 상태별 케이스 정리
+          - paragraph [ref=e249]:
+            - generic [ref=e250]: React
+            - generic [ref=e251]: TypeScript
+            - generic [ref=e252]: Vanilla Extract
+            - generic [ref=e253]: Style Dictionary
+            - generic [ref=e254]: Storybook
+          - generic [ref=e255]:
+            - link [ref=e256] [cursor=pointer]:
+              - /url: /strongerDeer/nds
+            - link "NDS 설계 슬라이드" [ref=e260] [cursor=pointer]:
+              - /url: https://www.figma.com/slides/H3he12dIt9FBNioyo72JvK
+      - listitem [ref=e265]:
+        - link [ref=e266] [cursor=pointer]:
+          - /url: /strongerDeer/page0127
+          - paragraph [ref=e268]: 개인 프로젝트
+        - generic [ref=e272]:
+          - generic [ref=e273]:
+            - link "page0127. 상세 보기" [ref=e274] [cursor=pointer]:
+              - /url: /strongerDeer/page0127
+              - heading "page0127. 페이지 읽다" [level=3] [ref=e275]:
+                - text: page0127.
+                - generic [ref=e278]: 페이지 읽다
+            - paragraph [ref=e279]: 독서 기록을 책장·통계·취향 분석·추천 흐름으로 연결한 개인 프로젝트
+            - list [ref=e280]:
+              - listitem [ref=e281]: 완독·별점 기록 기반 AI 독서 취향 분석과 추천 도서 생성 기능 구현
+              - listitem [ref=e282]: Supabase 기반 로그인, 팔로우, 좋아요, 댓글, 알림 등 소셜 기능 구현
+              - listitem [ref=e283]: 알라딘 도서 API를 서버에서 중계하고 캐시를 적용해 외부 호출량·보안 제약 완화
+          - paragraph [ref=e284]:
+            - generic [ref=e285]: Next.js 16
+            - generic [ref=e286]: React 19
+            - generic [ref=e287]: TypeScript
+            - generic [ref=e288]: Supabase
+            - generic [ref=e289]: TanStack Query v5
+            - generic [ref=e290]: OpenAI API
+            - generic [ref=e291]: Aladin API
+            - generic [ref=e292]: Recharts
+            - generic [ref=e293]: Tailwind CSS
+          - generic [ref=e294]:
+            - link [ref=e295] [cursor=pointer]:
+              - /url: /strongerDeer/page0127
+            - link "https://github.com/strongerDeer/page0127" [ref=e299] [cursor=pointer]:
+              - /url: https://github.com/strongerDeer/page0127
+            - link "https://page0127.vercel.app/" [ref=e304] [cursor=pointer]:
+              - /url: https://page0127.vercel.app/
+    - generic [ref=e310]:
+      - heading "Other Projects 보조 프로젝트" [level=2] [ref=e311]
+      - list [ref=e313]:
+        - listitem [ref=e314]:
+          - link [ref=e315] [cursor=pointer]:
+            - /url: /strongerDeer/wenivooks
+            - paragraph [ref=e317]: 업무
+          - generic [ref=e322]:
+            - generic [ref=e323]:
+              - link "WeniVooks 상세 보기" [ref=e324] [cursor=pointer]:
+                - /url: /strongerDeer/wenivooks
+                - heading "WeniVooks 위니북스" [level=3] [ref=e325]:
+                  - text: WeniVooks
+                  - generic [ref=e328]: 위니북스
+              - list [ref=e329]:
+                - listitem [ref=e330]: 검색엔진 최적화(SEO)로 3개월 만에 검색 노출 900회+, 클릭수 1,746회 달성(구글 서치 콘솔 기준)
+            - paragraph [ref=e331]:
+              - generic [ref=e332]: Next.js
+              - generic [ref=e333]: JavaScript
+              - generic [ref=e334]: Sass
+            - generic [ref=e335]:
+              - link [ref=e336] [cursor=pointer]:
+                - /url: /strongerDeer/wenivooks
+              - link "https://www.books.weniv.co.kr/" [ref=e340] [cursor=pointer]:
+                - /url: https://www.books.weniv.co.kr/
+        - listitem [ref=e346]:
+          - link [ref=e347] [cursor=pointer]:
+            - /url: /strongerDeer/weniv-analytics
+            - paragraph [ref=e349]: 업무
+          - generic [ref=e354]:
+            - generic [ref=e355]:
+              - link "Weniv Analytics 상세 보기" [ref=e356] [cursor=pointer]:
+                - /url: /strongerDeer/weniv-analytics
+                - heading "Weniv Analytics 위니브 분석 대시보드" [level=3] [ref=e357]:
+                  - text: Weniv Analytics
+                  - generic [ref=e361]: 위니브 분석 대시보드
+              - list [ref=e362]:
+                - listitem [ref=e363]: 사내 서비스 데이터를 시각화해 서비스 가치 평가와 마케팅 활용 의사결정 기준 제시
+            - paragraph [ref=e364]:
+              - generic [ref=e365]: TypeScript
+              - generic [ref=e366]: Next.js
+              - generic [ref=e367]: Sass(scss)
+            - link [ref=e369] [cursor=pointer]:
+              - /url: /strongerDeer/weniv-analytics
+        - listitem [ref=e373]:
+          - link [ref=e374] [cursor=pointer]:
+            - /url: /strongerDeer/weniv-bootcamp
+            - paragraph [ref=e376]: 업무
+          - generic [ref=e381]:
+            - generic [ref=e382]:
+              - link "Weniv Bootcamp 상세 보기" [ref=e383] [cursor=pointer]:
+                - /url: /strongerDeer/weniv-bootcamp
+                - heading "Weniv Bootcamp 위니브 부트캠프" [level=3] [ref=e384]:
+                  - text: Weniv Bootcamp
+                  - generic [ref=e389]: 위니브 부트캠프
+              - list [ref=e390]:
+                - listitem [ref=e391]: Next.js를 이용한 정적 사이트 제작 SEO 최적화 작업
+            - paragraph [ref=e392]:
+              - generic [ref=e393]: Next.js
+              - generic [ref=e394]: JavaScript
+              - generic [ref=e395]: Sass(scss)
+            - generic [ref=e396]:
+              - link [ref=e397] [cursor=pointer]:
+                - /url: /strongerDeer/weniv-bootcamp
+              - link "https://github.com/weniv/bootcamp" [ref=e401] [cursor=pointer]:
+                - /url: https://github.com/weniv/bootcamp
+              - link "https://bootcamp.weniv.co.kr/" [ref=e406] [cursor=pointer]:
+                - /url: https://bootcamp.weniv.co.kr/
+      - button "보조 프로젝트 더보기" [ref=e412] [cursor=pointer]
+  - generic [ref=e414]:
+    - heading "Work Experience 경력" [level=2] [ref=e415]
+    - paragraph [ref=e416]:
+      - text: "프론트엔드 개발 경력:"
+      - strong [ref=e417]: 3년 9개월
+      - generic [ref=e418]:
+        - text: "/ IT 부문 경력: 총"
+        - strong [ref=e419]: 10년
+    - list [ref=e421]:
+      - listitem [ref=e422]:
+        - generic [ref=e423]:
+          - heading "NOVERA노베라 / 서울" [level=3] [ref=e424]
+          - paragraph [ref=e425]: 2025.02~재직중(1년 5개월)
+          - paragraph [ref=e426]: 아티스트 상품 판매, 이벤트 운영, 팬덤 커머스 서비스를 제공하는 기업
+          - paragraph [ref=e427]: 플랫폼사업실 플랫폼사업팀 | 프로(대리)
+        - generic [ref=e428]:
+          - paragraph [ref=e429]: 프론트엔드 개발자
+          - list [ref=e433]:
+            - listitem [ref=e434]: "NOVERA Shop 개발/운영: Next.js 16, React 19 기반 커머스 사용자 화면 운영 및 개선"
+            - listitem [ref=e435]: "운영 어드민 개발: 주문·배송·반품·클레임·이벤트 매출 등 운영 업무 전반의 관리 기능 구현"
+            - listitem [ref=e436]: "분석/품질 대시보드 구축: GA4, Search Console, 어드민, 실사용자 속도 지표, Lighthouse 데이터를 통합해 성과와 품질을 확인하는 내부 대시보드 구축"
+            - listitem [ref=e437]: "디자인 시스템 구축: React, TypeScript, Vanilla Extract 기반 공통 컴포넌트 라이브러리와 Figma 토큰 변환 흐름 구성"
+            - listitem [ref=e438]: "제품 개선: 회원가입, 상품 탐색, 주문/클레임, 성능, SEO 등 커머스 핵심 흐름을 데이터와 운영 이슈를 기준으로 개선"
+      - listitem [ref=e439]:
+        - generic [ref=e440]:
+          - heading "Weniv위니브 / 제주" [level=3] [ref=e441]
+          - paragraph [ref=e442]: 2022.04 ~ 2024.07 (2년 4개월)
+          - paragraph [ref=e443]: ICT 교육 관련 온·오프라인 강의, 전자책, 웹 서비스, 콘퍼런스 등을 제공하는 기업
+        - generic [ref=e444]:
+          - paragraph [ref=e445]: 프론트엔드 개발자
+          - list [ref=e449]:
+            - listitem [ref=e450]: Next.js, TypeScript, Storybook 등 신규 기술 도입으로 사내 개발 환경 개선 및 코드 품질 향상 주도
+            - listitem [ref=e451]: 자사 서비스 SEO 개선 작업을 통해 구글 검색 노출 개선
+            - listitem [ref=e452]: 서비스 통합 모니터링이 가능한 맞춤형 데이터 분석 대시보드 개발
+            - listitem [ref=e453]: 코드 컨벤션, SEO 개선 매뉴얼, 프로젝트 문서 작성 가이드 등 다양한 사내 개발 문서화
+            - listitem [ref=e454]: 개발자 교육 콘텐츠 제작 및 부트캠프 강의 진행
+    - button "이전 경력 보기" [ref=e455] [cursor=pointer]
+  - generic [ref=e457]:
+    - heading "Other Experience 기타 경력 및 경험" [level=2] [ref=e458]
+    - list [ref=e459]:
+      - listitem [ref=e460]:
+        - generic [ref=e462]:
+          - heading "부트캠프 강사" [level=3] [ref=e463]
+          - paragraph [ref=e468]:
+            - strong [ref=e469]: 멋쟁이 사자처럼 프론트엔드 스쿨
+            - text: HTML/CSS 강의
+          - list [ref=e470]:
+            - listitem [ref=e471]: 5, 7기 HTML/CSS 메인 강의(2023.02~11)
+            - listitem [ref=e472]: 3, 4기 HTML/CSS 특강(2022.10.07, 12.26)
+            - listitem [ref=e473]: 3기 멘토(2022.08~2023.01)
+            - listitem [ref=e474]: 2, 4기 선배 특강(2022.04.08)
+          - paragraph [ref=e475]:
+            - strong [ref=e476]: 이스트소프트 오르미 백엔드 스쿨
+            - text: 1, 3기 HTML/CSS 강의
+      - listitem [ref=e477]:
+        - generic [ref=e478]:
+          - generic [ref=e479]:
+            - heading "인프런 온라인 강의" [level=3] [ref=e480]
+            - paragraph [ref=e484]:
+              - strong [ref=e485]: 아는 만큼 보이는 크롬 개발자 도구
+              - text: (2023.06)
+            - list [ref=e486]:
+              - listitem [ref=e487]: 프론트엔드 개발자가 알아야 할 크롬 개발자 도구의 기본적인 기능과 실무에 활용할 수 있는 팁을 담은 강의
+              - listitem [ref=e488]:
+                - strong [ref=e489]: 수강생 2,693명
+                - text: /
+                - strong [ref=e490]: 평점 4.8
+                - text: / 수강평 85개 (2026년 7월 기준)
+          - link "강의 링크" [ref=e491] [cursor=pointer]:
+            - /url: https://inf.run/FQsL
+      - listitem [ref=e497]:
+        - generic [ref=e498]:
+          - generic [ref=e499]:
+            - heading "전자책 출판" [level=3] [ref=e500]
+            - paragraph [ref=e504]:
+              - strong [ref=e505]: 알아서 잘 딱 깔끔하고 센스있게 정리하는 GitHub 핵심 개념
+              - text: (2022.03)
+            - list [ref=e506]:
+              - listitem [ref=e507]: 멋쟁이사자처럼 프론트엔드 스쿨 강사, 멘토, 수강생 16명이 함께한 프로젝트
+          - link "전자책 링크" [ref=e508] [cursor=pointer]:
+            - /url: https://ridibooks.com/books/2773000054
+      - listitem [ref=e514]:
+        - generic [ref=e516]:
+          - heading "특강" [level=3] [ref=e517]
+          - paragraph [ref=e522]:
+            - strong [ref=e523]: 제주 패스파인더
+            - text: 전지적 주니어 시점 <디자이너에서 개발자로>(2024.07.26)
+          - paragraph [ref=e524]:
+            - strong [ref=e525]: 제주대학교
+            - text: 계절학기 수업 <취업 멘토링>(2023.06.26)
+          - paragraph [ref=e526]:
+            - strong [ref=e527]: 제주 오현고등학교
+            - text: HTML/CSS <나의 좌우명 꾸미기>(2022.06.10)
+          - paragraph [ref=e528]:
+            - strong [ref=e529]: 멋쟁이사자처럼
+            - text: "앱스쿨 특강 <2022 최강 부트캠프 그 전설의 시작: 그걸 내가 써본다>(2022.09.27)"
+  - generic [ref=e531]:
+    - generic [ref=e532]:
+      - heading "Education 교육" [level=2] [ref=e533]
+      - list [ref=e534]:
+        - listitem [ref=e535]:
+          - strong [ref=e536]: 멋쟁이 사자처럼 프론트엔드 스쿨
+          - text: 1기 수료(2021.11 ~ 2022.01)
+          - list [ref=e537]:
+            - listitem [ref=e538]: HTML, CSS, Sass, Bootstrap, TailWind, JavaScript, GitHub, Node.js, jQuery 등 학습
+            - listitem [ref=e539]: 개근상, 동료 칭찬상, CSS 캐릭터 웹 디자인 대회 최우수상, 천하제일 이력서 만들기 최우수상 수상
+            - listitem [ref=e540]:
+              - generic [ref=e541]:
+                - strong [ref=e542]: 중소벤처기업부장관상
+                - text: 수상(프론트엔드 개발자 양성 부문 / 2022.11.15)
+        - listitem [ref=e544]:
+          - strong [ref=e545]: 부산대학교
+          - text: 조경학과 졸업(2008.03 ~ 2012.02)
+          - list [ref=e546]:
+            - listitem [ref=e547]: "학점: 3.87/4.5"
+            - listitem [ref=e548]: "제8회 도코모모 코리아 디자인 공모전 입선(2011.06 / 주제: 캠프 하야리아의 미래는 / 작품: \"MOSAIC\")"
+            - listitem [ref=e549]: 2학년 겨울방학부터 조경설계회사(기단 조경 기술사 사무소) 인턴 시작, 졸업 후 취업(2012.11까지 근무)
+    - generic [ref=e550]:
+      - heading "Certifications 자격증" [level=2] [ref=e551]
+      - list [ref=e552]:
+        - listitem [ref=e553]:
+          - generic [ref=e554]:
+            - strong [ref=e555]: 정보처리기사
+            - text: (한국산업인력공단 / 2015.07)
+        - listitem [ref=e556]: 웹디자인기능사(한국산업인력공단 / 2013.06)
+        - listitem [ref=e557]: 컴퓨터그래픽스 운용기능사(한국산업인력공단 / 2013.04)
+        - listitem [ref=e558]: 펀드 투자권유대행인(한국금융투자협회 / 2019.09)
+        - listitem [ref=e559]: 조경기사(한국산업인력공단 / 2013.05)

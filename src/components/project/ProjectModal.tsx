@@ -4,7 +4,7 @@ import TypeIcon from "./TypeIcon";
 import { I_PROJECTS, ICON_MAP, ICON_TYPE } from "@data/project";
 
 export default function ProjectModal({ project }: { project: I_PROJECTS }) {
-  const { type, title, kor, icon, description, github, url, content } = project;
+  const { type, title, kor, icon, description, github, url, urlType, urlLabel, content } = project;
 
   const IconComponent = ICON_MAP[icon as ICON_TYPE];
 
@@ -26,7 +26,7 @@ export default function ProjectModal({ project }: { project: I_PROJECTS }) {
       </div>
       <div className="flex gap-1 absolute top-8 right-16">
         {github && <LinkBtn type="github" url={github} />}
-        {url && <LinkBtn type="url" url={url} />}
+        {url && <LinkBtn type="url" url={url} urlType={urlType} label={urlLabel} />}
       </div>
     </>
   );

@@ -1,11 +1,11 @@
-import { raleway } from "@font/font";
+import { pretendard } from "@font";
 
 import styles from "./Logo.module.scss";
 
 export default function Logo({ className }: { className?: string }) {
   return (
     <span
-      className={`${raleway.className} ${styles.logo} ${
+      className={`${pretendard.className} ${styles.logo} ${
         className ? className : `text-xl sm:text-3xl`
       }`}
     >

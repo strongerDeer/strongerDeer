@@ -1,8 +1,9 @@
 import { LinkBtn } from "@components/project/ProjectBtns";
 import TypeIcon from "@components/project/TypeIcon";
 import { ICON_MAP, ICON_TYPE } from "@data/project";
-import { getProject } from "@utils/projects";
+import { getProject, getProjectIds } from "@utils/projects";
 import { X } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import styles from "./page.module.scss";
@@ -14,16 +15,22 @@ interface Props {
   }>;
 }
 export async function generateStaticParams() {
-  return [
-    { id: "jeju-ai" },
-    { id: "jeju-algorithm" },
-    { id: "page0127" },
-    { id: "teemstone" },
-    { id: "weniv-analytics" },
-    { id: "weniv-bootcamp" },
-    { id: "weniv-link" },
-    { id: "wenivooks" },
-  ];
+  return getProjectIds().map((id) => ({ id }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const { title, kor, description } = await getProject(id);
+  const pageTitle = `${title} ${kor} | 강혜진 포트폴리오`;
+
+  return {
+    title: pageTitle,
+    description,
+    openGraph: {
+      title: pageTitle,
+      description,
+    },
+  };
 }
 
 export default async function Page({ params }: Props) {
@@ -41,6 +48,9 @@ export default async function Page({ params }: Props) {
     period,
     github,
     url,
+    urlType,
+    urlLabel,
+    headings,
     content,
   } = project;
 
@@ -59,21 +69,24 @@ export default async function Page({ params }: Props) {
         <p className="text-gray-500 mt-2">{role}</p>
         <p className="text-gray-500 mt-2">{description}</p>
 
-        <Nav />
+        <Nav headings={headings} />
       </header>
-      <Image
-        className="mb-16 m-auto rounded-xl"
-        src={`/strongerDeer/${thumb}`}
-        alt=""
-        width={500}
-        height={500}
-      />
+      {thumb && (
+        <Image
+          className="mb-16 m-auto rounded-xl max-w-[500px] w-full h-auto"
+          src={`/strongerDeer${thumb}`}
+          alt=""
+          width={800}
+          height={600}
+          priority
+        />
+      )}
       <div className={styles.contents}>
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>
       <div className={styles.buttons}>
         {github && <LinkBtn type="github" url={github} />}
-        {url && <LinkBtn type="url" url={url} />}
+        {url && <LinkBtn type="url" url={url} urlType={urlType} label={urlLabel} />}
 
         <Link href={`../strongerDeer#${id}`} className={styles.back}>
           <X className="w-6 h-6" />

@@ -13,7 +13,7 @@ export const EXPERIENCES = [
         lists: [
           "5, 7기 HTML/CSS 메인 강의<span>(2023.02~11)</span>",
           "3, 4기 HTML/CSS 특강<span>(2022.10.07, 12.26)</span>",
-          "3기 멘토<span>(2022.08-2023-01)</span>",
+          "3기 멘토<span>(2022.08~2023.01)</span>",
           "2, 4기 선배 특강<span>(2022.04.08)</span>", //<라떼는 말이야>, 부트캠프 빠르게 망하는 10가지 방법>
         ],
       },
@@ -34,7 +34,7 @@ export const EXPERIENCES = [
         text: "<strong>아는 만큼 보이는 크롬 개발자 도구</strong><span>(2023.06)</span>",
         lists: [
           "프론트엔드 개발자가 알아야 할 크롬 개발자 도구의 기본적인 기능과 실무에 활용할 수 있는 팁을 담은 강의",
-          "<strong>수강생 2,457명</strong> / <strong>평점 4.9</strong> <span>(2025년 1월 기준)</span>",
+          "<strong>수강생 2,693명</strong> / <strong>평점 4.8</strong> / 수강평 85개 <span>(2026년 7월 기준)</span>",
         ],
       },
     ],
@@ -64,7 +64,7 @@ export const EXPERIENCES = [
   },
   {
     id: 4,
-    thumb: "/img.jpg",
+    thumb: "/thumb_lecture.jpg",
     icon: Mic2,
     title: "특강",
 

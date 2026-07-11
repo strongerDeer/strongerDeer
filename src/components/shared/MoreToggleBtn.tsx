@@ -10,7 +10,7 @@ export default function MoreToggleBtn({
   className?: string;
 }) {
   return (
-    <button onClick={onClick} className={`moreToggleBtn ${className}`}>
+    <button onClick={onClick} className={`moreToggleBtn ${className ?? ""}`}>
       {showAll ? "접기" : text}
     </button>
   );

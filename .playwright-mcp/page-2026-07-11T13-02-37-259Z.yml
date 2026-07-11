@@ -1,0 +1,9 @@
+- generic [ref=f2e5]:
+  - region "도움말/확대/축소 도구 모음" [ref=f2e27]:
+    - toolbar "도움말/확대/축소 도구 모음" [ref=f2e29]:
+      - button "도움말" [ref=f2e31]
+  - generic:
+    - status
+    - group [ref=f2e33]:
+      - alert [ref=f2e35]
+      - alert [ref=f2e37]

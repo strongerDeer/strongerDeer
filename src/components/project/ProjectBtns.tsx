@@ -1,12 +1,18 @@
-import { ExternalLink, Github, Search } from "lucide-react";
+import { ExternalLink, Github, Presentation, Search } from "lucide-react";
 import Link from "next/link";
+
+type UrlType = "site" | "slides";
 
 export default function ProjectBtns({
   url,
+  urlType,
+  urlLabel,
   github,
   projectId,
 }: {
   url: string;
+  urlType?: UrlType;
+  urlLabel?: string;
   github?: string;
   projectId: string;
 }) {
@@ -17,7 +23,7 @@ export default function ProjectBtns({
       </Link>
 
       {github && <LinkBtn type="github" url={github} />}
-      {url && <LinkBtn type="url" url={url} />}
+      {url && <LinkBtn type="url" url={url} urlType={urlType} label={urlLabel} />}
     </div>
   );
 }
@@ -25,9 +31,13 @@ export default function ProjectBtns({
 export const LinkBtn = ({
   type,
   url,
+  urlType = "site",
+  label,
 }: {
   type: "github" | "url" | "view";
   url: string;
+  urlType?: UrlType;
+  label?: string;
 }) => {
   if (type === "view") {
   }
@@ -42,12 +52,14 @@ export const LinkBtn = ({
             : "bg-blue-100 border-blue-100"
         }`}
       >
-        {type === "url" ? (
+        {type === "url" && urlType === "slides" ? (
+          <Presentation className="stroke-blue-500" />
+        ) : type === "url" ? (
           <ExternalLink className="stroke-blue-500" />
         ) : (
           <Github className="stroke-gray-700" />
         )}
-        <span>{url}</span>
+        <span>{label ?? url}</span>
       </a>
     </>
   );
