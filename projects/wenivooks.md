@@ -13,7 +13,7 @@ skills: ["Next.js", "JavaScript", "Sass"]
 icon: BookOpenText
 metrics:
   [
-    "검색엔진 최적화(SEO)로 3개월 만에 검색 노출 900회+, 클릭수 1,746회 달성(구글 서치 콘솔 기준)",
+    "검색엔진 최적화(SEO)로 런칭 3개월간 구글 검색 노출 31.7만 회·클릭 1,746회 달성(Search Console, 2024.05~07 기준)",
 "프로젝트 팀장으로서 반응형 디자인, 테마 설정 등 UI/UX를 고려하여 기능 구현",
 "React SPA 기술을 사용하던 회사에 Next.js 기술 도입",
   ]
@@ -229,16 +229,16 @@ useEffect(() => {
 
 - React SPA 기술을 사용하던 회사에 Next.js 기술 도입
 - 프로젝트 팀장으로서 반응형 디자인, 테마 설정 등 UI/UX를 고려하여 기능 구현
-- 검색엔진 최적화(SEO)로 3개월 만에 검색 노출 900회+, 클릭수 1,746회 달성(구글 서치 콘솔 기준)
+- 검색엔진 최적화(SEO)로 런칭 3개월간 구글 검색 노출 31.7만 회, 클릭 1,746회 달성(Search Console, 2024.05~07 기준)
   :::div{.function}
 
   - 검색엔진 최적화(SEO)
     ![](/strongerDeer/project/wenivooks_seo.jpg)
     - robots.txt, sitemap.xml 설정
     - OG 메타데이터 최적화로 URL 공유 시 콘텐츠 가독성 향상
-  - 런칭 3개월 만에 구글 검색 노출 900회+ 달성
+  - 런칭 직후부터 검색 노출·클릭 상승 추이 확인
     ![](/strongerDeer/project/wenivooks_click.jpg)
-  - 총 클릭수 1,746회, 노출수 31.7만 기록 (2024.05-07 3달 기준)
+  - 3개월 누적 노출 31.7만 회, 클릭 1,746회 기록
     ![](/strongerDeer/project/wenivooks_google.jpg)
     :::
 
