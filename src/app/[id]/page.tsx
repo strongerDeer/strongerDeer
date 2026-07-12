@@ -21,8 +21,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const { title, kor, description } = await getProject(id);
+  const { title, kor, description, thumb } = await getProject(id);
   const pageTitle = `${title} ${kor} | 강혜진 포트폴리오`;
+  const images = [thumb ? `/strongerDeer${thumb}` : "/strongerDeer/og-image.jpg"];
 
   return {
     title: pageTitle,
@@ -30,6 +31,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: pageTitle,
       description,
+      images,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description,
+      images,
     },
   };
 }
