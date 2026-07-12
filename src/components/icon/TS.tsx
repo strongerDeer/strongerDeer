@@ -1,4 +1,4 @@
-export default function TS() {
+const TS = () => {
   return (
     <svg
       width="16"
@@ -13,4 +13,6 @@ export default function TS() {
       />
     </svg>
   );
-}
+};
+
+export default TS;

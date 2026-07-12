@@ -1,4 +1,4 @@
-export default function Certifications() {
+const Certifications = () => {
   return (
     <section>
       <h2 className="title">
@@ -40,4 +40,6 @@ export default function Certifications() {
       </ul>
     </section>
   );
-}
+};
+
+export default Certifications;

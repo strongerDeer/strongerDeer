@@ -1,12 +1,11 @@
 import { SKILL, SkillType } from "@data/project";
 
-export default function Tab({
-  activeFilter,
-  setActiveFilter,
-}: {
+type TabProps = {
   activeFilter: SkillType | "all";
   setActiveFilter: (filter: SkillType | "all") => void;
-}) {
+};
+
+const Tab = ({ activeFilter, setActiveFilter }: TabProps) => {
   return (
     <div className="projectTab">
       <button
@@ -26,4 +25,6 @@ export default function Tab({
       ))}
     </div>
   );
-}
+};
+
+export default Tab;

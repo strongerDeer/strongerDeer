@@ -1,24 +1,36 @@
 "use client";
-import Logo from "./shared/Logo";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+
 import { HERO_KEYWORDS } from "@data/introduce";
 
-export default function Hero() {
+import Logo from "./shared/Logo";
+
+const Hero = () => {
+  const shouldReduceMotion = useReducedMotion();
+
+  const fadeUp = (delay: number) =>
+    shouldReduceMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.3, delay },
+        };
+
   return (
     <div className="wrap" id="hero">
       <AnimatePresence mode="wait">
         <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.5 }}
+          {...(shouldReduceMotion
+            ? {}
+            : {
+                initial: { opacity: 0, y: 20 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: -20 },
+                transition: { duration: 0.3 },
+              })}
         >
-          <motion.div
-            className="code font-mono"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
+          <motion.div className="code font-mono" {...fadeUp(0.1)}>
             <span className="text-primaryA11y">{`<strong>`}</span>
             <wbr />
             <span className="font-bold">De</span>
@@ -32,26 +44,15 @@ export default function Hero() {
             <span className="text-primaryA11y">{`</strong>`}</span>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <Logo className="text-6xl sm:text-8xl md:text-9xl" />
+          <motion.div {...fadeUp(0.2)}>
+            <Logo className="text-[clamp(2.75rem,10vw,8rem)] leading-none" />
           </motion.div>
-          <motion.p
-            className="text-xl mt-10 mb-4 font-light"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
+          <motion.p className="text-xl mt-10 mb-4 font-light" {...fadeUp(0.3)}>
             👋 안녕하세요
           </motion.p>
           <motion.p
             className="text-2xl leading-snug font-thin sm:text-3xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
+            {...fadeUp(0.4)}
           >
             <span className="border-b border-gray-500">
               0.1초의 피드백을
@@ -63,20 +64,16 @@ export default function Hero() {
           </motion.p>
           <motion.p
             className="mt-6 max-w-3xl text-base sm:text-lg leading-relaxed text-gray-600 font-light text-balance break-keep"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1 }}
+            {...fadeUp(0.5)}
           >
-            0.1초는 사용자가 화면의 반응을 즉각적이라고 느끼는 기준입니다.
-            커머스의 상품 탐색, 주문/클레임, 운영 어드민처럼 상태가 복잡한
-            화면을 사용자가 이해하기 쉬운 흐름으로 정리하고, 성능·SEO·이벤트
-            지표로 개선 결과를 확인합니다.
+            0.1초의 빠른 반응부터 복잡한 상태의 명확한 안내까지, 사용자가
+            머뭇거리는 지점을 줄입니다. 상품 탐색·주문/클레임·운영 어드민의
+            흐름을 이해하기 쉬운 UI로 정리하고, 성능·SEO·행동 데이터로 개선
+            효과를 검증합니다.
           </motion.p>
           <motion.ul
             className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.2 }}
+            {...fadeUp(0.6)}
           >
             {HERO_KEYWORDS.map(({ title, description, icon: Icon }) => (
               <li
@@ -95,4 +92,6 @@ export default function Hero() {
       </AnimatePresence>
     </div>
   );
-}
+};
+
+export default Hero;

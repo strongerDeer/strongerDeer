@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Education() {
+const Education = () => {
   return (
     <section>
       <h2 className="title">
@@ -69,4 +69,6 @@ export default function Education() {
       </ol>
     </section>
   );
-}
+};
+
+export default Education;

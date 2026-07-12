@@ -16,9 +16,13 @@ const SHORT_LABEL: Record<string, string> = {
   "기술적으로 보강한 부분": "기술 보강",
   "설계 판단 기준 — 데이터가 없는 초기 단계에서": "판단 기준",
   "공개 가능한 근거 방식": "공개 근거",
+  "배경과 문제": "배경·문제",
+  "왜 이 기술을 사용했나": "기술 선택",
+  "운영·경영진용 성과 대시보드": "성과 대시보드",
+  "프론트엔드 품질 모니터링": "품질 모니터링",
 };
 
-export default function Nav({ headings }: NavProps) {
+const Nav = ({ headings }: NavProps) => {
   if (headings.length === 0) {
     return null;
   }
@@ -32,4 +36,6 @@ export default function Nav({ headings }: NavProps) {
       ))}
     </nav>
   );
-}
+};
+
+export default Nav;

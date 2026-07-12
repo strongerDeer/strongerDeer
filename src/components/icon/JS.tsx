@@ -1,4 +1,4 @@
-export default function JS() {
+const JS = () => {
   return (
     <svg
       width="16"
@@ -13,4 +13,6 @@ export default function JS() {
       />
     </svg>
   );
-}
+};
+
+export default JS;

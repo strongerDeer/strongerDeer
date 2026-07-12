@@ -1,13 +1,33 @@
 .project {
-  @apply max-w-screen-2xl m-auto px-10 pb-10;
+  @apply max-w-screen-2xl m-auto px-4 sm:px-10 pb-10;
 
   header {
     @apply bg-white sticky top-0 pt-10 z-10 border-b mb-6;
   }
 }
 
+.overview {
+  @apply mx-auto mb-10 max-w-5xl rounded-2xl border border-blue-100 bg-blue-50 p-5 sm:p-6;
+
+  h3 {
+    @apply mb-3 text-sm font-bold text-blue-700;
+  }
+}
+
+.summary {
+  @apply grid gap-3 md:grid-cols-3;
+
+  li {
+    @apply rounded-xl bg-white p-4 font-semibold leading-relaxed text-gray-800 shadow-sm;
+  }
+}
+
+.disclosure {
+  @apply mt-4 text-sm leading-relaxed text-gray-500;
+}
+
 .buttons {
-  @apply flex gap-1 fixed top-12 right-10 z-20;
+  @apply flex gap-1 fixed top-3 right-3 sm:top-12 sm:right-10 z-20;
 
   .back {
     @apply bg-gray-200 w-10 h-10 flex items-center justify-center rounded-full;
@@ -15,6 +35,18 @@
 }
 
 .contents {
+  p {
+    @apply leading-7 text-gray-700;
+
+    & + p {
+      @apply mt-3;
+    }
+  }
+
+  ul {
+    @apply my-4;
+  }
+
   h3,
   h4,
   h5 {
@@ -22,30 +54,32 @@
   }
 
   h3 {
-    @apply text-xl mb-2 -mt-72 pt-72;
+    scroll-margin-top: 18rem;
+    @apply mt-14 mb-5 rounded-xl border-l-4 border-blue-500 bg-blue-50 px-5 py-4 text-xl;
 
-    & ~ h3 {
-      @apply -mt-56 pt-72;
-    }
     & + h4 {
       @apply mt-0;
     }
   }
 
   h4 {
-    @apply text-lg mb-2;
+    @apply relative mb-3 pl-5 text-lg;
+
+    &::before {
+      @apply absolute left-0 top-2.5 h-2 w-2 rounded-full bg-blue-500 content-[''];
+    }
 
     & ~ h4,
     & ~ h5 {
-      @apply mt-8;
+      @apply mt-10;
     }
   }
 
   h5 {
-    @apply text-base underline  underline-offset-2;
+    @apply inline-flex rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700;
   }
   img {
-    @apply max-w-[50%];
+    @apply mx-auto w-full max-w-5xl rounded-xl border border-gray-100;
   }
 
   hr {

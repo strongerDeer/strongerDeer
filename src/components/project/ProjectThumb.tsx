@@ -1,17 +1,14 @@
 import Image from "next/image";
 import TypeIcon from "./TypeIcon";
 
-export default function ProjectThumb({
-  type,
-  thumb,
-  title,
-  metrics,
-}: {
+type ProjectThumbProps = {
   type: "개인" | "업무";
   thumb: string;
   title?: string;
   metrics?: string[];
-}) {
+};
+
+const ProjectThumb = ({ type, thumb, title, metrics }: ProjectThumbProps) => {
   return (
     <div className="thumb">
       <TypeIcon type={type} />
@@ -25,4 +22,6 @@ export default function ProjectThumb({
       )}
     </div>
   );
-}
+};
+
+export default ProjectThumb;

@@ -1,7 +1,7 @@
 "use client";
 import Script from "next/script";
 
-export default function GA() {
+const GA = () => {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   if (!gaId) {
@@ -24,4 +24,6 @@ export default function GA() {
       </Script>
     </>
   );
-}
+};
+
+export default GA;

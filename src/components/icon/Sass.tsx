@@ -1,4 +1,4 @@
-export default function Sass() {
+const Sass = () => {
   return (
     <svg
       width="16"
@@ -13,4 +13,6 @@ export default function Sass() {
       />
     </svg>
   );
-}
+};
+
+export default Sass;

@@ -3,7 +3,7 @@ import Logo from "@components/shared/Logo";
 import { Github } from "lucide-react";
 import Link from "next/link";
 
-export default function Header() {
+const Header = () => {
   return (
     <header className="header">
       <Logo />
@@ -54,4 +54,6 @@ export default function Header() {
       </span>
     </header>
   );
-}
+};
+
+export default Header;

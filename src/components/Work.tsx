@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import MoreToggleBtn from "./shared/MoreToggleBtn";
 import Image from "next/image";
 
-export default function Work() {
+const Work = () => {
   const [showAll, setShowAll] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -26,10 +26,10 @@ export default function Work() {
           Work Experience<span>경력</span>
         </h2>
         <p>
-          프론트엔드 개발 경력: <strong>3년 10개월</strong>{" "}
+          프론트엔드 개발 경력: <strong>3년 9개월</strong>{" "}
           <span className="block sm:inline">
             <span className="hidden sm:inline">/</span> 웹/IT 실무 경력: 총{" "}
-            <strong>11년 6개월</strong>
+            <strong>11년 4개월</strong>
           </span>
         </p>
 
@@ -63,18 +63,25 @@ export default function Work() {
                     {career.position}
                   </p>
                   <ul>
-                    {career.description.map((desc, i) => (
-                      <li key={i} className="leading-relaxed">
-                        {desc}
+                    {career.description.map((desc) => (
+                      <li key={desc} className="leading-relaxed">
+                        {desc.includes(":") ? (
+                          <>
+                            <strong>{desc.split(":", 1)[0]}</strong>
+                            {desc.slice(desc.indexOf(":"))}
+                          </>
+                        ) : (
+                          desc
+                        )}
                       </li>
                     ))}
                   </ul>
 
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4 full">
                     {career.images &&
-                      career.images.map((image, i) => (
+                      career.images.map((image) => (
                         <Image
-                          key={i}
+                          key={image}
                           src={`/strongerDeer${image}`}
                           alt=""
                           width={288}
@@ -101,4 +108,6 @@ export default function Work() {
       </section>
     </div>
   );
-}
+};
+
+export default Work;

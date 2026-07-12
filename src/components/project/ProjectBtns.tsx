@@ -1,32 +1,39 @@
-import { ExternalLink, Github, Presentation, Search } from "lucide-react";
+import { ArrowRight, ExternalLink, Github, Presentation } from "lucide-react";
 import Link from "next/link";
 
 type UrlType = "site" | "slides";
 
-export default function ProjectBtns({
-  url,
-  urlType,
-  urlLabel,
-  github,
-  projectId,
-}: {
+type ProjectBtnsProps = {
   url: string;
   urlType?: UrlType;
   urlLabel?: string;
   github?: string;
   projectId: string;
-}) {
+  detailLabel?: string;
+};
+
+const ProjectBtns = ({
+  url,
+  urlType,
+  urlLabel,
+  github,
+  projectId,
+  detailLabel,
+}: ProjectBtnsProps) => {
   return (
     <div className="btn-group">
-      <Link href={`/${projectId}`} className="go border-gray-150">
-        <Search className="stroke-gray-700" />
+      <Link href={`/${projectId}`} className="go detail border-gray-150">
+        <span>{detailLabel ?? "상세 과정 보기"}</span>
+        <ArrowRight className="stroke-gray-700" />
       </Link>
 
       {github && <LinkBtn type="github" url={github} />}
       {url && <LinkBtn type="url" url={url} urlType={urlType} label={urlLabel} />}
     </div>
   );
-}
+};
+
+export default ProjectBtns;
 
 export const LinkBtn = ({
   type,

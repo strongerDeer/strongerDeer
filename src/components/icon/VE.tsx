@@ -1,4 +1,4 @@
-export default function VE() {
+const VE = () => {
   return (
     <svg
       width="16"
@@ -132,4 +132,6 @@ export default function VE() {
       />
     </svg>
   );
-}
+};
+
+export default VE;

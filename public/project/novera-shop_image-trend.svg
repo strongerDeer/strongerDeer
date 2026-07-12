@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">홈 이미지 전송량 최적화 추세</title>
+  <desc id="desc">2026년 6월 9일 6645KB에서 7월 6일 381KB로 약 94퍼센트 감소한 Lighthouse transferSize 기준 홈 이미지 전송량 추세</desc>
+  <rect width="1200" height="620" rx="32" fill="#f8fbff"/>
+  <rect x="44" y="40" width="1112" height="536" rx="24" fill="#fff" stroke="#dbeafe" stroke-width="2"/>
+
+  <text x="88" y="98" fill="#111827" font-family="Pretendard, sans-serif" font-size="30" font-weight="700">홈 이미지 전송량</text>
+  <text x="88" y="132" fill="#64748b" font-family="Pretendard, sans-serif" font-size="17">Lighthouse resource-summary · transferSize 기준</text>
+
+  <rect x="866" y="75" width="242" height="66" rx="16" fill="#eff6ff"/>
+  <text x="987" y="104" text-anchor="middle" fill="#64748b" font-family="Pretendard, sans-serif" font-size="14" font-weight="600">최적화 전 대비</text>
+  <text x="987" y="130" text-anchor="middle" fill="#2563eb" font-family="Pretendard, sans-serif" font-size="27" font-weight="800">94.3% 감소</text>
+
+  <g stroke="#e2e8f0" stroke-width="1">
+    <line x1="118" y1="196" x2="1100" y2="196"/>
+    <line x1="118" y1="284" x2="1100" y2="284"/>
+    <line x1="118" y1="372" x2="1100" y2="372"/>
+    <line x1="118" y1="460" x2="1100" y2="460"/>
+  </g>
+  <g fill="#94a3b8" font-family="Pretendard, sans-serif" font-size="13" text-anchor="end">
+    <text x="102" y="201">7,000KB</text>
+    <text x="102" y="289">5,000KB</text>
+    <text x="102" y="377">3,000KB</text>
+    <text x="102" y="465">1,000KB</text>
+  </g>
+
+  <path d="M142 212 L277 208 L412 210 L547 486 L682 483 L817 482 L952 487 L1087 485 L1087 504 L142 504 Z" fill="#dbeafe" opacity=".65"/>
+  <path d="M142 212 L277 208 L412 210 L547 486 L682 483 L817 482 L952 487 L1087 485" fill="none" stroke="#3b82f6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <line x1="487" y1="176" x2="487" y2="504" stroke="#93c5fd" stroke-width="2" stroke-dasharray="7 7"/>
+  <rect x="432" y="166" width="111" height="30" rx="15" fill="#dbeafe"/>
+  <text x="487" y="187" text-anchor="middle" fill="#1d4ed8" font-family="Pretendard, sans-serif" font-size="13" font-weight="700">최적화 반영</text>
+
+  <g fill="#fff" stroke="#3b82f6" stroke-width="5">
+    <circle cx="142" cy="212" r="8"/><circle cx="277" cy="208" r="8"/><circle cx="412" cy="210" r="8"/>
+    <circle cx="547" cy="486" r="8"/><circle cx="682" cy="483" r="8"/><circle cx="817" cy="482" r="8"/>
+    <circle cx="952" cy="487" r="8"/><circle cx="1087" cy="485" r="8"/>
+  </g>
+
+  <g font-family="Pretendard, sans-serif">
+    <rect x="108" y="154" width="102" height="38" rx="12" fill="#172554"/>
+    <text x="159" y="179" text-anchor="middle" fill="#fff" font-size="17" font-weight="700">6,645KB</text>
+    <rect x="369" y="154" width="102" height="38" rx="12" fill="#172554"/>
+    <text x="420" y="179" text-anchor="middle" fill="#fff" font-size="17" font-weight="700">6,690KB</text>
+    <rect x="508" y="426" width="80" height="36" rx="12" fill="#2563eb"/>
+    <text x="548" y="450" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">410KB</text>
+    <rect x="913" y="427" width="80" height="36" rx="12" fill="#2563eb"/>
+    <text x="953" y="451" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">381KB</text>
+  </g>
+
+  <g fill="#64748b" font-family="Pretendard, sans-serif" font-size="13" text-anchor="middle">
+    <text x="142" y="532">06.09</text><text x="277" y="532">06.15</text><text x="412" y="532">06.18</text>
+    <text x="547" y="532">06.19</text><text x="682" y="532">06.22</text><text x="817" y="532">06.29</text>
+    <text x="952" y="532">07.06</text><text x="1087" y="532">07.09</text>
+  </g>
+</svg>

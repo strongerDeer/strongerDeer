@@ -122,7 +122,6 @@ export async function getProject(fileName: string) {
 
 function myRemarkPlugin() {
   return function (tree: Root) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     visit(tree, function (node: any) {
       if (
         node.type === "containerDirective" ||

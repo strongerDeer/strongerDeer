@@ -5,15 +5,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import { I_PROJECTS } from "@data/project";
 import ProjectCard from "./project/ProjectCard";
 import MoreToggleBtn from "./shared/MoreToggleBtn";
-interface ProjectProps {
+type ProjectProps = {
   projects: I_PROJECTS[];
-}
+};
 
 const FEATURED_COUNT = 4;
-const OTHER_COLLAPSED_COUNT = 3;
-const HIDDEN_PROJECT_IDS = ["teemstone"];
+const OTHER_COLLAPSED_COUNT = 2;
+const HIDDEN_PROJECT_IDS = ["teemstone", "jeju-algorithm"];
 
-export default function Projects({ projects }: ProjectProps) {
+const Projects = ({ projects }: ProjectProps) => {
   const [showAllOther, setShowAllOther] = useState(false);
   const otherSectionRef = React.useRef<HTMLDivElement>(null);
 
@@ -24,6 +24,7 @@ export default function Projects({ projects }: ProjectProps) {
   const displayOther = showAllOther
     ? other
     : other.slice(0, OTHER_COLLAPSED_COUNT);
+  const displayProjects = [...featured, ...displayOther];
 
   const handleToggle = () => {
     setShowAllOther((prev) => !prev);
@@ -40,66 +41,46 @@ export default function Projects({ projects }: ProjectProps) {
             Projects <span>프로젝트</span>
           </h2>
 
-          <AnimatePresence mode="wait">
-            <motion.ul
-              className="card md:grid-cols-2 xl:grid-cols-3"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {featured.map((project, index) => (
-                <ProjectCard
-                  key={`${project.title}-${index}`}
-                  index={index}
-                  project={project}
-                />
-              ))}
-            </motion.ul>
-          </AnimatePresence>
+          <div ref={otherSectionRef} className="list">
+            <AnimatePresence mode="wait">
+              <motion.ul
+                className="card grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {displayProjects.map((project, index) => (
+                  <ProjectCard
+                    key={project.id}
+                    index={index}
+                    project={project}
+                    compact={index >= featured.length}
+                  />
+                ))}
+              </motion.ul>
+            </AnimatePresence>
+            {!showAllOther && other.length > OTHER_COLLAPSED_COUNT && (
+              <div className="blur" />
+            )}
+          </div>
 
           {other.length > 0 && (
-            <div ref={otherSectionRef}>
-              <h2 className="title mt-16">
-                Other Projects <span>보조 프로젝트</span>
-              </h2>
-
-              <div className="list">
-                <AnimatePresence mode="wait">
-                  <motion.ul
-                    className="card md:grid-cols-3"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {displayOther.map((project, index) => (
-                      <ProjectCard
-                        key={`${project.title}-${index}`}
-                        index={index}
-                        project={project}
-                        compact
-                      />
-                    ))}
-                  </motion.ul>
-                </AnimatePresence>
-                {!showAllOther && other.length > OTHER_COLLAPSED_COUNT && (
-                  <div className="blur" />
-                )}
-              </div>
-
+            <>
               {other.length > OTHER_COLLAPSED_COUNT && (
                 <MoreToggleBtn
-                  text="보조 프로젝트 더보기"
+                  text="프로젝트 더보기"
                   className={showAllOther ? "mt-6" : "-mt-12"}
                   showAll={showAllOther}
                   onClick={handleToggle}
                 />
               )}
-            </div>
+            </>
           )}
         </section>
       </div>
     </>
   );
-}
+};
+
+export default Projects;

@@ -2,9 +2,10 @@
 
 import { MAIN_STACK, PROGRAMS, SKILL_DOMAINS } from "@data/skill";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
-export default function Skills() {
+const Skills = () => {
   return (
     <div className="wrap" id="skills">
       <section>
@@ -12,7 +13,7 @@ export default function Skills() {
           Skills <span>기술</span>
         </h2>
         <ul className="domains">
-          {SKILL_DOMAINS.map(({ id, title, description, evidence, icon: Icon }) => (
+          {SKILL_DOMAINS.map(({ id, title, description, evidence, image, projectId, icon: Icon }) => (
             <li key={id} className="domain">
               <div className="domainHead">
                 <span className="domainIcon">
@@ -20,6 +21,20 @@ export default function Skills() {
                 </span>
                 <strong>{title}</strong>
               </div>
+              {projectId && (
+                <Link
+                  href={`/${projectId}`}
+                  className="domainImage"
+                  aria-label={`${title} 관련 프로젝트 상세 보기`}
+                >
+                  <Image
+                    src={`/strongerDeer${image}`}
+                    width={640}
+                    height={360}
+                    alt=""
+                  />
+                </Link>
+              )}
               <p>{description}</p>
               <p className="evidence">{evidence}</p>
             </li>
@@ -60,4 +75,6 @@ export default function Skills() {
       </section>
     </div>
   );
-}
+};
+
+export default Skills;

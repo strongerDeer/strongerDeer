@@ -9,11 +9,12 @@ import Link from "next/link";
 import styles from "./page.module.scss";
 import Image from "next/image";
 import Nav from "@components/project/Nav";
-interface Props {
+import NadDashboardDemo from "@components/project/NadDashboardDemo";
+type Props = {
   params: Promise<{
     id: string;
   }>;
-}
+};
 export async function generateStaticParams() {
   return getProjectIds().map((id) => ({ id }));
 }
@@ -47,6 +48,7 @@ export default async function Page({ params }: Props) {
     description,
     period,
     github,
+    codeDisclosure,
     url,
     urlType,
     urlLabel,
@@ -55,6 +57,14 @@ export default async function Page({ params }: Props) {
   } = project;
 
   const IconComponent = ICON_MAP[icon as ICON_TYPE];
+  const nadSectionStart =
+    id === "novera-dashboard" ? content.indexOf('id="section5"') : -1;
+  const nadInsertAt =
+    nadSectionStart >= 0 ? content.indexOf("</h3>", nadSectionStart) + 5 : -1;
+  const contentBeforeDemo =
+    nadInsertAt > 4 ? content.slice(0, nadInsertAt) : content;
+  const contentAfterDemo = nadInsertAt > 4 ? content.slice(nadInsertAt) : "";
+
   return (
     <div className={styles.project}>
       <header>
@@ -71,7 +81,18 @@ export default async function Page({ params }: Props) {
 
         <Nav headings={headings} />
       </header>
-      {thumb && (
+      <section className={styles.overview} aria-label="프로젝트 요약">
+        <h3>핵심 결과</h3>
+        <ul className={styles.summary}>
+          {project.metrics.map((metric) => (
+            <li key={metric}>{metric}</li>
+          ))}
+        </ul>
+        {codeDisclosure && (
+          <p className={styles.disclosure}>{codeDisclosure}</p>
+        )}
+      </section>
+      {thumb && id !== "novera-dashboard" && (
         <Image
           className="mb-16 m-auto rounded-xl max-w-[500px] w-full h-auto"
           src={`/strongerDeer${thumb}`}
@@ -82,7 +103,13 @@ export default async function Page({ params }: Props) {
         />
       )}
       <div className={styles.contents}>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div dangerouslySetInnerHTML={{ __html: contentBeforeDemo }} />
+        {id === "novera-dashboard" && nadInsertAt > 4 && (
+          <NadDashboardDemo />
+        )}
+        {contentAfterDemo && (
+          <div dangerouslySetInnerHTML={{ __html: contentAfterDemo }} />
+        )}
       </div>
       <div className={styles.buttons}>
         {github && <LinkBtn type="github" url={github} />}

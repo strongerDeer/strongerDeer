@@ -170,7 +170,7 @@
     @apply flex flex-wrap w-full gap-2 text-sm;
   }
   .btn-group {
-    @apply flex justify-end gap-2 mt-5;
+    @apply flex flex-wrap justify-end gap-2 mt-5;
   }
 
   & > li.compact {
@@ -198,8 +198,20 @@
     // 카드(흰 배경+그림자) 위를 균일하게 덮는 상위 레이어.
     // -inset-x로 카드 바깥 여백/그림자까지 함께 덮어 경계에서 색이 어긋나지 않게 한다.
     .blur {
-      @apply content-[''] block absolute -inset-x-4 -bottom-8 z-20 h-60 bg-gradient-to-b
+      @apply content-[''] block absolute -inset-x-4 -bottom-8 z-20 bg-gradient-to-b
       from-transparent from-0% via-blue-50 via-65% to-blue-50 pointer-events-none;
+
+      // 접힌 상태의 마지막 행 전체를 덮는다.
+      // 모바일 6행 → 태블릿 3행 → 데스크톱 2행
+      height: calc((100% - 10rem) / 6 + 2rem);
+
+      @media (min-width: 768px) {
+        height: calc((100% - 4rem) / 3 + 2rem);
+      }
+
+      @media (min-width: 1280px) {
+        height: calc((100% - 2rem) / 2 + 2rem);
+      }
     }
   }
 }
@@ -220,6 +232,14 @@
 
         strong {
           @apply text-base;
+        }
+      }
+
+      .domainImage {
+        @apply block mb-4 overflow-hidden rounded-lg border border-gray-100 bg-gray-50;
+
+        img {
+          @apply w-full aspect-video object-cover transition-transform duration-300 hover:scale-[1.02];
         }
       }
 

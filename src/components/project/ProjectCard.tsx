@@ -7,15 +7,13 @@ import Tag from "@components/shared/Tag";
 import { I_PROJECTS, ICON_MAP, ICON_TYPE } from "@data/project";
 import Link from "next/link";
 
-export default function ProjectCard({
-  project,
-  index,
-  compact = false,
-}: {
+type ProjectCardProps = {
   project: I_PROJECTS;
   index: number;
   compact?: boolean;
-}) {
+};
+
+const ProjectCard = ({ project, index, compact = false }: ProjectCardProps) => {
   const {
     id,
     type,
@@ -23,6 +21,7 @@ export default function ProjectCard({
     title,
     kor,
     description,
+    detailLabel,
     skills,
     icon,
     metrics,
@@ -64,8 +63,8 @@ export default function ProjectCard({
           {!compact && <p>{description}</p>}
 
           <ul className="list2">
-            {displayMetrics.map((metric, idx) => (
-              <li key={idx}>{metric}</li>
+            {displayMetrics.map((metric) => (
+              <li key={metric}>{metric}</li>
             ))}
           </ul>
         </div>
@@ -77,8 +76,11 @@ export default function ProjectCard({
           urlLabel={urlLabel}
           github={github}
           projectId={id}
+          detailLabel={detailLabel}
         />
       </div>
     </motion.li>
   );
-}
+};
+
+export default ProjectCard;

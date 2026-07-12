@@ -159,6 +159,16 @@ hover:scale-110 transition-all duration-300;
   span {
     @include a11y-hidden;
   }
+
+  &.detail {
+    @apply w-auto max-w-full px-4 rounded-full hover:scale-100;
+
+    span {
+      @apply static w-auto h-auto p-0 m-0 overflow-visible whitespace-nowrap border-0 text-sm font-medium text-gray-700;
+      clip: auto;
+      clip-path: none;
+    }
+  }
 }
 
 // iconType

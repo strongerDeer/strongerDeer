@@ -36,12 +36,12 @@ export const SKILL = [
 
 export type SkillType = (typeof SKILL)[number];
 
-export interface ProjectHeading {
+export type ProjectHeading = {
   id: string;
   text: string;
-}
+};
 
-export interface I_PROJECTS {
+export type I_PROJECTS = {
   index: number;
   id: string;
   type: "개인" | "업무";
@@ -50,6 +50,7 @@ export interface I_PROJECTS {
   title: string;
   kor: string;
   description: string;
+  detailLabel?: string;
 
   tags: SkillType[];
   icon: string;
@@ -58,10 +59,11 @@ export interface I_PROJECTS {
   urlType?: "site" | "slides";
   urlLabel?: string;
   github?: string;
+  codeDisclosure?: string;
 
   skills: string[];
   person: string;
   role: string;
   headings: ProjectHeading[];
   content: string;
-}
+};

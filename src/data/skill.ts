@@ -10,14 +10,15 @@ import { IconType } from "react-icons";
 import { FaGithub } from "react-icons/fa";
 import { SiClaude } from "react-icons/si";
 
-export interface I_SkillDomain {
+export type I_SkillDomain = {
   id: string;
   title: string;
   description: string;
   evidence: string;
+  image: string;
   projectId?: string;
   icon: LucideIcon;
-}
+};
 
 // 이력서의 "맡길 수 있는 기술 영역"을 실무 근거(evidence)와 함께 정리.
 // evidence는 실제 프로젝트에서 만든 결과라 "할 수 있다"가 아니라 "해봤다"로 읽힌다.
@@ -26,9 +27,10 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
     id: "product-ui",
     title: "Product UI",
     description:
-      "상품 탐색, 주문/클레임, 운영 어드민처럼 상태가 복잡한 화면의 로딩·오류·빈 화면·권한 상태를 일관되게 설계하고 구현합니다.",
+      "상품 탐색, 주문/클레임, 운영 어드민처럼 상태가 많은 화면을 로딩·오류·빈 화면·권한 상태까지 포함해 설계·구현합니다.",
     evidence:
-      "NOVERA Shop 커머스 핵심 화면의 상태 표현을 정리해 CS 발생 지점을 사전 안내로 전환",
+      "NOVERA Shop에서 문의가 잦던 지점을 화면 내 사전 안내로 전환",
+    image: "/project/novera-shop_plp.jpg",
     projectId: "novera-shop",
     icon: SquareStack,
   },
@@ -36,9 +38,10 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
     id: "frontend-architecture",
     title: "Frontend Architecture",
     description:
-      "Next.js App Router, React 19, TypeScript strict, TanStack Query v5 기반으로 서버/클라이언트 경계, 데이터 캐싱, 폼 흐름을 구성합니다.",
+      "Next.js App Router, React 19, TypeScript strict, TanStack Query v5 기반의 서버/클라이언트 데이터 흐름과 폼을 설계합니다.",
     evidence:
-      "SSR 데이터와 클라이언트 캐시를 prefetch/dehydrate로 연결하고, 무한 스크롤 필터 빈 화면까지 방어",
+      "SSR 데이터를 prefetch/dehydrate로 클라이언트 캐시에 이어받아 중복 요청 제거, 무한 스크롤·필터 조합의 빈 결과 화면까지 처리",
+    image: "/project/novera-shop_architecture.png",
     projectId: "novera-shop",
     icon: Boxes,
   },
@@ -46,9 +49,10 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
     id: "design-system",
     title: "Design System",
     description:
-      "Vanilla Extract, Style Dictionary, Storybook 기반으로 공통 컴포넌트와 디자인 토큰을 정리하고 제품 간 UI 기준을 맞춥니다.",
+      "Vanilla Extract, Style Dictionary, Storybook 기반 공통 컴포넌트·디자인 토큰 관리로 제품 간 UI 일관성을 확보합니다.",
     evidence:
-      "NDS 공통 컴포넌트 30종, Figma 토큰 변환 흐름, 런타임 스타일 계산을 줄이는 타입 안전한 variant 구조 구성",
+      "NDS 공통 UI 모듈 20여 개, Figma 토큰 변환 파이프라인, 제로 런타임 기반의 타입 안전한 variant 구조 구성",
+    image: "/project/nds_button.jpg",
     projectId: "nds",
     icon: Palette,
   },
@@ -56,9 +60,10 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
     id: "performance-seo",
     title: "Performance & SEO",
     description:
-      "Core Web Vitals, Lighthouse, 이미지 전송량, 웹폰트, canonical, JSON-LD, sitemap/robots를 점검해 검색 노출과 초기 경험을 개선합니다.",
+      "Core Web Vitals·Lighthouse 기반 이미지·웹폰트 최적화와 canonical, JSON-LD, sitemap 등 SEO 설정 점검으로 초기 로딩·검색 노출을 개선합니다.",
     evidence:
-      "이미지 전송량·웹폰트 로드 방식을 실사용자 지표와 Lighthouse로 교차 확인해 개선 우선순위를 도출(운영 사이트 SEO 100·접근성 96)",
+      "실사용자 지표와 Lighthouse를 교차 확인해 개선 우선순위 도출",
+    image: "/project/nad_crux.jpg",
     projectId: "novera-shop",
     icon: Gauge,
   },
@@ -66,9 +71,10 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
     id: "data-dashboard",
     title: "Data Dashboard",
     description:
-      "GA4 Data API, Google Search Console, 어드민 데이터를 연결해 이벤트 성과와 품질 지표를 Recharts 기반 대시보드로 시각화합니다.",
+      "GA4 Data API, Search Console, 어드민 데이터를 연결한 성과·품질 지표를 Recharts 대시보드로 시각화합니다.",
     evidence:
-      "이벤트 성과 분석 체계와 대시보드 6종을 구축하고, SPHERE 1회차 DAU를 사업팀과 합의한 내부 목표 대비 122%로 추적",
+      "이벤트 성과 분석 체계 구축·대시보드 배포, SPHERE 1회차 DAU 내부 목표 대비 122% 추적",
+    image: "/project/nad_quality.jpg",
     projectId: "novera-dashboard",
     icon: LayoutDashboard,
   },
@@ -79,23 +85,34 @@ export const MAIN_STACK = [
   "Next.js 16",
   "TypeScript",
   "TanStack Query v5",
+  "react-hook-form",
+  "yup",
+  "Tailwind CSS",
   "Vanilla Extract",
   "Style Dictionary",
   "Storybook",
   "Recharts",
   "GA4 Data API",
-  "Tailwind CSS",
+  "Google Search Console",
+  "Core Web Vitals",
   "AWS Amplify",
+  "Vercel",
+  "Figma",
+  "Jira",
+  "Notion",
+  "GitHub",
+  "Claude",
+  "Codex",
 ];
 
 // 도구 아이템 인터페이스
-interface I_Program {
+type I_Program = {
   id: number;
   name: string;
   image?: string;
   icon?: IconType;
   description: string;
-}
+};
 
 export const PROGRAMS: I_Program[] = [
   {

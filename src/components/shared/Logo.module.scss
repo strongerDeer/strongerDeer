@@ -34,8 +34,13 @@ $delay-increment: 0.1;
 }
 
 .logo {
+  display: inline-flex;
+  max-width: 100%;
+  white-space: nowrap;
+
   span {
     display: inline-block;
+    flex: none;
     font-weight: $initial-weight;
     opacity: 0;
 
@@ -46,6 +51,14 @@ $delay-increment: 0.1;
           $i * $delay-increment
         );
       }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    span {
+      animation: none;
+      font-weight: 600;
+      opacity: 1;
     }
   }
 }

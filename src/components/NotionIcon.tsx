@@ -1,4 +1,4 @@
-export default function NotionIcon() {
+const NotionIcon = () => {
   return (
     <svg
       className="h-6"
@@ -15,4 +15,6 @@ export default function NotionIcon() {
       />
     </svg>
   );
-}
+};
+
+export default NotionIcon;

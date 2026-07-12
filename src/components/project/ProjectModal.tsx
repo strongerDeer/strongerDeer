@@ -3,7 +3,7 @@ import React from "react";
 import TypeIcon from "./TypeIcon";
 import { I_PROJECTS, ICON_MAP, ICON_TYPE } from "@data/project";
 
-export default function ProjectModal({ project }: { project: I_PROJECTS }) {
+const ProjectModal = ({ project }: { project: I_PROJECTS }) => {
   const { type, title, kor, icon, description, github, url, urlType, urlLabel, content } = project;
 
   const IconComponent = ICON_MAP[icon as ICON_TYPE];
@@ -30,4 +30,6 @@ export default function ProjectModal({ project }: { project: I_PROJECTS }) {
       </div>
     </>
   );
-}
+};
+
+export default ProjectModal;

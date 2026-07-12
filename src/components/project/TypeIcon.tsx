@@ -1,6 +1,6 @@
 import { BriefcaseBusiness, User } from "lucide-react";
 
-export default function TypeIcon({ type }: { type: "개인" | "업무" }) {
+const TypeIcon = ({ type }: { type: "개인" | "업무" }) => {
   return (
     <p className="iconType">
       {type === "개인" ? (
@@ -16,4 +16,6 @@ export default function TypeIcon({ type }: { type: "개인" | "업무" }) {
       )}
     </p>
   );
-}
+};
+
+export default TypeIcon;

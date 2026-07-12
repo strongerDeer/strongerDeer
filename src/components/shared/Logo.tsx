@@ -2,7 +2,7 @@ import { pretendard } from "@font";
 
 import styles from "./Logo.module.scss";
 
-export default function Logo({ className }: { className?: string }) {
+const Logo = ({ className }: { className?: string }) => {
   return (
     <span
       className={`${pretendard.className} ${styles.logo} ${
@@ -17,8 +17,9 @@ export default function Logo({ className }: { className?: string }) {
       <span>g</span>
       <span>e</span>
       <span>r</span>
-      <wbr />
       <span>Deer</span>
     </span>
   );
-}
+};
+
+export default Logo;

@@ -3,12 +3,13 @@ import { X } from "lucide-react";
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 
-interface ModalProps {
+type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
-}
-export default function Modal({ isOpen, onClose, children }: ModalProps) {
+};
+
+const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -88,4 +89,6 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
     </AnimatePresence>,
     document.body
   );
-}
+};
+
+export default Modal;

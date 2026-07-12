@@ -4,7 +4,7 @@ import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import React, { Fragment } from "react";
 
-export default function OtherExperience() {
+const OtherExperience = () => {
   return (
     <div className="wrap" id="otherExperience">
       <section>
@@ -28,13 +28,13 @@ export default function OtherExperience() {
                     {title}
                   </h3>
 
-                  {contents.map((content, index) => (
-                    <Fragment key={index}>
+                  {contents.map((content) => (
+                    <Fragment key={content.text}>
                       <p>{parseText(content.text)}</p>
                       {content.lists && (
                         <ul className="list2">
-                          {content.lists.map((list, index) => (
-                            <li key={index}>{parseText(list)}</li>
+                          {content.lists.map((list) => (
+                            <li key={list}>{parseText(list)}</li>
                           ))}
                         </ul>
                       )}
@@ -54,4 +54,6 @@ export default function OtherExperience() {
       </section>
     </div>
   );
-}
+};
+
+export default OtherExperience;

@@ -3,27 +3,27 @@
 import Modal from "@components/project/Modal";
 import { createContext, ReactNode, useContext, useState } from "react";
 
-interface ModalContextType {
+type ModalContextType = {
   open: (body: ReactNode) => void;
   close: () => void;
-}
+};
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-interface ModalProps {
+type ModalProps = {
   isOpen: boolean;
   body: ReactNode;
-}
+};
 
 const defaultValues: ModalProps = {
   isOpen: false,
   body: null,
 };
 
-export function ModalContextProvider({
+export const ModalContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) => {
   const [modalState, setModalState] = useState<ModalProps>(defaultValues);
 
   const open = (body: ReactNode) => {
@@ -51,7 +51,7 @@ export function ModalContextProvider({
       )}
     </ModalContext.Provider>
   );
-}
+};
 
 export const useModalContext = (): ModalContextType => {
   const context = useContext(ModalContext);
