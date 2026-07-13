@@ -89,7 +89,7 @@ hooks: {
 
 ## 모바일·크로스브라우저에서만 재현되는 문제
 
-**문제**: 모달 내용에서 드래그를 시작해 backdrop에서 놓으면 의도와 달리 모달이 닫혔다. `will-change` 속성이 fixed 위치 기준을 바꾸어 모달 위치가 틀어지는 문제도 있었다.
+**문제**: 모달 내용에서 드래그를 시작해 backdrop에서 놓으면 의도와 달리 모달이 닫힘. `will-change` 속성이 fixed 위치 기준을 바꾸어 모달 위치가 틀어지는 문제도 발생.
 
 **해결**: `pointerdown`과 `pointerup`이 모두 backdrop에서 발생한 경우만 닫히게 바꾸고, 주 포인터가 아닌 입력은 제외. 판정 로직을 순수 함수로 분리해 8개 케이스로 테스트하고, fixed 위치를 깨뜨리던 `will-change`는 제거. 모바일 높이는 `vh`에서 `dvh`로 전환.
 
@@ -106,4 +106,7 @@ hooks: {
 
 # 관련 자료
 
-[NDS 설계 슬라이드](https://www.figma.com/slides/H3he12dIt9FBNioyo72JvK) — 테마·컴포넌트·토큰 구조.
+- [NDS 설계 슬라이드](https://www.figma.com/slides/H3he12dIt9FBNioyo72JvK) — 테마·컴포넌트·토큰 구조
+- [기술 의사결정 기록(ADR)](https://www.notion.so/strongerdeer/34101a7a57f1811daab2cd6e3d469208) — 주요 설계 판단의 배경과 대안 비교
+- [트러블슈팅 · 회고](https://www.notion.so/strongerdeer/34101a7a57f181758a05fed6e64bcc15) — 문제 정의부터 해결·회고까지
+- [토큰 네이밍 시스템](https://www.notion.so/strongerdeer/2ca01a7a57f18014afc7c0c398faaee3) — 디자이너와의 공통 언어 정의
