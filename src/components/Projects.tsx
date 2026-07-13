@@ -11,7 +11,7 @@ type ProjectProps = {
 
 const FEATURED_COUNT = 4;
 const OTHER_COLLAPSED_COUNT = 2;
-const HIDDEN_PROJECT_IDS = ["teemstone", "jeju-algorithm"];
+const HIDDEN_PROJECT_IDS: string[] = [];
 
 const Projects = ({ projects }: ProjectProps) => {
   const [showAllOther, setShowAllOther] = useState(false);

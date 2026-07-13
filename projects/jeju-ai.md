@@ -6,7 +6,7 @@ title: "2024 Jeju AI Conference"
 thumb: "/project_jeju_ai_conf.jpg"
 period: "2024.03(3일)"
 kor: "제주 AI 컨퍼런스"
-description: "'AI, 모두를 위한 미래 지식을 넘어 혁신으로'라는 주제의 컨퍼런스 소개 페이지"
+description: "컨퍼런스의 첫인상을 어떻게 한 페이지에 담았을까?"
 tags: ["Next.js", "React", "TypeScript", "Sass"]
 skills: ["Next.js", "TypeScript", "Sass(scss)", "GitHub Actions"]
 icon: "Cpu"

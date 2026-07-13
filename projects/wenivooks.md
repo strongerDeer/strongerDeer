@@ -6,7 +6,7 @@ title: "WeniVooks"
 thumb: "/project_wenivooks.jpg"
 kor: "위니북스"
 period: "2023.09~2024.07(약 11개월)"
-description: "개발 입문자들을 위한 온라인 개발 교안 서비스"
+description: "Notion 교안의 한계를 어떻게 웹 교안 서비스로 풀었을까?"
 background: ""
 tags: ["Next.js", "React", "JavaScript", "Sass"]
 skills: ["Next.js", "JavaScript", "Sass"]
@@ -24,7 +24,7 @@ role: "4인 프로젝트(디자인1, 프론트엔드3) - 프로젝트 리드/프
 
 # 🤔 배경
 
-ICT 교육 회사에서 Notion으로 제공하던 개발 교육 콘텐츠를 웹 서비스로 전환하는 프로젝트입니다. Notion으로 교안을 운영하면서 발생한 문제점들이 있었습니다
+ICT 교육 회사에서 Notion으로 제공하던 개발 교육 콘텐츠를 웹 서비스로 전환하는 프로젝트. Notion으로 교안을 운영하며 아래 문제점이 발생
 
 :::div{.motivation}
 
@@ -38,7 +38,7 @@ ICT 교육 회사에서 Notion으로 제공하던 개발 교육 콘텐츠를 웹
 
 :::
 
-이러한 문제들을 해결하고 더 많은 사람들이 접근할 수 있는 웹 교안 서비스를 개발하게 되었습니다.
+이 문제들을 해결하고 더 많은 사람이 접근할 수 있는 웹 교안 서비스로 개발.
 
 # 📝 기획
 
