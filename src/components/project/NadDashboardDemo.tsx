@@ -10,7 +10,7 @@ const metrics = [
 const NadDashboardDemo = () => {
   return (
     <section className={styles.demo} aria-label="더미 데이터로 재현한 NAD 대시보드 UI">
-      <div className={styles.demoLabel}>PORTFOLIO DEMO · DUMMY DATA</div>
+      <div className={styles.demoLabel}>예시 화면 · 실데이터 아님</div>
 
       <nav className={styles.nav} aria-label="대시보드 예시 메뉴">
         <div>

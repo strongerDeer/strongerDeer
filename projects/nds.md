@@ -47,13 +47,10 @@ Shop client·admin 등 여러 제품에서 함께 사용하는 사내 디자인 
 
 # 구현
 
-- Button, Input, Modal, Table, Select, Accordion, Carousel, Pagination, Stepper 등 제품에서 반복 사용하는 공통 UI 모듈 20여 개와 색상·간격·타이포 등 Foundation 토큰 설계·구현
-- 소비 앱의 프레임워크에 맞춰 이미지를 최적화할 수 있도록 Carousel·Avatar 등에 `renderImage` 렌더프롭을 도입해 Next.js `next/image` 연동을 컴포넌트 외부에서 주입 가능하게 설계
-- Select에 검색형(searchable) combobox 모드를 추가하고, Stepper controlled 모드 input 상태 동기화, Modal full 사이즈·다중 모달 포커스 관리 등 실제 제품 요구를 반영해 컴포넌트 API 확장
-- Figma 토큰을 코드에서 사용할 수 있는 형태로 변환하는 흐름 구성
-- 색상, 간격, radius, elevation, z-index, motion 토큰화 및 멀티브랜드 테마 시스템 구성
-- Storybook에 컴포넌트 사용 예시와 상태별 케이스를 정리해 디자이너·개발자 간 확인 기준 마련
-- 컴포넌트 개발 가이드, 토큰 가이드, 체크리스트, 테마 구조 문서화
+- **공통 UI 모듈 20여 개** — Button·Input·Modal·Table·Select·Accordion·Carousel·Pagination·Stepper 등과 색상·간격·타이포 Foundation 토큰 설계·구현
+- **제품 요구 반영 API 확장** — Carousel·Avatar에 `renderImage` 렌더프롭으로 `next/image` 외부 주입, Select 검색형 combobox, Stepper controlled 모드, Modal full 사이즈·다중 모달 포커스 관리
+- **토큰·테마 시스템** — 색상·간격·radius·elevation·z-index·motion 토큰화와 멀티브랜드 테마, Figma 토큰 코드 변환 흐름 구성
+- **문서화** — Storybook 상태별 케이스, 컴포넌트·토큰 가이드, 체크리스트, 테마 구조 문서화로 디자이너·개발자 확인 기준 마련
 
 ![Storybook — 색상 토큰 3계층(Primitive·Semantic·Brand)과 코드 사용 예시](/strongerDeer/project/nds_colors.jpg)
 
@@ -90,42 +87,16 @@ hooks: {
 
 컴포넌트에서는 타입이 있는 토큰 객체를 사용하고, 제품 앱은 CSS 변수로 theme 주입.
 
-## 제품 앱 환경과 Storybook 환경이 달라지는 문제
-
-Storybook과 Next.js 제품 앱의 실행 환경이 달라지는 문제. React를 외부 의존성으로 관리해 중복 번들링을 막고, Vanilla Extract의 정적 CSS가 소비 앱에서도 동일하게 적용되도록 구성.
-
-아래 예시는 제품에서 허용할 Button variant와 size 조합을 타입으로 제한하는 recipe 구조를 단순화한 코드.
-
-```ts
-export const buttonRecipe = recipe({
-  base: buttonBase,
-  variants: {
-    variant: {
-      primary: primaryButton,
-      secondary: secondaryButton,
-    },
-    size: {
-      sm: smallButton,
-      md: mediumButton,
-    },
-  },
-});
-```
-
-## 접근성 기준이 컴포넌트마다 흩어지는 문제
-
-아이콘 버튼·비밀번호 보기·수량 Stepper에서 접근성 이름이 누락되는 문제. 컴포넌트 단위 `aria-label`과 SSR markup·CSS 소스 테스트로 회귀 방지.
-
-- 아이콘 전용 Input button: `비밀번호 보기`, `수량 감소`, `수량 증가`
-- Stepper: 증가/감소 버튼과 number input에 접근성 이름 제공
-- coarse pointer 환경에서 최소 터치 타깃 44px 이상 보장
-- 우측 아이콘이 2개 이상일 때 touch target이 겹치지 않도록 간격 규칙 테스트
-
 ## 모바일·크로스브라우저에서만 재현되는 문제
 
 **문제**: 모달 내용에서 드래그를 시작해 backdrop에서 놓으면 의도와 달리 모달이 닫혔다. `will-change` 속성이 fixed 위치 기준을 바꾸어 모달 위치가 틀어지는 문제도 있었다.
 
 **해결**: `pointerdown`과 `pointerup`이 모두 backdrop에서 발생한 경우만 닫히게 바꾸고, 주 포인터가 아닌 입력은 제외. 판정 로직을 순수 함수로 분리해 8개 케이스로 테스트하고, fixed 위치를 깨뜨리던 `will-change`는 제거. 모바일 높이는 `vh`에서 `dvh`로 전환.
+
+## 그 외 해결한 문제
+
+- **환경 차이** → Storybook과 Next.js 제품 앱의 실행 환경이 다른 문제를, React 외부 의존성 관리로 중복 번들링을 막고 Vanilla Extract 정적 CSS가 소비 앱에서도 동일 적용되도록 구성. `recipe`로 허용 variant·size 조합을 타입 제한
+- **접근성 기준 산재** → 아이콘 버튼·비밀번호 보기·수량 Stepper의 접근성 이름 누락을 컴포넌트 단위 `aria-label`로 통일하고 SSR markup·CSS 소스 테스트로 회귀 방지. coarse pointer 환경 최소 터치 타깃 44px과 아이콘 간격 규칙을 테스트로 고정
 
 # 결과
 

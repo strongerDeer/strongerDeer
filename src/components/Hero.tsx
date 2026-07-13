@@ -63,13 +63,13 @@ const Hero = () => {
             <strong>강혜진</strong> 개발자입니다.
           </motion.p>
           <motion.p
-            className="mt-6 max-w-3xl text-base sm:text-lg leading-relaxed text-gray-600 font-light text-balance break-keep"
+            className="mt-6 w-full text-base sm:text-lg leading-relaxed text-gray-600 font-light text-balance break-keep"
             {...fadeUp(0.5)}
           >
             0.1초의 빠른 반응부터 복잡한 상태의 명확한 안내까지, 사용자가
-            머뭇거리는 지점을 줄입니다. 상품 탐색·주문/클레임·운영 어드민의
-            흐름을 이해하기 쉬운 UI로 정리하고, 성능·SEO·행동 데이터로 개선
-            효과를 검증합니다.
+            머뭇거리는 지점을 줄입니다.
+            <br /> 상품 탐색·주문/클레임·운영 어드민의 흐름을 이해하기 쉬운 UI로
+            정리하고, 성능·SEO·행동 데이터로 개선 효과를 검증합니다.
           </motion.p>
           <motion.ul
             className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8"
