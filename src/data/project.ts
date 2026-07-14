@@ -55,6 +55,10 @@ export type I_PROJECTS = {
   tags: SkillType[];
   icon: string;
   metrics: string[];
+  // 상세 페이지 "핵심 결과"를 KPI 스타일(큰 값 + 설명)로 보여줄 때 쓰는 선택 필드.
+  // 없으면 metrics 문장으로 그대로 렌더한다(숫자 없는 프로젝트 안전).
+  // 카드(ProjectCard)는 계속 metrics만 쓰므로 영향 없음.
+  highlights?: { value: string; label: string }[];
   url: string;
   urlType?: "site" | "slides";
   urlLabel?: string;

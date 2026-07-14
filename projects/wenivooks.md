@@ -17,6 +17,18 @@ metrics:
 "프로젝트 팀장으로서 반응형 디자인, 테마 설정 등 UI/UX를 고려하여 기능 구현",
 "React SPA 기술을 사용하던 회사에 Next.js 기술 도입",
   ]
+highlights:
+  [
+    {
+      value: "노출 31.7만 회",
+      label: "SEO로 런칭 3개월간 구글 검색 노출, 클릭 1,746회 (Search Console, 2024.05~07)",
+    },
+    {
+      value: "팀 리드",
+      label: "4인 프로젝트 팀장으로 반응형·테마 등 UI/UX 기능 구현 주도",
+    },
+    { value: "Next.js 도입", label: "React SPA를 쓰던 회사에 Next.js 기술 도입" },
+  ]
 url: "https://www.books.weniv.co.kr/"
 role: "4인 프로젝트(디자인1, 프론트엔드3) - 프로젝트 리드/프론트엔드 개발 50% 기여"
 

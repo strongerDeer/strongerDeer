@@ -135,6 +135,7 @@ export const CAREERS: I_CAREERS[] = [
     description: [
       "조경 설계 및 디자인",
       "CAD 도면 설계, Photoshop 2D 이미지 작업, SketchUp 3D 렌더링",
+      "대학교 2학년 겨울방학부터 인턴 시작, 졸업 후 취업",
     ],
     location: "부산",
   },

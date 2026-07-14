@@ -5,6 +5,7 @@ import {
   LucideIcon,
   Palette,
   SquareStack,
+  Workflow,
 } from "lucide-react";
 import { IconType } from "react-icons";
 import { FaGithub } from "react-icons/fa";
@@ -13,9 +14,12 @@ import { SiClaude } from "react-icons/si";
 export type I_SkillDomain = {
   id: string;
   title: string;
+  // JSX 컴포넌트처럼 보이게 쓰는 PascalCase 이름 (<ProductUI /> eyebrow).
+  // title은 공백이 있어 태그로 못 쓰므로 별도 필드로 둔다.
+  component: string;
   description: string;
   evidence: string;
-  image: string;
+  image?: string;
   projectId?: string;
   icon: LucideIcon;
 };
@@ -26,10 +30,10 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
   {
     id: "product-ui",
     title: "Product UI",
+    component: "ProductUI",
     description:
       "상품 탐색, 주문/클레임, 운영 어드민처럼 상태가 많은 화면을 로딩·오류·빈 화면·권한 상태까지 포함해 설계·구현합니다.",
-    evidence:
-      "NOVERA Shop에서 문의가 잦던 지점을 화면 내 사전 안내로 전환",
+    evidence: "NOVERA Shop에서 문의가 잦던 지점을 화면 내 사전 안내로 전환",
     image: "/project/novera-shop_plp.jpg",
     projectId: "novera-shop",
     icon: SquareStack,
@@ -37,6 +41,7 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
   {
     id: "frontend-architecture",
     title: "Frontend Architecture",
+    component: "FrontendArchitecture",
     description:
       "Next.js App Router, React 19, TypeScript strict, TanStack Query v5 기반의 서버/클라이언트 데이터 흐름과 폼을 설계합니다.",
     evidence:
@@ -48,6 +53,7 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
   {
     id: "design-system",
     title: "Design System",
+    component: "DesignSystem",
     description:
       "Vanilla Extract, Style Dictionary, Storybook 기반 공통 컴포넌트·디자인 토큰 관리로 제품 간 UI 일관성을 확보합니다.",
     evidence:
@@ -59,10 +65,10 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
   {
     id: "performance-seo",
     title: "Performance & SEO",
+    component: "PerformanceSEO",
     description:
       "Core Web Vitals·Lighthouse 기반 이미지·웹폰트 최적화와 canonical, JSON-LD, sitemap 등 SEO 설정 점검으로 초기 로딩·검색 노출을 개선합니다.",
-    evidence:
-      "실사용자 지표와 Lighthouse를 교차 확인해 개선 우선순위 도출",
+    evidence: "실사용자 지표와 Lighthouse를 교차 확인해 개선 우선순위 도출",
     image: "/project/nad_crux.jpg",
     projectId: "novera-shop",
     icon: Gauge,
@@ -70,13 +76,23 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
   {
     id: "data-dashboard",
     title: "Data Dashboard",
+    component: "DataDashboard",
     description:
       "GA4 Data API, Search Console, 어드민 데이터를 연결한 성과·품질 지표를 Recharts 대시보드로 시각화합니다.",
     evidence:
-      "이벤트 성과 분석 체계 구축·대시보드 배포, SPHERE 1회차 DAU 내부 목표 대비 122% 추적",
+      "이벤트 성과 분석 체계 구축·대시보드 배포. 회차별 오픈 시점 차이를 상대기간으로 정규화해 공정 비교하고, 지표의 귀속 한계·데이터 커버리지를 함께 노출해 오독 방지",
     image: "/project/nad_quality.jpg",
     projectId: "novera-dashboard",
     icon: LayoutDashboard,
+  },
+  {
+    id: "ai-workflow",
+    title: "AI Workflow",
+    component: "AIWorkflow",
+    description:
+      "Claude Code와 Figma·Notion MCP로 개발 워크플로우를 구성하고, AI 생성 코드는 타입·린트 검사를 거쳐 아키텍처·보안에 영향을 주는 부분은 직접 확인 후 반영합니다.",
+    evidence: "Figma MCP로 기획 화면 구현·디자인 적용 등 디자인-코드 전환 작업에 활용",
+    icon: Workflow,
   },
 ];
 

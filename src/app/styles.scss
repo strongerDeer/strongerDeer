@@ -33,7 +33,7 @@
 
 #projects,
 #otherExperience {
-  @apply bg-blue-50;
+  @apply bg-gray-50;
 }
 
 // 경력
@@ -199,7 +199,7 @@
     // -inset-x로 카드 바깥 여백/그림자까지 함께 덮어 경계에서 색이 어긋나지 않게 한다.
     .blur {
       @apply content-[''] block absolute -inset-x-4 -bottom-8 z-20 bg-gradient-to-b
-      from-transparent from-0% via-blue-50 via-65% to-blue-50 pointer-events-none;
+      from-transparent from-0% via-gray-50 via-65% to-gray-50 pointer-events-none;
 
       // 접힌 상태의 마지막 행 전체를 덮는다.
       // 모바일 6행 → 태블릿 3행 → 데스크톱 2행
@@ -223,6 +223,14 @@
     .domain {
       @apply rounded-xl border border-gray-200 h-full p-5;
 
+      .domainTag {
+        @apply block mb-2 text-xs text-primaryA11y;
+
+        .domainTagName {
+          @apply text-point;
+        }
+      }
+
       .domainHead {
         @apply flex items-center gap-2 mb-3;
 
@@ -230,8 +238,9 @@
           @apply flex items-center justify-center w-9 h-9 rounded-lg bg-blue-500/10 text-blue-500 shrink-0;
         }
 
+        // Skill 6개는 형제라 위계가 없으므로 이름 굵기 통일(bold).
         strong {
-          @apply text-base;
+          @apply text-base font-bold;
         }
       }
 
@@ -244,11 +253,11 @@
       }
 
       p {
-        @apply text-sm text-gray-500 font-light leading-relaxed;
+        @apply text-sm text-gray-600 font-normal leading-relaxed;
       }
 
       .evidence {
-        @apply mt-3 pt-3 border-t border-gray-100 text-gray-800 font-normal;
+        @apply mt-3 pt-3 border-t border-gray-100 text-point font-mono text-xs leading-relaxed;
       }
     }
   }
@@ -437,7 +446,7 @@
 }
 
 [data-rehype-pretty-code-figure] pre {
-  @apply p-8 text-sm rounded-lg bg-gray-100 !important;
+  @apply p-8 text-sm rounded-lg bg-gray-100 overflow-x-auto !important;
 }
 
 code {

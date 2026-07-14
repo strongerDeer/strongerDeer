@@ -6,11 +6,17 @@
   }
 }
 
+// 페이지 최상단 "성과 요약" — 파랑 대신 중립 배경 + 보라(point) accent 제목.
+// 강조는 아래 KPI value(보라)에만 둔다.
 .overview {
-  @apply mx-auto mb-10 max-w-5xl rounded-2xl border border-blue-100 bg-blue-50 p-5 sm:p-6;
+  @apply mx-auto mb-10 max-w-5xl rounded-2xl border border-gray-200 bg-gray-50 p-5 sm:p-6;
 
   h3 {
-    @apply mb-3 text-sm font-bold text-blue-700;
+    @apply mb-4 flex items-center gap-2 text-sm font-bold text-point;
+
+    &::before {
+      @apply h-0.5 w-3.5 rounded-full bg-point content-[''];
+    }
   }
 }
 
@@ -18,8 +24,22 @@
   @apply grid gap-3 md:grid-cols-3;
 
   li {
-    @apply rounded-xl bg-white p-4 font-semibold leading-relaxed text-gray-800 shadow-sm;
+    @apply rounded-xl bg-white p-4 font-semibold leading-relaxed text-gray-800;
+    @apply border border-gray-100;
   }
+}
+
+// KPI 스타일 — 큰 값(보라) + 작은 설명. highlights가 있을 때만 사용.
+.kpi {
+  @apply flex flex-col;
+}
+
+.kpiValue {
+  @apply text-2xl font-extrabold leading-tight tracking-tight text-point;
+}
+
+.kpiLabel {
+  @apply mt-2 text-sm font-normal leading-relaxed text-gray-600;
 }
 
 .disclosure {
@@ -35,16 +55,43 @@
 }
 
 .contents {
+  // 읽는 건 좁게, 보는 건 넓게 — 본문은 768px 읽기 컬럼(가운데)으로 묶고,
+  // 이미지·다이어그램만 컬럼 밖으로 넓힌다(아래 img 규칙).
+  // break-words: 'Button·Input·Modal…'처럼 가운뎃점으로 이어진 긴 토큰이
+  // 모바일에서 가로 스크롤을 만들지 않도록 단어 중간 줄바꿈 허용.
+  @apply mx-auto max-w-3xl break-words;
+
   p {
-    @apply leading-7 text-gray-700;
+    @apply leading-8 text-gray-700;
 
     & + p {
-      @apply mt-3;
+      @apply mt-3.5;
     }
   }
 
   ul {
     @apply my-4;
+  }
+
+  // 본문 리스트(전역 .list의 파란 점)를 상세 페이지에서만 오버라이드 —
+  // 왼쪽 보라 세로선 accent로. h3·h4의 accent와 같은 언어(강약만 다름).
+  // globals의 .list는 Work·Education 등이 공유하므로 여기서만 스코프.
+  :global(.list) > li {
+    @apply border-l-2 border-gray-200 py-2.5 pl-4;
+    transition: border-color 0.15s;
+
+    &::before {
+      @apply hidden;
+    }
+
+    &:hover {
+      @apply border-point;
+    }
+
+    // 리스트 항목 첫 부분(기술명 등 **볼드**)을 살짝 강조
+    strong {
+      @apply text-gray-900;
+    }
   }
 
   h3,
@@ -53,33 +100,35 @@
     @apply font-bold;
   }
 
+  // 뎁스는 "같은 언어의 강약"으로 — h3/h4 모두 보라(point) accent를 쓰되,
+  // 세로선(대섹션) → 가로 대시(중섹션)로 굵기·크기·여백에 위계를 준다.
   h3 {
     scroll-margin-top: 18rem;
-    @apply mt-14 mb-5 rounded-xl border-l-4 border-blue-500 bg-blue-50 px-5 py-4 text-xl;
+    @apply mt-16 mb-6 border-l-[3px] border-point pl-4 text-2xl font-extrabold leading-tight;
+
+    &:first-child {
+      @apply mt-0;
+    }
 
     & + h4 {
-      @apply mt-0;
+      @apply mt-6;
     }
   }
 
   h4 {
-    @apply relative mb-3 pl-5 text-lg;
+    @apply relative mb-3 mt-9 flex items-center gap-2 text-[17px] leading-snug;
 
     &::before {
-      @apply absolute left-0 top-2.5 h-2 w-2 rounded-full bg-blue-500 content-[''];
-    }
-
-    & ~ h4,
-    & ~ h5 {
-      @apply mt-10;
+      @apply h-0.5 w-3.5 rounded-full bg-point content-[''];
     }
   }
 
   h5 {
-    @apply inline-flex rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700;
+    @apply mt-8 inline-flex rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700;
   }
+  // 이미지·다이어그램도 읽기 컬럼과 같은 폭으로 — 텍스트와 좌우 정렬을 맞춘다.
   img {
-    @apply mx-auto w-full max-w-5xl rounded-xl border border-gray-100;
+    @apply mx-auto w-full rounded-xl border border-gray-100;
   }
 
   :global(.realdata) {

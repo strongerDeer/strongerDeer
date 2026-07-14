@@ -13,32 +13,41 @@ const Skills = () => {
           Skills <span>기술</span>
         </h2>
         <ul className="domains">
-          {SKILL_DOMAINS.map(({ id, title, description, evidence, image, projectId, icon: Icon }) => (
-            <li key={id} className="domain">
-              <div className="domainHead">
-                <span className="domainIcon">
-                  <Icon size={20} />
+          {SKILL_DOMAINS.map(
+            ({
+              id,
+              title,
+              component,
+              description,
+              evidence,
+              image,
+              projectId,
+              icon: Icon,
+            }) => (
+              <li key={id} className="domain">
+                <span className="domainTag font-mono">
+                  {"<"}
+                  <span className="domainTagName">{component}</span> {"/>"}
                 </span>
-                <strong>{title}</strong>
-              </div>
-              {projectId && (
-                <Link
-                  href={`/${projectId}`}
-                  className="domainImage"
-                  aria-label={`${title} 관련 프로젝트 상세 보기`}
-                >
+                <div className="domainHead">
+                  <span className="domainIcon">
+                    <Icon size={20} />
+                  </span>
+                  <strong>{title}</strong>
+                </div>
+                {/* {projectId && (
                   <Image
                     src={`/strongerDeer${image}`}
                     width={640}
                     height={360}
                     alt=""
                   />
-                </Link>
-              )}
-              <p>{description}</p>
-              <p className="evidence">{evidence}</p>
-            </li>
-          ))}
+                )} */}
+                <p>{description}</p>
+                <p className="evidence">{evidence}</p>
+              </li>
+            ),
+          )}
         </ul>
 
         <ul className="stack">
@@ -46,32 +55,6 @@ const Skills = () => {
             <li key={skill}>{skill}</li>
           ))}
         </ul>
-
-        <details className="tools">
-          <summary>작업 환경 · 협업 도구</summary>
-          <div className="program">
-            {PROGRAMS.map((program) => (
-              <span key={program.id} className="tool">
-                {program.icon ? (
-                  <span className="iconProgram">
-                    {React.createElement(program.icon, { size: 18 })}
-                  </span>
-                ) : (
-                  <Image
-                    src={`/strongerDeer${program.image}`}
-                    width={40}
-                    height={40}
-                    alt=""
-                  />
-                )}
-                <span className="toolName">
-                  <strong>{program.name}</strong>
-                  {program.description}
-                </span>
-              </span>
-            ))}
-          </div>
-        </details>
       </section>
     </div>
   );

@@ -16,10 +16,6 @@ const Education = () => {
               스택 학습
             </li>
             <li>
-              개근상, 동료 칭찬상, CSS 캐릭터 웹 디자인 대회 최우수상, 천하제일
-              이력서 만들기 최우수상 수상
-            </li>
-            <li>
               <span className="point">
                 <strong>중소벤처기업부장관상</strong> 수상
                 <span className="text-gray-500 text-sm">
@@ -58,11 +54,6 @@ const Education = () => {
                 (2011.06 / 주제: 캠프 하야리아의 미래는 / 작품:
                 &quot;MOSAIC&quot;)
               </span>
-            </li>
-            <li>
-              2학년 겨울방학부터 조경설계회사(기단 조경 기술사 사무소) 인턴
-              시작, 졸업 후 취업
-              <span className="text-gray-500 text-sm">(2012.11까지 근무)</span>
             </li>
           </ul>
         </li>

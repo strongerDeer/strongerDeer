@@ -83,19 +83,31 @@ export default async function Page({ params }: Props) {
             {title} <span>{kor}</span>
           </h2>
         </div>
-        <p className="text-gray-500 mt-2">{period}</p>
-        <p className="text-gray-500 mt-2">{role}</p>
-        <p className="text-gray-500 mt-2">{description}</p>
+        <p className="mt-3 text-lg font-semibold text-gray-800">{description}</p>
+        <p className="mt-2 text-sm text-gray-500">
+          {period} · {role}
+        </p>
 
         <Nav headings={headings} />
       </header>
       <section className={styles.overview} aria-label="프로젝트 요약">
         <h3>핵심 결과</h3>
-        <ul className={styles.summary}>
-          {project.metrics.map((metric) => (
-            <li key={metric}>{metric}</li>
-          ))}
-        </ul>
+        {project.highlights ? (
+          <ul className={styles.summary}>
+            {project.highlights.map(({ value, label }) => (
+              <li key={value} className={styles.kpi}>
+                <strong className={styles.kpiValue}>{value}</strong>
+                <span className={styles.kpiLabel}>{label}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <ul className={styles.summary}>
+            {project.metrics.map((metric) => (
+              <li key={metric}>{metric}</li>
+            ))}
+          </ul>
+        )}
         {codeDisclosure && (
           <p className={styles.disclosure}>{codeDisclosure}</p>
         )}

@@ -47,11 +47,11 @@ const Hero = () => {
           <motion.div {...fadeUp(0.2)}>
             <Logo className="text-[clamp(2.75rem,10vw,8rem)] leading-none" />
           </motion.div>
-          <motion.p className="text-xl mt-10 mb-4 font-light" {...fadeUp(0.3)}>
+          <motion.p className="text-xl mt-10 mb-4 font-medium" {...fadeUp(0.3)}>
             👋 안녕하세요
           </motion.p>
           <motion.p
-            className="text-2xl leading-snug font-thin sm:text-3xl"
+            className="text-2xl leading-snug font-normal sm:text-3xl"
             {...fadeUp(0.4)}
           >
             <span className="border-b border-gray-500">
@@ -63,7 +63,7 @@ const Hero = () => {
             <strong>강혜진</strong> 개발자입니다.
           </motion.p>
           <motion.p
-            className="mt-6 w-full text-base sm:text-lg leading-relaxed text-gray-600 font-light text-balance break-keep"
+            className="mt-6 w-full text-base sm:text-lg leading-relaxed text-gray-700 font-normal text-balance break-keep"
             {...fadeUp(0.5)}
           >
             0.1초의 빠른 반응부터 복잡한 상태의 명확한 안내까지, 사용자가
@@ -82,7 +82,7 @@ const Hero = () => {
               >
                 <Icon className="w-5 h-5 text-point" />
                 <strong className="text-base">{title}</strong>
-                <p className="text-sm text-balance break-keep text-gray-500 font-light leading-relaxed">
+                <p className="text-sm text-balance break-keep text-gray-600 font-normal leading-relaxed">
                   {description}
                 </p>
               </li>
