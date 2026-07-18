@@ -1,11 +1,11 @@
 ---
-index: 2
+index: 3
 id: "novera-dashboard"
 type: "업무"
 title: "NAD"
 kor: "NOVERA Analytics Dashboard"
 thumb: "/project_nad.jpg"
-period: "2026~진행중"
+period: "2026"
 description: "오픈 시점이 다른 4개 이벤트, 어떻게 같은 기준으로 비교했을까?"
 detailLabel: "성과 비교·품질 회귀 판정 체계 보기"
 tags: ["TypeScript", "React", "Next.js"]
@@ -14,7 +14,7 @@ icon: "ChartSpline"
 metrics:
   [
     "오픈 시점이 다른 4개 캠페인 회차를 상대기간으로 정규화해 공정 비교",
-    "실사용자 Core Web Vitals 통과: LCP 1.44초·INP 88ms·CLS 0",
+    "실사용자 Core Web Vitals 통과: 모바일 LCP 약 1.7초·INP 96ms·CLS 0",
     "Lighthouse 접근성 96·SEO 100 확인, GA4·Search Console·어드민 데이터 통합",
   ]
 highlights:
@@ -24,8 +24,8 @@ highlights:
       label: "오픈 시점이 다른 캠페인을 상대기간으로 정규화해 공정 비교",
     },
     {
-      value: "LCP 1.44초",
-      label: "실사용자 Core Web Vitals 통과 (INP 88ms · CLS 0)",
+      value: "CWV 통과",
+      label: "모바일 LCP 약 1.7초·INP 96ms·CLS 0 (CrUX p75·2026-07 기준)",
     },
     {
       value: "접근성 96 · SEO 100",
@@ -137,7 +137,7 @@ const andPage = (eventFilter: unknown, pagePaths: string[]) => ({
 - CLS(화면 밀림 정도): 0.1/0.25
 - 실험실 TBT(총 차단 시간)·번들·이미지 전송량: 회귀 감지용 보조 신호
 
-**결과**: 실사용자 기준 LCP 1.44초·INP 88ms·CLS 0 통과 판정 — 측정 환경 변동에 흔들리지 않는 합격 기준 확보.
+**결과**: 실사용자 Core Web Vitals 통과 판정 — 모바일 p75 LCP 약 1.7초·INP 96ms·CLS 0으로, 측정 환경 변동에 흔들리지 않는 합격 기준 확보.
 
 ### 문제 4. 측정 노이즈를 코드 회귀로 오인하는 문제
 
@@ -154,6 +154,6 @@ const andPage = (eventFilter: unknown, pagePaths: string[]) => ({
 
 ## 결과
 
-- 실사용자 Core Web Vitals 통과: **LCP 1.44초 · INP 88ms · CLS 0**(2026-06~07 28일 창 기준 — 이동 창이라 수치는 주차별 변동)
+- 실사용자 Core Web Vitals 통과: **모바일 p75 LCP 약 1.7초 · INP 96ms · CLS 0**(CrUX origin, 2026-06-16~07-13 28일 창 기준 — 재직 중 최종 측정 기록)
 - Lighthouse 기준 **접근성 96 · SEO 100** 확인
 - 성능·SEO·이미지·번들 회귀를 주기적으로 확인하는 품질 기준 마련

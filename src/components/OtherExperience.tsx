@@ -42,7 +42,12 @@ const OtherExperience = () => {
                   ))}
                 </div>
                 {link && (
-                  <a href={link.url} target="_blank" className="go">
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="go"
+                  >
                     <ExternalLink />
                     <span>{link.text}</span>
                   </a>

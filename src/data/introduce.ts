@@ -1,19 +1,19 @@
-import { ChartPie, MessageSquareText, Palette } from "lucide-react";
+import { Accessibility, Boxes, Palette } from "lucide-react";
 
 export const HERO_KEYWORDS = [
   {
-    title: "UI 피드백",
-    description: "버튼 상태, 로딩, 오류, 화면 전환처럼 사용자가 머뭇거리는 순간을 줄이는 UI 피드백을 설계합니다.",
-    icon: MessageSquareText,
+    title: "UX Rules",
+    description: "환경·입력 방식이 달라도 지켜지는 반응형·키보드·접근성 규칙 정의",
+    icon: Accessibility,
   },
   {
-    title: "성과·품질 대시보드",
-    description: "GA4, Search Console, 실사용자 속도 지표를 통합해 성과와 품질을 확인하는 대시보드를 구축합니다.",
-    icon: ChartPie,
+    title: "Component Engineering",
+    description: "브라우저 동작을 컴포넌트 API·테스트로 담아 동작·회귀 축소",
+    icon: Boxes,
   },
   {
-    title: "디자인 시스템",
-    description: "디자인 토큰과 공통 컴포넌트를 기준으로 제품 간 UI 상태와 동작 차이를 줄입니다.",
+    title: "Design Platform & DX",
+    description: "Figma 토큰·패키지·Storybook·CI로 디자이너·개발자 공통 기준 연결",
     icon: Palette,
   },
 ];

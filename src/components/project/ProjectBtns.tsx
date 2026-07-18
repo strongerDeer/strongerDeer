@@ -53,6 +53,7 @@ export const LinkBtn = ({
       <a
         href={url}
         target="_blank"
+        rel="noopener noreferrer"
         className={`go ${
           type === "github"
             ? "bg-gray-200 border-gray-200"

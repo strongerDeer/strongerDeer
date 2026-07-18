@@ -1,11 +1,11 @@
 import {
+  Accessibility,
   Boxes,
   Gauge,
   LayoutDashboard,
   LucideIcon,
   Palette,
   SquareStack,
-  Workflow,
 } from "lucide-react";
 import { IconType } from "react-icons";
 import { FaGithub } from "react-icons/fa";
@@ -27,6 +27,30 @@ export type I_SkillDomain = {
 // 이력서의 "맡길 수 있는 기술 영역"을 실무 근거(evidence)와 함께 정리.
 // evidence는 실제 프로젝트에서 만든 결과라 "할 수 있다"가 아니라 "해봤다"로 읽힌다.
 export const SKILL_DOMAINS: I_SkillDomain[] = [
+  {
+    id: "design-system",
+    title: "Design System",
+    component: "DesignSystem",
+    description:
+      "Vanilla Extract, Style Dictionary, Storybook 기반 공통 컴포넌트·디자인 토큰을 사내 패키지로 관리합니다.",
+    evidence:
+      "제품별로 달랐던 UI·접근성·토큰 판단을 API·테스트·패키지로 통합하고 NOVERA Shop 고객 화면에 적용",
+    image: "/project/nds_button.jpg",
+    projectId: "nds",
+    icon: Palette,
+  },
+  {
+    id: "browser-accessibility",
+    title: "Browser & Accessibility",
+    component: "BrowserAccessibility",
+    description:
+      "포인터·키보드·포커스·뷰포트 등 브라우저 동작을 접근 가능한 컴포넌트 기본값과 테스트로 연결합니다.",
+    evidence:
+      "모달의 포커스 복귀·다중 오버레이 순서·포인터 입력 판정과 아이콘 버튼 접근성 이름·최소 44px 크기의 터치 영역을 기본 동작과 테스트로 고정",
+    image: "/project/nds_modal.jpg",
+    projectId: "nds",
+    icon: Accessibility,
+  },
   {
     id: "product-ui",
     title: "Product UI",
@@ -51,18 +75,6 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
     icon: Boxes,
   },
   {
-    id: "design-system",
-    title: "Design System",
-    component: "DesignSystem",
-    description:
-      "Vanilla Extract, Style Dictionary, Storybook 기반 공통 컴포넌트·디자인 토큰 관리로 제품 간 UI 일관성을 확보합니다.",
-    evidence:
-      "NDS 공통 UI 모듈 20여 개, Figma 토큰 변환 파이프라인, 제로 런타임 기반의 타입 안전한 variant 구조 구성",
-    image: "/project/nds_button.jpg",
-    projectId: "nds",
-    icon: Palette,
-  },
-  {
     id: "performance-seo",
     title: "Performance & SEO",
     component: "PerformanceSEO",
@@ -70,7 +82,7 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
       "Core Web Vitals·Lighthouse 기반 이미지·웹폰트 최적화와 canonical, JSON-LD, sitemap 등 SEO 설정 점검으로 초기 로딩·검색 노출을 개선합니다.",
     evidence: "실사용자 지표와 Lighthouse를 교차 확인해 개선 우선순위 도출",
     image: "/project/nad_crux.jpg",
-    projectId: "novera-shop",
+    projectId: "novera-dashboard",
     icon: Gauge,
   },
   {
@@ -85,15 +97,6 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
     projectId: "novera-dashboard",
     icon: LayoutDashboard,
   },
-  {
-    id: "ai-workflow",
-    title: "AI Workflow",
-    component: "AIWorkflow",
-    description:
-      "Claude Code와 Figma·Notion MCP로 개발 워크플로우를 구성하고, AI 생성 코드는 타입·린트 검사를 거쳐 아키텍처·보안에 영향을 주는 부분은 직접 확인 후 반영합니다.",
-    evidence: "Figma MCP로 기획 화면 구현·디자인 적용 등 디자인-코드 전환 작업에 활용",
-    icon: Workflow,
-  },
 ];
 
 export const MAIN_STACK = [
@@ -107,6 +110,13 @@ export const MAIN_STACK = [
   "Vanilla Extract",
   "Style Dictionary",
   "Storybook",
+  "Vite",
+  "tsup",
+  "Vitest",
+  "Playwright",
+  "Chromatic",
+  "GitHub Actions",
+  "Nexus",
   "Recharts",
   "GA4 Data API",
   "Google Search Console",
@@ -117,8 +127,6 @@ export const MAIN_STACK = [
   "Jira",
   "Notion",
   "GitHub",
-  "Claude",
-  "Codex",
 ];
 
 // 도구 아이템 인터페이스

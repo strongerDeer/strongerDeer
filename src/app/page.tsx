@@ -16,9 +16,9 @@ export default async function Home() {
       <Header />
       <Hero />
 
-      <Skills />
-      <Projects projects={projects} />
       <Work />
+      <Projects projects={projects} />
+      <Skills />
       <OtherExperience />
 
       <div className="wrap" id="education">

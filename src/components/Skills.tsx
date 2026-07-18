@@ -1,7 +1,6 @@
 "use client";
 
 import { MAIN_STACK, PROGRAMS, SKILL_DOMAINS } from "@data/skill";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -20,7 +19,6 @@ const Skills = () => {
               component,
               description,
               evidence,
-              image,
               projectId,
               icon: Icon,
             }) => (
@@ -35,16 +33,13 @@ const Skills = () => {
                   </span>
                   <strong>{title}</strong>
                 </div>
-                {/* {projectId && (
-                  <Image
-                    src={`/strongerDeer${image}`}
-                    width={640}
-                    height={360}
-                    alt=""
-                  />
-                )} */}
                 <p>{description}</p>
                 <p className="evidence">{evidence}</p>
+                {projectId && (
+                  <Link className="domainLink" href={`/${projectId}`}>
+                    근거 프로젝트 보기 <span aria-hidden="true">→</span>
+                  </Link>
+                )}
               </li>
             ),
           )}

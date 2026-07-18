@@ -8,7 +8,7 @@ period: "2024.03(3일)"
 kor: "제주 AI 컨퍼런스"
 description: "컨퍼런스의 첫인상을 어떻게 한 페이지에 담았을까?"
 tags: ["Next.js", "React", "TypeScript", "Sass"]
-skills: ["Next.js", "TypeScript", "Sass(scss)", "GitHub Actions"]
+skills: ["Next.js", "TypeScript", "Sass(scss)"]
 icon: "Cpu"
 metrics:
   [
@@ -33,7 +33,7 @@ role: "2인 프로젝트(디자인1/프론트엔드1) - 디자인 20%, 프론트
 
 # 🛠️ 기술 스택
 
-Next.js, TypeScript, Sass, GitHub Actions
+Next.js, TypeScript, Sass
 
 # 결과
 
@@ -43,6 +43,5 @@ Next.js, TypeScript, Sass, GitHub Actions
 
 # 💡 인사이트
 
-- GitHub Actions를 활용한 CI/CD 파이프라인 구축 경험
 - 컨텐츠를 JSON 파일로 분리하여 관리함으로써 비개발자도 쉽게 수정할 수 있는
   시스템을 구축하며 효율적인 컨텐츠 관리의 중요성을 체감

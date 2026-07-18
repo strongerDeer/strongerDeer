@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">NDS 디자인 시스템 전달 흐름</title>
+  <desc id="desc">Figma Variables가 Style Dictionary를 거쳐 코드 토큰과 NDS 컴포넌트, Nexus 패키지, NOVERA Shop으로 전달되고 사용자 UX와 개발자 DX로 이어지는 구조</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7f5ff"/>
+      <stop offset="1" stop-color="#f8fafc"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0l10 5-10 5z" fill="#7967d8"/>
+    </marker>
+    <style>
+      .title{font:700 25px Pretendard,Arial,sans-serif;fill:#24212f}.label{font:700 18px Pretendard,Arial,sans-serif;fill:#24212f}.sub{font:400 14px Pretendard,Arial,sans-serif;fill:#667085}.pill{font:700 13px Pretendard,Arial,sans-serif;fill:#6654c0}.flow{stroke:#7967d8;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="620" rx="28" fill="url(#bg)"/>
+  <text x="60" y="68" class="title">디자인 규칙이 운영 제품까지 도착하는 흐름</text>
+  <g transform="translate(55 125)">
+    <g><rect width="185" height="130" rx="18" fill="#fff" stroke="#ded8ff"/><text x="24" y="45" class="label">Figma Variables</text><text x="24" y="76" class="sub">색상 · 간격 · radius</text><text x="24" y="99" class="sub">상태 · motion 기반값</text></g>
+    <path class="flow" d="M193 65h55"/>
+    <g transform="translate(260)"><rect width="190" height="130" rx="18" fill="#fff" stroke="#ded8ff"/><text x="22" y="45" class="label">Style Dictionary</text><text x="22" y="76" class="sub">custom transform</text><text x="22" y="99" class="sub">CSS Variables + TS</text></g>
+    <path class="flow" d="M458 65h55"/>
+    <g transform="translate(525)"><rect width="190" height="130" rx="18" fill="#fff" stroke="#ded8ff"/><text x="24" y="45" class="label">NDS Components</text><text x="24" y="76" class="sub">React · TypeScript</text><text x="24" y="99" class="sub">Vanilla Extract</text></g>
+    <path class="flow" d="M723 65h55"/>
+    <g transform="translate(790)"><rect width="150" height="130" rx="18" fill="#fff" stroke="#ded8ff"/><text x="22" y="45" class="label">Nexus npm</text><text x="22" y="76" class="sub">CJS · ESM</text><text x="22" y="99" class="sub">types · CSS</text></g>
+    <path class="flow" d="M948 65h45"/>
+    <g transform="translate(1005)"><rect width="135" height="130" rx="18" fill="#6654c0"/><text x="20" y="47" style="font:700 18px Pretendard,Arial,sans-serif;fill:#fff">NOVERA</text><text x="20" y="72" style="font:700 18px Pretendard,Arial,sans-serif;fill:#fff">Shop</text><text x="20" y="103" style="font:400 13px Pretendard,Arial,sans-serif;fill:#e8e3ff">첫 운영 소비 제품</text></g>
+  </g>
+  <g transform="translate(55 330)">
+    <rect width="540" height="220" rx="22" fill="#fff" stroke="#e4e7ec"/>
+    <rect x="24" y="24" width="64" height="28" rx="14" fill="#eeeaff"/><text x="42" y="43" class="pill">UX</text>
+    <text x="24" y="88" class="label">사용자가 예측할 수 있는 공통 동작</text>
+    <text x="24" y="124" class="sub">키보드 포커스 · 접근성 이름 · 44px 터치 타깃</text>
+    <text x="24" y="153" class="sub">모바일 뷰포트 · 포인터 · 로딩/오류/비활성 상태</text>
+    <text x="24" y="186" class="sub">제품에서 반복되는 판단을 컴포넌트 기본값으로 제공</text>
+  </g>
+  <g transform="translate(615 330)">
+    <rect width="530" height="220" rx="22" fill="#fff" stroke="#e4e7ec"/>
+    <rect x="24" y="24" width="64" height="28" rx="14" fill="#eeeaff"/><text x="41" y="43" class="pill">DX</text>
+    <text x="24" y="88" class="label">개발자가 안전하게 선택하는 공통 경로</text>
+    <text x="24" y="124" class="sub">타입 자동완성 · variant 제한 · Storybook 사용 예시</text>
+    <text x="24" y="153" class="sub">토큰 자동 변환 · 패키지 빌드 · CI/CD 배포</text>
+    <text x="24" y="186" class="sub">반복 질문과 실수를 타입·도구·문서에 외부화</text>
+  </g>
+</svg>

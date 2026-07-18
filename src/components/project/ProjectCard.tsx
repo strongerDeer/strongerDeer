@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 import React from "react";
 import ProjectThumb from "./ProjectThumb";
@@ -33,19 +33,24 @@ const ProjectCard = ({ project, index, compact = false }: ProjectCardProps) => {
 
   const IconComponent = ICON_MAP[icon as ICON_TYPE];
   const displayMetrics = compact ? metrics.slice(0, 1) : metrics;
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <motion.li
       id={id}
       className={compact ? "compact" : ""}
-      initial={{ opacity: 0, y: 50 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }} // exit 애니메이션 추가
-      transition={{
-        duration: 0.3,
-        ease: "easeOut",
-        delay: index * 0.1,
-      }}
+      exit={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+      transition={
+        shouldReduceMotion
+          ? { duration: 0 }
+          : {
+              duration: 0.3,
+              ease: "easeOut",
+              delay: index * 0.1,
+            }
+      }
     >
       <Link href={`/${id}`}>
         <ProjectThumb type={type} thumb={thumb} title={title} metrics={metrics} />

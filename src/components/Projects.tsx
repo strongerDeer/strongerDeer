@@ -44,8 +44,9 @@ const Projects = ({ projects }: ProjectProps) => {
           <div ref={otherSectionRef} className="list">
             <AnimatePresence mode="wait">
               <motion.ul
+                id="projects-list"
                 className="card grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
-                initial={{ opacity: 0 }}
+                initial={false}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
@@ -73,6 +74,7 @@ const Projects = ({ projects }: ProjectProps) => {
                   className={showAllOther ? "mt-6" : "-mt-12"}
                   showAll={showAllOther}
                   onClick={handleToggle}
+                  controls="projects-list"
                 />
               )}
             </>

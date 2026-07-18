@@ -72,7 +72,6 @@ ICT 교육 회사에서 Notion으로 제공하던 개발 교육 콘텐츠를 웹
 ## 배포
 
 - **AWS Lightsail**: 애플리케이션 배포 및 Node.js 환경 구성
-- **GitHub Actions**: 자동 배포 파이프라인 구축
 
 # 🔍 기능
 

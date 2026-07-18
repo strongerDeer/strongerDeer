@@ -1,5 +1,4 @@
 import {
-  Binary,
   Book,
   BookOpenText,
   Building,
@@ -10,14 +9,12 @@ import {
 } from "lucide-react";
 
 export const ICON_MAP = {
-  Binary,
   Book,
   BookOpenText,
   Building,
   ChartSpline,
   Cpu,
   Link,
-
   Tent,
 } as const;
 

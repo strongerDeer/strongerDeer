@@ -78,10 +78,10 @@ export default async function Page({ params }: Props) {
       <header>
         <TypeIcon type={type} />
         <div className="flex items-center justify-between">
-          <h2 className="title flex items-center gap-2">
+          <h1 className="title flex items-center gap-2">
             <IconComponent />
             {title} <span>{kor}</span>
-          </h2>
+          </h1>
         </div>
         <p className="mt-3 text-lg font-semibold text-gray-800">{description}</p>
         <p className="mt-2 text-sm text-gray-500">
@@ -91,7 +91,7 @@ export default async function Page({ params }: Props) {
         <Nav headings={headings} />
       </header>
       <section className={styles.overview} aria-label="프로젝트 요약">
-        <h3>핵심 결과</h3>
+        <h2>핵심 결과</h2>
         {project.highlights ? (
           <ul className={styles.summary}>
             {project.highlights.map(({ value, label }) => (
@@ -116,7 +116,7 @@ export default async function Page({ params }: Props) {
         <Image
           className="mb-16 m-auto rounded-xl max-w-[500px] w-full h-auto"
           src={`/strongerDeer${thumb}`}
-          alt=""
+          alt={`${title} ${kor} 데모 화면`}
           width={800}
           height={600}
           priority

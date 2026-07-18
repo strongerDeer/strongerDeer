@@ -35,7 +35,7 @@ function getHeadingText(node: Heading): string {
  * 마크다운의 H1(#) 헤딩을 순서대로 추출해 앵커 id를 자동 부여한다.
  * - id: `section1`, `section2` … (등장 순서 기반)
  * - 추출한 목록은 Nav 렌더에 재사용하므로, 프로젝트를 추가해도 코드 수정이 필요 없다.
- * 헤딩 레벨은 페이지 문맥에 맞춰 h1→h3, h2→h4, h3→h5로 낮춘다.
+ * 헤딩 레벨은 페이지 문맥에 맞춰 h1→h2, h2→h3, h3→h4로 낮춘다(페이지 제목이 h1이므로 그 하위 섹션은 h2부터 시작).
  */
 function adjustHeadingLevel(headings: ProjectHeading[]) {
   return (tree: Root) => {
@@ -43,11 +43,11 @@ function adjustHeadingLevel(headings: ProjectHeading[]) {
       const isSection = node.depth === 1;
 
       if (node.depth === 1) {
-        node.depth = 3;
+        node.depth = 2;
       } else if (node.depth === 2) {
-        node.depth = 4;
+        node.depth = 3;
       } else if (node.depth === 3) {
-        node.depth = 5;
+        node.depth = 4;
       }
 
       if (isSection) {

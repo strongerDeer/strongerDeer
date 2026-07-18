@@ -3,12 +3,11 @@ import type { Metadata } from "next";
 import "./globals.scss";
 import "./styles.scss";
 import { pretendard } from "@font";
-import { ModalContextProvider } from "@contexts/ModalContext";
 import GA from "@utils/GA";
 
 const SITE_TITLE = "강혜진 | 프론트엔드 개발자";
 const SITE_DESCRIPTION =
-  "0.1초의 피드백을 데이터로 증명하는 강혜진 개발자입니다. 사용자가 머뭇거리는 순간을 지표로 찾아 줄입니다.";
+  "사용자가 머뭇거리는 0.1초를 찾아 줄이는 프론트엔드 개발자 강혜진입니다. Product UI를 설계하고 성능·SEO·행동 데이터로 개선을 검증합니다.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -16,6 +15,14 @@ export const metadata: Metadata = {
   ),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
 
   openGraph: {
     type: "website",
@@ -41,7 +48,7 @@ export default function RootLayout({
   return (
     <html lang="ko-KR" className={pretendard.variable}>
       <body>
-        <ModalContextProvider>{children}</ModalContextProvider>
+        {children}
         <GA />
       </body>
     </html>
