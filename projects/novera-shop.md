@@ -5,7 +5,7 @@ type: "업무"
 title: "NOVERA Shop"
 kor: "커머스 프론트엔드 구축·운영"
 thumb: "/project_noverashop.jpg"
-period: "2025.02~2026.08"
+period: "2025.02~운영 중"
 description: "취소·반품·거절이 얽히는 주문 상태 15가지, 화면은 어떻게 감당했을까?"
 detailLabel: "주문·클레임 상태 설계 과정 보기"
 tags: ["TypeScript", "React", "Next.js", "Design"]

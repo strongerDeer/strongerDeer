@@ -34,7 +34,7 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
     description:
       "Vanilla Extract, Style Dictionary, Storybook 기반 공통 컴포넌트·디자인 토큰을 사내 패키지로 관리합니다.",
     evidence:
-      "제품별로 달랐던 UI·접근성·토큰 판단을 API·테스트·패키지로 통합하고 NOVERA Shop 고객 화면에 적용",
+      "오픈 초기부터 화면마다 반복될 UI·접근성·토큰 판단을 API·테스트·패키지로 구조화해 NOVERA Shop 고객 화면에 적용",
     image: "/project/nds_button.jpg",
     projectId: "nds",
     icon: Palette,

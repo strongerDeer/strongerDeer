@@ -9,7 +9,7 @@ export const EXPERIENCES = [
 
     contents: [
       {
-        text: "<strong>멋쟁이 사자처럼 프론트엔드 스쿨</strong> HTML/CSS 강의",
+        text: "<strong>멋쟁이사자처럼 프론트엔드 스쿨</strong> HTML/CSS 강의",
         lists: [
           "5, 7기 HTML/CSS 메인 강의<span>(2023.02~11)</span>",
           "3, 4기 HTML/CSS 특강<span>(2022.10.07, 12.26)</span>",

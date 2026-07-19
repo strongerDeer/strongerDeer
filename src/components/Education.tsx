@@ -8,7 +8,7 @@ const Education = () => {
       </h2>
       <ol className="list">
         <li>
-          <strong>멋쟁이 사자처럼 프론트엔드 스쿨</strong> 1기 수료
+          <strong>멋쟁이사자처럼 프론트엔드 스쿨</strong> 1기 수료
           <span className="text-gray-500 text-sm">(2021.11 ~ 2022.01)</span>
           <ul>
             <li>

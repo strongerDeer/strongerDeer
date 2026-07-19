@@ -64,7 +64,7 @@ const Hero = () => {
             className="mt-6 w-full text-base sm:text-lg leading-relaxed text-gray-700 font-normal text-balance break-keep"
             {...fadeUp(0.5)}
           >
-            7년 7개월의 디자인·웹퍼블리싱 경험과 React·TypeScript 구현력을
+            7년 7개월의 디자인·웹 퍼블리싱 경험과 React·TypeScript 구현력을
             바탕으로, 반응형·키보드·로딩·접근성 기준을 공통 컴포넌트에
             담습니다.
             <br /> Figma의 디자인 규칙을 토큰과 타입으로 연결하고,

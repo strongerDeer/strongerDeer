@@ -18,7 +18,7 @@ metrics:
   ]
 url: "https://bootcamp.weniv.co.kr/"
 github: "https://github.com/weniv/bootcamp"
-role: "2인 프로젝트(디자인1/프론트엔드1) - 프론트엔드 100%기여"
+role: "2인 프로젝트(디자인1/프론트엔드1) - 프론트엔드 100% 기여"
 ---
 
 # 🤔 배경
