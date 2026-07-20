@@ -6,8 +6,8 @@
       <stop offset="0" stop-color="#f7f5ff"/>
       <stop offset="1" stop-color="#f8fafc"/>
     </linearGradient>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
-      <path d="M0 0l10 5-10 5z" fill="#7967d8"/>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto">
+      <path d="M0 0l8 4-8 4z" fill="#7967d8"/>
     </marker>
     <style>
       .title{font:700 25px Pretendard,Arial,sans-serif;fill:#24212f}.label{font:700 18px Pretendard,Arial,sans-serif;fill:#24212f}.sub{font:400 14px Pretendard,Arial,sans-serif;fill:#667085}.pill{font:700 13px Pretendard,Arial,sans-serif;fill:#6654c0}.flow{stroke:#7967d8;stroke-width:3;fill:none;marker-end:url(#arrow)}
@@ -17,14 +17,14 @@
   <text x="60" y="68" class="title">디자인 규칙이 운영 제품까지 도착하는 흐름</text>
   <g transform="translate(55 125)">
     <g><rect width="185" height="130" rx="18" fill="#fff" stroke="#ded8ff"/><text x="24" y="45" class="label">Figma Variables</text><text x="24" y="76" class="sub">색상 · 간격 · radius</text><text x="24" y="99" class="sub">상태 · motion 기반값</text></g>
-    <path class="flow" d="M193 65h55"/>
-    <g transform="translate(260)"><rect width="190" height="130" rx="18" fill="#fff" stroke="#ded8ff"/><text x="22" y="45" class="label">Style Dictionary</text><text x="22" y="76" class="sub">custom transform</text><text x="22" y="99" class="sub">CSS Variables + TS</text></g>
-    <path class="flow" d="M458 65h55"/>
-    <g transform="translate(525)"><rect width="190" height="130" rx="18" fill="#fff" stroke="#ded8ff"/><text x="24" y="45" class="label">NDS Components</text><text x="24" y="76" class="sub">React · TypeScript</text><text x="24" y="99" class="sub">Vanilla Extract</text></g>
-    <path class="flow" d="M723 65h55"/>
-    <g transform="translate(790)"><rect width="150" height="130" rx="18" fill="#fff" stroke="#ded8ff"/><text x="22" y="45" class="label">Nexus npm</text><text x="22" y="76" class="sub">CJS · ESM</text><text x="22" y="99" class="sub">types · CSS</text></g>
-    <path class="flow" d="M948 65h45"/>
-    <g transform="translate(1005)"><rect width="135" height="130" rx="18" fill="#6654c0"/><text x="20" y="47" style="font:700 18px Pretendard,Arial,sans-serif;fill:#fff">NOVERA</text><text x="20" y="72" style="font:700 18px Pretendard,Arial,sans-serif;fill:#fff">Shop</text><text x="20" y="103" style="font:400 13px Pretendard,Arial,sans-serif;fill:#e8e3ff">첫 운영 소비 제품</text></g>
+    <path class="flow" d="M193 65h48"/>
+    <g transform="translate(245)"><rect width="190" height="130" rx="18" fill="#fff" stroke="#ded8ff"/><text x="22" y="45" class="label">Style Dictionary</text><text x="22" y="76" class="sub">custom transform</text><text x="22" y="99" class="sub">CSS Variables + TS</text></g>
+    <path class="flow" d="M443 65h48"/>
+    <g transform="translate(495)"><rect width="190" height="130" rx="18" fill="#fff" stroke="#ded8ff"/><text x="24" y="45" class="label">NDS Components</text><text x="24" y="76" class="sub">React · TypeScript</text><text x="24" y="99" class="sub">Vanilla Extract</text></g>
+    <path class="flow" d="M693 65h48"/>
+    <g transform="translate(745)"><rect width="150" height="130" rx="18" fill="#fff" stroke="#ded8ff"/><text x="22" y="45" class="label">Nexus npm</text><text x="22" y="76" class="sub">CJS · ESM</text><text x="22" y="99" class="sub">types · CSS</text></g>
+    <path class="flow" d="M903 65h48"/>
+    <g transform="translate(955)"><rect width="135" height="130" rx="18" fill="#6654c0"/><text x="20" y="47" style="font:700 18px Pretendard,Arial,sans-serif;fill:#fff">NOVERA</text><text x="20" y="72" style="font:700 18px Pretendard,Arial,sans-serif;fill:#fff">Shop</text><text x="20" y="103" style="font:400 13px Pretendard,Arial,sans-serif;fill:#e8e3ff">첫 운영 소비 제품</text></g>
   </g>
   <g transform="translate(55 330)">
     <rect width="540" height="220" rx="22" fill="#fff" stroke="#e4e7ec"/>

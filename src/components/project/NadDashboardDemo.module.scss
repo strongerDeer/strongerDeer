@@ -124,16 +124,40 @@
 .legend span.line3::before { @apply bg-pink-500; }
 .legend span.line4::before { @apply bg-amber-500; }
 
-.chartCard svg { @apply mt-3 w-full; }
-.gridLines line { stroke: #e5e7eb; stroke-width: 1; }
-polyline.line1, polyline.line2, polyline.line3, polyline.line4 {
+.chartCard svg { @apply mt-3 w-full; overflow: visible; }
+
+// 그리드는 실선 → 옅은 점선으로 낮춰 곡선이 주인공이 되게 한다.
+.gridLines line {
+  stroke: #eceef2;
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+
+.area { stroke: none; }
+
+// 곡선 — 각진 polyline을 buildSmoothPath의 path로 교체.
+path.line1, path.line2, path.line3, path.line4 {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 3;
+  stroke-width: 2.5;
 }
-polyline.line1 { stroke: #6366f1; }
-polyline.line2 { stroke: #10b981; }
-polyline.line3 { stroke: #ec4899; }
-polyline.line4 { stroke: #f59e0b; }
+path.line1 { stroke: #6366f1; }
+path.line2 { stroke: #10b981; }
+path.line3 { stroke: #ec4899; }
+path.line4 { stroke: #f59e0b; }
+
 .axisLabels { fill: #9ca3af; font-size: 10px; }
+
+// Y축 규모 라벨(높음·보통·0) — 우측 정렬로 그리드 왼쪽에 붙인다.
+.yLabels text {
+  fill: #b6bcc7;
+  font-size: 9px;
+  text-anchor: end;
+}
+
+// 끝점 회차 라벨 — 곡선 색과 같은 색, 굵게.
+.endLabel {
+  font-size: 10px;
+  font-weight: 700;
+}

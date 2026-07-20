@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">NOVERA Shop 시스템 구조</title>
+  <desc id="desc">GitHub·고객·운영자·Figma가 사용자 화면과 운영 관리 화면으로 이어지고, 두 화면이 백엔드 API를 공유하며, GA4·CrUX 실사용자 지표가 품질 대시보드로 연결되는 구조. 실선은 데이터·배포 흐름, 점선은 성과 측정 연동.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7f5ff"/>
+      <stop offset="1" stop-color="#f8fafc"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto">
+      <path d="M0 0l8 4-8 4z" fill="#7967d8"/>
+    </marker>
+    <marker id="arrowGray" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto">
+      <path d="M0 0l8 4-8 4z" fill="#98a2b3"/>
+    </marker>
+    <style>
+      .title{font:700 25px Pretendard,Arial,sans-serif;fill:#24212f}
+      .node{font:700 17px Pretendard,Arial,sans-serif;fill:#24212f}
+      .sub{font:400 13px Pretendard,Arial,sans-serif;fill:#667085}
+      .actor{font:700 15px Pretendard,Arial,sans-serif;fill:#24212f}
+      .chip{font:600 12px Pretendard,Arial,sans-serif;fill:#6654c0}
+      .edgeLabel{font:600 12px Pretendard,Arial,sans-serif;fill:#98a2b3}
+      .flow{stroke:#7967d8;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+      .measure{stroke:#98a2b3;stroke-width:2;stroke-dasharray:5 5;fill:none;marker-end:url(#arrowGray)}
+    </style>
+  </defs>
+  <rect width="1200" height="700" rx="28" fill="url(#bg)"/>
+  <text x="55" y="60" class="title">사용자·운영 화면이 하나의 API를 공유하고, 지표는 대시보드로 이어진다</text>
+
+  <!-- edges (먼저 그려 노드 아래로) -->
+  <!-- GitHub → 사용자 화면 -->
+  <path class="flow" d="M245 150C330 155 360 175 400 188"/>
+  <!-- 고객 → 사용자 화면 -->
+  <path class="flow" d="M180 240C270 225 330 215 400 208"/>
+  <!-- 사용자 화면 → 백엔드 API -->
+  <path class="flow" d="M640 240C690 270 710 320 728 342"/>
+  <!-- 운영자 → 운영 관리 화면 -->
+  <path class="flow" d="M180 400h215"/>
+  <!-- 운영 관리 화면 → 백엔드 API -->
+  <path class="flow" d="M640 378C680 372 700 366 728 362"/>
+  <!-- Figma → 디자인 시스템 -->
+  <path class="flow" d="M245 560h150"/>
+  <!-- 디자인 시스템 → 운영 관리 화면 & 사용자 화면 (토큰 공급) -->
+  <path class="flow" d="M470 545C520 500 515 450 517 415"/>
+  <!-- 사용자 화면 → GA4·CrUX (점선, 측정) -->
+  <path class="measure" d="M640 185C740 165 820 150 898 138"/>
+  <!-- GA4·CrUX → 품질 대시보드 (점선) -->
+  <path class="measure" d="M1010 180v34"/>
+
+  <!-- actors (좌측) -->
+  <g transform="translate(55 118)">
+    <rect width="190" height="66" rx="14" fill="#fff" stroke="#e4e7ec"/>
+    <rect x="18" y="16" width="34" height="34" rx="9" fill="#24212f"/><text x="35" y="39" style="font:700 15px Pretendard;fill:#fff" text-anchor="middle">GH</text>
+    <text x="66" y="32" class="actor">GitHub</text><text x="66" y="52" class="sub">저장소 · PR 협업</text>
+  </g>
+  <g transform="translate(55 208)">
+    <circle cx="35" cy="33" r="16" fill="#eeeaff"/><text x="35" y="38" class="chip" text-anchor="middle">고객</text>
+    <text x="66" y="30" class="actor">고객</text><text x="66" y="50" class="sub">쇼핑 · 주문 · 결제</text>
+  </g>
+  <g transform="translate(55 368)">
+    <circle cx="35" cy="33" r="16" fill="#eeeaff"/><text x="35" y="38" class="chip" text-anchor="middle">운영</text>
+    <text x="66" y="30" class="actor">운영자</text><text x="66" y="50" class="sub">상품 · 주문 · CS</text>
+  </g>
+  <g transform="translate(55 528)">
+    <rect width="190" height="66" rx="14" fill="#fff" stroke="#e4e7ec"/>
+    <rect x="18" y="16" width="34" height="34" rx="9" fill="#f24e1e"/><text x="35" y="39" style="font:700 15px Pretendard;fill:#fff" text-anchor="middle">Fig</text>
+    <text x="66" y="32" class="actor">Figma</text><text x="66" y="52" class="sub">디자인 원본</text>
+  </g>
+
+  <!-- 사용자 화면 (강조: 초록 테두리) -->
+  <g transform="translate(400 150)">
+    <rect width="240" height="118" rx="18" fill="#fff" stroke="#0f9d58" stroke-width="2.5"/>
+    <text x="24" y="40" class="node">사용자 화면</text>
+    <text x="24" y="64" class="sub">커머스 스토어프론트</text>
+    <rect x="24" y="80" width="78" height="24" rx="12" fill="#eafaf1"/><text x="63" y="97" style="font:600 12px Pretendard;fill:#0f7a45" text-anchor="middle">Next.js</text>
+    <rect x="110" y="80" width="66" height="24" rx="12" fill="#eafaf1"/><text x="143" y="97" style="font:600 12px Pretendard;fill:#0f7a45" text-anchor="middle">React</text>
+  </g>
+
+  <!-- 운영 관리 화면 -->
+  <g transform="translate(400 340)">
+    <rect width="240" height="90" rx="18" fill="#fff" stroke="#ded8ff"/>
+    <text x="24" y="40" class="node">운영 관리 화면</text>
+    <text x="24" y="64" class="sub">상품·주문·CS 관리 백오피스</text>
+  </g>
+
+  <!-- 디자인 시스템 -->
+  <g transform="translate(400 528)">
+    <rect width="240" height="100" rx="18" fill="#fff" stroke="#ded8ff"/>
+    <text x="24" y="38" class="node">디자인 시스템(NDS)</text>
+    <text x="24" y="60" class="sub">토큰 기반 공통 컴포넌트</text>
+    <rect x="24" y="70" width="118" height="22" rx="11" fill="#eeeaff"/><text x="83" y="86" class="chip" text-anchor="middle">Vanilla Extract</text>
+  </g>
+
+  <!-- 백엔드 API (중앙 열) -->
+  <g transform="translate(730 316)">
+    <rect width="200" height="90" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <text x="24" y="40" class="node">백엔드 API</text>
+    <text x="24" y="64" class="sub">상품·주문·결제 처리</text>
+  </g>
+
+  <!-- GA4·CrUX (우측 열, 상단) -->
+  <g transform="translate(900 96)">
+    <rect width="220" height="84" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <text x="22" y="38" class="node">GA4 · CrUX</text>
+    <text x="22" y="62" class="sub">트래픽 · 실사용자 속도</text>
+  </g>
+
+  <!-- 품질 대시보드 (우측 열, GA4 바로 아래) -->
+  <g transform="translate(900 216)">
+    <rect width="220" height="84" rx="18" fill="#6654c0"/>
+    <text x="22" y="38" style="font:700 17px Pretendard;fill:#fff">품질 대시보드</text>
+    <text x="22" y="62" style="font:400 13px Pretendard;fill:#e8e3ff">성능·SEO·코드 건강 관측</text>
+  </g>
+
+  <!-- edge labels -->
+  <text x="300" y="120" class="edgeLabel">배포</text>
+  <text x="185" y="558" class="edgeLabel">토큰</text>
+  <text x="720" y="150" class="edgeLabel">GA4 · CrUX</text>
+
+  <!-- legend -->
+  <g transform="translate(55 648)">
+    <line x1="0" y1="10" x2="34" y2="10" stroke="#7967d8" stroke-width="2.5"/>
+    <text x="44" y="15" class="sub">실선 = 데이터·배포 흐름</text>
+    <line x1="220" y1="10" x2="254" y2="10" stroke="#98a2b3" stroke-width="2" stroke-dasharray="5 5"/>
+    <text x="264" y="15" class="sub">점선 = 성과 측정 연동</text>
+  </g>
+</svg>

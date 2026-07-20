@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1230" height="760" viewBox="0 0 1230 760" role="img" aria-labelledby="title desc">
+  <title id="title">실사용자 지표(CrUX) — 모바일·데스크탑 통과 판정과 LCP 추세</title>
+  <desc id="desc">실제 크롬 사용자 최근 28일 기준 모바일·데스크탑의 LCP·INP·CLS·TTFB 판정, 모바일 LCP 구성 분해(서버 응답 66퍼센트·이미지 로드 6퍼센트·이미지 다운로드 12퍼센트·렌더 지연 15퍼센트), 그리고 LCP 등급 분포가 양호 81.2퍼센트에서 92.2퍼센트로 개선된 주간 추세.</desc>
+  <defs>
+    <style>
+      .h{font:700 20px Pretendard,Arial,sans-serif;fill:#24212f}
+      .sub{font:400 13px Pretendard,Arial,sans-serif;fill:#667085}
+      .plat{font:700 14px Pretendard,Arial,sans-serif;fill:#24212f}
+      .metricName{font:600 13px Pretendard,Arial,sans-serif;fill:#667085}
+      .metricVal{font:800 22px Pretendard,Arial,sans-serif;fill:#24212f}
+      .ok{font:700 12px Pretendard,Arial,sans-serif;fill:#0f7a45}
+      .warn{font:700 12px Pretendard,Arial,sans-serif;fill:#b45309}
+      .legend{font:600 12px Pretendard,Arial,sans-serif;fill:#344054}
+      .axis{font:400 11px Pretendard,Arial,sans-serif;fill:#98a2b3}
+      .pass{font:700 12px Pretendard,Arial,sans-serif;fill:#0f9d58}
+    </style>
+  </defs>
+  <rect width="1230" height="760" rx="20" fill="#ffffff" stroke="#eef0f4"/>
+
+  <!-- 헤더 -->
+  <text x="32" y="46" class="h">실사용자 지표 (CrUX)</text>
+  <text x="32" y="70" class="sub">실제 크롬 사용자 최근 28일(2026-06-14~07-11) · 느린 편 25% 사용자 기준(75분위) · 사이트 전체 집계</text>
+  <g transform="translate(1050 28)"><rect width="150" height="30" rx="15" fill="#eafaf1"/><circle cx="24" cy="15" r="4" fill="#0f9d58"/><text x="38" y="20" class="pass">판정: 통과</text></g>
+
+  <!-- 모바일 행 -->
+  <g transform="translate(32 96)">
+    <rect width="60" height="24" rx="12" fill="#eafaf1"/><text x="30" y="17" class="ok" text-anchor="middle">모바일</text>
+    <text x="74" y="17" class="sub">정상 · 판정 기준</text>
+  </g>
+  <g transform="translate(32 132)">
+    <!-- LCP -->
+    <g><rect width="278" height="86" rx="14" fill="#fafbfc" stroke="#eef0f4"/><text x="20" y="30" class="metricName">LCP</text><text x="20" y="62" class="metricVal">1.65s</text><g transform="translate(96 46)"><rect width="52" height="22" rx="11" fill="#eafaf1"/><text x="26" y="16" class="ok" text-anchor="middle">정상</text></g></g>
+    <!-- INP -->
+    <g transform="translate(298 0)"><rect width="278" height="86" rx="14" fill="#fafbfc" stroke="#eef0f4"/><text x="20" y="30" class="metricName">INP</text><text x="20" y="62" class="metricVal">96ms</text><g transform="translate(96 46)"><rect width="52" height="22" rx="11" fill="#eafaf1"/><text x="26" y="16" class="ok" text-anchor="middle">정상</text></g></g>
+    <!-- CLS -->
+    <g transform="translate(596 0)"><rect width="278" height="86" rx="14" fill="#fafbfc" stroke="#eef0f4"/><text x="20" y="30" class="metricName">CLS</text><text x="20" y="62" class="metricVal">0.00</text><g transform="translate(96 46)"><rect width="52" height="22" rx="11" fill="#eafaf1"/><text x="26" y="16" class="ok" text-anchor="middle">정상</text></g></g>
+    <!-- TTFB -->
+    <g transform="translate(894 0)"><rect width="272" height="86" rx="14" fill="#fffbeb" stroke="#fde68a"/><text x="20" y="30" class="metricName">TTFB</text><text x="20" y="62" class="metricVal" fill="#b45309">1015ms</text><g transform="translate(120 46)"><rect width="52" height="22" rx="11" fill="#fef3c7"/><text x="26" y="16" class="warn" text-anchor="middle">주의</text></g></g>
+  </g>
+
+  <!-- 데스크탑 행 -->
+  <g transform="translate(32 244)">
+    <rect width="72" height="24" rx="12" fill="#eafaf1"/><text x="36" y="17" class="ok" text-anchor="middle">데스크탑</text>
+    <text x="86" y="17" class="sub">정상 · 판정 기준</text>
+  </g>
+  <g transform="translate(32 280)">
+    <g><rect width="278" height="86" rx="14" fill="#fafbfc" stroke="#eef0f4"/><text x="20" y="30" class="metricName">LCP</text><text x="20" y="62" class="metricVal">1.15s</text><g transform="translate(96 46)"><rect width="52" height="22" rx="11" fill="#eafaf1"/><text x="26" y="16" class="ok" text-anchor="middle">정상</text></g></g>
+    <g transform="translate(298 0)"><rect width="278" height="86" rx="14" fill="#fafbfc" stroke="#eef0f4"/><text x="20" y="30" class="metricName">INP</text><text x="20" y="62" class="metricVal">50ms</text><g transform="translate(96 46)"><rect width="52" height="22" rx="11" fill="#eafaf1"/><text x="26" y="16" class="ok" text-anchor="middle">정상</text></g></g>
+    <g transform="translate(596 0)"><rect width="278" height="86" rx="14" fill="#fafbfc" stroke="#eef0f4"/><text x="20" y="30" class="metricName">CLS</text><text x="20" y="62" class="metricVal">0.02</text><g transform="translate(96 46)"><rect width="52" height="22" rx="11" fill="#eafaf1"/><text x="26" y="16" class="ok" text-anchor="middle">정상</text></g></g>
+    <g transform="translate(894 0)"><rect width="272" height="86" rx="14" fill="#fafbfc" stroke="#eef0f4"/><text x="20" y="30" class="metricName">TTFB</text><text x="20" y="62" class="metricVal">723ms</text><g transform="translate(112 46)"><rect width="52" height="22" rx="11" fill="#eafaf1"/><text x="26" y="16" class="ok" text-anchor="middle">정상</text></g></g>
+  </g>
+
+  <!-- LCP 구성 분해 바 (모바일) -->
+  <g transform="translate(32 396)">
+    <text x="0" y="14" class="sub">실사용자 LCP 구성 (모바일)</text>
+    <g transform="translate(0 26)">
+      <rect x="0" width="770" height="18" rx="9" fill="#e4342f"/>
+      <rect x="770" width="70" height="18" fill="#f59e0b"/>
+      <rect x="840" width="140" height="18" fill="#3b6fe0"/>
+      <rect x="980" width="186" height="18" rx="9" fill="#98a2b3"/>
+      <!-- 좌우 라운드 보정용 덮개 -->
+      <rect x="0" width="12" height="18" fill="#e4342f"/>
+      <rect x="1154" width="12" height="18" rx="9" fill="#98a2b3"/>
+    </g>
+    <g transform="translate(0 66)" class="legend">
+      <circle cx="6" cy="0" r="5" fill="#e4342f"/><text x="18" y="4">서버 응답(TTFB) 1027ms (66%)</text>
+      <circle cx="266" cy="0" r="5" fill="#f59e0b"/><text x="278" y="4">이미지 로드 지연 98ms (6%)</text>
+      <circle cx="516" cy="0" r="5" fill="#3b6fe0"/><text x="528" y="4">이미지 다운로드 190ms (12%)</text>
+      <circle cx="808" cy="0" r="5" fill="#98a2b3"/><text x="820" y="4">렌더 지연 235ms (15%)</text>
+    </g>
+  </g>
+
+  <line x1="32" y1="502" x2="1198" y2="502" stroke="#eef0f4"/>
+
+  <!-- LCP 등급 분포 누적 영역 추세 -->
+  <g transform="translate(32 524)">
+    <text x="0" y="14" class="h" style="font-size:18px">실사용자 추세 (CrUX) — LCP 등급 분포</text>
+    <g transform="translate(980 -4)"><rect width="132" height="26" rx="13" fill="#eafaf1"/><circle cx="20" cy="13" r="4" fill="#0f9d58"/><text x="34" y="18" class="pass">LCP 통과</text></g>
+    <text x="0" y="38" class="sub">양호 81.2% → 92.2% 개선 · 10주 중 9주만 데이터(방문자 적은 주는 비어 있음)</text>
+    <g transform="translate(0 52)" class="legend">
+      <circle cx="6" cy="0" r="5" fill="#10b981"/><text x="16" y="4">양호 92.2%</text>
+      <circle cx="116" cy="0" r="5" fill="#f59e0b"/><text x="126" y="4">개선 필요 4.5%</text>
+      <circle cx="246" cy="0" r="5" fill="#f43f5e"/><text x="256" y="4">불량 3.3%</text>
+    </g>
+
+    <!-- chart plot: x 90..1120, y 76(=100%)..236(=0%) -->
+    <g>
+      <!-- y grid -->
+      <line x1="90" y1="76" x2="1120" y2="76" stroke="#f1f3f7"/><text x="60" y="80" class="axis">100%</text>
+      <line x1="90" y1="132" x2="1120" y2="132" stroke="#f1f3f7"/><text x="64" y="136" class="axis">60%</text>
+      <line x1="90" y1="180" x2="1120" y2="180" stroke="#f1f3f7"/><text x="64" y="184" class="axis">30%</text>
+      <line x1="90" y1="236" x2="1120" y2="236" stroke="#e4e7ec"/><text x="72" y="240" class="axis">0%</text>
+
+      <!-- 데이터가 시작되는 지점(05/16 이후) 이전은 비어 있음. plot 시작 x=250 -->
+      <!-- 양호(초록) 영역: 바닥(236)부터 상단 경계까지. 상단 경계 y는 81%→92% 상승(값 클수록 y 작아짐) -->
+      <path d="M250 106 L360 104 L470 102 L580 100 L690 92 L800 90 L910 89 L1010 88 L1120 88 L1120 236 L250 236 Z" fill="#10b981" opacity="0.9"/>
+      <!-- 개선 필요(주황) 밴드: 양호 상단 위 얇은 층 -->
+      <path d="M250 106 L360 104 L470 102 L580 100 L690 92 L800 90 L910 89 L1010 88 L1120 88 L1120 82 L1010 82 L910 83 L800 84 L690 86 L580 92 L470 94 L360 96 L250 98 Z" fill="#f59e0b" opacity="0.9"/>
+      <!-- 불량(빨강) 최상단 얇은 층 -->
+      <path d="M250 98 L360 96 L470 94 L580 92 L690 86 L800 84 L910 83 L1010 82 L1120 82 L1120 78 L250 78 Z" fill="#f43f5e" opacity="0.9"/>
+
+      <!-- 통과선 75% -->
+      <line x1="90" y1="116" x2="1120" y2="116" stroke="#667085" stroke-width="1.5" stroke-dasharray="6 5"/>
+      <text x="1120" y="112" class="axis" text-anchor="end" fill="#667085">통과선 75%</text>
+
+      <!-- x labels -->
+      <g class="axis" text-anchor="middle">
+        <text x="140" y="256">05/09</text><text x="250" y="256">05/16</text><text x="360" y="256">05/23</text><text x="470" y="256">05/30</text><text x="580" y="256">06/06</text><text x="690" y="256">06/13</text><text x="800" y="256">06/20</text><text x="910" y="256">06/27</text><text x="1010" y="256">07/04</text><text x="1120" y="256">07/11</text>
+      </g>
+    </g>
+  </g>
+</svg>

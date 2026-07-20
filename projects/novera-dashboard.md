@@ -116,11 +116,11 @@ const andPage = (eventFilter: unknown, pagePaths: string[]) => ({
 
 **화면 구성**: 페이지별 Core Web Vitals·Lighthouse 점수, 이미지 전송량·번들·타입·린트 오류, 운영 release 커밋 기준 이전 배포 대비 변화, 회귀·노이즈 구분과 주간 분석 코멘트, canonical·hreflang·JSON-LD·sitemap·robots 자동 점검.
 
-![Shop 품질 모니터링 — 재측정·회귀 판정과 주간 자동 분석 코멘트](/strongerDeer/project/nad_quality.jpg)
+![Shop 품질 모니터링 — 재측정·회귀 판정과 주간 자동 분석 코멘트](/strongerDeer/project/nad_quality.svg)
 
 :span[실측 데이터]{.realdata} 동일 배포본 재측정 여부, 이미지·번들·성능 변화, 회귀·노이즈, 주간 분석 코멘트 구성.
 
-![실사용자 지표(CrUX) — 모바일·데스크탑 통과 판정, LCP 구성 분해와 주간 추세](/strongerDeer/project/nad_crux.jpg)
+![실사용자 지표(CrUX) — 모바일·데스크탑 통과 판정, LCP 구성 분해와 주간 추세](/strongerDeer/project/nad_crux.svg)
 
 :span[실측 데이터]{.realdata} 실사용자(CrUX) 최근 28일 이동 창 기준 모바일·데스크탑 통과 판정. 수치는 주차별로 변동하며, LCP 구성 분해와 주간 추세로 원인 위치(서버 응답·이미지·렌더)를 함께 확인.
 

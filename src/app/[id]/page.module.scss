@@ -6,13 +6,14 @@
   }
 }
 
-// 페이지 최상단 "성과 요약" — 파랑 대신 중립 배경 + 보라(point) accent 제목.
-// 강조는 아래 KPI value(보라)에만 둔다.
+// 페이지 최상단 "핵심 결과" — 배경·카드 박스를 걷어낸 구분선(divider) 레이아웃.
+// 값 3개를 세로 구분선으로만 나눠 절제된 기업형 대시보드 느낌을 준다.
+// 강조는 큰 보라(point) KPI value에만 둔다.
 .overview {
-  @apply mx-auto mb-10 max-w-5xl rounded-2xl border border-gray-200 bg-gray-50 p-5 sm:p-6;
+  @apply mx-auto mb-12 max-w-5xl;
 
   h2 {
-    @apply mb-4 flex items-center gap-2 text-sm font-bold text-point;
+    @apply mb-5 flex items-center gap-2 text-sm font-bold text-point;
 
     &::before {
       @apply h-0.5 w-3.5 rounded-full bg-point content-[''];
@@ -23,27 +24,56 @@
 .summary {
   @apply grid gap-3 md:grid-cols-3;
 
-  li {
+  // KPI(구분선 형)일 때는 열 사이를 넉넉히 벌려 세로 구분선이
+  // 양쪽 항목의 가운데에 오도록 한다(구분선 왼쪽 gap ≈ 오른쪽 pl).
+  &:has(.kpi) {
+    @apply gap-3 md:gap-0;
+  }
+
+  // metrics(긴 문장 리스트) 전용 카드 스타일 — .kpi가 없는 li에만 적용.
+  // KPI(.kpi) 항목은 아래 구분선 스타일이 대신 담당한다.
+  li:not(.kpi) {
     @apply rounded-xl bg-white p-4 font-semibold leading-relaxed text-gray-800;
     @apply border border-gray-100;
   }
 }
 
-// KPI 스타일 — 큰 값(보라) + 작은 설명. highlights가 있을 때만 사용.
+// KPI 스타일 — 배경 없이 세로 구분선으로만 값을 나눈다(highlights 있을 때만).
+// 모바일(세로 스택): 위쪽 가로 구분선. sm↑(가로 3열): 왼쪽 세로 구분선.
 .kpi {
-  @apply flex flex-col;
+  @apply flex flex-col border-t border-gray-200 pt-4;
+
+  // 첫 항목은 모바일에서 위 구분선을 숨겨 상단이 뜨는 걸 막는다.
+  &:first-child {
+    @apply border-t-0 pt-0;
+  }
+
+  @media (min-width: 768px) {
+    // 가로 배치: 세로 구분선 + 좌우 대칭 여백. gap-0 상태에서 각 항목이
+    // 구분선 양옆으로 같은 padding(pl/pr)을 가져 구분선이 가운데에 온다.
+    @apply border-t-0 border-l border-gray-200 pl-7 pr-7 pt-0;
+
+    &:first-child {
+      @apply border-l-0 pl-0;
+    }
+
+    &:last-child {
+      @apply pr-0;
+    }
+  }
 }
 
 .kpiValue {
-  @apply text-2xl font-extrabold leading-tight tracking-tight text-point;
+  @apply text-[26px] font-extrabold leading-tight tracking-tight text-point;
 }
 
 .kpiLabel {
   @apply mt-2 text-sm font-normal leading-relaxed text-gray-600;
 }
 
+// 각주 — 값 영역과 얇은 구분선으로 분리해 '보조 설명'임을 드러낸다.
 .disclosure {
-  @apply mt-4 text-sm leading-relaxed text-gray-500;
+  @apply mt-6 border-t border-gray-100 pt-4 text-sm leading-relaxed text-gray-500;
 }
 
 .buttons {
@@ -94,17 +124,43 @@
     }
   }
 
+  h2,
   h3,
   h4,
   h5 {
     @apply font-bold;
   }
 
-  // 뎁스는 "같은 언어의 강약"으로 — h3/h4 모두 보라(point) accent를 쓰되,
-  // 세로선(대섹션) → 가로 대시(중섹션)로 굵기·크기·여백에 위계를 준다.
+  // 뎁스는 "같은 언어의 강약"으로 — h2/h3는 보라(point) 세로선을 공유하되
+  // 굵기·크기·여백으로 강약을 준다: h2(대섹션) > h3(중섹션) > h4(가로 대시) > h5(뱃지).
+  //
+  // scroll-margin-top: 앵커 타깃은 마크다운 '#'(= 렌더 h2)이다. Nav 클릭 시
+  // sticky 헤더(데스크탑 ~230px / 모바일 ~392px)가 제목을 가리지 않도록,
+  // 헤더가 큰 모바일은 크게(25rem) 잡고 sm:부터 데스크탑 높이(15rem)로 줄인다.
+
+  // h2 — 대섹션(프로젝트 소개·배경과 문제·구현·결과 등). 최상위 위계.
+  // 세로선은 제목 텍스트 높이에만 붙는다("프로젝트 소개"처럼). 섹션 사이 호흡은
+  // 상단 구분선이 아니라 넉넉한 margin-top으로만 준다 — 구분선+padding을 쓰면
+  // 세로선이 padding 영역까지 늘어나 제목 위로 튀어나오는 문제가 생긴다.
+  h2 {
+    scroll-margin-top: 25rem;
+    @apply mt-20 mb-7 border-l-4 border-point pl-4 text-[28px] font-extrabold leading-tight tracking-tight text-gray-900;
+
+    // sm(640px) 이상: 헤더가 작아지므로 오프셋도 줄인다.
+    @media (min-width: 640px) {
+      scroll-margin-top: 15rem;
+    }
+
+    &:first-child {
+      @apply mt-0;
+    }
+  }
+
+  // h3 — 중섹션("문제 1/2/3"). h2와 같은 세로선 언어지만 한 단계 약하게:
+  // 보라(진하고 두꺼운) → 회색(얇은) 세로선으로 색·굵기 모두 낮춰 종속 관계를 드러낸다.
   h3 {
-    scroll-margin-top: 18rem;
-    @apply mt-16 mb-6 border-l-[3px] border-point pl-4 text-2xl font-extrabold leading-tight;
+    scroll-margin-top: 15rem;
+    @apply mt-12 mb-5 border-l-2 border-gray-300 pl-3.5 text-xl font-bold leading-snug text-gray-800;
 
     &:first-child {
       @apply mt-0;
@@ -142,6 +198,33 @@
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.025em;
+  }
+
+  // 본문 링크 — 보라(point) + 밑줄로 '눌러지는 것'임을 드러낸다.
+  // 밑줄은 살짝 띄우고(text-underline-offset), hover 시 진해진다.
+  a {
+    @apply font-medium text-point underline;
+    text-decoration-color: rgba(102, 99, 253, 0.4);
+    text-underline-offset: 3px;
+    transition:
+      text-decoration-color 0.15s,
+      color 0.15s;
+
+    &:hover {
+      text-decoration-color: var(--point);
+    }
+
+    &:focus-visible {
+      @apply rounded outline-2 outline-offset-2 outline-point;
+    }
+  }
+
+  // 외부 링크(새 탭)에는 ↗ 아이콘을 붙여 '새 창으로 열림'을 알린다.
+  a:global(.external)::after {
+    content: "↗";
+    @apply ml-0.5 inline-block text-[0.85em];
+    // 아이콘은 밑줄에서 제외해 링크 텍스트와 시각적으로 구분한다.
+    text-decoration: none;
   }
 
   hr {

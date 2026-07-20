@@ -70,6 +70,28 @@ function addClasses() {
   };
 }
 
+/**
+ * 외부 링크(http로 시작)를 새 탭에서 열고, 링크임을 알리는 클래스를 부여한다.
+ * - target="_blank"에는 보안상 rel="noopener noreferrer"를 함께 붙인다.
+ * - 스타일 훅으로 external 클래스를 달아, 상세 페이지 CSS에서 밑줄·외부 링크 아이콘을 붙인다.
+ */
+function externalLinks() {
+  return (tree: Root) => {
+    visit(tree, "element", (node: Element) => {
+      if (node.tagName !== "a") return;
+      const href = node.properties?.href;
+      if (typeof href !== "string" || !/^https?:\/\//.test(href)) return;
+
+      node.properties = node.properties || {};
+      node.properties.target = "_blank";
+      node.properties.rel = "noopener noreferrer";
+      const prev = node.properties.className;
+      const classes = Array.isArray(prev) ? prev : prev ? [String(prev)] : [];
+      node.properties.className = [...classes, "external"];
+    });
+  };
+}
+
 export async function getAllProjects() {
   const allProjectsData = await Promise.all(
     getProjectIds().map(async (id) => {
@@ -104,6 +126,7 @@ export async function getProject(fileName: string) {
     .use(myRemarkPlugin) // 확장구문 사용
     .use(remarkRehype)
     .use(addClasses)
+    .use(externalLinks)
     .use(rehypePrettyCode, {
       theme: "github-light",
     })

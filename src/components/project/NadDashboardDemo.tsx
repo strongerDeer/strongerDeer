@@ -120,13 +120,70 @@ const compareRows: CompareRow[] = [
   },
 ];
 
-// 오픈 후 N일째(1~14일)로 정규화한 회차별 일별 PV 더미 곡선
-const chartLines = [
-  { className: "line1", label: "1회차", points: "48,60 94,75 141,90 187,110 233,130 280,145 326,160 372,175 419,185 465,192 511,198 558,202 604,205 650,208" },
-  { className: "line2", label: "2회차", points: "48,205 94,200 141,196 187,190 233,186 280,180 326,176 372,172 419,168 465,165 511,162 558,160 604,158 650,155" },
-  { className: "line3", label: "3회차", points: "48,208 94,206 141,200 187,150 233,120 280,140 326,170 372,185 419,195 465,200 511,204 558,206 604,207 650,208" },
-  { className: "line4", label: "4회차", points: "48,210 94,202 141,193 187,185 233,176 280,168 326,159 372,151 419,142 465,134 511,125 558,117 604,108 650,100" },
+// 오픈 후 N일째(1~14일)로 정규화한 회차별 일별 PV 더미 곡선.
+// 좌표는 [x, y] 배열 — 아래 buildSmoothPath로 부드러운 곡선 path를 만든다.
+const CHART = { w: 680, h: 250, top: 40, bottom: 210, left: 48, right: 650 };
+
+type ChartLine = {
+  className: string;
+  label: string;
+  color: string;
+  points: [number, number][];
+};
+
+const chartLines: ChartLine[] = [
+  {
+    className: "line1",
+    label: "1회차",
+    color: "#6366f1",
+    points: [[48, 60], [94, 75], [141, 90], [187, 110], [233, 130], [280, 145], [326, 160], [372, 175], [419, 185], [465, 192], [511, 198], [558, 202], [604, 205], [650, 208]],
+  },
+  {
+    className: "line2",
+    label: "2회차",
+    color: "#10b981",
+    points: [[48, 205], [94, 200], [141, 196], [187, 190], [233, 186], [280, 180], [326, 176], [372, 172], [419, 168], [465, 165], [511, 162], [558, 160], [604, 158], [650, 155]],
+  },
+  {
+    className: "line3",
+    label: "3회차",
+    color: "#ec4899",
+    points: [[48, 208], [94, 206], [141, 200], [187, 150], [233, 120], [280, 140], [326, 170], [372, 185], [419, 195], [465, 200], [511, 204], [558, 206], [604, 207], [650, 208]],
+  },
+  {
+    className: "line4",
+    label: "4회차",
+    color: "#f59e0b",
+    points: [[48, 210], [94, 202], [141, 193], [187, 185], [233, 176], [280, 168], [326, 159], [372, 151], [419, 142], [465, 134], [511, 125], [558, 117], [604, 108], [650, 100]],
+  },
 ];
+
+// 점들을 Catmull-Rom 스플라인으로 이어 부드러운 곡선 path(d 속성)를 만든다.
+// tension 0.5로 자연스러운 곡률. 각진 polyline 대신 이 path를 stroke한다.
+function buildSmoothPath(points: [number, number][]): string {
+  if (points.length < 2) return "";
+  const d = [`M ${points[0][0]} ${points[0][1]}`];
+  for (let i = 0; i < points.length - 1; i++) {
+    const p0 = points[i === 0 ? 0 : i - 1];
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const p3 = points[i + 2 < points.length ? i + 2 : i + 1];
+    const cp1x = p1[0] + (p2[0] - p0[0]) / 6;
+    const cp1y = p1[1] + (p2[1] - p0[1]) / 6;
+    const cp2x = p2[0] - (p3[0] - p1[0]) / 6;
+    const cp2y = p2[1] - (p3[1] - p1[1]) / 6;
+    d.push(`C ${cp1x} ${cp1y} ${cp2x} ${cp2y} ${p2[0]} ${p2[1]}`);
+  }
+  return d.join(" ");
+}
+
+// 곡선 아래를 채우는 area path — 선 path에 바닥선(bottom)까지 닫아준다.
+function buildAreaPath(points: [number, number][]): string {
+  const line = buildSmoothPath(points);
+  const first = points[0];
+  const last = points[points.length - 1];
+  return `${line} L ${last[0]} ${CHART.bottom} L ${first[0]} ${CHART.bottom} Z`;
+}
 
 const NadDashboardDemo = () => {
   return (
@@ -277,16 +334,84 @@ const NadDashboardDemo = () => {
             ))}
           </div>
         </div>
-        <svg viewBox="0 0 680 250" role="img" aria-label="회차별 오픈 후 일차별 PV 더미 데이터 추세 차트">
+        <svg
+          viewBox="0 0 720 250"
+          role="img"
+          aria-label="회차별 오픈 후 일차별 PV 더미 데이터 추세 차트"
+        >
+          <defs>
+            {chartLines.map((line) => (
+              <linearGradient
+                key={line.className}
+                id={`area-${line.className}`}
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop offset="0%" stopColor={line.color} stopOpacity="0.16" />
+                <stop offset="100%" stopColor={line.color} stopOpacity="0" />
+              </linearGradient>
+            ))}
+          </defs>
+
+          {/* 가로 그리드 + Y축 값(상대 규모) */}
           <g className={styles.gridLines}>
-            <line x1="48" y1="40" x2="650" y2="40" />
-            <line x1="48" y1="95" x2="650" y2="95" />
-            <line x1="48" y1="150" x2="650" y2="150" />
-            <line x1="48" y1="210" x2="650" y2="210" />
+            {[40, 95, 150, 210].map((y) => (
+              <line key={y} x1="48" y1={y} x2="650" y2={y} />
+            ))}
           </g>
+          <g className={styles.yLabels}>
+            <text x="40" y="44">높음</text>
+            <text x="40" y="154">보통</text>
+            <text x="40" y="213">0</text>
+          </g>
+
+          {/* 면적 그라데이션(곡선 아래) */}
           {chartLines.map((line) => (
-            <polyline key={line.label} className={styles[line.className]} points={line.points} />
+            <path
+              key={`area-${line.className}`}
+              className={styles.area}
+              d={buildAreaPath(line.points)}
+              fill={`url(#area-${line.className})`}
+            />
           ))}
+
+          {/* 부드러운 곡선 */}
+          {chartLines.map((line) => (
+            <path
+              key={line.className}
+              className={styles[line.className]}
+              d={buildSmoothPath(line.points)}
+            />
+          ))}
+
+          {/* 끝점 마커 + 최종 값 라벨.
+              라벨 y는 끝점 y 순서대로 최소 간격(14px)을 확보해 겹침을 피한다
+              (1·3회차처럼 끝점이 같은 높이일 때 라벨이 뭉치는 문제 방지). */}
+          {(() => {
+            const ends = chartLines
+              .map((line) => ({ line, x: line.points[line.points.length - 1][0], y: line.points[line.points.length - 1][1] }))
+              .sort((a, b) => a.y - b.y);
+            const MIN_GAP = 14;
+            for (let i = 1; i < ends.length; i++) {
+              if (ends[i].y - ends[i - 1].y < MIN_GAP) {
+                ends[i] = { ...ends[i], y: ends[i - 1].y + MIN_GAP };
+              }
+            }
+            return ends.map(({ line, x, y }) => {
+              const [, markerY] = line.points[line.points.length - 1];
+              return (
+                <g key={`end-${line.className}`}>
+                  <circle cx={x} cy={markerY} r="3.5" fill="#fff" stroke={line.color} strokeWidth="2.5" />
+                  <text x={x + 9} y={y + 3} className={styles.endLabel} fill={line.color}>
+                    {line.label}
+                  </text>
+                </g>
+              );
+            });
+          })()}
+
           <g className={styles.axisLabels}>
             <text x="48" y="232">1일</text>
             <text x="184" y="232">4일</text>
