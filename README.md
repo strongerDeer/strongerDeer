@@ -34,6 +34,4 @@
 ![Photoshop](https://img.shields.io/badge/Photoshop-f9f9f9?style=flat-square&logo=adobe-photoshop&logoColor=31A8FF)
 ![Notion](https://img.shields.io/badge/Notion-f9f9f9?style=flat-square&logo=notion&logoColor=000000)
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=strongerDeer&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
-
 </div>
