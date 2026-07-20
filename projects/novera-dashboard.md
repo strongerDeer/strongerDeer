@@ -9,7 +9,18 @@ period: "2026"
 description: "오픈 시점이 다른 4개 이벤트, 어떻게 같은 기준으로 비교했을까?"
 detailLabel: "성과 비교·품질 회귀 판정 체계 보기"
 tags: ["TypeScript", "React", "Next.js"]
-skills: ["Next.js 16", "React 19", "TypeScript", "GA4 Data API", "Google Search Console", "Recharts", "Lighthouse", "Core Web Vitals", "AWS Amplify"]
+skills:
+  [
+    "Next.js 16",
+    "React 19",
+    "TypeScript",
+    "GA4 Data API",
+    "Google Search Console",
+    "Recharts",
+    "Lighthouse",
+    "Core Web Vitals",
+    "AWS Amplify",
+  ]
 icon: "ChartSpline"
 metrics:
   [
@@ -82,7 +93,7 @@ const daysSinceOpen = (date: string, openDate: string) =>
   Math.floor(
     (new Date(`${date}T00:00:00Z`).getTime() -
       new Date(`${openDate}T00:00:00Z`).getTime()) /
-      86400000
+      86400000,
   ) + 1;
 ```
 
@@ -154,6 +165,6 @@ const andPage = (eventFilter: unknown, pagePaths: string[]) => ({
 
 ## 결과
 
-- 실사용자 Core Web Vitals 통과: **모바일 p75 LCP 약 1.7초 · INP 96ms · CLS 0**(CrUX origin, 2026-06-16~07-13 28일 창 기준 — 재직 중 최종 측정 기록)
+- 실사용자 Core Web Vitals 통과: **모바일 p75 LCP 약 1.7초 · INP 96ms · CLS 0**(CrUX origin, 2026-06-16~07-13 28일 창 기준 — 2026.07 측정 기록)
 - Lighthouse 기준 **접근성 96 · SEO 100** 확인
 - 성능·SEO·이미지·번들 회귀를 주기적으로 확인하는 품질 기준 마련

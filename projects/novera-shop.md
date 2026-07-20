@@ -19,12 +19,9 @@ metrics:
   ]
 highlights:
   [
-    {
-      value: "상태 15가지",
-      label: "화면 기준을 단일 출처로 설계, 구매자·운영 화면에 일관 반영",
-    },
     { value: "94% ↓", label: "홈 이미지 6,645KB → 381KB 경량화" },
     { value: "79.4%", label: "운영 오픈 후 7일간 신규 가입자가 선택한 간편가입 비중" },
+    { value: "1.7s", label: "모바일 LCP(실사용) — NAD 품질 대시보드 CrUX p75 측정" },
   ]
 url: "https://shop.novera.town/"
 codeDisclosure: "회사 코드와 운영 데이터는 비공개이며, 상세 내용과 코드 예시는 공개 가능한 범위에서 구조를 단순화·비식별화해 재구성했습니다."

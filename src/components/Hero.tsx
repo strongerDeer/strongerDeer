@@ -1,7 +1,5 @@
 "use client";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 import { HERO_KEYWORDS } from "@data/introduce";
 
@@ -55,7 +53,7 @@ const Hero = () => {
             <span className="border-b border-gray-500">
               사용자가 머뭇거리는
               <br />
-              0.1초를 제품의 규칙으로 줄이는
+              0.1초를 찾아 줄이는
             </span>
             <br />
             <strong>강혜진</strong> 개발자입니다.
@@ -64,22 +62,12 @@ const Hero = () => {
             className="mt-6 w-full text-base sm:text-lg leading-relaxed text-gray-700 font-normal text-balance break-keep"
             {...fadeUp(0.5)}
           >
-            7년 7개월의 디자인·웹 퍼블리싱 경험과 React·TypeScript 구현력을
-            바탕으로, 반응형·키보드·로딩·접근성 기준을 공통 컴포넌트에
-            담습니다.
-            <br /> Figma의 디자인 규칙을 토큰과 타입으로 연결하고,
-            Storybook·테스트·문서화로 좋은 UX가 제품에서 일관되게 구현되는
-            환경을 만듭니다.
+            디자인 의도와 브라우저 동작을 연결해
+            <br />
+            사용 환경이 달라도
+            <br />
+            일관된 UX를 만드는 프론트엔드 개발자
           </motion.p>
-          <motion.div {...fadeUp(0.6)}>
-            <Link
-              href="/nds"
-              className="mt-7 inline-flex min-h-11 items-center gap-2 rounded-full bg-point px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-transform hover:scale-[1.02]"
-            >
-              NDS 설계·운영 과정 보기
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </motion.div>
           <motion.ul
             className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 mt-6"
             {...fadeUp(0.6)}
