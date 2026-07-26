@@ -194,7 +194,9 @@
     @apply mt-8 inline-flex rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700;
   }
   // 이미지·다이어그램도 읽기 컬럼과 같은 폭으로 — 텍스트와 좌우 정렬을 맞춘다.
-  img {
+  // video 는 GIF 를 대체한 것이라 이미지와 동일하게 다룬다(WCAG 2.2.2 로 controls 부여).
+  img,
+  video {
     @apply mx-auto w-full rounded-xl border border-gray-100;
   }
 

@@ -65,7 +65,7 @@ metrics:
 :::div{.function}
 
 - 기간별 데이터 시각화
-  ![](/strongerDeer/project/analytics_date.gif)
+  ![](/strongerDeer/project/analytics_date.mp4)
 
   - 최근 한주/최근한달 빠른 버튼 제공
   - 달력으로 시작일-종료일 직접 선택 가능
@@ -82,7 +82,7 @@ metrics:
   ![](/strongerDeer/project/analytics_time.webp)
 
 - SQL 코드 에디터
-  ![](/strongerDeer/project/analytics_editor.gif)
+  ![](/strongerDeer/project/analytics_editor.mp4)
   - 복사 및 CSV 다운로드 기능 제공
   - SQL 활용한 데이터 분석 지원
 
@@ -119,7 +119,7 @@ metrics:
   - 해당 데이터 기반 서비스 QA 체크 우선 진행 제안
 
 - 국내 지도 히트맵: 국내 지역별 사용자 분포 히트맵
-  ![](/strongerDeer/project/analytics_map.gif)
+  ![](/strongerDeer/project/analytics_map.mp4)
 
   - 지역별 사용자 분포로 마케팅 활용 제안
 

@@ -92,6 +92,44 @@ function externalLinks() {
   };
 }
 
+/**
+ * 마크다운의 ![alt](….mp4) 를 <video> 로 바꾼다.
+ *
+ * 원래 GIF 였으나 자동 재생·무한 반복에 정지 수단이 없어 WCAG 2.2.2(Pause, Stop, Hide)
+ * 를 만족하지 못했다. <video controls> 는 네이티브 재생/정지 컨트롤을 주므로
+ * 클라이언트 JS 없이 해결된다.
+ * - preload="none": 재생을 누르기 전까지 영상을 받지 않는다(포스터만 로드)
+ * - poster: 같은 이름의 .webp(첫 프레임)
+ * - alt 텍스트는 aria-label 로 옮겨 접근 가능한 이름을 유지한다
+ *
+ * 새 영상을 추가할 때는 mp4 와 같은 이름의 포스터 .webp 를 함께 넣어야 한다:
+ *   ffmpeg -i in.gif -movflags faststart -pix_fmt yuv420p \
+ *     -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -c:v libx264 -crf 28 -preset slow -an out.mp4
+ *   (포스터는 첫 프레임을 webp 로 저장)
+ */
+function videoFromMarkdownImage() {
+  return (tree: Root) => {
+    visit(tree, "element", (node: Element) => {
+      if (node.tagName !== "img") return;
+      const src = node.properties?.src;
+      if (typeof src !== "string" || !src.endsWith(".mp4")) return;
+
+      const alt = node.properties?.alt;
+      node.tagName = "video";
+      node.properties = {
+        controls: true,
+        preload: "none",
+        poster: src.replace(/\.mp4$/, ".webp"),
+        ...(typeof alt === "string" && alt ? { "aria-label": alt } : {}),
+      };
+      node.children = [
+        h("source", { src, type: "video/mp4" }),
+        { type: "text", value: "이 브라우저는 video 태그를 지원하지 않습니다." },
+      ];
+    });
+  };
+}
+
 export async function getAllProjects() {
   const allProjectsData = await Promise.all(
     getProjectIds().map(async (id) => {
@@ -127,6 +165,7 @@ export async function getProject(fileName: string) {
     .use(remarkRehype)
     .use(addClasses)
     .use(externalLinks)
+    .use(videoFromMarkdownImage)
     .use(rehypePrettyCode, {
       // github-light 는 주석·문자열 토큰이 대비 3.17~4.38 로 AA 미달이라
       // 동일 계열의 고대비 테마를 사용한다.
