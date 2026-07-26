@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 
-import { AnimatePresence, motion } from "framer-motion";
 import { I_PROJECTS } from "@data/project";
 import ProjectCard from "./project/ProjectCard";
 import MoreToggleBtn from "./shared/MoreToggleBtn";
@@ -52,27 +51,20 @@ const Projects = ({ projects }: ProjectProps) => {
           </h2>
 
           <div ref={otherSectionRef} className="list">
-            <AnimatePresence mode="wait">
-              <motion.ul
-                id="projects-list"
-                className="card grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
-                initial={false}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                {displayProjects.map((project, index) => (
-                  <ProjectCard
-                    key={project.id}
-                    index={index}
-                    project={project}
-                    compact={index >= featured.length}
-                    // 접힌 상태에서 보여주는 맛보기 카드들은 blur 에 덮여 보이지 않는다.
-                    hidden={!showAllOther && index >= featured.length}
-                  />
-                ))}
-              </motion.ul>
-            </AnimatePresence>
+            <ul
+              id="projects-list"
+              className="card grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+            >
+              {displayProjects.map((project, index) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  compact={index >= featured.length}
+                  // 접힌 상태에서 보여주는 맛보기 카드들은 blur 에 덮여 보이지 않는다.
+                  hidden={!showAllOther && index >= featured.length}
+                />
+              ))}
+            </ul>
             {!showAllOther && other.length > OTHER_COLLAPSED_COUNT && (
               <div className="blur" />
             )}

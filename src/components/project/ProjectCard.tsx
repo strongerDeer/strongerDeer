@@ -1,5 +1,3 @@
-import { motion, useReducedMotion } from "framer-motion";
-
 import React from "react";
 import ProjectThumb from "./ProjectThumb";
 import ProjectBtns from "./ProjectBtns";
@@ -9,7 +7,6 @@ import Link from "next/link";
 
 type ProjectCardProps = {
   project: I_PROJECTS;
-  index: number;
   compact?: boolean;
   /** 접힌 상태에서 blur 그라데이션에 덮여 보이지 않는 카드 */
   hidden?: boolean;
@@ -17,7 +14,6 @@ type ProjectCardProps = {
 
 const ProjectCard = ({
   project,
-  index,
   compact = false,
   hidden = false,
 }: ProjectCardProps) => {
@@ -40,10 +36,9 @@ const ProjectCard = ({
 
   const IconComponent = ICON_MAP[icon as ICON_TYPE];
   const displayMetrics = compact ? metrics.slice(0, 1) : metrics;
-  const shouldReduceMotion = useReducedMotion();
 
   return (
-    <motion.li
+    <li
       id={id}
       // "더보기"로 펼쳤을 때 새로 드러난 첫 카드로 초점을 옮기기 위한 대상.
       // -1 이라 Tab 순서에는 들어가지 않고 프로그램적 초점만 받는다.
@@ -53,18 +48,6 @@ const ProjectCard = ({
       // 초점 링이 그려지는 상황(WCAG 2.4.11 Focus Not Obscured)을 막는다.
       inert={hidden}
       className={compact ? "compact" : ""}
-      initial={false}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-      transition={
-        shouldReduceMotion
-          ? { duration: 0 }
-          : {
-              duration: 0.3,
-              ease: "easeOut",
-              delay: index * 0.1,
-            }
-      }
     >
       {/* 카드 대표 링크. 초점을 받으면 카드 전체에 링이 그려진다(globals.scss 의 :has 규칙).
           제목은 링크로 감싸지 않는다 — 목적지가 같아 이름이 중복될 뿐 아니라,
@@ -104,7 +87,7 @@ const ProjectCard = ({
           detailLabel={detailLabel}
         />
       </div>
-    </motion.li>
+    </li>
   );
 };
 

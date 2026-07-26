@@ -11,7 +11,6 @@
     "deploy": "npm run build && touch out/.nojekyll"
   },
   "dependencies": {
-    "framer-motion": "^11.14.4",
     "gray-matter": "^4.0.3",
     "hastscript": "^9.0.0",
     "lucide-react": "^0.468.0",
