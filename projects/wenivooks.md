@@ -81,24 +81,24 @@ ICT 교육 회사에서 Notion으로 제공하던 개발 교육 콘텐츠를 웹
   ![](/strongerDeer/project/wenivooks_list.webp)
   - 사이드바를 통한 전체 교안 목차 제공(토글 기능 제공)
 - 페이지 목차  
-  ![](/strongerDeer/project/wenivooks_toc.mp4)
+  ![페이지 목차를 열고 스크롤 위치에 따라 현재 섹션을 강조하는 화면](/strongerDeer/project/wenivooks_toc.mp4)
   - 현재 페이지의 세부 목차 제공(토글 기능 제공)
   - 스크롤 위치에 따른 현재 섹션 하이라이팅
   - 클릭 시 해당 영역으로 이동
 - 페이지 이동 버튼 제공
-  ![](/strongerDeer/project/wenivooks_page.mp4)
+  ![하단 고정 이전·다음 버튼으로 교안 페이지를 이동하는 화면](/strongerDeer/project/wenivooks_page.mp4)
 
   - 하단 고정 페이지 이동 버튼으로 책 흐름에 방해 받지 않고 페이지 이동 가능
 
 - HTML/CSS 코드 에디터
-  ![](/strongerDeer/project/wenivooks_editor.mp4)
+  ![HTML·CSS 코드를 편집하면 결과가 실시간 미리보기에 반영되는 화면](/strongerDeer/project/wenivooks_editor.mp4)
 
   - 실시간 미리보기
   - 코드 하이라이팅
   - VS Code 없이 바로 실습 가능한 환경
 
 - 사용자 맞춤 환경
-  ![](/strongerDeer/project/wenivooks_theme.mp4)
+  ![라이트·다크 테마와 글꼴·글자 크기를 변경하는 사용자 설정 화면](/strongerDeer/project/wenivooks_theme.mp4)
 
   - 라이트/다크 모드 지원
   - 기본/세리프 형태 폰트 및 크기 조절 가능
