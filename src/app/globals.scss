@@ -10,9 +10,8 @@
 
   --background: #ffffff;
   --foreground: #171717;
-  --primary: #499bef;
   // 텍스트용 파랑. 이전 값 #4796e7 은 흰 배경 대비 3.10 으로 AA(4.5) 미달이었다.
-  // 브랜드 파랑(--primary)의 색상(210°)·채도(84%)는 유지한 채 명도만 61%→44% 로 낮춰 4.95 확보.
+  // 브랜드 파랑 #499bef 의 색상(210°)·채도(84%)는 유지한 채 명도만 61%→44% 로 낮춰 4.95 확보.
   // 최소 통과선(#1376db, 4.52)이 아니라 여유를 둔 값 — --point(4.81)와 같은 수준으로 맞춘다.
   --primary-a11y: #1270cf;
   // 원색 #6663fd 는 흰 배경 대비 4.40 으로 WCAG AA(4.5) 미달이라 5% 어둡게 조정(4.81).
@@ -137,16 +136,6 @@ body {
 
 .center {
   @apply flex justify-center;
-}
-/* footer */
-.link {
-  @apply transform hover:scale-110 transition-all p-3 bg-white rounded-xl shadow-lg;
-  svg {
-    @apply w-6 h-6 text-gray-700;
-  }
-  span {
-    @include a11y-hidden;
-  }
 }
 
 .header {

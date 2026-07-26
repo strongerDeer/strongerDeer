@@ -259,14 +259,6 @@
         }
       }
 
-      .domainImage {
-        @apply block mb-4 overflow-hidden rounded-lg border border-gray-100 bg-gray-50;
-
-        img {
-          @apply w-full aspect-video object-cover transition-transform duration-300 hover:scale-[1.02];
-        }
-      }
-
       p {
         @apply text-sm text-gray-600 font-normal leading-relaxed;
       }
@@ -324,18 +316,6 @@
 }
 
 
-.projectTab {
-  @apply flex gap-2 mb-12 flex-wrap;
-
-  button {
-    @apply bg-white text-gray-500 rounded px-2 py-1 text-sm hover:text-blue-500 transition-all duration-300;
-
-    &.active {
-      @apply bg-blue-600 text-white shadow-lg;
-    }
-  }
-}
-
 #introduce {
   .contents {
     @apply flex flex-col gap-12 mt-6 leading-relaxed;
@@ -348,14 +328,6 @@
     }
   }
 }
-.text_link {
-  @apply text-blue-500 inline-flex gap-1;
-
-  svg {
-    @apply h-4 mt-1;
-  }
-}
-
 .strength {
   @apply grid md:grid-cols-3 gap-8 mt-8;
   div {
@@ -373,33 +345,6 @@
 .moreToggleBtn {
   // hover 색은 자동 대비 검사가 재현하지 못해 놓치기 쉽다. blue-500 은 3.68 로 미달 → blue-600(5.17).
   @apply px-6 py-2 text-sm border border-gray-300 bg-white rounded-full hover:text-blue-600 hover:border-blue-200 transition-colors mx-auto block relative z-30;
-}
-
-.json {
-  @apply text-blue-400 leading-relaxed;
-  font-size: 0.95em;
-
-  .label {
-    @apply shrink-0 text-indigo-400;
-  }
-
-  .colon {
-    @apply text-gray-200;
-  }
-  .array {
-    &::before {
-      @apply content-['['] text-gray-200 mr-1;
-    }
-
-    &::after {
-      @apply content-['],'] text-gray-200 ml-1;
-    }
-    span:not(:last-child) {
-      &::after {
-        @apply content-[','] text-gray-200 mr-1;
-      }
-    }
-  }
 }
 
 .skill {
