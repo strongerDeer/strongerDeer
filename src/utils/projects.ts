@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { I_PROJECTS, ProjectHeading } from "@data/project";
+import { I_PROJECTS, I_PROJECT_SUMMARY, ProjectHeading } from "@data/project";
 import { remark } from "remark";
 import { visit } from "unist-util-visit";
 import remarkRehype from "remark-rehype";
@@ -151,15 +151,55 @@ function lazyLoadImages() {
   };
 }
 
-export async function getAllProjects() {
-  const allProjectsData = await Promise.all(
-    getProjectIds().map(async (id) => {
-      const project = await getProject(id);
-      return project;
-    })
-  );
+/**
+ * 홈 카드용 요약 목록. frontmatter 만 읽고 마크다운 본문은 건드리지 않는다.
+ *
+ * 예전에는 getProject()를 9번 돌려 전체 객체를 넘겼는데, 홈의 Projects 가
+ * 클라이언트 컴포넌트라 상세 본문 HTML(content)까지 RSC 페이로드에 직렬화됐다.
+ * 홈에서 쓰지도 않는 내용이라 순수 낭비였다.
+ * 덤으로 remark/rehype 파이프라인을 9번 돌리지 않아 빌드도 가벼워진다.
+ */
+export function getProjectSummaries(): I_PROJECT_SUMMARY[] {
+  const summaries = getProjectIds().map((id) => {
+    const fullPath = path.join(projectsDirectory, `${id}.md`);
+    const { data } = matter(fs.readFileSync(fullPath, "utf8"));
+    const {
+      index,
+      type,
+      thumb,
+      title,
+      kor,
+      description,
+      detailLabel,
+      skills,
+      icon,
+      metrics,
+      url,
+      urlType,
+      urlLabel,
+      github,
+    } = data as Omit<I_PROJECTS, "id" | "headings" | "content">;
 
-  return allProjectsData.sort((a, b) => a.index - b.index);
+    return {
+      id,
+      index,
+      type,
+      thumb,
+      title,
+      kor,
+      description,
+      detailLabel,
+      skills,
+      icon,
+      metrics,
+      url,
+      urlType,
+      urlLabel,
+      github,
+    };
+  });
+
+  return summaries.sort((a, b) => a.index - b.index);
 }
 
 export function getProjectIds() {

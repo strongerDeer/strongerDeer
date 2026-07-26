@@ -7,10 +7,12 @@ import OtherExperience from "@components/OtherExperience";
 import Header, { ExternalLinks } from "@components/Header/Header";
 import SkipLink from "@components/shared/SkipLink";
 import Skills from "@components/Skills";
-import { getAllProjects } from "@utils/projects";
+import { getProjectSummaries } from "@utils/projects";
 
 export default async function Home() {
-  const projects = await getAllProjects();
+  // 카드에 필요한 frontmatter 만 넘긴다 — 전체 객체를 넘기면 상세 본문 HTML 까지
+  // 클라이언트로 직렬화된다(자세한 이유는 getProjectSummaries 주석).
+  const projects = getProjectSummaries();
 
   return (
     <div>

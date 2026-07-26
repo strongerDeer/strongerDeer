@@ -68,3 +68,29 @@ export type I_PROJECTS = {
   headings: ProjectHeading[];
   content: string;
 };
+
+/**
+ * 홈 카드(ProjectCard)가 실제로 쓰는 필드만 추린 타입.
+ *
+ * 홈은 클라이언트 컴포넌트(Projects)에 목록을 넘기므로, I_PROJECTS 를 그대로 주면
+ * 상세 본문 HTML(content)까지 RSC 페이로드에 직렬화된다 — 홈에서 쓰지도 않는
+ * 9개 프로젝트의 상세 내용이 통째로 실려 왔다.
+ */
+export type I_PROJECT_SUMMARY = Pick<
+  I_PROJECTS,
+  | "index"
+  | "id"
+  | "type"
+  | "thumb"
+  | "title"
+  | "kor"
+  | "description"
+  | "detailLabel"
+  | "skills"
+  | "icon"
+  | "metrics"
+  | "url"
+  | "urlType"
+  | "urlLabel"
+  | "github"
+>;

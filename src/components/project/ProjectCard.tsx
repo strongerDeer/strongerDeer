@@ -2,10 +2,10 @@ import React from "react";
 import ProjectThumb from "./ProjectThumb";
 import ProjectBtns from "./ProjectBtns";
 import Tag from "@components/shared/Tag";
-import { I_PROJECTS, ICON_MAP, ICON_TYPE } from "@data/project";
+import { I_PROJECT_SUMMARY, ICON_MAP, ICON_TYPE } from "@data/project";
 
 type ProjectCardProps = {
-  project: I_PROJECTS;
+  project: I_PROJECT_SUMMARY;
   compact?: boolean;
   /** 접힌 상태에서 blur 그라데이션에 덮여 보이지 않는 카드 */
   hidden?: boolean;

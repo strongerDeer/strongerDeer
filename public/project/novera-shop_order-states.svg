@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
-  <title id="title">주문 상태 15가지와 거절 이력 복귀 규칙</title>
+  <title id="title">주문 상태 15종과 거절 이력 복귀 규칙</title>
   <desc id="desc">배송 5가지·취소 4가지·반품 6가지의 주문 상태를 정상·취소·반품·거절 그룹으로 분류하고, 취소는 결제완료 상태에서만 가능하며, 거절은 별도 상태가 아니라 이력으로 남고 상품이 원래 상태로 복귀하는 규칙을 단일 판정 모듈로 관리하는 구조.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -23,7 +23,7 @@
     </style>
   </defs>
   <rect width="1200" height="640" rx="28" fill="url(#bg)"/>
-  <text x="55" y="58" class="title">상태 15가지를 4개 그룹으로 — 철회·거절은 상태가 아니라 이력이다</text>
+  <text x="55" y="58" class="title">상태 15종을 4개 그룹으로 — 철회·거절은 상태가 아니라 이력이다</text>
   <text x="55" y="86" class="note">취소·반품·구매확정·배송조회 가능 여부를 화면이 아니라 단일 판정 모듈에서 결정 → 정책이 바뀌면 모듈만 고친다</text>
 
   <!-- 정상(배송) 그룹 5 -->

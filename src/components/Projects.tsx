@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
 
-import { I_PROJECTS } from "@data/project";
+import { I_PROJECT_SUMMARY } from "@data/project";
 import ProjectCard from "./project/ProjectCard";
 import MoreToggleBtn from "./shared/MoreToggleBtn";
 import { scrollIntoViewSafely } from "@utils/motion";
 type ProjectProps = {
-  projects: I_PROJECTS[];
+  projects: I_PROJECT_SUMMARY[];
 };
 
 const FEATURED_COUNT = 4;
