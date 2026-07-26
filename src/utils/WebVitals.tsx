@@ -4,7 +4,11 @@ import { useReportWebVitals } from "next/web-vitals";
 
 declare global {
   interface Window {
-    dataLayer?: unknown[];
+    gtag?: (
+      command: "event",
+      eventName: string,
+      params: Record<string, unknown>
+    ) => void;
   }
 }
 
@@ -20,30 +24,30 @@ const toGaValue = (name: string, value: number) =>
  * 필드 데이터가 있어야 판정된다(모바일·데스크톱 각각 p75 200ms 이하가 양호).
  * 그래서 개선 작업보다 먼저 계측을 붙여 전후 비교 기준을 만든다.
  *
- * gtag() 대신 dataLayer 에 직접 넣는 이유 — 지표가 gtag.js 로드보다 먼저 발생할 수
- * 있는데, dataLayer 는 GA 인라인 스크립트가 먼저 만들어두므로 큐에 쌓였다가 처리된다.
+ * 전송은 gtag() 로 한다. dataLayer 에 배열을 직접 push 해도 대개 동작하지만,
+ * gtag() 가 넣는 것은 배열이 아니라 arguments 객체라 GA4 가 이벤트로 처리한다는
+ * 보장이 없다. 공식 형태를 따른다.
+ *
+ * GA 로드 전에 발생한 지표는 버려진다. web-vitals 는 대부분 페이지 숨김 시점에
+ * 값을 확정하므로 afterInteractive 로 붙는 GA 보다 늦게 보고된다.
  */
 const WebVitals = () => {
   useReportWebVitals((metric) => {
-    if (typeof window === "undefined") return;
-    // GA 미설정(NEXT_PUBLIC_GA_ID 없음)이면 dataLayer 자체가 없다 — 조용히 넘어간다.
-    if (!window.dataLayer) return;
+    // GA 미설정(NEXT_PUBLIC_GA_ID 없음)이면 gtag 자체가 없다 — 조용히 넘어간다.
+    if (typeof window === "undefined" || typeof window.gtag !== "function")
+      return;
 
-    window.dataLayer.push([
-      "event",
-      metric.name,
-      {
-        value: toGaValue(metric.name, metric.value),
-        // 같은 지표가 여러 번 갱신되므로, GA 에서 중복을 걸러낼 수 있게 id 를 함께 보낸다.
-        metric_id: metric.id,
-        metric_value: metric.value,
-        metric_rating: metric.rating, // good | needs-improvement | poor
-        metric_delta: metric.delta,
-        metric_navigation_type: metric.navigationType,
-        // 사용자 행동이 아니므로 참여 이벤트로 집계되지 않게 한다.
-        non_interaction: true,
-      },
-    ]);
+    window.gtag("event", metric.name, {
+      value: toGaValue(metric.name, metric.value),
+      // 같은 지표가 여러 번 갱신되므로, GA 에서 중복을 걸러낼 수 있게 id 를 함께 보낸다.
+      metric_id: metric.id,
+      metric_value: metric.value,
+      metric_rating: metric.rating, // good | needs-improvement | poor
+      metric_delta: metric.delta,
+      metric_navigation_type: metric.navigationType,
+      // 사용자 행동이 아니므로 참여 이벤트로 집계되지 않게 한다.
+      non_interaction: true,
+    });
   });
 
   return null;

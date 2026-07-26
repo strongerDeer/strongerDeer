@@ -26,9 +26,12 @@ const Projects = ({ projects }: ProjectProps) => {
     : other.slice(0, OTHER_COLLAPSED_COUNT);
   const displayProjects = [...featured, ...displayOther];
 
-  // 새로 드러나는 첫 카드. 이 카드들은 "더보기" 버튼보다 DOM 앞에 삽입되므로,
-  // 초점을 옮겨주지 않으면 펼친 뒤 다음 Tab 이 새 카드를 모두 건너뛰고 다음 섹션으로 간다.
-  const firstRevealedId = other[OTHER_COLLAPSED_COUNT]?.id;
+  // 펼쳤을 때 처음으로 초점 가능해지는 카드.
+  // 접힌 상태에서도 other[0..1] 은 DOM 에 있지만 blur 에 덮여 inert 라 초점을 받지 못한다.
+  // 따라서 "새로 추가되는 카드"(other[2])가 아니라 other[0] 이 기준이다.
+  // 또한 이 카드들은 "더보기" 버튼보다 DOM 앞에 있어, 초점을 옮기지 않으면
+  // 펼친 뒤 다음 Tab 이 새 카드를 모두 건너뛰고 다음 섹션으로 간다.
+  const firstRevealedId = other[0]?.id;
 
   const handleToggle = () => {
     setShowAllOther((prev) => !prev);

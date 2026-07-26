@@ -119,10 +119,11 @@
 
 .legend { @apply flex flex-wrap gap-3 text-[10px] text-gray-500; }
 .legend span::before { content: ""; @apply mr-1 inline-block h-2 w-2 rounded-full; }
-.legend span.line1::before { @apply bg-indigo-500; }
-.legend span.line2::before { @apply bg-emerald-500; }
-.legend span.line3::before { @apply bg-pink-500; }
-.legend span.line4::before { @apply bg-amber-500; }
+// 범례 스와치는 곡선과 같은 색이어야 대응이 읽힌다 — 위 path 색과 함께 어둡게 맞춘다.
+.legend span.line1::before { @apply bg-indigo-600; }
+.legend span.line2::before { @apply bg-emerald-700; }
+.legend span.line3::before { @apply bg-pink-600; }
+.legend span.line4::before { @apply bg-amber-700; }
 
 .chartCard svg { @apply mt-3 w-full; overflow: visible; }
 
@@ -142,16 +143,19 @@ path.line1, path.line2, path.line3, path.line4 {
   stroke-linejoin: round;
   stroke-width: 2.5;
 }
-path.line1 { stroke: #6366f1; }
-path.line2 { stroke: #10b981; }
-path.line3 { stroke: #ec4899; }
-path.line4 { stroke: #f59e0b; }
+// 곡선 색은 .endLabel(10px bold 텍스트)에도 그대로 쓰이므로, 그래픽 기준 3:1 이
+// 아니라 텍스트 기준 4.5:1 을 넘겨야 한다. 흰 배경(.chartCard) 기준 대비를 병기한다.
+path.line1 { stroke: #4f46e5; } // indigo-600  6.29:1 (이전 #6366f1 4.47 — 미달)
+path.line2 { stroke: #047857; } // emerald-700 5.48:1 (이전 #10b981 2.54 — 미달)
+path.line3 { stroke: #db2777; } // pink-600    4.60:1 (이전 #ec4899 3.53 — 미달)
+path.line4 { stroke: #b45309; } // amber-700   5.02:1 (이전 #f59e0b 2.15 — 미달)
 
-.axisLabels { fill: #9ca3af; font-size: 10px; }
+// 축 레이블은 10px 텍스트 — gray-400(2.54)에서 gray-500(4.83)으로 올린다.
+.axisLabels { fill: #6b7280; font-size: 10px; }
 
 // Y축 규모 라벨(높음·보통·0) — 우측 정렬로 그리드 왼쪽에 붙인다.
 .yLabels text {
-  fill: #b6bcc7;
+  fill: #6b7280; // 이전 #b6bcc7 은 1.91:1 로 미달
   font-size: 9px;
   text-anchor: end;
 }

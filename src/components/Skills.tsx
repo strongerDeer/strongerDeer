@@ -1,5 +1,4 @@
-"use client";
-
+// 상태·이벤트·브라우저 API 가 없어 서버 컴포넌트로 둔다.
 import {
   I_SkillDomain,
   MAIN_STACK,
