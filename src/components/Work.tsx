@@ -23,7 +23,7 @@ const Work = () => {
   return (
     <div className="wrap" id="work">
       <section ref={sectionRef}>
-        <h2 className="title">
+        <h2 id="work-heading" tabIndex={-1} className="title skipTarget">
           Work Experience<span>경력</span>
         </h2>
         <p>

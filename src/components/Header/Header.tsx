@@ -3,13 +3,17 @@ import Logo from "@components/shared/Logo";
 import { Github, Menu } from "lucide-react";
 import Link from "next/link";
 
+// 섹션 래퍼(#work 등)가 아니라 각 섹션 제목을 가리킨다.
+// 래퍼는 min-h-100dvh 라 초점 링이 화면 밖에 걸려 안 보이고, 제목을 대상으로 하면
+// 이동 후 "여기로 왔다"가 링으로 분명히 드러난다(스킵 링크와 같은 방식).
+// 래퍼의 id 는 CSS 가 쓰므로 그대로 두었다 — 기존 #work 같은 주소도 계속 스크롤된다.
 const NAV_ITEMS = [
-  { href: "#hero", label: "홈" },
-  { href: "#work", label: "경력" },
-  { href: "#projects", label: "프로젝트" },
-  { href: "#skills", label: "기술" },
-  { href: "#otherExperience", label: "기타 경험" },
-  { href: "#education", label: "교육·자격" },
+  { href: "#hero-heading", label: "홈" },
+  { href: "#work-heading", label: "경력" },
+  { href: "#projects-heading", label: "프로젝트" },
+  { href: "#skills-heading", label: "기술" },
+  { href: "#other-heading", label: "기타 경험" },
+  { href: "#education-heading", label: "교육·자격" },
 ];
 
 export const ExternalLinks = ({ mobile = false }: { mobile?: boolean }) => (

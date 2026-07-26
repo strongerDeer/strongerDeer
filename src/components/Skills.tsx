@@ -46,7 +46,7 @@ const Skills = () => {
   return (
     <div className="wrap" id="skills">
       <section>
-        <h2 className="title">
+        <h2 id="skills-heading" tabIndex={-1} className="title skipTarget">
           Skills <span>기술</span>
         </h2>
 

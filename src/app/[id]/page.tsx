@@ -77,28 +77,6 @@ export default async function Page({ params }: Props) {
   return (
     <div className={styles.project}>
       <SkipLink targetId="project-overview" />
-      {/* 화면상 우측 상단 고정(.buttons 는 position:fixed)이므로 DOM 도 상단에 둔다.
-          본문 끝에 있으면 Tab 으로 가장 늦게 도달해 시각 순서와 초점 순서가 어긋난다. */}
-      <div className={styles.buttons}>
-        {github && <LinkBtn type="github" url={github} project={title} />}
-        {url && (
-          <LinkBtn
-            type="url"
-            url={url}
-            urlType={urlType}
-            label={urlLabel}
-            project={title}
-          />
-        )}
-
-        <Link
-          href={`../strongerDeer#${id}`}
-          className={styles.back}
-          aria-label="프로젝트 목록으로 돌아가기"
-        >
-          <X className="w-6 h-6" aria-hidden="true" />
-        </Link>
-      </div>
       <header>
         <TypeIcon type={type} />
         <div className="flex items-center justify-between">
@@ -159,6 +137,30 @@ export default async function Page({ params }: Props) {
           )}
         </div>
       </main>
+
+      {/* 화면상 우측 상단 고정(.buttons 는 position:fixed)이지만 DOM 은 본문 뒤에 둔다.
+          홈의 우측 하단 고정 링크와 같은 기준 — 페이지에 계속 떠 있는 보조 컨트롤은
+          본문을 다 읽은 뒤 도달하게 한다. */}
+      <div className={styles.buttons}>
+        {github && <LinkBtn type="github" url={github} project={title} />}
+        {url && (
+          <LinkBtn
+            type="url"
+            url={url}
+            urlType={urlType}
+            label={urlLabel}
+            project={title}
+          />
+        )}
+
+        <Link
+          href={`../strongerDeer#${id}`}
+          className={styles.back}
+          aria-label="프로젝트 목록으로 돌아가기"
+        >
+          <X className="w-6 h-6" aria-hidden="true" />
+        </Link>
+      </div>
     </div>
   );
 }

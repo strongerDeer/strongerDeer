@@ -3,7 +3,7 @@ import Image from "next/image";
 const Education = () => {
   return (
     <section>
-      <h2 className="title">
+      <h2 id="education-heading" tabIndex={-1} className="title skipTarget">
         Education <span>교육</span>
       </h2>
       <ol className="list">

@@ -8,7 +8,7 @@ const OtherExperience = () => {
   return (
     <div className="wrap" id="otherExperience">
       <section>
-        <h2 className="title">
+        <h2 id="other-heading" tabIndex={-1} className="title skipTarget">
           Other Experience <span>기타 경력 및 경험</span>
         </h2>
 

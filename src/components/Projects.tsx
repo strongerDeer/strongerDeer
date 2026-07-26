@@ -49,7 +49,7 @@ const Projects = ({ projects }: ProjectProps) => {
     <>
       <div className="wrap" id="projects">
         <section>
-          <h2 className="title">
+          <h2 id="projects-heading" tabIndex={-1} className="title skipTarget">
             Projects <span>프로젝트</span>
           </h2>
 

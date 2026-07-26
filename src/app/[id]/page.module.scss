@@ -2,7 +2,10 @@
   @apply max-w-screen-2xl m-auto px-4 sm:px-10 pb-10;
 
   header {
-    @apply bg-surface sticky top-0 pt-10 z-10 border-b mb-6;
+    // sticky 오버레이라 아래 본문이 비쳐 보이면 안 된다 — 카드(surface)가 아니라
+    // 페이지 배경과 같은 색이어야 한다. 라이트에서는 둘 다 흰색이라 차이가 없었지만
+    // 다크에서는 surface(#171a20)가 배경(#0f1115)보다 밝아 블록처럼 도드라졌다.
+    @apply bg-background sticky top-0 pt-10 z-10 border-b border-line mb-6;
   }
 
   // 본문 바로가기 대상("핵심 결과" 제목). 상세는 sticky 헤더가 홈보다 훨씬 높아
