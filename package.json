@@ -22,7 +22,6 @@
     "remark": "^15.0.1",
     "remark-directive": "^3.0.0",
     "remark-rehype": "^11.1.1",
-    "sass-loader": "^16.0.4",
     "shiki": "^1.24.4",
     "unist-util-visit": "^5.0.0"
   },
@@ -35,6 +34,7 @@
     "eslint-config-next": "^16.2.10",
     "postcss": "^8",
     "sass": "1.77.8",
+    "sass-loader": "^16.0.4",
     "subset-font": "^2.5.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"

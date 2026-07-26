@@ -295,27 +295,9 @@
     }
   }
 }
-.strength {
-  @apply grid md:grid-cols-3 gap-8 mt-8;
-  div {
-    @apply p-6 bg-surface rounded-xl;
-  }
-
-  h3 {
-    @apply flex items-center gap-1 mb-4 text-accent-text text-lg font-bold;
-    svg {
-      @apply h-5;
-    }
-  }
-}
-
 .moreToggleBtn {
   // hover 색은 자동 대비 검사가 재현하지 못해 놓치기 쉽다. blue-500 은 3.68 로 미달 → blue-600(5.17).
   @apply px-6 py-2 text-sm border border-line-strong bg-surface rounded-full hover:text-accent-text hover:border-accent-line transition-colors mx-auto block relative z-30;
-}
-
-.skill {
-  @apply text-sm bg-surface-subtle p-6 rounded-xl mt-4 grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-3;
 }
 
 .function {
@@ -326,10 +308,6 @@
       @apply max-w-full rounded-xl border mt-3;
     }
   }
-}
-
-.new-link {
-  @apply text-accent-text underline;
 }
 
 [data-rehype-pretty-code-figure] pre {

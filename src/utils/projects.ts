@@ -130,6 +130,27 @@ function videoFromMarkdownImage() {
   };
 }
 
+/**
+ * 마크다운 본문 이미지에 지연 로딩을 붙인다.
+ *
+ * next/image 로 넣은 썸네일과 달리 마크다운에서 온 <img> 는 아무 속성이 없어
+ * 화면 밖 이미지까지 전부 즉시 내려받았다(Lighthouse "Defer offscreen images" 206KiB).
+ * 본문 이미지는 sticky 헤더·핵심 결과·대표 썸네일 아래에 있어 첫 화면에 걸리지 않으므로
+ * 전부 lazy 로 돌려도 LCP 후보를 늦추지 않는다.
+ */
+function lazyLoadImages() {
+  return (tree: Root) => {
+    visit(tree, "element", (node: Element) => {
+      if (node.tagName !== "img") return;
+      node.properties = {
+        ...node.properties,
+        loading: "lazy",
+        decoding: "async",
+      };
+    });
+  };
+}
+
 export async function getAllProjects() {
   const allProjectsData = await Promise.all(
     getProjectIds().map(async (id) => {
@@ -165,7 +186,9 @@ export async function getProject(fileName: string) {
     .use(remarkRehype)
     .use(addClasses)
     .use(externalLinks)
+    // 순서 주의 — video 변환을 먼저 해야 mp4 가 img 로 남아 lazy 속성을 받지 않는다.
     .use(videoFromMarkdownImage)
+    .use(lazyLoadImages)
     .use(rehypePrettyCode, {
       // github-light 는 주석·문자열 토큰이 대비 3.17~4.38 로 AA 미달이라
       // 동일 계열의 고대비 테마를 쓴다.
