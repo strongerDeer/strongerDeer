@@ -47,7 +47,9 @@ const Hero = () => {
             👋 안녕하세요
           </motion.p>
           <motion.h1
-            className="text-2xl leading-snug font-normal sm:text-3xl"
+            id="hero-heading"
+            tabIndex={-1}
+            className="skipTarget text-2xl leading-snug font-normal sm:text-3xl"
             {...fadeUp(0.4)}
           >
             <span className="border-b border-gray-500">

@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { I_PROJECTS } from "@data/project";
 import ProjectCard from "./project/ProjectCard";
 import MoreToggleBtn from "./shared/MoreToggleBtn";
+import { scrollIntoViewSafely } from "@utils/motion";
 type ProjectProps = {
   projects: I_PROJECTS[];
 };
@@ -26,12 +27,21 @@ const Projects = ({ projects }: ProjectProps) => {
     : other.slice(0, OTHER_COLLAPSED_COUNT);
   const displayProjects = [...featured, ...displayOther];
 
+  // 새로 드러나는 첫 카드. 이 카드들은 "더보기" 버튼보다 DOM 앞에 삽입되므로,
+  // 초점을 옮겨주지 않으면 펼친 뒤 다음 Tab 이 새 카드를 모두 건너뛰고 다음 섹션으로 간다.
+  const firstRevealedId = other[OTHER_COLLAPSED_COUNT]?.id;
+
   const handleToggle = () => {
     setShowAllOther((prev) => !prev);
     if (showAllOther) {
-      otherSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+      scrollIntoViewSafely(otherSectionRef.current);
     }
   };
+
+  React.useEffect(() => {
+    if (!showAllOther || !firstRevealedId) return;
+    document.getElementById(firstRevealedId)?.focus();
+  }, [showAllOther, firstRevealedId]);
 
   return (
     <>
@@ -57,6 +67,8 @@ const Projects = ({ projects }: ProjectProps) => {
                     index={index}
                     project={project}
                     compact={index >= featured.length}
+                    // 접힌 상태에서 보여주는 맛보기 카드들은 blur 에 덮여 보이지 않는다.
+                    hidden={!showAllOther && index >= featured.length}
                   />
                 ))}
               </motion.ul>

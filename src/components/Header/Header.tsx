@@ -12,7 +12,7 @@ const NAV_ITEMS = [
   { href: "#education", label: "교육·자격" },
 ];
 
-const ExternalLinks = ({ mobile = false }: { mobile?: boolean }) => (
+export const ExternalLinks = ({ mobile = false }: { mobile?: boolean }) => (
   <span className={mobile ? "mobileExternalLinks" : "portfolioLinks"}>
     <a
       href="https://strongerdeer.notion.site/strongerDeer-Archive-17e01a7a57f1804a8248c430448d5417?pvs=74"
@@ -31,7 +31,7 @@ const ExternalLinks = ({ mobile = false }: { mobile?: boolean }) => (
       title="GitHub"
       className="externalLink githubLink"
     >
-      <Github className="h-5" />
+      <Github className="h-5" aria-hidden="true" />
       <span>{mobile ? "GitHub" : "GitHub"}</span>
     </a>
   </span>
@@ -63,8 +63,6 @@ const Header = () => {
           <ExternalLinks mobile />
         </nav>
       </details>
-
-      <ExternalLinks />
     </header>
   );
 };

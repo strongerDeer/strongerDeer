@@ -66,7 +66,8 @@
       }
 
       h3 {
-        @apply text-sm font-normal text-gray-400 mb-3;
+        // 경력 메타데이터(국문명·지역). gray-400 은 흰 배경 대비 2.54 로 AA 미달 → gray-500(4.83).
+        @apply text-sm font-normal text-gray-500 mb-3;
 
         span {
           @apply text-xl font-bold mb-2 text-gray-800 tracking-tight  mr-2;
@@ -370,7 +371,8 @@
 }
 
 .moreToggleBtn {
-  @apply px-6 py-2 text-sm border border-gray-300 bg-white rounded-full hover:text-blue-500 hover:border-blue-200 transition-colors mx-auto block relative z-30;
+  // hover 색은 자동 대비 검사가 재현하지 못해 놓치기 쉽다. blue-500 은 3.68 로 미달 → blue-600(5.17).
+  @apply px-6 py-2 text-sm border border-gray-300 bg-white rounded-full hover:text-blue-600 hover:border-blue-200 transition-colors mx-auto block relative z-30;
 }
 
 .json {

@@ -1,34 +1,31 @@
 @use "sass:math";
 
 // 애니메이션 관련 변수
-$animation-duration: 10s;
-$animation-timing: ease-in-out;
+// 이전에는 10s 무한 반복이었다. WCAG 2.2.2(Pause, Stop, Hide)는 자동으로 시작해
+// 5초를 넘는 움직임에 정지 수단을 요구하므로, 정지 UI 를 넣는 대신 1회 재생으로 바꾼다.
+// 전체 재생 시간 = 0.5s + (8 × 0.06s) ≈ 0.98s.
+$animation-duration: 0.5s;
+$animation-timing: ease-out;
 $initial-weight: 100;
 $weight-increment: 100;
-$delay-increment: 0.1;
+$delay-increment: 0.06;
 
 @mixin font-weight-animation($weight, $delay) {
   --target-weight: #{$weight};
-  animation: fontWeight $animation-duration infinite both;
+  // both: 시작 전에는 from(opacity 0), 끝난 뒤에는 to(목표 굵기)를 유지한다.
+  // 반복하지 않으므로 재생이 끝나면 글자별 굵기 그라데이션 상태로 멈춘다.
+  animation: fontWeight $animation-duration both;
   animation-delay: #{$delay}s;
   animation-timing-function: $animation-timing;
 }
 
 @keyframes fontWeight {
-  0% {
+  from {
     font-weight: $initial-weight;
-    opacity: 1;
+    opacity: 0;
   }
-  10% {
+  to {
     font-weight: var(--target-weight);
-    opacity: 1;
-  }
-  95% {
-    font-weight: var(--target-weight);
-    opacity: 1;
-  }
-  100% {
-    font-weight: $initial-weight;
     opacity: 1;
   }
 }
@@ -54,10 +51,12 @@ $delay-increment: 0.1;
     }
   }
 
+  // 감속 설정에서는 애니메이션만 없애고 "끝난 뒤의 모습"을 그대로 보여준다.
+  // 이전에는 일괄 600 이라 일반 모드(굵기 그라데이션)와 로고가 다르게 보였다.
   @media (prefers-reduced-motion: reduce) {
     span {
       animation: none;
-      font-weight: 600;
+      font-weight: var(--target-weight);
       opacity: 1;
     }
   }

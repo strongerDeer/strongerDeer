@@ -9,6 +9,7 @@ type ProjectBtnsProps = {
   urlLabel?: string;
   github?: string;
   projectId: string;
+  projectTitle?: string;
   detailLabel?: string;
 };
 
@@ -18,17 +19,28 @@ const ProjectBtns = ({
   urlLabel,
   github,
   projectId,
+  projectTitle,
   detailLabel,
 }: ProjectBtnsProps) => {
   return (
     <div className="btn-group">
       <Link href={`/${projectId}`} className="go detail border-gray-150">
         <span>{detailLabel ?? "상세 과정 보기"}</span>
-        <ArrowRight className="stroke-gray-700" />
+        <ArrowRight className="stroke-gray-700" aria-hidden="true" />
       </Link>
 
-      {github && <LinkBtn type="github" url={github} />}
-      {url && <LinkBtn type="url" url={url} urlType={urlType} label={urlLabel} />}
+      {github && (
+        <LinkBtn type="github" url={github} project={projectTitle} />
+      )}
+      {url && (
+        <LinkBtn
+          type="url"
+          url={url}
+          urlType={urlType}
+          label={urlLabel}
+          project={projectTitle}
+        />
+      )}
     </div>
   );
 };
@@ -40,35 +52,43 @@ export const LinkBtn = ({
   url,
   urlType = "site",
   label,
+  project,
 }: {
   type: "github" | "url" | "view";
   url: string;
   urlType?: UrlType;
   label?: string;
+  project?: string;
 }) => {
-  if (type === "view") {
-  }
+  // 이름이 없으면 URL 전체가 링크 이름으로 읽힌다("https 콜론 슬래시 슬래시 …").
+  // 카드마다 같은 종류의 버튼이 반복되므로 프로젝트명을 앞에 붙여 목록에서 구분되게 한다.
+  const fallback =
+    type === "github"
+      ? "GitHub 저장소"
+      : urlType === "slides"
+      ? "슬라이드 열기"
+      : "사이트 열기";
+  const name = label ?? (project ? `${project} ${fallback}` : fallback);
+
   return (
-    <>
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`go ${
-          type === "github"
-            ? "bg-gray-200 border-gray-200"
-            : "bg-blue-100 border-blue-100"
-        }`}
-      >
-        {type === "url" && urlType === "slides" ? (
-          <Presentation className="stroke-blue-500" />
-        ) : type === "url" ? (
-          <ExternalLink className="stroke-blue-500" />
-        ) : (
-          <Github className="stroke-gray-700" />
-        )}
-        <span>{label ?? url}</span>
-      </a>
-    </>
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`go ${
+        type === "github"
+          ? "bg-gray-200 border-gray-200"
+          : "bg-blue-100 border-blue-100"
+      }`}
+    >
+      {type === "url" && urlType === "slides" ? (
+        <Presentation className="stroke-blue-500" aria-hidden="true" />
+      ) : type === "url" ? (
+        <ExternalLink className="stroke-blue-500" aria-hidden="true" />
+      ) : (
+        <Github className="stroke-gray-700" aria-hidden="true" />
+      )}
+      <span>{name}</span>
+    </a>
   );
 };

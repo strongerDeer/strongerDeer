@@ -28,7 +28,7 @@ const Nav = ({ headings }: NavProps) => {
   }
 
   return (
-    <nav className={styles.nav}>
+    <nav className={styles.nav} aria-label="이 문서 목차">
       {headings.map(({ id, text }) => (
         <Link key={id} href={`#${id}`}>
           {SHORT_LABEL[text] ?? text}

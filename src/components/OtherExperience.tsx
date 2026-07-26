@@ -48,7 +48,7 @@ const OtherExperience = () => {
                     rel="noopener noreferrer"
                     className="go"
                   >
-                    <ExternalLink />
+                    <ExternalLink aria-hidden="true" />
                     <span>{link.text}</span>
                   </a>
                 )}

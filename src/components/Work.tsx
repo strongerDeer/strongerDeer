@@ -5,6 +5,7 @@ import { Code, SquareMousePointer, Trees } from "lucide-react";
 import { useRef, useState } from "react";
 import MoreToggleBtn from "./shared/MoreToggleBtn";
 import Image from "next/image";
+import { scrollIntoViewSafely } from "@utils/motion";
 
 const Work = () => {
   const [showAll, setShowAll] = useState(false);
@@ -15,7 +16,7 @@ const Work = () => {
   const handleToggle = () => {
     setShowAll((prev) => !prev);
     if (showAll) {
-      sectionRef.current?.scrollIntoView({ behavior: "smooth" });
+      scrollIntoViewSafely(sectionRef.current);
     }
   };
 

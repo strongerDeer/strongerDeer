@@ -190,7 +190,10 @@ const NadDashboardDemo = () => {
     <section className={styles.demo} aria-label="더미 데이터로 재현한 NAD 이벤트 성과 대시보드 UI">
       <div className={styles.demoLabel}>예시 화면 · 실데이터 아님</div>
 
-      <nav className={styles.nav} aria-label="대시보드 예시 메뉴">
+      {/* 링크가 하나도 없는 시각적 모형이라 <nav> 로 두면 이동할 곳이 없는
+          navigation 랜드마크가 랜드마크 목록에 남는다. 바깥 <section> 의 aria-label 이
+          "예시 화면"이라는 맥락을 이미 전달하므로 랜드마크를 만들지 않는다. */}
+      <div className={styles.nav}>
         <div>
           <span>대시보드</span>
           <strong>SPHERE</strong>
@@ -200,7 +203,7 @@ const NadDashboardDemo = () => {
           <span>검색·SEO</span>
           <span>품질</span>
         </div>
-      </nav>
+      </div>
 
       <header className={styles.header}>
         <div>
