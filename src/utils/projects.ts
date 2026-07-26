@@ -128,7 +128,9 @@ export async function getProject(fileName: string) {
     .use(addClasses)
     .use(externalLinks)
     .use(rehypePrettyCode, {
-      theme: "github-light",
+      // github-light 는 주석·문자열 토큰이 대비 3.17~4.38 로 AA 미달이라
+      // 동일 계열의 고대비 테마를 사용한다.
+      theme: "github-light-high-contrast",
     })
     .use(rehypeStringify)
     .process(matterResult.content);

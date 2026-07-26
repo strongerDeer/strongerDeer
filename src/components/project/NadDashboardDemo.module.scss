@@ -10,7 +10,7 @@
   @apply flex flex-col gap-3 border-b border-gray-200 pb-3 pr-0 sm:flex-row sm:items-center sm:justify-between sm:pr-48;
   div { @apply flex flex-wrap items-center gap-4; }
   strong { @apply border-b-2 border-indigo-600 pb-1 text-sm; }
-  span { @apply text-xs font-medium text-gray-400; }
+  span { @apply text-xs font-medium text-gray-500; }
 }
 
 .deepNav span { @apply rounded-full border border-gray-200 bg-white px-2.5 py-1 text-[10px]; }
@@ -45,11 +45,11 @@
 }
 .metrics article > strong { @apply mt-2 block text-2xl font-bold text-indigo-700; }
 .metrics article.kpiGreen > strong { @apply text-emerald-700; }
-.metrics article > small { @apply mt-1 block min-h-8 text-[10px] leading-relaxed text-gray-400; }
+.metrics article > small { @apply mt-1 block min-h-8 text-[10px] leading-relaxed text-gray-500; }
 
 .rateRow {
   @apply mt-2 flex items-center justify-between;
-  span { @apply text-[10px] text-gray-400; }
+  span { @apply text-[10px] text-gray-500; }
   b { @apply text-[11px] font-bold text-gray-700; }
 }
 .progress { @apply mt-1 h-1.5 overflow-hidden rounded-full bg-gray-100; }
@@ -61,7 +61,7 @@
   div { @apply flex flex-1 flex-col items-center gap-1; }
   i { @apply flex h-9 w-full items-end rounded bg-gray-50 not-italic; }
   i span { @apply block w-full rounded-t bg-indigo-300; }
-  small { @apply text-[9px] text-gray-400; }
+  small { @apply text-[9px] text-gray-500; }
 }
 .kpiGreen .miniBars i span { @apply bg-emerald-300; }
 
@@ -76,9 +76,9 @@
 }
 .periodCurrent {
   @apply flex items-center gap-3;
-  > span { @apply border-r border-gray-200 pr-3 text-[11px] text-gray-400; }
+  > span { @apply border-r border-gray-200 pr-3 text-[11px] text-gray-500; }
   strong { @apply block text-sm; }
-  small { @apply text-[10px] text-gray-400; }
+  small { @apply text-[10px] text-gray-500; }
 }
 .periodOptions {
   @apply flex flex-wrap items-center gap-1.5;
@@ -95,27 +95,27 @@
 .tableWrap {
   @apply mt-4 overflow-x-auto rounded-xl border border-gray-200 bg-white;
   table { @apply w-full min-w-[560px] border-collapse text-xs; }
-  th { @apply border-b border-gray-200 px-3 py-2.5 text-right text-[10px] font-semibold text-gray-400; }
+  th { @apply border-b border-gray-200 px-3 py-2.5 text-right text-[10px] font-semibold text-gray-500; }
   th:first-child { @apply text-left; }
   td { @apply border-b border-gray-100 px-3 py-2.5 text-right; }
   tr:last-child td { @apply border-b-0; }
   td b { @apply font-bold; }
-  td small { @apply block text-[9px] text-gray-400; }
+  td small { @apply block text-[9px] text-gray-500; }
 }
 .roundCell {
   @apply text-left;
   strong { @apply mr-2 text-indigo-700; }
-  span { @apply text-[10px] text-gray-400; }
+  span { @apply text-[10px] text-gray-500; }
 }
 .accent { @apply font-bold text-indigo-600; }
-.dim { @apply text-gray-400; }
+.dim { @apply text-gray-500; }
 
-.footnote { @apply mt-2 text-[10px] leading-relaxed text-gray-400; }
+.footnote { @apply mt-2 text-[10px] leading-relaxed text-gray-500; }
 
 .chartCard { @apply mt-4 rounded-xl border border-gray-200 bg-white p-4; }
 .cardHead { @apply flex flex-wrap items-start justify-between gap-3; }
 .cardHead strong { @apply text-sm; }
-.cardHead p { @apply mt-1 text-[11px] text-gray-400; }
+.cardHead p { @apply mt-1 text-[11px] text-gray-500; }
 
 .legend { @apply flex flex-wrap gap-3 text-[10px] text-gray-500; }
 .legend span::before { content: ""; @apply mr-1 inline-block h-2 w-2 rounded-full; }
