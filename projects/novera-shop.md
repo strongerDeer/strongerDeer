@@ -4,7 +4,7 @@ id: "novera-shop"
 type: "업무"
 title: "NOVERA Shop"
 kor: "커머스 프론트엔드 구축·운영"
-thumb: "/project_noverashop.jpg"
+thumb: "/project_noverashop.webp"
 period: "2025.02~운영 중"
 description: "취소·반품·거절이 얽히는 주문 상태 15종, 화면은 어떻게 감당했을까?"
 detailLabel: "주문·클레임 상태 설계 과정 보기"
@@ -75,7 +75,7 @@ role: "신규 커머스 TF에서 화면 정책·UI 설계·개발·운영 검증
 
 # 구현
 
-![상품 목록 화면(PLP) — 카테고리 필터·정렬·상품 카드 상태 배지](/strongerDeer/project/novera-shop_plp.jpg)
+![상품 목록 화면(PLP) — 카테고리 필터·정렬·상품 카드 상태 배지](/strongerDeer/project/novera-shop_plp.webp)
 
 카테고리 필터, 정렬, 무료배송·품절임박 상태 배지를 포함한 상품 탐색 화면.
 
@@ -84,11 +84,11 @@ role: "신규 커머스 TF에서 화면 정책·UI 설계·개발·운영 검증
 - **캠페인 구축·측정**: 팬덤 참여형 이벤트 SPHERE 3개 회차와 DANAL SQUARE 랜딩 개발. 댓글·퀴즈·투표처럼 회차마다 참여 방식과 디자인이 달라 고유 화면은 독립 구현하되, 기존 상품 UI·댓글 API와 컴포넌트·로그인 복귀 흐름을 연결하고 진입·참여 행동은 공통 GA 이벤트 체계로 측정. 이벤트 ID·일정·연관 상품 등 운영 값은 회차별 상수로 분리
 - **상품별 사전 안내**: 해외결제·예약 판매·배송 조건을 상품 화면에서 결제 전에 확인할 수 있도록 안내 영역 구성
 
-![상품 상세 화면(PDP) — 가격·배송 조건과 상품별 안내사항 영역](/strongerDeer/project/novera-shop_pdp.jpg)
+![상품 상세 화면(PDP) — 가격·배송 조건과 상품별 안내사항 영역](/strongerDeer/project/novera-shop_pdp.webp)
 
 가격·배송 조건 아래에 안내사항 영역을 분리해 이벤트 상품의 발송 시점, 주문 변경 조건, 해외 진행 방식을 결제 전에 노출.
 
-![SPHERE 호흡 투표 이벤트 랜딩 — 발동 카운터·투표·공유·상품 연결](/strongerDeer/project/novera-shop_sphere.jpg)
+![SPHERE 호흡 투표 이벤트 랜딩 — 발동 카운터·투표·공유·상품 연결](/strongerDeer/project/novera-shop_sphere.webp)
 
 누적 발동 카운터, 투표·공유·상품 연결을 포함한 참여형 캠페인 랜딩. 각 캠페인의 경로·오픈일·참여 유형을 대시보드에 등록하고, 댓글·투표·퀴즈 완주처럼 서로 다른 핵심 행동을 오픈 후 7·14·30일의 동일 기간 기준으로 비교.
 

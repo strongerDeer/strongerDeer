@@ -3,7 +3,7 @@ index: 9
 id: "weniv-link"
 type: "업무"
 title: "Weniv Link"
-thumb: "/project_wenivlink.jpg"
+thumb: "/project_wenivlink.webp"
 period: "2024.05"
 kor: "위니브 링크"
 description: "긴 URL 공유를 어떻게 친근한 사용자 경험으로 만들었을까?"

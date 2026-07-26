@@ -3,7 +3,7 @@ index: 5
 id: "wenivooks"
 type: "업무"
 title: "WeniVooks"
-thumb: "/project_wenivooks.jpg"
+thumb: "/project_wenivooks.webp"
 kor: "위니북스"
 period: "2023.09~2024.07(약 11개월)"
 description: "Notion 교안의 한계를 어떻게 웹 교안 서비스로 풀었을까?"
@@ -78,7 +78,7 @@ ICT 교육 회사에서 Notion으로 제공하던 개발 교육 콘텐츠를 웹
 :::div{.function}
 
 - 전체 책 목차
-  ![](/strongerDeer/project/wenivooks_list.jpg)
+  ![](/strongerDeer/project/wenivooks_list.webp)
   - 사이드바를 통한 전체 교안 목차 제공(토글 기능 제공)
 - 페이지 목차  
   ![](/strongerDeer/project/wenivooks_toc.gif)
@@ -106,7 +106,7 @@ ICT 교육 회사에서 Notion으로 제공하던 개발 교육 콘텐츠를 웹
 
 - 관련 내용 매뉴얼 작성
 
-  ![](/strongerDeer/project/wenivooks_manual.jpg)
+  ![](/strongerDeer/project/wenivooks_manual.webp)
 
   - 마크다운 작성 가이드 및 교안 등록 프로세스 매뉴얼 제작
   - 향후 유사 프로젝트 진행 시 참고 가능한 문서 확보
@@ -244,13 +244,13 @@ useEffect(() => {
   :::div{.function}
 
   - 검색엔진 최적화(SEO)
-    ![](/strongerDeer/project/wenivooks_seo.jpg)
+    ![](/strongerDeer/project/wenivooks_seo.webp)
     - robots.txt, sitemap.xml 설정
     - OG 메타데이터 최적화로 URL 공유 시 콘텐츠 가독성 향상
   - 런칭 직후부터 검색 노출·클릭 상승 추이 확인
-    ![](/strongerDeer/project/wenivooks_click.jpg)
+    ![](/strongerDeer/project/wenivooks_click.webp)
   - 3개월 누적 노출 31.7만 회, 클릭 1,746회 기록
-    ![](/strongerDeer/project/wenivooks_google.jpg)
+    ![](/strongerDeer/project/wenivooks_google.webp)
     :::
 
 # 💡 인사이트

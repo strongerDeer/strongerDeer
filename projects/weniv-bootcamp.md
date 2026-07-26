@@ -4,7 +4,7 @@ id: "weniv-bootcamp"
 type: "업무"
 title: "Weniv Bootcamp"
 kor: "위니브 부트캠프"
-thumb: "/project_bootcamp.jpg"
+thumb: "/project_bootcamp.webp"
 period: "2023.11~2024.01"
 description: "강의의 강점을 어떻게 수강 신청까지 이어지게 전달했을까?"
 tags: ["Next.js", "React", "Sass"]

@@ -3,7 +3,7 @@ index: 6
 id: "weniv-analytics"
 type: "업무"
 title: "Weniv Analytics"
-thumb: "/project_analytics.jpg"
+thumb: "/project_analytics.webp"
 kor: "위니브 분석 대시보드"
 period: "2024.05~2024.07(약 8주)"
 description: "흩어진 서비스 사용 현황을 어떻게 한 기준으로 비교했을까?"
@@ -71,15 +71,15 @@ metrics:
   - 달력으로 시작일-종료일 직접 선택 가능
 
 - 기간별 접속자수/접속건수
-  ![](/strongerDeer/project/analytics_chart.jpg)
+  ![](/strongerDeer/project/analytics_chart.webp)
 
   - 접속량과 접속자수 구분하여 사용자 접속량 파악
 
 - 요일별 평균 접속자수/접속건수
-  ![](/strongerDeer/project/analytics_day.jpg)
+  ![](/strongerDeer/project/analytics_day.webp)
 
 - 라인 차트: 시간별 평균 접속자수/접속건수
-  ![](/strongerDeer/project/analytics_time.jpg)
+  ![](/strongerDeer/project/analytics_time.webp)
 
 - SQL 코드 에디터
   ![](/strongerDeer/project/analytics_editor.gif)
@@ -93,15 +93,15 @@ metrics:
 :::div{.function}
 
 - 기간별 DAU, WAU, MAU 지표 모니터링
-  ![](/strongerDeer/project/analytics_dau.jpg)
+  ![](/strongerDeer/project/analytics_dau.webp)
 - 메뉴: 최근 7일 접속자수 추이 그래프 형태 제공
-  ![](/strongerDeer/project/analytics_line7.jpg)
+  ![](/strongerDeer/project/analytics_line7.webp)
 
   - 전체적인 추이 파악
   - 지난주 대비 증감수 파악
 
 - 서비스별 접속자 수 추이 비교
-  ![](/strongerDeer/project/analytics_line.jpg)
+  ![](/strongerDeer/project/analytics_line.webp)
 
   - 서비스 개선 우선순위 설정 및 개발 리소스 배분
   - 운영 리소스 대비 실사용이 저조한 서비스 종료 제안
@@ -113,7 +113,7 @@ metrics:
 :::div{.function}
 
 - 도넛 차트: 기간별 접속자 환경
-  ![](/strongerDeer/project/analytics_donut.jpg)
+  ![](/strongerDeer/project/analytics_donut.webp)
 
   - 모바일/PC 사용 비율, 운영체제별 사용자 분포, 브라우저별 점유율 분석
   - 해당 데이터 기반 서비스 QA 체크 우선 진행 제안
@@ -124,7 +124,7 @@ metrics:
   - 지역별 사용자 분포로 마케팅 활용 제안
 
 - 키워드 데이터 시각화: 서비스(위니북스) 내 검색 키워드
-  ![](/strongerDeer/project/analytics_keyword.jpg)
+  ![](/strongerDeer/project/analytics_keyword.webp)
 
   - 인기 검색어 기반 콘텐츠 내용 보강 제안
   - 사용자 관심사에 따른 신규 콘텐츠 기획 제안

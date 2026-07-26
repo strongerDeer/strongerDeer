@@ -25,14 +25,14 @@ const Education = () => {
 
               <div className="grid grid-cols-2 gap-2 mt-2 max-w-screen-sm">
                 <Image
-                  src="/strongerDeer/img.png"
+                  src="/strongerDeer/img.webp"
                   alt=""
                   width={400}
                   height={400}
                   className="object-cover aspect-[5/3] rounded-lg"
                 />
                 <Image
-                  src="/strongerDeer/img2.jpg"
+                  src="/strongerDeer/img2.webp"
                   alt=""
                   width={400}
                   height={400}

@@ -3,7 +3,7 @@ import { BookMarked, LeafyGreen, Mic2, Tent } from "lucide-react";
 export const EXPERIENCES = [
   {
     id: 1,
-    thumb: "/thumb_camp.jpg",
+    thumb: "/thumb_camp.webp",
     icon: Tent,
     title: "부트캠프 강사",
 
@@ -25,7 +25,7 @@ export const EXPERIENCES = [
 
   {
     id: 2,
-    thumb: "/thumb_inflearn.jpg",
+    thumb: "/thumb_inflearn.webp",
     icon: LeafyGreen,
     title: "인프런 온라인 강의",
 
@@ -44,7 +44,7 @@ export const EXPERIENCES = [
 
   {
     id: 3,
-    thumb: "/thumb_book.jpg",
+    thumb: "/thumb_book.webp",
     icon: BookMarked,
     title: "전자책 출판",
 
@@ -64,7 +64,7 @@ export const EXPERIENCES = [
   },
   {
     id: 4,
-    thumb: "/thumb_lecture.jpg",
+    thumb: "/thumb_lecture.webp",
     icon: Mic2,
     title: "특강",
 

@@ -37,7 +37,7 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
       "상품 탐색, 주문/클레임, 운영 도구처럼 상태가 많은 화면을 로딩·오류·빈 화면·권한 상태까지 포함해 설계·구현합니다.",
     evidence:
       "주문 상태 15종의 표시·행동 기준을 단일 출처로 정리해 고객·운영 화면에 일관 반영하고, 문의가 잦던 지점을 화면 내 사전 안내로 전환",
-    image: "/project/novera-shop_plp.jpg",
+    image: "/project/novera-shop_plp.webp",
     projectId: "novera-shop",
     icon: SquareStack,
   },

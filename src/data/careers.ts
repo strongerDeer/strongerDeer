@@ -61,9 +61,9 @@ export const CAREERS: I_CAREERS[] = [
     ],
     location: "서울",
     images: [
-      "/career/teemstone_1.jpg",
-      "/career/teemstone_2.jpg",
-      "/career/teemstone_3.jpg",
+      "/career/teemstone_1.webp",
+      "/career/teemstone_2.webp",
+      "/career/teemstone_3.webp",
     ],
   },
   {
@@ -80,9 +80,9 @@ export const CAREERS: I_CAREERS[] = [
     ],
     location: "서울",
     images: [
-      "/career/geryon_1.jpg",
-      "/career/geryon_2.jpg",
-      "/career/geryon_3.jpg",
+      "/career/geryon_1.webp",
+      "/career/geryon_2.webp",
+      "/career/geryon_3.webp",
     ],
   },
   {
@@ -99,9 +99,9 @@ export const CAREERS: I_CAREERS[] = [
     ],
     location: "서울",
     images: [
-      "/career/dunet_1.jpg",
-      "/career/dunet_2.jpg",
-      "/career/dunet_3.jpg",
+      "/career/dunet_1.webp",
+      "/career/dunet_2.webp",
+      "/career/dunet_3.webp",
     ],
   },
   {
@@ -118,9 +118,9 @@ export const CAREERS: I_CAREERS[] = [
     ],
     location: "부산",
     images: [
-      "/career/skoinfo_1.jpg",
-      "/career/skoinfo_2.jpg",
-      "/career/skoinfo_3.jpg",
+      "/career/skoinfo_1.webp",
+      "/career/skoinfo_2.webp",
+      "/career/skoinfo_3.webp",
     ],
   },
   {

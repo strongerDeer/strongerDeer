@@ -3,7 +3,7 @@ index: 8
 id: "jeju-ai"
 type: "업무"
 title: "2024 Jeju AI Conference"
-thumb: "/project_jeju_ai_conf.jpg"
+thumb: "/project_jeju_ai_conf.webp"
 period: "2024.03(3일)"
 kor: "제주 AI 컨퍼런스"
 description: "컨퍼런스의 첫인상을 어떻게 한 페이지에 담았을까?"
