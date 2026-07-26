@@ -1,5 +1,5 @@
 ---
-index: 3
+index: 2
 id: "novera-dashboard"
 type: "업무"
 title: "NAD"
@@ -125,15 +125,17 @@ const andPage = (eventFilter: unknown, pagePaths: string[]) => ({
 
 **사용자·목적**: 프론트엔드·디자인이 배포 후 성능·접근성·SEO·이미지·번들 회귀를 감지. 실사용자 지표 CrUX(크롬 실사용자 측정 데이터)를 합격 기준으로 두고 Lighthouse는 주간 변화 비교에 활용.
 
-**화면 구성**: 페이지별 Core Web Vitals·Lighthouse 점수, 이미지 전송량·번들·타입·린트 오류, 운영 release 커밋 기준 이전 배포 대비 변화, 회귀·노이즈 구분과 주간 분석 코멘트, canonical·hreflang·JSON-LD·sitemap·robots 자동 점검.
+**화면 구성**: 페이지별 Core Web Vitals·Lighthouse 점수, 이미지 전송량·번들·타입·린트 오류, 운영 릴리스 커밋 기준 이전 배포 대비 변화, 회귀·노이즈 구분과 주간 분석 코멘트, canonical·hreflang·JSON-LD·sitemap·robots 자동 점검.
+
+**측정 자동화**: 운영 배포본을 별도 worktree에서 빌드해 모바일·데스크톱 Lighthouse를 반복 측정하고, 직전 배포와 비교해 품질 회귀를 판정. 수집·판정은 결정론적 스크립트가 담당하고 AI는 측정 결과의 자연어 분석과 다음 우선순위 작성을 맡도록 분리해, AI를 사용할 수 없는 환경에서도 측정과 판정은 유지되도록 구성.
 
 ![Shop 품질 모니터링 — 재측정·회귀 판정과 주간 자동 분석 코멘트](/strongerDeer/project/nad_quality.svg)
 
 :span[실측 데이터]{.realdata} 동일 배포본 재측정 여부, 이미지·번들·성능 변화, 회귀·노이즈, 주간 분석 코멘트 구성.
 
-![실사용자 지표(CrUX) — 모바일·데스크탑 통과 판정, LCP 구성 분해와 주간 추세](/strongerDeer/project/nad_crux.svg)
+![실사용자 지표(CrUX) — 모바일·데스크톱 통과 판정, LCP 구성 분해와 주간 추세](/strongerDeer/project/nad_crux.svg)
 
-:span[실측 데이터]{.realdata} 실사용자(CrUX) 최근 28일 이동 창 기준 모바일·데스크탑 통과 판정. 수치는 주차별로 변동하며, LCP 구성 분해와 주간 추세로 원인 위치(서버 응답·이미지·렌더)를 함께 확인.
+:span[실측 데이터]{.realdata} 실사용자(CrUX) 최근 28일 이동 창 기준 모바일·데스크톱 통과 판정. 수치는 주차별로 변동하며, LCP 구성 분해와 주간 추세로 원인 위치(서버 응답·이미지·렌더)를 함께 확인.
 
 ## 기술 문제와 해결
 
@@ -157,7 +159,7 @@ const andPage = (eventFilter: unknown, pagePaths: string[]) => ({
 **해결**:
 
 - 동일 배포본 재측정으로 실제 코드 변화와 측정 편차 분리
-- 비교 기준점(baseline)을 운영 release 커밋으로 고정
+- 비교 기준점(baseline)을 운영 릴리스 커밋으로 고정
 - TBT 노이즈 밴드 적용으로 허위 경보 제거
 - 외부 API 캐시와 주간 자동 측정으로 반복 조회 비용 축소
 

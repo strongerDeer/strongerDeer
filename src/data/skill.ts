@@ -1,11 +1,13 @@
 import {
   Accessibility,
+  Bot,
   Boxes,
   Gauge,
   LayoutDashboard,
   LucideIcon,
   Palette,
   SquareStack,
+  Workflow,
 } from "lucide-react";
 import { IconType } from "react-icons";
 import { FaGithub } from "react-icons/fa";
@@ -27,6 +29,53 @@ export type I_SkillDomain = {
 // 이력서의 "맡길 수 있는 기술 영역"을 실무 근거(evidence)와 함께 정리.
 // evidence는 실제 프로젝트에서 만든 결과라 "할 수 있다"가 아니라 "해봤다"로 읽힌다.
 export const SKILL_DOMAINS: I_SkillDomain[] = [
+  {
+    id: "product-ui",
+    title: "Product UI",
+    component: "ProductUI",
+    description:
+      "상품 탐색, 주문/클레임, 운영 도구처럼 상태가 많은 화면을 로딩·오류·빈 화면·권한 상태까지 포함해 설계·구현합니다.",
+    evidence:
+      "주문 상태 15종의 표시·행동 기준을 단일 출처로 정리해 고객·운영 화면에 일관 반영하고, 문의가 잦던 지점을 화면 내 사전 안내로 전환",
+    image: "/project/novera-shop_plp.jpg",
+    projectId: "novera-shop",
+    icon: SquareStack,
+  },
+  {
+    id: "frontend-architecture",
+    title: "Frontend Architecture",
+    component: "FrontendArchitecture",
+    description:
+      "Next.js App Router, React 19, TypeScript strict, TanStack Query v5 기반의 서버/클라이언트 데이터 흐름과 폼을 설계합니다.",
+    evidence:
+      "SSR 데이터를 prefetch/dehydrate로 클라이언트 캐시에 이어받아 중복 요청 제거, 무한 스크롤·필터 조합의 빈 결과 화면까지 처리",
+    image: "/project/novera-shop_architecture.png",
+    projectId: "novera-shop",
+    icon: Boxes,
+  },
+  {
+    id: "data-dashboard",
+    title: "Data Dashboard",
+    component: "DataDashboard",
+    description:
+      "GA4 Data API, Search Console, 어드민 데이터를 연결한 성과·품질 지표를 Recharts 대시보드로 시각화합니다.",
+    evidence:
+      "이벤트 성과 분석 체계 구축·대시보드 배포. 회차별 오픈 시점 차이를 상대기간으로 정규화해 공정 비교하고, 지표의 귀속 한계·데이터 커버리지를 함께 노출해 오독 방지",
+    image: "/project/nad_quality.jpg",
+    projectId: "novera-dashboard",
+    icon: LayoutDashboard,
+  },
+  {
+    id: "performance-seo",
+    title: "Performance & SEO",
+    component: "PerformanceSEO",
+    description:
+      "Core Web Vitals·Lighthouse 기반 이미지·웹폰트 최적화와 canonical, JSON-LD, sitemap 등 SEO 설정 점검으로 초기 로딩·검색 노출을 개선합니다.",
+    evidence: "실사용자 지표와 Lighthouse를 교차 확인해 개선 우선순위 도출",
+    image: "/project/nad_crux.jpg",
+    projectId: "novera-dashboard",
+    icon: Gauge,
+  },
   {
     id: "design-system",
     title: "Design System",
@@ -51,51 +100,31 @@ export const SKILL_DOMAINS: I_SkillDomain[] = [
     projectId: "nds",
     icon: Accessibility,
   },
+];
+
+// AI·자동화는 제품 역량(SKILL_DOMAINS)과 같은 위계가 아니라 그 역량을 수행하는 방식이라,
+// 같은 카드 디자인을 쓰되 별도 묶음으로 분리해 렌더한다.
+export const WORKFLOW_DOMAINS: I_SkillDomain[] = [
   {
-    id: "product-ui",
-    title: "Product UI",
-    component: "ProductUI",
+    id: "ai-assisted-development",
+    title: "AI-assisted Development",
+    component: "AIAssistedDevelopment",
     description:
-      "상품 탐색, 주문/클레임, 운영 어드민처럼 상태가 많은 화면을 로딩·오류·빈 화면·권한 상태까지 포함해 설계·구현합니다.",
-    evidence: "NOVERA Shop에서 문의가 잦던 지점을 화면 내 사전 안내로 전환",
-    image: "/project/novera-shop_plp.jpg",
-    projectId: "novera-shop",
-    icon: SquareStack,
-  },
-  {
-    id: "frontend-architecture",
-    title: "Frontend Architecture",
-    component: "FrontendArchitecture",
-    description:
-      "Next.js App Router, React 19, TypeScript strict, TanStack Query v5 기반의 서버/클라이언트 데이터 흐름과 폼을 설계합니다.",
+      "Claude Code로 요구사항과 작업 단위를 Markdown으로 정리하고 초안 구현·리팩터링·테스트·문서화를 진행합니다.",
     evidence:
-      "SSR 데이터를 prefetch/dehydrate로 클라이언트 캐시에 이어받아 중복 요청 제거, 무한 스크롤·필터 조합의 빈 결과 화면까지 처리",
-    image: "/project/novera-shop_architecture.png",
-    projectId: "novera-shop",
-    icon: Boxes,
+      "중요한 변경은 Claude 리뷰와 Codex의 다른 모델 관점으로 교차 검증하고, 생성 코드는 타입·린트·테스트와 직접 리뷰를 거쳐 반영",
+    icon: Bot,
   },
   {
-    id: "performance-seo",
-    title: "Performance & SEO",
-    component: "PerformanceSEO",
+    id: "workflow-automation",
+    title: "Workflow Automation",
+    component: "WorkflowAutomation",
     description:
-      "Core Web Vitals·Lighthouse 기반 이미지·웹폰트 최적화와 canonical, JSON-LD, sitemap 등 SEO 설정 점검으로 초기 로딩·검색 노출을 개선합니다.",
-    evidence: "실사용자 지표와 Lighthouse를 교차 확인해 개선 우선순위 도출",
-    image: "/project/nad_crux.jpg",
-    projectId: "novera-dashboard",
-    icon: Gauge,
-  },
-  {
-    id: "data-dashboard",
-    title: "Data Dashboard",
-    component: "DataDashboard",
-    description:
-      "GA4 Data API, Search Console, 어드민 데이터를 연결한 성과·품질 지표를 Recharts 대시보드로 시각화합니다.",
+      "Figma MCP로 디자인 컨텍스트와 구현을 연결하고, 반복되는 품질 측정·리포트 작업을 자동화합니다.",
     evidence:
-      "이벤트 성과 분석 체계 구축·대시보드 배포. 회차별 오픈 시점 차이를 상대기간으로 정규화해 공정 비교하고, 지표의 귀속 한계·데이터 커버리지를 함께 노출해 오독 방지",
-    image: "/project/nad_quality.jpg",
+      "측정·판정은 결정론적 스크립트가, 요약·해석은 AI가 담당하도록 분리하고 코드 반영과 PR 머지는 직접 검토 후 결정",
     projectId: "novera-dashboard",
-    icon: LayoutDashboard,
+    icon: Workflow,
   },
 ];
 
@@ -127,6 +156,8 @@ export const MAIN_STACK = [
   "Jira",
   "Notion",
   "GitHub",
+  "Claude Code",
+  "Codex",
 ];
 
 // 도구 아이템 인터페이스
@@ -174,6 +205,6 @@ export const PROGRAMS: I_Program[] = [
     name: "Claude",
     icon: SiClaude,
     description:
-      "AI 도구 활용 — 품질 측정 해석, 문서 동기화를 보조로 활용하고 최종 판단은 직접 수행.",
+      "AI 도구 활용 — Claude Code·MCP(Figma·Notion)로 화면 구현과 문서 동기화를 자동화하고, 생성 코드는 타입·린트 검사와 직접 리뷰를 거쳐 반영.",
   },
 ];

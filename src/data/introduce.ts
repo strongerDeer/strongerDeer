@@ -1,19 +1,19 @@
-import { Accessibility, Boxes, Palette } from "lucide-react";
+import { ChartSpline, Palette, SquareStack } from "lucide-react";
 
 export const HERO_KEYWORDS = [
   {
-    title: "UX Rules",
-    description: "환경·입력 방식이 달라도 지켜지는 반응형·키보드·접근성 규칙 정의",
-    icon: Accessibility,
+    title: "Commerce Product UI",
+    description: "상품 탐색·주문·클레임 고객 화면부터 운영 도구까지 구축",
+    icon: SquareStack,
   },
   {
-    title: "Component Engineering",
-    description: "브라우저 동작을 컴포넌트 API·테스트로 담아 동작·회귀 축소",
-    icon: Boxes,
+    title: "Data-driven Improvement",
+    description: "행동·성능 데이터로 개선 결과를 확인하고 다음 우선순위를 결정",
+    icon: ChartSpline,
   },
   {
-    title: "Design Platform & DX",
-    description: "Figma 토큰·패키지·Storybook·CI로 디자이너·개발자 공통 기준 연결",
+    title: "Design to Engineering",
+    description: "8년의 디자인 경험을 토큰·컴포넌트 기준으로 연결",
     icon: Palette,
   },
 ];

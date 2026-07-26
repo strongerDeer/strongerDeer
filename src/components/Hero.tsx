@@ -62,11 +62,9 @@ const Hero = () => {
             className="mt-6 w-full text-base sm:text-lg leading-relaxed text-gray-700 font-normal text-balance break-keep"
             {...fadeUp(0.5)}
           >
-            디자인 의도와 브라우저 동작을 연결해
+            상품 탐색부터 주문·클레임, 운영 도구까지 구축하고
             <br />
-            사용 환경이 달라도
-            <br />
-            일관된 UX를 만드는 프론트엔드 개발자
+            사용자 행동과 성능 데이터로 개선 결과를 확인합니다
           </motion.p>
           <motion.ul
             className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 mt-6"
