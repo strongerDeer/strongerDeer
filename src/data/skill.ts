@@ -9,9 +9,6 @@ import {
   SquareStack,
   Workflow,
 } from "lucide-react";
-import { IconType } from "react-icons";
-import { FaGithub } from "react-icons/fa";
-import { SiClaude } from "react-icons/si";
 
 export type I_SkillDomain = {
   id: string;
@@ -151,53 +148,4 @@ export const MAIN_STACK = [
   "GitHub",
   "Claude Code",
   "Codex",
-];
-
-// 도구 아이템 인터페이스
-type I_Program = {
-  id: number;
-  name: string;
-  image?: string;
-  icon?: IconType;
-  description: string;
-};
-
-export const PROGRAMS: I_Program[] = [
-  {
-    id: 1,
-    name: "VS Code",
-    image: "/program/vsc.jpg",
-    description: "기술 스택 관점 — 확장 프로그램, 스니펫 등 코드 작성 환경.",
-  },
-  {
-    id: 2,
-    name: "Chrome",
-    image: "/program/chrome.jpg",
-    description: "사용자 관점 — 개발자 도구로 실제 사용자가 보는 화면을 점검.",
-  },
-  {
-    id: 3,
-    name: "Notion",
-    image: "/program/notion.png",
-    description: "협업 관점 — 정책·기준·문서를 팀이 함께 참고하도록 정리.",
-  },
-  {
-    id: 4,
-    name: "Figma",
-    image: "/program/figma.jpg",
-    description: "디자인·협업 관점 — 디자이너와 화면 시안, 토큰을 함께 검토.",
-  },
-  {
-    id: 5,
-    name: "GitHub",
-    icon: FaGithub,
-    description: "버전관리 관점 — 코드 리뷰, 커밋 컨벤션으로 협업 이력 관리.",
-  },
-  {
-    id: 6,
-    name: "Claude",
-    icon: SiClaude,
-    description:
-      "AI 도구 활용 — Claude Code·MCP(Figma·Notion)로 화면 구현과 문서 동기화를 자동화하고, 생성 코드는 타입·린트 검사와 직접 리뷰를 거쳐 반영.",
-  },
 ];
