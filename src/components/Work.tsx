@@ -36,12 +36,16 @@ const Work = () => {
 
         <div className="list">
           <ol id="work-list">
-            {(displayCareers as I_CAREERS[]).map((career, index) => (
+            {(displayCareers as I_CAREERS[]).map((career, index) => {
+              // 접힌 상태의 맛보기 항목은 opacity-30 이라 본문 대비가 1.46:1 까지 떨어진다.
+              // 읽을 수 없는 상태이므로 inert 로 접근성 트리에서 제외한다
+              // (프로젝트 카드의 blur 처리와 같은 이유).
+              const faded = !showAll && index !== 0;
+              return (
               <li
                 key={career.id}
-                className={`${
-                  showAll || index === 0 ? "opacity-100" : "opacity-30"
-                }              `}
+                inert={faded}
+                className={faded ? "opacity-30" : "opacity-100"}
               >
                 <div>
                   <h3>
@@ -95,7 +99,8 @@ const Work = () => {
                   </div>
                 </div>
               </li>
-            ))}
+              );
+            })}
           </ol>
           {!showAll && CAREERS.length > 2 && <div className="blur" />}
         </div>

@@ -3,7 +3,6 @@ import ProjectThumb from "./ProjectThumb";
 import ProjectBtns from "./ProjectBtns";
 import Tag from "@components/shared/Tag";
 import { I_PROJECTS, ICON_MAP, ICON_TYPE } from "@data/project";
-import Link from "next/link";
 
 type ProjectCardProps = {
   project: I_PROJECTS;
@@ -49,16 +48,18 @@ const ProjectCard = ({
       inert={hidden}
       className={compact ? "compact" : ""}
     >
-      {/* 카드 대표 링크. 초점을 받으면 카드 전체에 링이 그려진다(globals.scss 의 :has 규칙).
+      {/* 카드 대표 링크는 ProjectThumb 안에서 이미지 영역만 감싼다(배지는 링크 밖).
+          초점을 받으면 카드 전체에 링이 그려진다(globals.scss 의 :has 규칙).
           제목은 링크로 감싸지 않는다 — 목적지가 같아 이름이 중복될 뿐 아니라,
           inline <a> 가 블록 <h3> 를 감싸는 구조라 아웃라인이 아예 그려지지 않았다. */}
-      <Link
+      <ProjectThumb
+        type={type}
+        thumb={thumb}
+        title={title}
+        metrics={metrics}
         href={`/${id}`}
-        className="thumbLink"
-        aria-label={`${title} 상세 보기`}
-      >
-        <ProjectThumb type={type} thumb={thumb} title={title} metrics={metrics} />
-      </Link>
+        label={`${title} 상세 보기`}
+      />
 
       <div className="content">
         <div>
