@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "predev": "npm run subset:font",
     "build": "next build --webpack",
+    "prebuild": "npm run subset:font",
+    "subset:font": "node scripts/subset-font.mjs",
     "start": "next start",
     "lint": "eslint .",
-    "deploy": "next build --webpack && touch out/.nojekyll"
+    "deploy": "npm run build && touch out/.nojekyll"
   },
   "dependencies": {
     "framer-motion": "^11.14.4",
@@ -36,6 +39,7 @@
     "eslint-config-next": "^16.2.10",
     "postcss": "^8",
     "sass": "1.77.8",
+    "subset-font": "^2.5.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

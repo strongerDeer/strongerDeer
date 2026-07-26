@@ -42,3 +42,6 @@ bak
 .gstack/
 .playwright-mcp/
 .claude
+
+# 빌드 시 생성되는 폰트 서브셋 (scripts/subset-font.mjs)
+src/font/PretendardVariable.subset.woff2
