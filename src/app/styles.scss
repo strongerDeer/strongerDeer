@@ -15,10 +15,10 @@
     @apply container mx-auto px-6;
 
     h2 {
-      @apply text-3xl font-bold text-gray-800;
+      @apply text-3xl font-bold text-ink;
 
       & + p {
-        @apply mt-4 mb-8 text-gray-600;
+        @apply mt-4 mb-8 text-ink-soft;
       }
     }
   }
@@ -28,12 +28,12 @@
 #skills,
 #work,
 #education {
-  @apply bg-white;
+  @apply bg-surface;
 }
 
 #projects,
 #otherExperience {
-  @apply bg-gray-50;
+  @apply bg-surface-sunken;
 }
 
 // 경력
@@ -55,10 +55,10 @@
         @apply content-[''] absolute left-0 top-0 translate-y-2;
       }
       &::before {
-        @apply w-3 h-3 rounded-full border-4 border-blue-500 z-10;
+        @apply w-3 h-3 rounded-full border-4 border-accent z-10;
       }
       &:not(:last-child):after {
-        @apply w-px h-full bg-gray-200 left-1.5 -translate-x-2/4;
+        @apply w-px h-full bg-surface-muted left-1.5 -translate-x-2/4;
       }
 
       div:first-child {
@@ -67,13 +67,13 @@
 
       h3 {
         // 경력 메타데이터(국문명·지역). gray-400 은 흰 배경 대비 2.54 로 AA 미달 → gray-500(4.83).
-        @apply text-sm font-normal text-gray-500 mb-3;
+        @apply text-sm font-normal text-ink-faint mb-3;
 
         span {
-          @apply text-xl font-bold mb-2 text-gray-800 tracking-tight  mr-2;
+          @apply text-xl font-bold mb-2 text-ink tracking-tight  mr-2;
         }
         & ~ p {
-          @apply text-sm text-gray-500 mt-1;
+          @apply text-sm text-ink-faint mt-1;
         }
       }
       .content {
@@ -84,7 +84,7 @@
           }
         }
         ul {
-          @apply list-disc list-inside text-gray-600 space-y-1 pl-3;
+          @apply list-disc list-inside text-ink-soft space-y-1 pl-3;
         }
       }
     }
@@ -95,7 +95,7 @@
     // Projects와 동일한 레이어 방식: 하단만 덮고 65%부터 불투명 배경색으로 마감.
     .blur {
       @apply content-[''] block absolute left-0 -bottom-8 w-full z-20 h-60 bg-gradient-to-b
-      from-transparent from-0% via-white via-65% to-white pointer-events-none;
+      from-transparent from-0% via-surface via-65% to-surface pointer-events-none;
     }
   }
 }
@@ -107,7 +107,7 @@
 .card {
   @apply grid gap-8;
   & > li {
-    @apply flex flex-col   bg-white rounded-xl shadow-lg overflow-hidden;
+    @apply flex flex-col   bg-surface rounded-xl shadow-lg overflow-hidden;
 
     .content {
       @apply flex flex-col grow items-end justify-between pt-4 px-6 pb-6;
@@ -123,7 +123,7 @@
       }
       h3 + p {
         #projects & {
-          @apply mb-6 text-gray-600;
+          @apply mb-6 text-ink-soft;
         }
 
         #otherExperience &,
@@ -152,7 +152,7 @@
   }
 
   .thumb {
-    @apply relative bg-gray-200;
+    @apply relative bg-surface-muted;
   }
 
   .thumb-fallback {
@@ -163,7 +163,7 @@
     }
 
     p {
-      @apply text-sm text-gray-500;
+      @apply text-sm text-ink-faint;
     }
   }
 
@@ -200,7 +200,7 @@
     // -inset-x로 카드 바깥 여백/그림자까지 함께 덮어 경계에서 색이 어긋나지 않게 한다.
     .blur {
       @apply content-[''] block absolute -inset-x-4 -bottom-8 z-20 bg-gradient-to-b
-      from-transparent from-0% via-gray-50 via-65% to-gray-50 pointer-events-none;
+      from-transparent from-0% via-surface-sunken via-65% to-surface-sunken pointer-events-none;
 
       // 접힌 상태의 마지막 행 전체를 덮는다.
       // 모바일 6행 → 태블릿 3행 → 데스크톱 2행
@@ -223,7 +223,7 @@
     @apply flex items-baseline gap-2 mt-10 mb-4 text-lg font-bold first-of-type:mt-0;
 
     span {
-      @apply text-sm font-normal text-gray-500;
+      @apply text-sm font-normal text-ink-faint;
     }
   }
 
@@ -236,7 +236,7 @@
     }
 
     .domain {
-      @apply rounded-xl border border-gray-200 h-full p-5;
+      @apply rounded-xl border border-line h-full p-5;
 
       .domainTag {
         @apply block mb-2 text-xs text-primaryA11y;
@@ -250,7 +250,7 @@
         @apply flex items-center gap-2 mb-3;
 
         .domainIcon {
-          @apply flex items-center justify-center w-9 h-9 rounded-lg bg-blue-500/10 text-blue-500 shrink-0;
+          @apply flex items-center justify-center w-9 h-9 rounded-lg bg-accent-tint text-accent shrink-0;
         }
 
         // Skill 6개는 형제라 위계가 없으므로 이름 굵기 통일(bold).
@@ -260,11 +260,11 @@
       }
 
       p {
-        @apply text-sm text-gray-600 font-normal leading-relaxed;
+        @apply text-sm text-ink-soft font-normal leading-relaxed;
       }
 
       .evidence {
-        @apply mt-3 pt-3 border-t border-gray-100 text-point font-mono text-xs leading-relaxed;
+        @apply mt-3 pt-3 border-t border-line-subtle text-point font-mono text-xs leading-relaxed;
       }
 
       .domainLink {
@@ -277,40 +277,7 @@
     @apply flex flex-wrap gap-2 mt-6;
 
     li {
-      @apply text-sm px-3 py-1 rounded-full bg-gray-100 text-gray-800;
-    }
-  }
-
-  .tools {
-    @apply mt-8 rounded-xl border border-gray-200;
-
-    summary {
-      @apply cursor-pointer select-none px-5 py-3 text-sm text-gray-500;
-    }
-
-    .program {
-      @apply grid grid-cols-1 sm:grid-cols-2 gap-3 px-5 pb-5;
-
-      .tool {
-        @apply flex items-start gap-3;
-
-        img,
-        .iconProgram {
-          @apply w-10 h-10 rounded-lg overflow-hidden shrink-0;
-        }
-
-        .iconProgram {
-          @apply flex items-center justify-center bg-gray-800 text-white;
-        }
-
-        .toolName {
-          @apply text-sm text-gray-500 font-light leading-relaxed;
-
-          strong {
-            @apply block text-gray-800 font-medium;
-          }
-        }
-      }
+      @apply text-sm px-3 py-1 rounded-full bg-surface-subtle text-ink;
     }
   }
 }
@@ -331,11 +298,11 @@
 .strength {
   @apply grid md:grid-cols-3 gap-8 mt-8;
   div {
-    @apply p-6 bg-white rounded-xl;
+    @apply p-6 bg-surface rounded-xl;
   }
 
   h3 {
-    @apply flex items-center gap-1 mb-4 text-blue-600 text-lg font-bold;
+    @apply flex items-center gap-1 mb-4 text-accent-text text-lg font-bold;
     svg {
       @apply h-5;
     }
@@ -344,11 +311,11 @@
 
 .moreToggleBtn {
   // hover 색은 자동 대비 검사가 재현하지 못해 놓치기 쉽다. blue-500 은 3.68 로 미달 → blue-600(5.17).
-  @apply px-6 py-2 text-sm border border-gray-300 bg-white rounded-full hover:text-blue-600 hover:border-blue-200 transition-colors mx-auto block relative z-30;
+  @apply px-6 py-2 text-sm border border-line-strong bg-surface rounded-full hover:text-accent-text hover:border-accent-line transition-colors mx-auto block relative z-30;
 }
 
 .skill {
-  @apply text-sm bg-gray-100 p-6 rounded-xl mt-4 grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-3;
+  @apply text-sm bg-surface-subtle p-6 rounded-xl mt-4 grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-3;
 }
 
 .function {
@@ -362,28 +329,40 @@
 }
 
 .new-link {
-  @apply text-blue-600 underline;
+  @apply text-accent-text underline;
 }
 
 [data-rehype-pretty-code-figure] pre {
-  @apply p-8 text-sm rounded-lg bg-gray-100 overflow-x-auto !important;
+  @apply p-8 text-sm rounded-lg bg-surface-subtle overflow-x-auto !important;
+
+  // shiki 가 토큰마다 --shiki-light/--shiki-dark 를 심어준다. 기본은 라이트,
+  // 다크 모드에서만 다크 토큰으로 바꾼다.
+  span {
+    color: var(--shiki-light);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-rehype-pretty-code-figure] pre span {
+    color: var(--shiki-dark);
+  }
 }
 
 // blue-600 on blue-100 은 대비 4.24 로 미달 — blue-700(5.49)로 조정.
 code {
-  @apply text-sm bg-blue-100 text-blue-700 rounded px-2 py-1;
+  @apply text-sm bg-accent-surface text-accent-text rounded px-2 py-1;
   pre & {
     @apply bg-transparent p-0;
   }
 }
 
 .details {
-  @apply p-6 border-4 border-gray-100 rounded-xl;
+  @apply p-6 border-4 border-line-subtle rounded-xl;
   h5 ~ h5 {
     @apply mt-8;
   }
 }
 
 .motivation {
-  @apply bg-gray-100 p-4 rounded-xl my-4;
+  @apply bg-surface-subtle p-4 rounded-xl my-4;
 }

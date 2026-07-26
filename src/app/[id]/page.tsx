@@ -107,8 +107,8 @@ export default async function Page({ params }: Props) {
             {title} <span>{kor}</span>
           </h1>
         </div>
-        <p className="mt-3 text-lg font-semibold text-gray-800">{description}</p>
-        <p className="mt-2 text-sm text-gray-500">
+        <p className="mt-3 text-lg font-semibold text-ink">{description}</p>
+        <p className="mt-2 text-sm text-ink-faint">
           {period} · {role}
         </p>
 

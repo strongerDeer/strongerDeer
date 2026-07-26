@@ -168,8 +168,14 @@ export async function getProject(fileName: string) {
     .use(videoFromMarkdownImage)
     .use(rehypePrettyCode, {
       // github-light 는 주석·문자열 토큰이 대비 3.17~4.38 로 AA 미달이라
-      // 동일 계열의 고대비 테마를 사용한다.
-      theme: "github-light-high-contrast",
+      // 동일 계열의 고대비 테마를 쓴다.
+      // 라이트/다크 두 테마를 함께 내보내면 각 토큰에 --shiki-light/--shiki-dark 가
+      // 붙어 CSS 에서 골라 쓸 수 있다(globals.scss 의 pre 규칙 참고).
+      // 단일 테마로 두면 다크 모드에서 배경만 어두워지고 토큰 색은 라이트용이라 대비가 무너진다.
+      theme: {
+        light: "github-light-high-contrast",
+        dark: "github-dark-high-contrast",
+      },
     })
     .use(rehypeStringify)
     .process(matterResult.content);

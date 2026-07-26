@@ -9,7 +9,7 @@ const Education = () => {
       <ol className="list">
         <li>
           <strong>멋쟁이사자처럼 프론트엔드 스쿨</strong> 1기 수료
-          <span className="text-gray-500 text-sm">(2021.11 ~ 2022.01)</span>
+          <span className="text-ink-faint text-sm">(2021.11 ~ 2022.01)</span>
           <ul>
             <li>
               HTML, CSS, Sass, JavaScript, React, Node.js 등 프론트엔드 기술
@@ -18,7 +18,7 @@ const Education = () => {
             <li>
               <span className="point">
                 <strong>중소벤처기업부장관상</strong> 수상
-                <span className="text-gray-500 text-sm">
+                <span className="text-ink-faint text-sm">
                   (프론트엔드 개발자 양성 부문 / 2022.11.15)
                 </span>
               </span>
@@ -45,12 +45,12 @@ const Education = () => {
 
         <li>
           <strong>부산대학교</strong> 조경학과 졸업
-          <span className="text-gray-500 text-sm">(2008.03 ~ 2012.02)</span>
+          <span className="text-ink-faint text-sm">(2008.03 ~ 2012.02)</span>
           <ul>
             <li>학점: 3.87/4.5</li>
             <li>
               제8회 도코모모 코리아 디자인 공모전 입선
-              <span className="text-gray-500 text-sm">
+              <span className="text-ink-faint text-sm">
                 (2011.06 / 주제: 캠프 하야리아의 미래는 / 작품:
                 &quot;MOSAIC&quot;)
               </span>

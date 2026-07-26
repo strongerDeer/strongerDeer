@@ -2,7 +2,7 @@
   @apply max-w-screen-2xl m-auto px-4 sm:px-10 pb-10;
 
   header {
-    @apply bg-white sticky top-0 pt-10 z-10 border-b mb-6;
+    @apply bg-surface sticky top-0 pt-10 z-10 border-b mb-6;
   }
 
   // 본문 바로가기 대상("핵심 결과" 제목). 상세는 sticky 헤더가 홈보다 훨씬 높아
@@ -44,15 +44,15 @@
   // metrics(긴 문장 리스트) 전용 카드 스타일 — .kpi가 없는 li에만 적용.
   // KPI(.kpi) 항목은 아래 구분선 스타일이 대신 담당한다.
   li:not(.kpi) {
-    @apply rounded-xl bg-white p-4 font-semibold leading-relaxed text-gray-800;
-    @apply border border-gray-100;
+    @apply rounded-xl bg-surface p-4 font-semibold leading-relaxed text-ink;
+    @apply border border-line-subtle;
   }
 }
 
 // KPI 스타일 — 배경 없이 세로 구분선으로만 값을 나눈다(highlights 있을 때만).
 // 모바일(세로 스택): 위쪽 가로 구분선. sm↑(가로 3열): 왼쪽 세로 구분선.
 .kpi {
-  @apply flex flex-col border-t border-gray-200 pt-4;
+  @apply flex flex-col border-t border-line pt-4;
 
   // 첫 항목은 모바일에서 위 구분선을 숨겨 상단이 뜨는 걸 막는다.
   &:first-child {
@@ -62,7 +62,7 @@
   @media (min-width: 768px) {
     // 가로 배치: 세로 구분선 + 좌우 대칭 여백. gap-0 상태에서 각 항목이
     // 구분선 양옆으로 같은 padding(pl/pr)을 가져 구분선이 가운데에 온다.
-    @apply border-t-0 border-l border-gray-200 pl-7 pr-7 pt-0;
+    @apply border-t-0 border-l border-line pl-7 pr-7 pt-0;
 
     &:first-child {
       @apply border-l-0 pl-0;
@@ -79,19 +79,19 @@
 }
 
 .kpiLabel {
-  @apply mt-2 text-sm font-normal leading-relaxed text-gray-600;
+  @apply mt-2 text-sm font-normal leading-relaxed text-ink-soft;
 }
 
 // 각주 — 값 영역과 얇은 구분선으로 분리해 '보조 설명'임을 드러낸다.
 .disclosure {
-  @apply mt-6 border-t border-gray-100 pt-4 text-sm leading-relaxed text-gray-500;
+  @apply mt-6 border-t border-line-subtle pt-4 text-sm leading-relaxed text-ink-faint;
 }
 
 .buttons {
   @apply flex gap-1 fixed top-3 right-3 sm:top-12 sm:right-10 z-20;
 
   .back {
-    @apply bg-gray-200 w-10 h-10 flex items-center justify-center rounded-full;
+    @apply bg-surface-muted w-10 h-10 flex items-center justify-center rounded-full;
   }
 }
 
@@ -103,7 +103,7 @@
   @apply mx-auto max-w-3xl break-words;
 
   p {
-    @apply leading-8 text-gray-700;
+    @apply leading-8 text-ink-body;
 
     & + p {
       @apply mt-3.5;
@@ -118,7 +118,7 @@
   // 왼쪽 보라 세로선 accent로. h3·h4의 accent와 같은 언어(강약만 다름).
   // globals의 .list는 Work·Education 등이 공유하므로 여기서만 스코프.
   :global(.list) > li {
-    @apply border-l-2 border-gray-200 py-2.5 pl-4;
+    @apply border-l-2 border-line py-2.5 pl-4;
     transition: border-color 0.15s;
 
     &::before {
@@ -131,7 +131,7 @@
 
     // 리스트 항목 첫 부분(기술명 등 **볼드**)을 살짝 강조
     strong {
-      @apply text-gray-900;
+      @apply text-ink;
     }
   }
 
@@ -155,7 +155,7 @@
   // 세로선이 padding 영역까지 늘어나 제목 위로 튀어나오는 문제가 생긴다.
   h2 {
     scroll-margin-top: 25rem;
-    @apply mt-20 mb-7 border-l-4 border-point pl-4 text-[28px] font-extrabold leading-tight tracking-tight text-gray-900;
+    @apply mt-20 mb-7 border-l-4 border-point pl-4 text-[28px] font-extrabold leading-tight tracking-tight text-ink;
 
     // sm(640px) 이상: 헤더가 작아지므로 오프셋도 줄인다.
     @media (min-width: 640px) {
@@ -171,7 +171,7 @@
   // 보라(진하고 두꺼운) → 회색(얇은) 세로선으로 색·굵기 모두 낮춰 종속 관계를 드러낸다.
   h3 {
     scroll-margin-top: 15rem;
-    @apply mt-12 mb-5 border-l-2 border-gray-300 pl-3.5 text-xl font-bold leading-snug text-gray-800;
+    @apply mt-12 mb-5 border-l-2 border-line-strong pl-3.5 text-xl font-bold leading-snug text-ink;
 
     &:first-child {
       @apply mt-0;
@@ -191,13 +191,13 @@
   }
 
   h5 {
-    @apply mt-8 inline-flex rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700;
+    @apply mt-8 inline-flex rounded-md bg-surface-subtle px-2.5 py-1 text-sm text-ink-body;
   }
   // 이미지·다이어그램도 읽기 컬럼과 같은 폭으로 — 텍스트와 좌우 정렬을 맞춘다.
   // video 는 GIF 를 대체한 것이라 이미지와 동일하게 다룬다(WCAG 2.2.2 로 controls 부여).
   img,
   video {
-    @apply mx-auto w-full rounded-xl border border-gray-100;
+    @apply mx-auto w-full rounded-xl border border-line-subtle;
   }
 
   :global(.realdata) {

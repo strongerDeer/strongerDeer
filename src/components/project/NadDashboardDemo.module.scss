@@ -1,4 +1,8 @@
 .demo {
+  // 이 영역은 실제 제품 UI 를 재현한 스크린샷 모형이다. 사이트 테마를 따라가면
+  // "실제 제품은 이렇게 생겼다"는 전달이 흐려지므로, 다크 모드에서도 라이트로 고정한다.
+  // color-scheme 을 되돌리면 내부 하드코딩 색(gray-*, 차트 색)이 그대로 의도대로 보인다.
+  color-scheme: light;
   @apply relative max-w-6xl mx-auto mb-16 overflow-hidden rounded-2xl border border-gray-200 bg-gray-50 p-4 sm:p-6 text-gray-900 shadow-sm;
 }
 

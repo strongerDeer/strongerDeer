@@ -2,20 +2,90 @@
 @tailwind components;
 @tailwind utilities;
 
+// ── 색 토큰 ────────────────────────────────────────────────────────────
+// 회색 계열이 전체 색상 사용의 70% 라, dark: 변형을 곳곳에 붙이는 대신
+// 의미 기반 토큰으로 묶고 여기서 한 번만 뒤집는다.
+// 라이트 값은 기존에 쓰던 gray-* 값 그대로라 라이트 모드 시각 변화는 없다.
 :root {
-  // 라이트 고정: 컴포넌트 색상이 bg-white·text-gray-* 로 하드코딩돼 있고 dark: 대응이 없어,
-  // --background/--foreground 만 반전하면 흰 카드 위에 밝은 글자가 겹쳐 대비가 무너진다.
-  // 색상을 토큰화하기 전까지는 OS 설정과 무관하게 라이트로 렌더한다.
   color-scheme: light;
 
   --background: #ffffff;
   --foreground: #171717;
+
+  // 표면 — 아래로 갈수록 진하다
+  --surface: #ffffff; // 카드
+  --surface-sunken: #f9fafb; // 섹션 배경 (gray-50)
+  --surface-subtle: #f3f4f6; // 태그·뱃지 (gray-100)
+  --surface-muted: #e5e7eb; // 썸네일 placeholder (gray-200)
+
+  // 경계
+  --line: #e5e7eb; // gray-200
+  --line-subtle: #f3f4f6; // gray-100
+  --line-strong: #d1d5db; // gray-300
+
+  // 텍스트 — 제목/본문/보조
+  --ink: #1f2937; // gray-800
+  --ink-body: #374151; // gray-700
+  --ink-soft: #4b5563; // gray-600
+  --ink-faint: #6b7280; // gray-500
+
+  // 반전 표면 — GitHub 버튼처럼 배경/글자를 뒤집어 강조하는 요소
+  --surface-inverse: #1f2937;
+  --ink-inverse: #ffffff;
+
+  // 파란 강조 계열(목차 칩·아이콘·본문 링크 등)
+  --accent: #3b82f6; // 아이콘·불릿 (비텍스트 3:1)
+  --accent-text: #1d4ed8; // 텍스트 (4.5 이상)
+  --accent-surface: #dbeafe; // 칩 배경
+  --accent-soft: #eff6ff; // 더 옅은 배경
+  --accent-line: #bfdbfe; // 장식 테두리
+  --accent-tint: #ebf2fe; // 아이콘 배경(기존 blue-500/10 상당)
+
+  // 강조색. 라이트 기준 대비는 아래 주석 참고.
   // 텍스트용 파랑. 이전 값 #4796e7 은 흰 배경 대비 3.10 으로 AA(4.5) 미달이었다.
   // 브랜드 파랑 #499bef 의 색상(210°)·채도(84%)는 유지한 채 명도만 61%→44% 로 낮춰 4.95 확보.
-  // 최소 통과선(#1376db, 4.52)이 아니라 여유를 둔 값 — --point(4.81)와 같은 수준으로 맞춘다.
   --primary-a11y: #1270cf;
   // 원색 #6663fd 는 흰 배경 대비 4.40 으로 WCAG AA(4.5) 미달이라 5% 어둡게 조정(4.81).
   --point: #615ef0;
+}
+
+// OS 설정만 따른다(사이트 내 토글 없음). 토큰 값만 뒤집으면 되므로 JS 가 필요 없다.
+// 아래 값은 표면 4종 × 텍스트/강조색 조합을 전수 계산해 최저 5.17:1 을 확인했다.
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --background: #0f1115;
+    --foreground: #e9ebef;
+
+    --surface: #171a20;
+    --surface-sunken: #0f1115;
+    --surface-subtle: #20242c;
+    --surface-muted: #2a2f38;
+
+    --line: #2c313a;
+    --line-subtle: #23272f;
+    --line-strong: #3a4049;
+
+    --ink: #e9ebef;
+    --ink-body: #c4c9d2;
+    --ink-soft: #b0b7c2;
+    --ink-faint: #9aa1ad;
+
+    --surface-inverse: #e9ebef;
+    --ink-inverse: #171a20;
+
+    --accent: #60a5fa;
+    --accent-text: #a8cbfd; // surface 대비 10.48
+    --accent-surface: #1e2b42;
+    --accent-soft: #182335;
+    --accent-line: #33455f;
+    --accent-tint: #1c2432;
+
+    // 라이트용 원색은 어두운 배경에서 대비가 무너진다 — 밝은 쪽으로 뒤집는다.
+    --primary-a11y: #7cb8ff; // surface 대비 8.43
+    --point: #a5a2ff; // surface 대비 7.64
+  }
 }
 
 body {
@@ -57,7 +127,7 @@ body {
 // 본문 바로가기 — 평소엔 화면 밖에 있다가 Tab 첫 진입에서만 내려온다.
 // 홈은 고정 헤더(.header, z-50), 상세는 sticky 헤더가 있어 그 위로 떠야 하므로 z-100.
 .skipLink {
-  @apply fixed left-4 top-0 z-[100] rounded-b-lg bg-point px-4 py-2.5 text-sm font-semibold text-white;
+  @apply fixed left-4 top-0 z-[100] rounded-b-lg bg-point px-4 py-2.5 text-sm font-semibold text-ink-inverse;
   transform: translateY(-100%);
   transition: transform 0.15s ease-out;
 
@@ -122,10 +192,10 @@ body {
 .title {
   @apply font-bold;
   span {
-    @apply font-normal text-lg text-gray-600 relative pl-3 ml-2;
+    @apply font-normal text-lg text-ink-soft relative pl-3 ml-2;
 
     &::before {
-      @apply content-[''] inline-block w-px  h-3 bg-gray-400 absolute top-1/2 left-0 -translate-y-1/2;
+      @apply content-[''] inline-block w-px  h-3 bg-line-strong absolute top-1/2 left-0 -translate-y-1/2;
     }
   }
   section &,
@@ -142,10 +212,10 @@ body {
   @apply flex justify-between h-16 items-center px-6 fixed top-0 left-0 w-full bg-background z-50;
 
   .headerNav {
-    @apply hidden items-center text-sm text-gray-600 md:flex md:gap-5;
+    @apply hidden items-center text-sm text-ink-soft md:flex md:gap-5;
 
     a {
-      @apply rounded-md px-1.5 py-2 hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-point;
+      @apply rounded-md px-1.5 py-2 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-point;
     }
   }
 
@@ -153,7 +223,7 @@ body {
     @apply relative md:hidden;
 
     summary {
-      @apply flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center gap-1 rounded-lg border border-gray-200 px-3 text-sm font-semibold text-gray-700;
+      @apply flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center gap-1 rounded-lg border border-line px-3 text-sm font-semibold text-ink-body;
 
       &::-webkit-details-marker {
         display: none;
@@ -165,16 +235,16 @@ body {
     }
 
     nav {
-      @apply absolute right-0 top-12 grid w-52 overflow-hidden rounded-xl border border-gray-200 bg-white p-2 shadow-xl;
+      @apply absolute right-0 top-12 grid w-52 overflow-hidden rounded-xl border border-line bg-surface p-2 shadow-xl;
 
       & > a {
-        @apply rounded-lg px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-50;
+        @apply rounded-lg px-3 py-2.5 text-sm text-ink-body hover:bg-surface-sunken;
       }
     }
   }
 
   .mobileExternalLinks {
-    @apply mt-1 grid grid-cols-2 gap-2 border-t border-gray-100 pt-2;
+    @apply mt-1 grid grid-cols-2 gap-2 border-t border-line-subtle pt-2;
 
     .externalLink {
       @apply flex min-h-11 items-center justify-center gap-2 rounded-lg px-2 text-xs font-semibold;
@@ -201,11 +271,11 @@ body {
 
 // 모바일 메뉴(.header 안)와 우측 하단 고정 링크가 함께 쓰는 색상.
 .notionLink {
-  @apply border-gray-300 bg-gray-200 text-gray-900;
+  @apply border-line-strong bg-surface-muted text-ink;
 }
 
 .githubLink {
-  @apply border-gray-800 bg-gray-800 text-white;
+  @apply border-surface-inverse bg-surface-inverse text-ink-inverse;
 }
 
 .list {
@@ -220,7 +290,7 @@ body {
     @apply py-1 pl-4;
 
     &::before {
-      @apply w-1.5 h-1.5 bg-blue-500 top-4 rounded-full;
+      @apply w-1.5 h-1.5 bg-accent top-4 rounded-full;
     }
 
     ul,
@@ -231,7 +301,7 @@ body {
         @apply py-1 pl-4;
 
         &::before {
-          @apply w-1.5 h-px bg-gray-500 top-4;
+          @apply w-1.5 h-px bg-ink-faint top-4;
         }
       }
     }
@@ -244,28 +314,28 @@ body {
     @apply pl-3 relative;
 
     &::before {
-      @apply content-[''] block absolute top-3 left-0 -translate-y-1/2 w-1.5 h-px bg-gray-500;
+      @apply content-[''] block absolute top-3 left-0 -translate-y-1/2 w-1.5 h-px bg-ink-faint;
     }
   }
 }
 
 .point {
-  @apply inline-block text-gray-600  py-px px-1 -mx-1 bg-white;
+  @apply inline-block text-ink-soft  py-px px-1 -mx-1 bg-surface;
 
   // blue-500 은 흰 배경 대비 3.68 로 미달 — blue-600(5.17)로 조정.
   strong {
-    @apply text-blue-600;
+    @apply text-accent-text;
   }
 }
 
 strong.point {
-  @apply text-blue-600;
+  @apply text-accent-text;
 }
 
 //
 .go {
   @apply inline-flex gap-1 items-center justify-center 
-  border hover:border-blue-200 hover:bg-blue-100 
+  border hover:border-accent-line hover:bg-accent-surface 
 
   w-10 h-10 rounded-full 
 hover:scale-110 transition-all duration-300;
@@ -280,7 +350,7 @@ hover:scale-110 transition-all duration-300;
     @apply w-auto max-w-full px-4 rounded-full hover:scale-100;
 
     span {
-      @apply static w-auto h-auto p-0 m-0 overflow-visible whitespace-nowrap border-0 text-sm font-medium text-gray-700;
+      @apply static w-auto h-auto p-0 m-0 overflow-visible whitespace-nowrap border-0 text-sm font-medium text-ink-body;
       clip: auto;
       clip-path: none;
     }
@@ -289,9 +359,9 @@ hover:scale-110 transition-all duration-300;
 
 // iconType
 .iconType {
-  @apply inline-flex items-center bg-gray-100 border rounded-2xl py-1 px-2 text-xs text-gray-600;
+  @apply inline-flex items-center bg-surface-subtle border rounded-2xl py-1 px-2 text-xs text-ink-soft;
 
   .thumb & {
-    @apply absolute top-3 left-3 bg-white;
+    @apply absolute top-3 left-3 bg-surface;
   }
 }

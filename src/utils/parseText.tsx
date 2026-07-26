@@ -13,7 +13,7 @@ const parseText = (text: string) => {
       const content = part.replace(/<span[^>]*?>(.*?)<\/span>/, "$1");
 
       return (
-        <span key={`${index}-${part}`} className="text-gray-500 text-sm">
+        <span key={`${index}-${part}`} className="text-ink-faint text-sm">
           {content}
         </span>
       );

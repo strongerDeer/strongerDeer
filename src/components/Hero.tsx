@@ -32,7 +32,7 @@ const Hero = () => {
           tabIndex={-1}
           className="skipTarget text-2xl leading-snug font-normal sm:text-3xl"
         >
-          <span className="border-b border-gray-500">
+          <span className="border-b border-ink-faint">
             사용자가 머뭇거리는
             <br />
             0.1초를 찾아 줄이는
@@ -40,7 +40,7 @@ const Hero = () => {
           <br />
           <strong>강혜진</strong> 개발자입니다.
         </h1>
-        <p className="mt-6 w-full text-base sm:text-lg leading-relaxed text-gray-700 font-normal text-balance break-keep">
+        <p className="mt-6 w-full text-base sm:text-lg leading-relaxed text-ink-body font-normal text-balance break-keep">
           상품 탐색부터 주문·클레임, 운영 도구까지 구축하고
           <br />
           사용자 행동과 성능 데이터로 개선 결과를 확인합니다
@@ -49,11 +49,11 @@ const Hero = () => {
           {HERO_KEYWORDS.map(({ title, description, icon: Icon }) => (
             <li
               key={title}
-              className="flex flex-col gap-1.5 p-3 rounded-xl border border-gray-150"
+              className="flex flex-col gap-1.5 p-3 rounded-xl border border-line"
             >
               <Icon className="w-5 h-5 text-point" />
               <strong className="text-sm sm:text-base">{title}</strong>
-              <p className="text-xs sm:text-sm text-balance break-keep text-gray-600 font-normal leading-relaxed">
+              <p className="text-xs sm:text-sm text-balance break-keep text-ink-soft font-normal leading-relaxed">
                 {description}
               </p>
             </li>

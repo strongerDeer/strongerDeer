@@ -24,9 +24,9 @@ const ProjectBtns = ({
 }: ProjectBtnsProps) => {
   return (
     <div className="btn-group">
-      <Link href={`/${projectId}`} className="go detail border-gray-150">
+      <Link href={`/${projectId}`} className="go detail border-line">
         <span>{detailLabel ?? "상세 과정 보기"}</span>
-        <ArrowRight className="stroke-gray-700" aria-hidden="true" />
+        <ArrowRight className="stroke-ink-body" aria-hidden="true" />
       </Link>
 
       {github && (
@@ -77,16 +77,16 @@ export const LinkBtn = ({
       rel="noopener noreferrer"
       className={`go ${
         type === "github"
-          ? "bg-gray-200 border-gray-200"
-          : "bg-blue-100 border-blue-100"
+          ? "bg-surface-muted border-line"
+          : "bg-accent-surface border-accent-line"
       }`}
     >
       {type === "url" && urlType === "slides" ? (
-        <Presentation className="stroke-blue-500" aria-hidden="true" />
+        <Presentation className="stroke-accent" aria-hidden="true" />
       ) : type === "url" ? (
-        <ExternalLink className="stroke-blue-500" aria-hidden="true" />
+        <ExternalLink className="stroke-accent" aria-hidden="true" />
       ) : (
-        <Github className="stroke-gray-700" aria-hidden="true" />
+        <Github className="stroke-ink-body" aria-hidden="true" />
       )}
       <span>{name}</span>
     </a>

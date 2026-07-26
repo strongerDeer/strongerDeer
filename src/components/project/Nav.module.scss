@@ -2,10 +2,10 @@
   @apply flex flex-wrap gap-2 mt-6 pb-3;
 
   a {
-    @apply inline-flex items-center rounded-full border border-gray-200 bg-gray-50 py-1.5 px-3 text-xs font-medium text-gray-600 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700;
+    @apply inline-flex items-center rounded-full border border-line bg-surface-sunken py-1.5 px-3 text-xs font-medium text-ink-soft transition-colors hover:border-accent-line hover:bg-accent-soft hover:text-accent-text;
 
     &.active {
-      @apply border-blue-500 bg-blue-50 text-blue-700;
+      @apply border-accent bg-accent-soft text-accent-text;
     }
   }
 }
