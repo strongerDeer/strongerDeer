@@ -4,6 +4,7 @@ import "./globals.scss";
 import "./styles.scss";
 import { pretendard } from "@font";
 import GA from "@utils/GA";
+import WebVitals from "@utils/WebVitals";
 
 const SITE_TITLE = "강혜진 | 프론트엔드 개발자";
 const SITE_DESCRIPTION =
@@ -50,6 +51,7 @@ export default function RootLayout({
       <body>
         {children}
         <GA />
+        <WebVitals />
       </body>
     </html>
   );

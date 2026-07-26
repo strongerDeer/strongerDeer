@@ -3,10 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "predev": "npm run subset:font",
-    "build": "next build --webpack",
-    "prebuild": "npm run subset:font",
+    "dev": "node scripts/subset-font.mjs && next dev",
+    "build": "node scripts/subset-font.mjs && next build --webpack",
     "subset:font": "node scripts/subset-font.mjs",
     "start": "next start",
     "lint": "eslint .",
