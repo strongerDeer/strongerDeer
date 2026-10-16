@@ -102,7 +102,7 @@ export const WORKFLOW_DOMAINS: I_SkillDomain[] = [
     description:
       "Claude Code로 요구사항과 작업 단위를 Markdown으로 정리하고 초안 구현·리팩터링·테스트·문서화를 진행합니다.",
     evidence:
-      "중요한 변경은 Claude 리뷰와 Codex의 다른 모델 관점으로 교차 검증하고, 생성 코드는 타입·린트·테스트와 직접 리뷰를 거쳐 반영",
+      "중요한 변경은 Claude 리뷰와 Codex의 다른 모델 관점으로 교차 검증하고, 생성 코드는 타입·린트·테스트 자동 검사를 통과한 뒤 반영",
     icon: Bot,
   },
   {
@@ -112,7 +112,7 @@ export const WORKFLOW_DOMAINS: I_SkillDomain[] = [
     description:
       "Figma MCP로 디자인 컨텍스트와 구현을 연결하고, 반복되는 품질 측정·리포트 작업을 자동화합니다.",
     evidence:
-      "측정·판정은 결정론적 스크립트가, 요약·해석은 AI가 담당하도록 분리하고 코드 반영과 PR 머지는 직접 검토 후 결정",
+      "측정·판정은 결정론적 스크립트가, 요약·해석은 AI가 담당하도록 분리하고 코드 반영과 PR 머지 여부는 자동 검사와 교차 검증 결과를 보고 결정",
     projectId: "novera-dashboard",
     icon: Workflow,
   },

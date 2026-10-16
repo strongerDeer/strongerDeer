@@ -14,7 +14,7 @@ export type I_CAREERS = {
 export const CAREERS: I_CAREERS[] = [
   {
     id: 1,
-    period: "2025.02~재직 중",
+    period: "2025.02~2026.08(1년 7개월)",
     company: "NOVERA",
     kor: "노베라",
     position: "프론트엔드 개발자",

@@ -34,7 +34,7 @@ export const EXPERIENCES = [
         text: "<strong>아는 만큼 보이는 크롬 개발자 도구</strong><span>(2023.06)</span>",
         lists: [
           "프론트엔드 개발자가 알아야 할 크롬 개발자 도구의 기본적인 기능과 실무에 활용할 수 있는 팁을 담은 강의",
-          "<strong>수강생 2,693명</strong> / <strong>평점 4.8</strong> / 수강평 85개 <span>(2026년 7월 기준)</span>",
+          "<strong>수강생 2,702명</strong> / <strong>평점 4.8</strong> / 수강평 86개 <span>(2026년 10월 기준)</span>",
         ],
       },
     ],
