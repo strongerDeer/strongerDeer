@@ -41,9 +41,9 @@ const Hero = () => {
           <strong>강혜진</strong> 개발자입니다.
         </h1>
         <p className="mt-6 w-full text-base sm:text-lg leading-relaxed text-ink-body font-normal text-balance break-keep">
-          상품 탐색부터 주문·클레임, 운영 도구까지 구축하고
+          아이디어를 제안하고, 화면으로 만들고,
           <br />
-          사용자 행동과 성능 데이터로 개선 결과를 확인합니다
+          출시 후 숫자로 확인하는 프론트엔드 개발자
         </p>
         <ul className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 mt-6">
           {HERO_KEYWORDS.map(({ title, description, icon: Icon }) => (
