@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff;
+  --background-soft: #f6f6fb;
+  --background-card: #fff;
+
+  --foreground: #1f2433;
+  --foreground-muted: #6b7080;
+
+  --line: #e6e6ef;
+  --accent: #615ef0;
+  --accent-soft: #efeefe;
+
+  --on-accent: #ffffff;
+  --info: #1270cf;
+  --info-soft: #e8f1fb;
+  --shadow: 0 1px 2px rgba(31, 36, 51, 0.06), 0 8px 24px rgba(31, 36, 51, 0.06);
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-soft: var(--background-soft);
+  --color-background-card: var(--background-card);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --shadow-card: var(--shadow);
+  --font-sans: var(--font-pretendard);
 }
-
+/* 시스템 다크모드 */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --background: #14151c;
+    --background-soft: #1c1d27;
+    --background-card: #1c1d27;
+
+    --foreground: #ecedf3;
+    --foreground-muted: #a3a6b5;
+
+    --line: #2c2e3b;
+    --accent: #8b88ff;
+    --accent-soft: #25244a;
+
+    --on-accent: #14151c;
+    --info: #5aa5f0;
+    --info-soft: #18283b;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
   }
+}
+/* 다크모드 */
+:root[data-theme="dark"] {
+  --background: #14151c;
+  --background-soft: #1c1d27;
+  --background-card: #1c1d27;
+
+  --foreground: #ecedf3;
+  --foreground-muted: #a3a6b5;
+
+  --line: #2c2e3b;
+  --accent: #8b88ff;
+  --accent-soft: #25244a;
+
+  --on-accent: #14151c;
+  --info: #5aa5f0;
+  --info-soft: #18283b;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
