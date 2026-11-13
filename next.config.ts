@@ -23,6 +23,8 @@ const nextConfig: NextConfig = {
 
   // 이미지 자동 최적화 끄기
   images: { unoptimized: true },
+
+  basePath: "/strongerDeer",
 };
 
 export default nextConfig;
