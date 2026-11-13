@@ -1,31 +1,31 @@
-# Sample workflow for building and deploying a Next.js site to GitHub Pages
+# Next.js 사이트를 빌드해 GitHub Pages에 배포하는 워크플로
 #
-# To get started with Next.js see: https://nextjs.org/docs/getting-started
+# Next.js 시작 가이드: https://nextjs.org/docs/getting-started
 #
 name: Deploy Next.js site to Pages
 
 on:
-  # Runs on pushes targeting the default branch
+  # 기본 브랜치에 push될 때 실행
   push:
     branches: ["main"]
 
-  # Allows you to run this workflow manually from the Actions tab
+  # Actions 탭에서 이 워크플로를 수동으로 실행할 수 있게 허용
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# GitHub Pages 배포가 가능하도록 GITHUB_TOKEN 권한 설정
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+# 동시 배포는 하나만 허용 — 진행 중인 실행과 가장 최근 대기 실행 사이에 쌓인 실행은 건너뛴다.
+# 단, 프로덕션 배포는 끝까지 완료돼야 하므로 진행 중인 실행은 취소하지 않는다.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Build job
+  # 빌드 잡
   build:
     runs-on: ubuntu-latest
     steps:
@@ -55,20 +55,20 @@ jobs:
           cache: ${{ steps.detect-package-manager.outputs.manager }}
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        with:
-          # Automatically inject basePath in your Next.js configuration file and disable
-          # server side image optimization (https://nextjs.org/docs/api-reference/next/image#unoptimized).
-          #
-          # You may remove this line if you want to manage the configuration yourself.
-          static_site_generator: next
+        # with:
+        # Next.js 설정 파일에 basePath를 자동 주입하고
+        # 서버 사이드 이미지 최적화를 비활성화한다 (https://nextjs.org/docs/api-reference/next/image#unoptimized).
+        #
+        # 설정을 직접 관리하려면 이 줄을 제거해도 된다.
+        # static_site_generator: next
       - name: Restore cache
         uses: actions/cache@v4
         with:
           path: |
             .next/cache
-          # Generate a new cache whenever packages or source files change.
+          # 패키지나 소스 파일이 바뀔 때마다 새 캐시를 생성한다.
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          # If source files changed but packages didn't, rebuild from a prior cache.
+          # 소스 파일만 바뀌고 패키지는 그대로면 이전 캐시를 기반으로 다시 빌드한다.
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
@@ -80,7 +80,7 @@ jobs:
         with:
           path: ./out
 
-  # Deployment job
+  # 배포 잡
   deploy:
     environment:
       name: github-pages
