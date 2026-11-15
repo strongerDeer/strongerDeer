@@ -1,14 +1,14 @@
 import {
   BalanceGame,
-  Contact,
   Banner,
   Book,
+  Contact,
   Demo,
   Hero,
   ResponseTime,
   StrongerDeer,
   Together,
-} from "@/components/sections";
+} from '@/components/sections';
 
 export default function Home() {
   return (
