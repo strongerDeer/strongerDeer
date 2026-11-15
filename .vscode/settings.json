@@ -1,0 +1,21 @@
+{
+  // Prettier 설정 파일(.prettierrc 등)이 있을 때만 포맷 적용 — 설정 없는 프로젝트에서 멋대로 포맷하지 않음
+  "prettier.requireConfig": true,
+  // 코드 포맷터로 Prettier 확장 사용 (esbenp.prettier-vscode)
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // 파일 저장 시 자동 포맷 실행
+  "editor.formatOnSave": true,
+  // 저장 시 실행할 코드 액션
+  "editor.codeActionsOnSave": {
+    // ESLint 자동 수정(import 정렬 등)을 명시적으로 실행 — "explicit"은 저장 트리거에만 동작
+    "source.fixAll.eslint": "explicit"
+  },
+  // 들여쓰기 너비 2칸 (CLAUDE.md Prettier 컨벤션과 일치)
+  "editor.tabSize": 2,
+  // 들여쓰기에 탭 대신 스페이스 사용
+  "editor.insertSpaces": true,
+  // 줄바꿈 문자를 LF(\n)로 통일 — OS 간 줄바꿈 차이로 인한 diff 방지
+  "files.eol": "\n",
+  // import 자동완성 시 절대경로(@/...) 우선 사용 — 상대경로(../../) 대신
+  "typescript.preferences.importModuleSpecifier": "non-relative"
+}
