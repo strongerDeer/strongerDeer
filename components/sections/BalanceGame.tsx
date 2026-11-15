@@ -1,15 +1,11 @@
-import { SectionHeading } from '../common/SectionHeading';
+import { Section } from '@/components/common/Section';
 
 export function BalanceGame() {
-  const titleId = 'balance-game-title';
-
   return (
-    <section id='balance-game' aria-labelledby={titleId}>
-      <SectionHeading
-        label='BALANCE GAME'
-        title='몇 개의 취향이 저와 겹칠까요?'
-        titleId={titleId}
-      />
-    </section>
+    <Section
+      id='balance-game'
+      label='밸런스 게임'
+      title='몇 개의 취향이 저와 겹칠까요?'
+    ></Section>
   );
 }
