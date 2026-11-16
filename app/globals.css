@@ -33,6 +33,37 @@
   --shadow-card: var(--shadow);
   --font-sans: var(--font-pretendard);
 }
+/*
+ * 글자 크기 토큰 (fluid type)
+ * - 화면 폭 360px → 1280px 사이에서 최소값 → 최대값으로 부드럽게 커짐
+ * - 최소·최대는 rem: 브라우저 글자 크기 설정(확대)을 따라가게 (WCAG 텍스트 200%)
+ * - 가운데 값은 rem + vw: 화면 폭에 비례하되, 확대 설정도 함께 반영
+ * - text-sm 같은 Tailwind 클래스가 이 값을 그대로 사용 (--text-*--line-height는 줄간격)
+ */
+@theme {
+  --text-xs: clamp(0.75rem, 0.7255rem + 0.1087vw, 0.8125rem); /* 12px → 13px */
+  --text-xs--line-height: 1.5;
+  --text-sm: clamp(0.8125rem, 0.788rem + 0.1087vw, 0.875rem); /* 13px → 14px */
+  --text-sm--line-height: 1.5;
+  --text-base: clamp(
+    0.9375rem,
+    0.8886rem + 0.2174vw,
+    1.0625rem
+  ); /* 15px → 17px */
+  --text-base--line-height: 1.6;
+  --text-lg: clamp(1.0625rem, 0.9891rem + 0.3261vw, 1.25rem); /* 17px → 20px */
+  --text-lg--line-height: 1.5;
+  --text-xl: clamp(1.25rem, 1.152rem + 0.4348vw, 1.5rem); /* 20px → 24px */
+  --text-xl--line-height: 1.4;
+  --text-2xl: clamp(1.5rem, 1.304rem + 0.8696vw, 2rem); /* 24px → 32px */
+  --text-2xl--line-height: 1.35;
+  --text-display: clamp(
+    1.75rem,
+    1.261rem + 2.174vw,
+    3rem
+  ); /* 28px → 48px, 섹션 제목 */
+  --text-display--line-height: 1.3;
+}
 /* 시스템 다크모드 */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
