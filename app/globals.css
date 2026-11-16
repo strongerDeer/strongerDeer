@@ -1,26 +1,109 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff;
+  --background-soft: #f6f6fb;
+  --background-card: #fff;
+
+  --foreground: #1f2433;
+  --foreground-muted: #6b7080;
+
+  --line: #e6e6ef;
+  --accent: #615ef0;
+  --accent-soft: #efeefe;
+
+  --on-accent: #ffffff;
+  --info: #1270cf;
+  --info-soft: #e8f1fb;
+  --shadow: 0 1px 2px rgba(31, 36, 51, 0.06), 0 8px 24px rgba(31, 36, 51, 0.06);
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-soft: var(--background-soft);
+  --color-background-card: var(--background-card);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --shadow-card: var(--shadow);
+  --font-sans: var(--font-pretendard);
 }
-
+/*
+ * 글자 크기 토큰 (fluid type)
+ * - 화면 폭 360px → 1280px 사이에서 최소값 → 최대값으로 부드럽게 커짐
+ * - 최소·최대는 rem: 브라우저 글자 크기 설정(확대)을 따라가게 (WCAG 텍스트 200%)
+ * - 가운데 값은 rem + vw: 화면 폭에 비례하되, 확대 설정도 함께 반영
+ * - text-sm 같은 Tailwind 클래스가 이 값을 그대로 사용 (--text-*--line-height는 줄간격)
+ */
+@theme {
+  --text-xs: clamp(0.75rem, 0.7255rem + 0.1087vw, 0.8125rem); /* 12px → 13px */
+  --text-xs--line-height: 1.5;
+  --text-sm: clamp(0.8125rem, 0.788rem + 0.1087vw, 0.875rem); /* 13px → 14px */
+  --text-sm--line-height: 1.5;
+  --text-base: clamp(
+    0.9375rem,
+    0.8886rem + 0.2174vw,
+    1.0625rem
+  ); /* 15px → 17px */
+  --text-base--line-height: 1.6;
+  --text-lg: clamp(1.0625rem, 0.9891rem + 0.3261vw, 1.25rem); /* 17px → 20px */
+  --text-lg--line-height: 1.5;
+  --text-xl: clamp(1.25rem, 1.152rem + 0.4348vw, 1.5rem); /* 20px → 24px */
+  --text-xl--line-height: 1.4;
+  --text-2xl: clamp(1.5rem, 1.304rem + 0.8696vw, 2rem); /* 24px → 32px */
+  --text-2xl--line-height: 1.35;
+  --text-display: clamp(
+    1.75rem,
+    1.261rem + 2.174vw,
+    3rem
+  ); /* 28px → 48px, 섹션 제목 */
+  --text-display--line-height: 1.3;
+}
+/* 시스템 다크모드 */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --background: #14151c;
+    --background-soft: #1c1d27;
+    --background-card: #1c1d27;
+
+    --foreground: #ecedf3;
+    --foreground-muted: #a3a6b5;
+
+    --line: #2c2e3b;
+    --accent: #8b88ff;
+    --accent-soft: #25244a;
+
+    --on-accent: #14151c;
+    --info: #5aa5f0;
+    --info-soft: #18283b;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
   }
+}
+/* 다크모드 */
+:root[data-theme="dark"] {
+  --background: #14151c;
+  --background-soft: #1c1d27;
+  --background-card: #1c1d27;
+
+  --foreground: #ecedf3;
+  --foreground-muted: #a3a6b5;
+
+  --line: #2c2e3b;
+  --accent: #8b88ff;
+  --accent-soft: #25244a;
+
+  --on-accent: #14151c;
+  --info: #5aa5f0;
+  --info-soft: #18283b;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }

@@ -7,7 +7,7 @@ name: Deploy Next.js site to Pages
 on:
   # 기본 브랜치에 push될 때 실행
   push:
-    branches: ["main"]
+    branches: ['main']
 
   # Actions 탭에서 이 워크플로를 수동으로 실행할 수 있게 허용
   workflow_dispatch:
@@ -21,7 +21,7 @@ permissions:
 # 동시 배포는 하나만 허용 — 진행 중인 실행과 가장 최근 대기 실행 사이에 쌓인 실행은 건너뛴다.
 # 단, 프로덕션 배포는 끝까지 완료돼야 하므로 진행 중인 실행은 취소하지 않는다.
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:
@@ -51,7 +51,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
           cache: ${{ steps.detect-package-manager.outputs.manager }}
       - name: Setup Pages
         uses: actions/configure-pages@v5
