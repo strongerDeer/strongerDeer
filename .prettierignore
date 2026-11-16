@@ -1,0 +1,7 @@
+# 직접 쓰는 문서 (줄바꿈 유지)
+README.md
+
+# 빌드 결과물·자동 생성 파일
+.next
+out
+package-lock.json
