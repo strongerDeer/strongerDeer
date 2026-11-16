@@ -22,6 +22,7 @@ export function Contact() {
           href='https://github.com/strongerDeer'
           target='_blank'
           rel='noopener noreferrer'
+          size='sm'
         >
           GitHub
         </ButtonLink>
