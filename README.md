@@ -12,7 +12,7 @@
 0.1초의 짧은 인터랙션,<br>
 디테일한 사용자 경험을 고민하는 <strong>강혜진</strong> 개발자입니다.
 
-<a href="https://strongerdeer.github.io/strongerDeer/">🦌 자기소개 페이지 보러 가기</a>
+<!--<a href="https://strongerdeer.github.io/strongerDeer/">🦌 자기소개 페이지 보러 가기</a>-->
 
 ### 🛠️ Skills
 
