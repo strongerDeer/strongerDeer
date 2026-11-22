@@ -2,7 +2,7 @@ import { Button } from '@/components/common/Button';
 
 export function Shop() {
   return (
-    <article>
+    <article id='shop'>
       <h3>Shop</h3>
 
       <Button>좋아요</Button>

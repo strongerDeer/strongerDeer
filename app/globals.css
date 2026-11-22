@@ -41,6 +41,9 @@
  * - text-sm 같은 Tailwind 클래스가 이 값을 그대로 사용 (--text-*--line-height는 줄간격)
  */
 @theme {
+  /* 콘텐츠 최대 폭: max-w-page */
+  --container-page: 80rem; /* 1280px */
+
   --text-xs: clamp(0.75rem, 0.7255rem + 0.1087vw, 0.8125rem); /* 12px → 13px */
   --text-xs--line-height: 1.5;
   --text-sm: clamp(0.8125rem, 0.788rem + 0.1087vw, 0.875rem); /* 13px → 14px */
