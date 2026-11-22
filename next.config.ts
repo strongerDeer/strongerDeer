@@ -1,5 +1,5 @@
 import type { NextConfig } from 'next';
-
+const BASE_PATH = '/strongerDeer';
 const nextConfig: NextConfig = {
   experimental: {
     agentFeedback: true,
@@ -24,7 +24,9 @@ const nextConfig: NextConfig = {
   // 이미지 자동 최적화 끄기
   images: { unoptimized: true },
 
-  basePath: '/strongerDeer',
+  basePath: BASE_PATH,
+
+  env: { NEXT_PUBLIC_BASE_PATH: BASE_PATH },
 };
 
 export default nextConfig;
