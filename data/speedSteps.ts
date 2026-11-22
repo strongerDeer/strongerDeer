@@ -4,7 +4,6 @@ export type SpeedStep = {
   delay: number;
 };
 
-// 단계마다 반응이 늦어짐: 0 → 3초. 마지막은 실제로 이메일 복사
 export const SPEED_STEPS: SpeedStep[] = [
   { label: '♡ 좋아요', doneLabel: '♥ 좋아요', delay: 0 },
   { label: '팔로우', doneLabel: '팔로잉 ✓', delay: 100 },

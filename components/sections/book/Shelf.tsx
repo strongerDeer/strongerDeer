@@ -8,12 +8,6 @@ type ShelfProps = {
   label: string;
 };
 
-/**
- * 책장 한 단
- * - 보이는 제목(h3)과 목록(ul)을 aria-labelledby로 연결
- * - id는 category로 만들어서 두 단이 겹치지 않게 함
- * - 책이 많아 넘치면 줄바꿈 대신 가로 스크롤, 책은 선반(아래 두꺼운 선) 위에 바닥 정렬
- */
 export function Shelf({ category, label }: ShelfProps) {
   const titleId = `shelf-${category}-title`;
   const books = BOOKS.filter((book) => book.category === category);

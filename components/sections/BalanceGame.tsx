@@ -4,7 +4,6 @@ import { ChoiceCard } from '@/components/sections/balance/ChoiceCard';
 import { GAMES } from '@/data/games';
 
 export function BalanceGame() {
-  // 정적 화면: 첫 문항만 그림. 몇 번째 문항인지·고른 개수는 5일차에 상태로
   const { id, title, a, b } = GAMES[0];
   const pickedCount = 0;
 
@@ -16,7 +15,6 @@ export function BalanceGame() {
       description='재미로 보는 밸런스 게임. 끌리는 쪽을 고르면 마지막에 제 선택과 비교해 드려요. 고른 답은 언제든 바꿀 수 있어요.'
     >
       <div className='mx-auto mt-8 max-w-4xl rounded-[28px] bg-background-soft px-[max(16px,4vw)] py-7 text-left'>
-        {/* 진행 상황 */}
         <div className='mb-3 flex items-center justify-between text-sm text-foreground-muted tabular-nums'>
           <span>1 / {GAMES.length}</span>
           <span>{pickedCount}개 골랐어요</span>
@@ -33,7 +31,6 @@ export function BalanceGame() {
             Feat. {title}
           </legend>
 
-          {/* 넓은 화면: A | VS | B 3칸, 좁은 화면: 세로로 쌓기 */}
           <div className='grid grid-cols-1 items-center gap-3 sm:grid-cols-[1fr_auto_1fr] sm:gap-4'>
             <ChoiceCard gameId={id} side='a' card={a} />
             <span

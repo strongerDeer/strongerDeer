@@ -4,7 +4,6 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 const base =
   'font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent inline-flex items-center justify-center gap-1';
 
-// 알약 모양(여백·둥근 모서리)은 solid·outline만. text는 글자 링크라 여백 없음
 const boxed = 'rounded-full px-[1.2em] py-[0.7em]';
 
 const variantClass: Record<ButtonVariant, string> = {

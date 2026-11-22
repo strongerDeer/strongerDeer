@@ -9,25 +9,21 @@ type ChoiceCardProps = {
   card: Game['a'];
 };
 
-// A는 파랑(info), B는 보라(accent)
 const sideClass = {
   a: 'bg-info-soft text-info',
   b: 'bg-accent-soft text-accent',
 };
 
-// 카드가 메모지처럼 살짝 기울어져 있다가, 올리거나 고르면 똑바로 섬
 const tiltClass = {
   a: '-rotate-[1.5deg]',
   b: 'rotate-[1.5deg]',
 };
 
-// 카드를 꽂아 둔 압정 색 (진한 색 / 밝은 색)
 const pinColor = {
   a: { dark: '#2f5fb8', light: '#5b8def' },
   b: { dark: '#4f4bd6', light: '#8f8cff' },
 };
 
-/** 장식용 압정 (스크린리더에는 숨김) */
 function Pin({ side }: { side: 'a' | 'b' }) {
   const { dark, light } = pinColor[side];
   return (
@@ -59,11 +55,6 @@ function Pin({ side }: { side: 'a' | 'b' }) {
   );
 }
 
-/**
- * 밸런스 게임 선택 카드 하나
- * - 라디오는 눈에서만 숨기고(sr-only) 카드(label) 전체를 누르게 함 → 키보드·스크린리더는 그대로 사용 가능
- * - 고른 카드는 peer-checked로 테두리 강조 (JS 없이 CSS만)
- */
 export function ChoiceCard({ gameId, side, card }: ChoiceCardProps) {
   const inputId = `game-${gameId}-${side}`;
 

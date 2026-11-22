@@ -14,7 +14,6 @@ export function Book() {
       <Shelf category='dev' label='개발 책' />
       <Shelf category='design' label='디자인·UX 책' />
 
-      {/* 책을 누르면 표지·제목·저자가 들어갈 자리 (6일차). 높이를 미리 잡아 화면이 덜컹이지 않게 */}
       <p
         aria-live='polite'
         className='mx-auto mt-4 flex min-h-24 items-center justify-center gap-3.5 text-foreground-muted'
@@ -39,7 +38,6 @@ export function Book() {
             추천하기
           </Button>
         </div>
-        {/* 추천 결과 문구 자리 (6일차) */}
         <p
           aria-live='polite'
           className='mt-2 min-h-[1.6em] text-sm text-foreground-muted'
