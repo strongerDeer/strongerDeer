@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import { type Book, BOOKS } from '@/data/books';
+import { asset } from '@/lib/asset';
 
 type ShelfProps = {
   category: Book['category'];
@@ -24,7 +25,7 @@ export function Shelf({ category, label }: ShelfProps) {
       </h3>
       <ul
         aria-labelledby={titleId}
-        className='flex items-end justify-center-safe gap-[3px] overflow-x-auto border-b-10 border-line px-3 pt-6'
+        className='flex items-end justify-center-safe gap-0.75 overflow-x-auto border-b-10 border-line px-3 pt-6'
       >
         {books.map(({ id, title }) => (
           <li key={id} className='shrink-0'>
@@ -33,7 +34,7 @@ export function Shelf({ category, label }: ShelfProps) {
               className='mx-1 block cursor-pointer overflow-hidden rounded-[3px] shadow-[0_0_0_1px_rgba(0,0,0,0.08),0_6px_14px_rgba(0,0,0,0.14)] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent'
             >
               <Image
-                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/books/${id}.webp`}
+                src={asset(`/images/books/${id}.webp`)}
                 alt={title}
                 width={80}
                 height={120}
