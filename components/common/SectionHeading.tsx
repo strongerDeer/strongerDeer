@@ -16,11 +16,13 @@ export function SectionHeading({
   return (
     <hgroup className='text-center font-bold'>
       {label && (
-        <p className='text-xs tracking-[0.06em] text-accent'>{label}</p>
+        <p className='mb-2 text-[13px] tracking-[0.06em] text-accent'>
+          {label}
+        </p>
       )}
       <Heading
         id={titleId}
-        className='text-display tracking-[-0.02em] text-balance'
+        className='mb-3 text-display tracking-[-0.02em] text-balance'
       >
         {title}
       </Heading>

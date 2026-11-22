@@ -13,8 +13,8 @@ export function Banner() {
       aria-labelledby='banner-title'
       className={`${brandVars} bg-linear-to-r from-[#f4f8ff] via-[#eaf2ff] to-[#e7f7f1] text-(--brand-ink)`}
     >
-      <div className='relative mx-auto flex w-full max-w-page justify-between gap-6 px-6 py-10 md:items-center'>
-        <div className='absolute top-6 right-6'>
+      <div className='relative mx-auto flex w-full max-w-page justify-between gap-6 px-4 py-10 md:items-center'>
+        <div className='absolute top-6 right-4'>
           <span
             aria-hidden='true'
             className='rounded border border-(--brand-ink)/15 bg-white/75 px-1.5 text-xs font-extrabold tracking-[0.08em] text-(--brand-sub)'

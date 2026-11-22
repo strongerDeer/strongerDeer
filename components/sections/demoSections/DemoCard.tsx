@@ -44,7 +44,11 @@ export function DemoCard({
         <h3 id={titleId} className='text-xl font-bold'>
           {title}
         </h3>
-        {description && <p className='text-foreground-muted'>{description}</p>}
+        {description && (
+          <p className='text-balance break-keep text-foreground-muted'>
+            {description}
+          </p>
+        )}
         {action}
       </div>
       <div className='min-w-0'>{children}</div>

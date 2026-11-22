@@ -36,7 +36,7 @@
 /* 글자 크기: 360px → 1280px 사이에서 부드럽게 커짐 (최소·최대는 rem이라 브라우저 확대를 따라감) */
 @theme {
   /* 콘텐츠 최대 폭: max-w-page */
-  --container-page: 80rem; /* 1280px */
+  --container-page: 55rem; /* 880px */
 
   --text-xs: clamp(0.75rem, 0.7255rem + 0.1087vw, 0.8125rem); /* 12px → 13px */
   --text-xs--line-height: 1.5;
@@ -103,4 +103,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
+  word-break: keep-all;
 }
