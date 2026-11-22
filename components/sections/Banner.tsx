@@ -3,11 +3,6 @@ import Image from 'next/image';
 import { ButtonLink } from '@/components/common/ButtonLink';
 import page0127Icon from '@/public/images/brand/page0127-icon.webp';
 
-/**
- * page0127 광고 배너
- * - page0127 브랜드 색은 이 섹션에서만 쓰므로 전역 토큰이 아니라 section에 CSS 변수로 둔다.
- * - 배경이 항상 밝은 색이라 글자색도 브랜드 진한 색으로 고정한다(다크 모드에서도 읽히게).
- */
 const brandVars =
   '[--brand:#1e69cb] [--brand-light:#438ef2] [--brand-mint:#5fe0b4] [--brand-ink:#14294e] [--brand-sub:#3b4e70]';
 
@@ -18,8 +13,8 @@ export function Banner() {
       aria-labelledby='banner-title'
       className={`${brandVars} bg-linear-to-r from-[#f4f8ff] via-[#eaf2ff] to-[#e7f7f1] text-(--brand-ink)`}
     >
-      <div className='relative mx-auto flex w-full max-w-page justify-between gap-6 px-6 py-10 md:items-center'>
-        <div className='absolute top-6 right-6'>
+      <div className='relative mx-auto flex w-full max-w-page justify-between gap-6 px-4 py-10 md:items-center'>
+        <div className='absolute top-6 right-4'>
           <span
             aria-hidden='true'
             className='rounded border border-(--brand-ink)/15 bg-white/75 px-1.5 text-xs font-extrabold tracking-[0.08em] text-(--brand-sub)'
@@ -48,11 +43,8 @@ export function Banner() {
             <span className='font-bold'>
               책장이 <span className='text-(--brand)'>취향을</span> 말해 줍니다
             </span>
-            {/* 계절을·마음을 돌아가는 글자는 움직임 단계에서 */}
           </h2>
 
-          {/* 버튼 기본색(accent) 대신 브랜드 색: className이 뒤에 붙지만 같은 속성끼리는
-              순서가 보장되지 않아서 !(important)로 덮는다. 이런 일이 많아지면 tailwind-merge 도입 */}
           <div className='flex max-w-60 flex-wrap gap-2 md:max-w-full'>
             <ButtonLink
               variant='solid'
@@ -72,7 +64,6 @@ export function Banner() {
           </div>
         </div>
 
-        {/* 장식용 아이콘 */}
         <Image
           src={page0127Icon}
           alt=''

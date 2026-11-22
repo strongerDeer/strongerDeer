@@ -19,15 +19,11 @@ export function Section({
   const titleId = `${id}-title`;
 
   return (
-    <section
-      id={id}
-      aria-labelledby={titleId}
-      className='flex min-h-[50vh] items-center justify-center'
-    >
-      <div className='mx-auto w-full max-w-page px-6 text-center'>
+    <section id={id} aria-labelledby={titleId} className='py-18'>
+      <div className='mx-auto w-full max-w-page px-4 text-center'>
         <SectionHeading label={label} title={title} titleId={titleId} />
         {description && (
-          <p className='text-center text-balance break-keep text-foreground-muted'>
+          <p className='mx-auto mb-7 max-w-[60ch] text-center text-balance break-keep text-foreground-muted'>
             {description}
           </p>
         )}

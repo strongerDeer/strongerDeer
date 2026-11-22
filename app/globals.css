@@ -33,16 +33,10 @@
   --shadow-card: var(--shadow);
   --font-sans: var(--font-pretendard);
 }
-/*
- * 글자 크기 토큰 (fluid type)
- * - 화면 폭 360px → 1280px 사이에서 최소값 → 최대값으로 부드럽게 커짐
- * - 최소·최대는 rem: 브라우저 글자 크기 설정(확대)을 따라가게 (WCAG 텍스트 200%)
- * - 가운데 값은 rem + vw: 화면 폭에 비례하되, 확대 설정도 함께 반영
- * - text-sm 같은 Tailwind 클래스가 이 값을 그대로 사용 (--text-*--line-height는 줄간격)
- */
+/* 글자 크기: 360px → 1280px 사이에서 부드럽게 커짐 (최소·최대는 rem이라 브라우저 확대를 따라감) */
 @theme {
   /* 콘텐츠 최대 폭: max-w-page */
-  --container-page: 80rem; /* 1280px */
+  --container-page: 55rem; /* 880px */
 
   --text-xs: clamp(0.75rem, 0.7255rem + 0.1087vw, 0.8125rem); /* 12px → 13px */
   --text-xs--line-height: 1.5;
@@ -109,4 +103,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
+  word-break: keep-all;
 }

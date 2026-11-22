@@ -15,17 +15,20 @@ export function Contact() {
         >
           stronger_deer@naver.com
         </a>
-        <Button size='sm'>주소복사</Button>
-        <Button size='sm'>내 방문 기록 보기</Button>
 
-        <ButtonLink
-          href='https://github.com/strongerDeer'
-          target='_blank'
-          rel='noopener noreferrer'
-          size='sm'
-        >
-          GitHub
-        </ButtonLink>
+        <Button size='sm'>주소복사</Button>
+        <div className='flex flex-wrap gap-2'>
+          <Button size='sm'>내 방문 기록 보기</Button>
+
+          <ButtonLink
+            href='https://github.com/strongerDeer'
+            target='_blank'
+            rel='noopener noreferrer'
+            size='sm'
+          >
+            GitHub
+          </ButtonLink>
+        </div>
       </div>
     </Section>
   );
