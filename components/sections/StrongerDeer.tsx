@@ -3,13 +3,67 @@
 import { useEffect, useRef } from 'react';
 
 import { ButtonLink } from '@/components/common/ButtonLink';
-import { clamp01 } from '@/lib/motion';
+import { clamp01, segment, type Timing } from '@/lib/motion';
+
+// stronger는 글자마다 200 → 900 계단, Deer는 900
+const LETTERS = [...'strongerDeer'].map((char, index) => ({
+  char,
+  weight: index < 8 ? 200 + index * 100 : 900,
+}));
+const MIN_WEIGHT = 200;
+const MAX_WEIGHT = 900;
+
+// 이름 장면 시간표 (progress 0 ~ 1 기준)
+const SWAP_TIMING: Timing = { start: 0.1, end: 0.45 }; // 해 → 혜
+const GROW_TIMING: Timing = { start: 0.2, end: 0.8 }; // 글자 굵어짐
+// 바뀔 때 위아래로 움직이는 거리(px)
+const NAME_SLIDE_PX = 12;
+const LITTLE_BY_LITTLE_SLIDE_PX = 8; // '조금씩'은 글자가 작아서 덜 움직임
 
 export function StrongerDeer() {
   const sectionRef = useRef<HTMLElement>(null);
+  const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const haeRef = useRef<HTMLSpanElement>(null);
+  const hyeRef = useRef<HTMLSpanElement>(null);
+  const littleByLittleRef = useRef<HTMLSpanElement>(null);
   const weightRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    // 진행률(0 ~ 1)을 받아 화면에 그린다
+    const paint = (progress: number) => {
+      const swap = segment(progress, SWAP_TIMING);
+      const grow = segment(progress, GROW_TIMING);
+
+      // 해·'조금씩'은 위로 사라지고, 혜는 아래에서 올라온다
+      const move = (el: HTMLElement | null, opacity: number, y: number) => {
+        if (!el) return;
+        el.style.opacity = String(opacity);
+        el.style.transform = `translateY(${y}px)`;
+      };
+      move(haeRef.current, 1 - swap, -NAME_SLIDE_PX * swap);
+      move(
+        littleByLittleRef.current,
+        1 - swap,
+        -LITTLE_BY_LITTLE_SLIDE_PX * swap
+      );
+      move(hyeRef.current, swap, NAME_SLIDE_PX * (1 - swap));
+
+      // 글자마다 목표 굵기가 달라서, 200에서 각자 목표까지 grow 비율만큼
+      letterRefs.current.forEach((el, index) => {
+        if (!el) return;
+        const target = LETTERS[index].weight;
+        el.style.fontWeight = String(
+          Math.round(MIN_WEIGHT + (target - MIN_WEIGHT) * grow)
+        );
+      });
+
+      if (weightRef.current) {
+        weightRef.current.textContent = String(
+          Math.round(MIN_WEIGHT + (MAX_WEIGHT - MIN_WEIGHT) * grow)
+        );
+      }
+    };
+
     const onScroll = () => {
       const section = sectionRef.current;
       if (!section) return;
@@ -20,13 +74,7 @@ export function StrongerDeer() {
 
       // 섹션 윗변이 화면 위로 올라간 만큼 = 지나간 거리
       const passed = -section.getBoundingClientRect().top;
-      const progress = clamp01(passed / stickyDistance);
-
-      if (weightRef.current) {
-        weightRef.current.textContent = String(
-          Math.round(200 + 700 * progress)
-        );
-      }
+      paint(clamp01(passed / stickyDistance));
     };
 
     onScroll();
@@ -42,16 +90,48 @@ export function StrongerDeer() {
       className='relative z-10 mt-[-100svh] h-[240svh] bg-background text-center motion-reduce:mt-0 motion-reduce:h-auto'
     >
       <div className='sticky top-(--header-h) flex h-[calc(100svh-var(--header-h))] flex-col items-center justify-center gap-5 px-4 py-10 motion-reduce:static'>
-        <p className='text-[clamp(28px,6vw,48px)] font-bold tracking-tight'>
-          strongerDeer
+        <p className='text-[clamp(28px,6vw,48px)] tracking-tight'>
+          <span className='sr-only'>strongerDeer</span>
+          <span aria-hidden='true'>
+            {LETTERS.map(({ char }, index) => (
+              <span
+                key={index}
+                ref={(el) => {
+                  letterRefs.current[index] = el;
+                }}
+                style={{ fontWeight: MIN_WEIGHT }}
+              >
+                {char}
+              </span>
+            ))}
+          </span>
         </p>
         <h1
           id='hero-title'
           aria-label='조금씩 강해진 개발자, 강혜진입니다.'
-          className='text-[clamp(44px,10vw,104px)] leading-[1.1] font-black tracking-[-0.04em]'
+          className='flex flex-col items-center text-[clamp(44px,10vw,104px)] leading-[1.1] font-black tracking-[-0.04em]'
         >
+          <span
+            ref={littleByLittleRef}
+            aria-hidden='true'
+            className='text-[0.45em] font-bold tracking-[-0.02em] text-foreground-muted'
+          >
+            조금씩
+          </span>
           <span aria-hidden='true'>
-            강<span className='text-accent'>혜</span>진 개발자.
+            강{/* 해와 혜를 같은 칸에 겹쳐 두고 투명도로 바꾼다 */}
+            <span className='inline-grid'>
+              <span ref={haeRef} className='[grid-area:1/1]'>
+                해
+              </span>
+              <span
+                ref={hyeRef}
+                className='text-accent opacity-0 [grid-area:1/1]'
+              >
+                혜
+              </span>
+            </span>
+            진 개발자.
           </span>
         </h1>
         <div className='mt-2 flex flex-wrap justify-center gap-2.5'>
