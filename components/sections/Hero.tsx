@@ -37,18 +37,21 @@ const TONE_CLASS: Record<Tone, string> = {
   accent: 'text-accent',
 };
 
-// 줄마다 [글자, 톤, 로고에 쓰는지, 전체 순번]
+// 줄마다 [글자, 톤, 로고에 쓰는지, 몇 번째 줄인지, 전체 순번]
 const LINES = (() => {
   let index = 0;
-  return CODE_LINES.map((parts) =>
+  return CODE_LINES.map((parts, line) =>
     parts.flatMap(({ text, tone, keep = false }) =>
-      [...text].map((char) => ({ char, tone, keep, index: index++ }))
+      [...text].map((char) => ({ char, tone, keep, line, index: index++ }))
     )
   );
 })();
 const ALL_CHARS = LINES.flat();
 const TOTAL = ALL_CHARS.length;
 const TYPE_INTERVAL = 70;
+
+const MAIN_LINE = 1; // 가운데 큰 줄 (De{sign||velop}er)
+const MAIN_FONT_SIZE = 'text-[clamp(30px,9.2vw,104px)] leading-tight';
 
 // 인트로 시간표 (스크롤한 화면 수 기준: 1 = 화면 높이만큼 내림)
 const HINT_FADE_TIMING: Timing = { start: 0, end: 0.15 }; // '스크롤'·'||' 사라짐
@@ -71,6 +74,17 @@ const fallTiming = (index: number): Timing => {
   return { start, end: start + FALL_DURATION };
 };
 
+// 로고 조립 2단계: 남은 글자를 화면에 고정된 복제본으로 바꿔치기
+// 복제본이어야 다른 섹션(이름 장면)의 로고 자리까지 자유롭게 날아갈 수 있다
+const KEPT_CHARS = ALL_CHARS.filter(({ keep }) => keep);
+const CLONE_START = 0.5; // 이 지점부터 원본 대신 복제본이 보임
+
+// 복제본 자리: 화면 기준 글자 가운데 좌표 + 큰 글자 대비 크기 비율
+type ClonePlace = { x: number; y: number; scale: number };
+
+const fontSizeOf = (element: HTMLElement) =>
+  parseFloat(getComputedStyle(element).fontSize);
+
 type Offset = { x: number; y: number };
 
 export function Hero() {
@@ -83,6 +97,9 @@ export function Hero() {
   const hintRef = useRef<HTMLParagraphElement>(null);
   const charRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const caretRef = useRef<HTMLSpanElement>(null);
+  const cloneRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  // 복제본마다 '원본 글자가 있는 자리'. 한 번 재고 저장해 둔다
+  const clonePlaces = useRef<ClonePlace[] | null>(null);
   // 알약마다 '가운데까지 거리'. 한 번 재고 저장해 둔다
   const pillOffsets = useRef<Offset[] | null>(null);
 
@@ -96,14 +113,35 @@ export function Hero() {
     return () => clearTimeout(timer);
   }, [typed, done]);
 
-  // 창 크기가 바뀌면 알약 위치도 바뀌므로, 저장해 둔 거리를 버리고 다음 프레임에 다시 잰다
+  // 창 크기가 바뀌면 알약·글자 위치도 바뀌므로, 저장해 둔 값을 버리고 다음 프레임에 다시 잰다
   useEffect(() => {
-    const resetPillOffsets = () => {
+    const resetMeasurements = () => {
       pillOffsets.current = null;
+      clonePlaces.current = null;
     };
-    window.addEventListener('resize', resetPillOffsets);
-    return () => window.removeEventListener('resize', resetPillOffsets);
+    window.addEventListener('resize', resetMeasurements);
+    return () => window.removeEventListener('resize', resetMeasurements);
   }, []);
+
+  // 남은 글자마다 화면 어디에 있는지 잰다
+  // 복제본은 모두 큰 글자 크기로 만들어 두고, 작은 글자는 scale로 줄여서 맞춘다
+  // (나중에 크기가 바뀔 때 font-size 대신 transform만 바꾸려고)
+  const measureClonePlaces = (): ClonePlace[] | null => {
+    const firstMainChar = charRefs.current[LINES[MAIN_LINE][0].index];
+    if (!firstMainChar) return null;
+    const mainFontSize = fontSizeOf(firstMainChar);
+
+    return KEPT_CHARS.map(({ index }) => {
+      const char = charRefs.current[index];
+      if (!char) return { x: 0, y: 0, scale: 1 };
+      const rect = char.getBoundingClientRect();
+      return {
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2,
+        scale: fontSizeOf(char) / mainFontSize,
+      };
+    });
+  };
 
   // 알약마다 '묶음 가운데까지 거리'를 잰다
   // 움직이는 중이면 transform 때문에 위치가 틀어지므로, 잠깐 지우고 잰 뒤 되돌린다
@@ -170,6 +208,24 @@ export function Hero() {
         scrolledScreens >= FALL_START ? 'hidden' : '';
     }
 
+    // 복제본 바꿔치기: CLONE_START부터 원본은 숨기고, 같은 자리에 복제본을 보인다
+    // 눈으로는 아무 변화가 없어야 성공
+    const showClones = scrolledScreens >= CLONE_START;
+    if (showClones) clonePlaces.current ??= measureClonePlaces();
+    const places = clonePlaces.current;
+    KEPT_CHARS.forEach(({ index }, order) => {
+      const char = charRefs.current[index];
+      const clone = cloneRefs.current[order];
+      if (char) char.style.opacity = showClones ? '0' : '';
+      if (!clone) return;
+      clone.style.opacity = showClones ? '1' : '0';
+      if (!showClones || !places) return;
+
+      const { x, y, scale } = places[order];
+      // translate(-50%, -50%): 복제본의 가운데를 (x, y)에 맞춘다
+      clone.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) scale(${scale})`;
+    });
+
     // 알약: 가운데로 모였다가(meet) → 아래로 가라앉으며 사라진다(sink)
     pillOffsets.current ??= measurePillOffsets();
     const offsets = pillOffsets.current;
@@ -206,7 +262,7 @@ export function Hero() {
                 key={li}
                 className={
                   li === 1
-                    ? 'text-[clamp(30px,9.2vw,104px)] leading-tight font-bold tracking-tight'
+                    ? `${MAIN_FONT_SIZE} font-bold tracking-tight`
                     : 'text-[clamp(16px,3.4vw,30px)]'
                 }
               >
@@ -262,6 +318,26 @@ export function Hero() {
         <p ref={hintRef} className='text-sm'>
           <span aria-hidden='true'>↓ </span>스크롤
         </p>
+      </div>
+
+      {/* 복제본 층: 화면에 고정(fixed). sticky 무대 밖에 두어야 이름 장면보다 위에 보인다 */}
+      <div
+        aria-hidden='true'
+        className='pointer-events-none fixed inset-0 z-40 font-mono'
+      >
+        {KEPT_CHARS.map(({ char, tone, line, index }, order) => (
+          <span
+            key={index}
+            ref={(el) => {
+              cloneRefs.current[order] = el;
+            }}
+            className={`absolute top-0 left-0 opacity-0 ${MAIN_FONT_SIZE} ${
+              line === MAIN_LINE ? 'font-bold tracking-tight' : ''
+            } ${TONE_CLASS[tone]}`}
+          >
+            {char}
+          </span>
+        ))}
       </div>
     </section>
   );
