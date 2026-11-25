@@ -8,6 +8,11 @@ export type Timing = { start: number; end: number };
 export const segment = (progress: number, { start, end }: Timing) =>
   clamp01((progress - start) / (end - start));
 
+// 출발값에서 도착값까지 progress(0 ~ 1)만큼 간 값 (선형 보간)
+// 예: lerp(100, 300, 0.5) = 200
+export const lerp = (from: number, to: number, progress: number) =>
+  from + (to - from) * progress;
+
 // 0 ~ 1 값을 처음과 끝은 천천히, 가운데는 빠르게 (smoothstep)
 export const ease = (progress: number) =>
   progress * progress * (3 - 2 * progress);

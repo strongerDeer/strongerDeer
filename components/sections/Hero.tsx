@@ -6,6 +6,7 @@ import { useScrollFrame } from '@/hooks/useScrollFrame';
 import {
   ease,
   introDarkness,
+  lerp,
   prefersReducedMotion,
   segment,
   type Timing,
@@ -80,7 +81,11 @@ const KEPT_CHARS = ALL_CHARS.filter(({ keep }) => keep);
 const CLONE_START = 0.5; // 이 지점부터 원본 대신 복제본이 보임
 
 // 복제본 자리: 화면 기준 글자 가운데 좌표 + 큰 글자 대비 크기 비율
-type ClonePlace = { x: number; y: number; scale: number };
+// meetX: De·er이 만나 Deer가 됐을 때의 x (strong 글자는 제자리 그대로)
+type ClonePlace = { x: number; y: number; scale: number; meetX: number };
+
+// 로고 조립 3단계: De는 오른쪽, er은 왼쪽으로 와서 가운데서 만나 Deer
+const DEER_MEET_TIMING: Timing = { start: CLONE_START, end: 0.72 };
 
 const fontSizeOf = (element: HTMLElement) =>
   parseFloat(getComputedStyle(element).fontSize);
@@ -131,16 +136,33 @@ export function Hero() {
     if (!firstMainChar) return null;
     const mainFontSize = fontSizeOf(firstMainChar);
 
-    return KEPT_CHARS.map(({ index }) => {
+    const places = KEPT_CHARS.map(({ index }) => {
       const char = charRefs.current[index];
-      if (!char) return { x: 0, y: 0, scale: 1 };
+      if (!char) return { x: 0, y: 0, scale: 1, meetX: 0 };
       const rect = char.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
       return {
-        x: rect.left + rect.width / 2,
+        x,
         y: rect.top + rect.height / 2,
         scale: fontSizeOf(char) / mainFontSize,
+        meetX: x,
       };
     });
+
+    // Deer 자리: De와 er 사이 한가운데를 기준으로, 글자 간격만큼 나란히 놓는다
+    const deerOrders = KEPT_CHARS.flatMap(({ line }, order) =>
+      line === MAIN_LINE ? [order] : []
+    );
+    const firstX = places[deerOrders[0]].x; // D
+    const lastX = places[deerOrders[deerOrders.length - 1]].x; // r
+    const centerX = (firstX + lastX) / 2;
+    const letterGap = places[deerOrders[1]].x - firstX; // 고정폭 글꼴이라 글자 간격이 모두 같다
+    const middlePosition = (deerOrders.length - 1) / 2; // 4글자면 1.5번째가 가운데
+    deerOrders.forEach((order, position) => {
+      places[order].meetX = centerX + (position - middlePosition) * letterGap;
+    });
+
+    return places;
   };
 
   // 알약마다 '묶음 가운데까지 거리'를 잰다
@@ -213,6 +235,7 @@ export function Hero() {
     const showClones = scrolledScreens >= CLONE_START;
     if (showClones) clonePlaces.current ??= measureClonePlaces();
     const places = clonePlaces.current;
+    const deerMeet = ease(segment(scrolledScreens, DEER_MEET_TIMING));
     KEPT_CHARS.forEach(({ index }, order) => {
       const char = charRefs.current[index];
       const clone = cloneRefs.current[order];
@@ -221,9 +244,10 @@ export function Hero() {
       clone.style.opacity = showClones ? '1' : '0';
       if (!showClones || !places) return;
 
-      const { x, y, scale } = places[order];
-      // translate(-50%, -50%): 복제본의 가운데를 (x, y)에 맞춘다
-      clone.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) scale(${scale})`;
+      const { x, y, scale, meetX } = places[order];
+      const currentX = lerp(x, meetX, deerMeet); // 원래 자리 → Deer 자리
+      // translate(-50%, -50%): 복제본의 가운데를 (currentX, y)에 맞춘다
+      clone.style.transform = `translate(${currentX}px, ${y}px) translate(-50%, -50%) scale(${scale})`;
     });
 
     // 알약: 가운데로 모였다가(meet) → 아래로 가라앉으며 사라진다(sink)
