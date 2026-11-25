@@ -106,6 +106,10 @@ body {
   word-break: keep-all;
 }
 
+:root {
+  --header-h: 3.25rem;
+}
+
 @theme {
   --animate-blink: blink 1s steps(1) infinite;
   @keyframes blink {

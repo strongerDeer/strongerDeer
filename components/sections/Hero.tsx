@@ -52,8 +52,12 @@ export function Hero() {
   }, [typed, done]);
 
   return (
-    <section id='hero' aria-label='소개' className='px-4 text-center'>
-      <div className='flex min-h-[calc(100svh-4rem)] flex-col items-center justify-center gap-6'>
+    <section
+      id='hero'
+      aria-label='소개'
+      className='-mt-(--header-h) h-[295svh] motion-reduce:mt-0 motion-reduce:h-auto'
+    >
+      <div className='sticky top-0 flex h-svh flex-col items-center justify-center gap-6 px-4 text-center motion-reduce:static motion-reduce:min-h-[calc(100svh-var(--header-h))]'>
         <p className='font-mono'>
           <span className='sr-only'>De{'{sign||velop}'}er</span>
           <code

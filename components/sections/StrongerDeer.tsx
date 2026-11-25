@@ -5,9 +5,9 @@ export function StrongerDeer() {
     <section
       id='stronger-deer'
       aria-labelledby='hero-title'
-      className='px-4 text-center'
+      className='relative z-10 mt-[-100svh] h-[240svh] bg-background text-center motion-reduce:mt-0 motion-reduce:h-auto'
     >
-      <div className='relative flex min-h-[calc(100svh-4rem)] flex-col items-center justify-center gap-5 py-10'>
+      <div className='sticky top-(--header-h) flex h-[calc(100svh-var(--header-h))] flex-col items-center justify-center gap-5 px-4 py-10 motion-reduce:static'>
         <p className='text-[clamp(28px,6vw,48px)] font-bold tracking-tight'>
           strongerDeer
         </p>
