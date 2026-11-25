@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { type Ref, useEffect, useRef, useState } from 'react';
 
 import { useScrollFrame } from '@/hooks/useScrollFrame';
 import {
@@ -17,12 +17,17 @@ const CAREERS = [
 ];
 
 type Tone = 'tag' | 'word' | 'accent';
-const CODE_LINES: { text: string; tone: Tone }[][] = [
-  [{ text: '<strong>', tone: 'tag' }],
+// keep: 로고(strongerDeer)에 쓰이는 글자. 나머지는 스크롤하면 떨어져 사라진다
+const CODE_LINES: { text: string; tone: Tone; keep?: boolean }[][] = [
   [
-    { text: 'De', tone: 'word' },
+    { text: '<', tone: 'tag' },
+    { text: 'strong', tone: 'tag', keep: true },
+    { text: '>', tone: 'tag' },
+  ],
+  [
+    { text: 'De', tone: 'word', keep: true },
     { text: '{sign||velop}', tone: 'accent' },
-    { text: 'er', tone: 'word' },
+    { text: 'er', tone: 'word', keep: true },
   ],
   [{ text: '</strong>', tone: 'tag' }],
 ];
@@ -32,16 +37,17 @@ const TONE_CLASS: Record<Tone, string> = {
   accent: 'text-accent',
 };
 
-// 줄마다 [글자, 톤, 전체 순번]
+// 줄마다 [글자, 톤, 로고에 쓰는지, 전체 순번]
 const LINES = (() => {
   let index = 0;
   return CODE_LINES.map((parts) =>
-    parts.flatMap(({ text, tone }) =>
-      [...text].map((char) => ({ char, tone, index: index++ }))
+    parts.flatMap(({ text, tone, keep = false }) =>
+      [...text].map((char) => ({ char, tone, keep, index: index++ }))
     )
   );
 })();
-const TOTAL = LINES.flat().length;
+const ALL_CHARS = LINES.flat();
+const TOTAL = ALL_CHARS.length;
 const TYPE_INTERVAL = 70;
 
 // 인트로 시간표 (스크롤한 화면 수 기준: 1 = 화면 높이만큼 내림)
@@ -50,6 +56,20 @@ const PILL_MEET_TIMING: Timing = { start: 0.05, end: 0.4 }; // 알약이 가운�
 const PILL_SINK_TIMING: Timing = { start: 0.35, end: 0.65 }; // 모인 알약이 가라앉으며 사라짐
 const PILL_SINK_PX = 90; // 가라앉는 거리
 const PILL_SINK_SCALE = 0.15; // 가라앉으며 줄어드는 비율
+
+// 로고 조립 1단계: 안 쓰는 글자가 떨어지며 사라짐
+const FALL_START = 0.35; // 첫 글자가 떨어지기 시작하는 지점
+const FALL_DURATION = 0.2; // 글자 하나가 다 떨어지는 데 걸리는 구간
+const FALL_STAGGER = 0.015; // 글자마다 늦게 출발하는 간격
+const FALL_STAGGER_GROUP = 7; // 7글자마다 늦는 정도를 처음부터 다시 (34글자가 한 줄로 차례를 서면 너무 길어짐)
+const FALL_DROP_PX = 80; // 떨어지는 거리
+const FALL_TILT_DEG = 14; // 떨어지며 기울어지는 각도
+
+// 글자마다 떨어지는 구간: 순번에 따라 조금씩 늦게 시작
+const fallTiming = (index: number): Timing => {
+  const start = FALL_START + (index % FALL_STAGGER_GROUP) * FALL_STAGGER;
+  return { start, end: start + FALL_DURATION };
+};
 
 type Offset = { x: number; y: number };
 
@@ -61,6 +81,8 @@ export function Hero() {
   const pillRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const orRef = useRef<HTMLSpanElement>(null);
   const hintRef = useRef<HTMLParagraphElement>(null);
+  const charRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const caretRef = useRef<HTMLSpanElement>(null);
   // 알약마다 '가운데까지 거리'. 한 번 재고 저장해 둔다
   const pillOffsets = useRef<Offset[] | null>(null);
 
@@ -130,6 +152,24 @@ export function Hero() {
     if (hintRef.current) hintRef.current.style.opacity = hintOpacity;
     if (orRef.current) orRef.current.style.opacity = hintOpacity;
 
+    // 로고에 안 쓰는 글자는 아래로 떨어지며 사라진다 (글자마다 조금씩 늦게 출발)
+    ALL_CHARS.forEach(({ keep, index }) => {
+      const char = charRefs.current[index];
+      if (keep || !char) return;
+      const fall = segment(scrolledScreens, fallTiming(index));
+      const drop = FALL_DROP_PX * fall * fall; // 제곱: 처음엔 천천히, 갈수록 빠르게 (중력처럼)
+      const tilt = (index % 2 === 0 ? -1 : 1) * FALL_TILT_DEG * fall; // 짝수 순번은 왼쪽, 홀수는 오른쪽으로
+      char.style.transform = `translateY(${drop}px) rotate(${tilt}deg)`;
+      char.style.opacity = String(1 - fall);
+    });
+
+    // 글자가 떨어지기 시작하면 커서도 숨긴다
+    // 깜빡임 애니메이션이 opacity를 쓰고 있어서, 겹치지 않게 visibility로 숨김
+    if (caretRef.current) {
+      caretRef.current.style.visibility =
+        scrolledScreens >= FALL_START ? 'hidden' : '';
+    }
+
     // 알약: 가운데로 모였다가(meet) → 아래로 가라앉으며 사라진다(sink)
     pillOffsets.current ??= measurePillOffsets();
     const offsets = pillOffsets.current;
@@ -172,13 +212,17 @@ export function Hero() {
               >
                 {line.map(({ char, tone, index }) => (
                   <span key={index}>
-                    {index === typed && <Caret />}
+                    {index === typed && <Caret ref={caretRef} />}
                     <span
-                      className={`${TONE_CLASS[tone]} ${index < typed ? '' : 'invisible'}`}
+                      ref={(el) => {
+                        charRefs.current[index] = el;
+                      }}
+                      // transform은 inline 요소에 적용되지 않아서 inline-block으로
+                      className={`inline-block ${TONE_CLASS[tone]} ${index < typed ? '' : 'invisible'}`}
                     >
                       {char}
                     </span>
-                    {done && index === TOTAL - 1 && <Caret />}
+                    {done && index === TOTAL - 1 && <Caret ref={caretRef} />}
                   </span>
                 ))}
               </span>
@@ -223,9 +267,9 @@ export function Hero() {
   );
 }
 
-function Caret() {
+function Caret({ ref }: { ref?: Ref<HTMLSpanElement> }) {
   return (
-    <span className='relative'>
+    <span ref={ref} className='relative'>
       <span className='absolute top-[0.1em] -left-px h-[1em] w-[0.08em] animate-blink bg-accent' />
     </span>
   );
