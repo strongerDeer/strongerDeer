@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+import { useScrollFrame } from '@/hooks/useScrollFrame';
 import {
   ease,
   introDarkness,
@@ -103,48 +104,40 @@ export function Hero() {
     return offsets;
   };
 
-  useEffect(() => {
-    const onScroll = () => {
-      const viewportHeight = window.innerHeight;
+  useScrollFrame(() => {
+    const viewportHeight = window.innerHeight;
 
-      // 스크롤할수록 인트로를 어둡게: CSS 변수 --intro-dark(0 ~ 1)만 바꾸고 색 계산은 CSS가 한다
-      const darkness = introDarkness(window.scrollY, viewportHeight);
-      document.documentElement.style.setProperty(
-        '--intro-dark',
-        darkness.toFixed(3)
-      );
+    // 스크롤할수록 인트로를 어둡게: CSS 변수 --intro-dark(0 ~ 1)만 바꾸고 색 계산은 CSS가 한다
+    const darkness = introDarkness(window.scrollY, viewportHeight);
+    document.documentElement.style.setProperty(
+      '--intro-dark',
+      darkness.toFixed(3)
+    );
 
-      const scrolledScreens = window.scrollY / viewportHeight;
+    const scrolledScreens = window.scrollY / viewportHeight;
 
-      // '스크롤' 안내와 가운데 '||'는 내리자마자 사라진다
-      const hintOpacity = String(
-        1 - segment(scrolledScreens, HINT_FADE_TIMING)
-      );
-      if (hintRef.current) hintRef.current.style.opacity = hintOpacity;
-      if (orRef.current) orRef.current.style.opacity = hintOpacity;
+    // '스크롤' 안내와 가운데 '||'는 내리자마자 사라진다
+    const hintOpacity = String(1 - segment(scrolledScreens, HINT_FADE_TIMING));
+    if (hintRef.current) hintRef.current.style.opacity = hintOpacity;
+    if (orRef.current) orRef.current.style.opacity = hintOpacity;
 
-      // 알약: 가운데로 모였다가(meet) → 아래로 가라앉으며 사라진다(sink)
-      pillOffsets.current ??= measurePillOffsets();
-      const offsets = pillOffsets.current;
-      if (!offsets) return;
+    // 알약: 가운데로 모였다가(meet) → 아래로 가라앉으며 사라진다(sink)
+    pillOffsets.current ??= measurePillOffsets();
+    const offsets = pillOffsets.current;
+    if (!offsets) return;
 
-      const meet = ease(segment(scrolledScreens, PILL_MEET_TIMING));
-      const sink = segment(scrolledScreens, PILL_SINK_TIMING);
-      pillRefs.current.forEach((pill, index) => {
-        if (!pill) return;
-        const { x, y } = offsets[index];
-        const moveX = x * meet;
-        const moveY = y * meet + PILL_SINK_PX * ease(sink);
-        const scale = 1 - PILL_SINK_SCALE * sink;
-        pill.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})`;
-        pill.style.opacity = String(1 - sink);
-      });
-    };
-
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    const meet = ease(segment(scrolledScreens, PILL_MEET_TIMING));
+    const sink = segment(scrolledScreens, PILL_SINK_TIMING);
+    pillRefs.current.forEach((pill, index) => {
+      if (!pill) return;
+      const { x, y } = offsets[index];
+      const moveX = x * meet;
+      const moveY = y * meet + PILL_SINK_PX * ease(sink);
+      const scale = 1 - PILL_SINK_SCALE * sink;
+      pill.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})`;
+      pill.style.opacity = String(1 - sink);
+    });
+  });
 
   return (
     <section

@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import { ButtonLink } from '@/components/common/ButtonLink';
+import { useScrollFrame } from '@/hooks/useScrollFrame';
 import { clamp01, introDarkness, segment, type Timing } from '@/lib/motion';
 
 // stronger는 글자마다 200 → 900 계단, Deer는 900
@@ -31,76 +32,70 @@ export function StrongerDeer() {
   const littleByLittleRef = useRef<HTMLSpanElement>(null);
   const weightRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    // 진행률(0 ~ 1)을 받아 화면에 그린다
-    const paint = (progress: number) => {
-      const swap = segment(progress, SWAP_TIMING);
-      const grow = segment(progress, GROW_TIMING);
+  // 진행률(0 ~ 1)을 받아 화면에 그린다
+  const paint = (progress: number) => {
+    const swap = segment(progress, SWAP_TIMING);
+    const grow = segment(progress, GROW_TIMING);
 
-      // 해·'조금씩'은 위로 사라지고, 혜는 아래에서 올라온다
-      const move = (el: HTMLElement | null, opacity: number, y: number) => {
-        if (!el) return;
-        el.style.opacity = String(opacity);
-        el.style.transform = `translateY(${y}px)`;
-      };
-      move(haeRef.current, 1 - swap, -NAME_SLIDE_PX * swap);
-      move(
-        littleByLittleRef.current,
-        1 - swap,
-        -LITTLE_BY_LITTLE_SLIDE_PX * swap
+    // 해·'조금씩'은 위로 사라지고, 혜는 아래에서 올라온다
+    const move = (el: HTMLElement | null, opacity: number, y: number) => {
+      if (!el) return;
+      el.style.opacity = String(opacity);
+      el.style.transform = `translateY(${y}px)`;
+    };
+    move(haeRef.current, 1 - swap, -NAME_SLIDE_PX * swap);
+    move(
+      littleByLittleRef.current,
+      1 - swap,
+      -LITTLE_BY_LITTLE_SLIDE_PX * swap
+    );
+    move(hyeRef.current, swap, NAME_SLIDE_PX * (1 - swap));
+
+    // 글자마다 목표 굵기가 달라서, 200에서 각자 목표까지 grow 비율만큼
+    letterRefs.current.forEach((el, index) => {
+      if (!el) return;
+      const target = LETTERS[index].weight;
+      el.style.fontWeight = String(
+        Math.round(MIN_WEIGHT + (target - MIN_WEIGHT) * grow)
       );
-      move(hyeRef.current, swap, NAME_SLIDE_PX * (1 - swap));
+    });
 
-      // 글자마다 목표 굵기가 달라서, 200에서 각자 목표까지 grow 비율만큼
-      letterRefs.current.forEach((el, index) => {
-        if (!el) return;
-        const target = LETTERS[index].weight;
-        el.style.fontWeight = String(
-          Math.round(MIN_WEIGHT + (target - MIN_WEIGHT) * grow)
-        );
-      });
-
-      if (weightRef.current) {
-        weightRef.current.textContent = String(
-          Math.round(MIN_WEIGHT + (MAX_WEIGHT - MIN_WEIGHT) * grow)
-        );
-      }
-    };
-
-    // 헤더: 인트로를 따라 어두워졌다가, 밝은 이 장면이 헤더에 닿기 직전부터 다시 밝아진다
-    const paintHeader = (sectionTop: number) => {
-      // 헤더 아래선 = 헤더 높이 (--header-h, sticky라 항상 화면 맨 위에 있음)
-      const headerBottom = document.querySelector('header')?.offsetHeight ?? 0;
-      const distanceToHeader = sectionTop - headerBottom;
-      const brighten = clamp01(1 - distanceToHeader / HEADER_BRIGHTEN_PX);
-      const headerDarkness =
-        introDarkness(window.scrollY, window.innerHeight) * (1 - brighten);
-      document.documentElement.style.setProperty(
-        '--header-dark',
-        headerDarkness.toFixed(3)
+    if (weightRef.current) {
+      weightRef.current.textContent = String(
+        Math.round(MIN_WEIGHT + (MAX_WEIGHT - MIN_WEIGHT) * grow)
       );
-    };
+    }
+  };
 
-    const onScroll = () => {
-      const section = sectionRef.current;
-      if (!section) return;
+  // 헤더: 인트로를 따라 어두워졌다가, 밝은 이 장면이 헤더에 닿기 직전부터 다시 밝아진다
+  const paintHeader = (sectionTop: number) => {
+    // 헤더 아래선 = 헤더 높이 (--header-h, sticky라 항상 화면 맨 위에 있음)
+    const headerBottom = document.querySelector('header')?.offsetHeight ?? 0;
+    const distanceToHeader = sectionTop - headerBottom;
+    const brighten = clamp01(1 - distanceToHeader / HEADER_BRIGHTEN_PX);
+    const headerDarkness =
+      introDarkness(window.scrollY, window.innerHeight) * (1 - brighten);
+    document.documentElement.style.setProperty(
+      '--header-dark',
+      headerDarkness.toFixed(3)
+    );
+  };
 
-      const sectionTop = section.getBoundingClientRect().top;
-      paintHeader(sectionTop);
+  useScrollFrame(() => {
+    const section = sectionRef.current;
+    if (!section) return;
 
-      // 무대가 화면에 붙어 있는 거리 = 섹션 높이 - 화면 높이
-      const stickyDistance = section.offsetHeight - window.innerHeight;
-      if (stickyDistance <= 0) return;
+    const sectionTop = section.getBoundingClientRect().top;
+    paintHeader(sectionTop);
 
-      // 섹션 윗변이 화면 위로 올라간 만큼 = 지나간 거리
-      const passed = -sectionTop;
-      paint(clamp01(passed / stickyDistance));
-    };
+    // 무대가 화면에 붙어 있는 거리 = 섹션 높이 - 화면 높이
+    const stickyDistance = section.offsetHeight - window.innerHeight;
+    if (stickyDistance <= 0) return;
 
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    // 섹션 윗변이 화면 위로 올라간 만큼 = 지나간 거리
+    const passed = -sectionTop;
+    paint(clamp01(passed / stickyDistance));
+  });
 
   return (
     <section
