@@ -162,3 +162,37 @@ body {
   --line: var(--intro-line);
   color: var(--foreground);
 }
+
+/* 헤더도 같은 방식. --header-dark(0~1)는 JS가 넣음 */
+.site-header {
+  --header-foreground: color-mix(
+    in srgb,
+    var(--editor-foreground) calc(var(--header-dark, 0) * 100%),
+    var(--foreground)
+  );
+  --header-background: color-mix(
+    in srgb,
+    var(--editor-background-card) calc(var(--header-dark, 0) * 100%),
+    var(--background)
+  );
+  --header-line: color-mix(
+    in srgb,
+    var(--editor-line) calc(var(--header-dark, 0) * 100%),
+    var(--line)
+  );
+  /* 헤더 자체 바탕: 어두운 에디터 색과 섞은 뒤, 88%만 칠해 뒤가 살짝 비치게 */
+  --header-surface: color-mix(
+    in srgb,
+    var(--editor-background) calc(var(--header-dark, 0) * 100%),
+    var(--background)
+  );
+  background: color-mix(in srgb, var(--header-surface) 88%, transparent);
+  border-color: var(--header-line);
+  backdrop-filter: blur(8px);
+}
+.site-header > * {
+  --foreground: var(--header-foreground);
+  --background: var(--header-background);
+  --line: var(--header-line);
+  color: var(--foreground);
+}

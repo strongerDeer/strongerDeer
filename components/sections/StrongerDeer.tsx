@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 
 import { ButtonLink } from '@/components/common/ButtonLink';
-import { clamp01, segment, type Timing } from '@/lib/motion';
+import { clamp01, introDarkness, segment, type Timing } from '@/lib/motion';
 
 // stronger는 글자마다 200 → 900 계단, Deer는 900
 const LETTERS = [...'strongerDeer'].map((char, index) => ({
@@ -19,6 +19,9 @@ const GROW_TIMING: Timing = { start: 0.2, end: 0.8 }; // 글자 굵어짐
 // 바뀔 때 위아래로 움직이는 거리(px)
 const NAME_SLIDE_PX = 12;
 const LITTLE_BY_LITTLE_SLIDE_PX = 8; // '조금씩'은 글자가 작아서 덜 움직임
+
+// 헤더가 다시 밝아지는 구간: 밝은 이 장면 윗변이 헤더 아래선 48px 위까지 오면 시작해서, 아래선에 닿으면 끝
+const HEADER_BRIGHTEN_PX = 48;
 
 export function StrongerDeer() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -64,16 +67,33 @@ export function StrongerDeer() {
       }
     };
 
+    // 헤더: 인트로를 따라 어두워졌다가, 밝은 이 장면이 헤더에 닿기 직전부터 다시 밝아진다
+    const paintHeader = (sectionTop: number) => {
+      // 헤더 아래선 = 헤더 높이 (--header-h, sticky라 항상 화면 맨 위에 있음)
+      const headerBottom = document.querySelector('header')?.offsetHeight ?? 0;
+      const distanceToHeader = sectionTop - headerBottom;
+      const brighten = clamp01(1 - distanceToHeader / HEADER_BRIGHTEN_PX);
+      const headerDarkness =
+        introDarkness(window.scrollY, window.innerHeight) * (1 - brighten);
+      document.documentElement.style.setProperty(
+        '--header-dark',
+        headerDarkness.toFixed(3)
+      );
+    };
+
     const onScroll = () => {
       const section = sectionRef.current;
       if (!section) return;
+
+      const sectionTop = section.getBoundingClientRect().top;
+      paintHeader(sectionTop);
 
       // 무대가 화면에 붙어 있는 거리 = 섹션 높이 - 화면 높이
       const stickyDistance = section.offsetHeight - window.innerHeight;
       if (stickyDistance <= 0) return;
 
       // 섹션 윗변이 화면 위로 올라간 만큼 = 지나간 거리
-      const passed = -section.getBoundingClientRect().top;
+      const passed = -sectionTop;
       paint(clamp01(passed / stickyDistance));
     };
 
