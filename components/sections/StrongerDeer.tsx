@@ -1,10 +1,16 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { ButtonLink } from '@/components/common/ButtonLink';
 import { useScrollFrame } from '@/hooks/useScrollFrame';
-import { clamp01, introDarkness, segment, type Timing } from '@/lib/motion';
+import {
+  clamp01,
+  introDarkness,
+  prefersReducedMotion,
+  segment,
+  type Timing,
+} from '@/lib/motion';
 
 // stronger는 글자마다 200 → 900 계단, Deer는 900
 const LETTERS = [...'strongerDeer'].map((char, index) => ({
@@ -80,6 +86,11 @@ export function StrongerDeer() {
       headerDarkness.toFixed(3)
     );
   };
+
+  // '동작 줄이기'를 켰으면 스크롤 연출 없이 마지막 장면(혜, 굵은 글자)을 바로 보여 준다
+  useEffect(() => {
+    if (prefersReducedMotion()) paint(1);
+  }, []);
 
   useScrollFrame(() => {
     const section = sectionRef.current;

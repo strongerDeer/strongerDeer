@@ -74,6 +74,15 @@ export function Hero() {
     return () => clearTimeout(timer);
   }, [typed, done]);
 
+  // 창 크기가 바뀌면 알약 위치도 바뀌므로, 저장해 둔 거리를 버리고 다음 프레임에 다시 잰다
+  useEffect(() => {
+    const resetPillOffsets = () => {
+      pillOffsets.current = null;
+    };
+    window.addEventListener('resize', resetPillOffsets);
+    return () => window.removeEventListener('resize', resetPillOffsets);
+  }, []);
+
   // 알약마다 '묶음 가운데까지 거리'를 잰다
   // 움직이는 중이면 transform 때문에 위치가 틀어지므로, 잠깐 지우고 잰 뒤 되돌린다
   const measurePillOffsets = (): Offset[] | null => {
