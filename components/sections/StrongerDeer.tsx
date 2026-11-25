@@ -1,8 +1,42 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
+
 import { ButtonLink } from '@/components/common/ButtonLink';
+import { clamp01 } from '@/lib/motion';
 
 export function StrongerDeer() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const weightRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const section = sectionRef.current;
+      if (!section) return;
+
+      // 무대가 화면에 붙어 있는 거리 = 섹션 높이 - 화면 높이
+      const stickyDistance = section.offsetHeight - window.innerHeight;
+      if (stickyDistance <= 0) return;
+
+      // 섹션 윗변이 화면 위로 올라간 만큼 = 지나간 거리
+      const passed = -section.getBoundingClientRect().top;
+      const progress = clamp01(passed / stickyDistance);
+
+      if (weightRef.current) {
+        weightRef.current.textContent = String(
+          Math.round(200 + 700 * progress)
+        );
+      }
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id='stronger-deer'
       aria-labelledby='hero-title'
       className='relative z-10 mt-[-100svh] h-[240svh] bg-background text-center motion-reduce:mt-0 motion-reduce:h-auto'
@@ -30,7 +64,11 @@ export function StrongerDeer() {
           aria-hidden='true'
           className='absolute inset-x-0 bottom-[8%] font-mono text-sm text-foreground-muted tabular-nums'
         >
-          font-weight: <b className='text-foreground'>900</b>;
+          font-weight:{' '}
+          <b ref={weightRef} className='text-foreground'>
+            200
+          </b>
+          ;
         </span>
       </div>
     </section>
