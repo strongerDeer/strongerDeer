@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { prefersReducedMotion } from '@/lib/motion';
+import { introDarkness, prefersReducedMotion } from '@/lib/motion';
 
 const CAREERS = [
   { role: 'Designer', text: '디자인·퍼블리싱 7년 7개월' },
@@ -51,11 +51,26 @@ export function Hero() {
     return () => clearTimeout(timer);
   }, [typed, done]);
 
+  // 스크롤할수록 인트로를 어둡게: CSS 변수 --intro-dark(0 ~ 1)만 바꾸고 색 계산은 CSS가 한다
+  useEffect(() => {
+    const onScroll = () => {
+      const darkness = introDarkness(window.scrollY, window.innerHeight);
+      document.documentElement.style.setProperty(
+        '--intro-dark',
+        darkness.toFixed(3)
+      );
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     <section
       id='hero'
       aria-label='소개'
-      className='-mt-(--header-h) h-[295svh] motion-reduce:mt-0 motion-reduce:h-auto'
+      className='intro-scene -mt-(--header-h) h-[295svh] motion-reduce:mt-0 motion-reduce:h-auto'
     >
       <div className='sticky top-0 flex h-svh flex-col items-center justify-center gap-6 px-4 text-center motion-reduce:static motion-reduce:min-h-[calc(100svh-var(--header-h))]'>
         <p className='font-mono'>

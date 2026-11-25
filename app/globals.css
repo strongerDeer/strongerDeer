@@ -108,6 +108,13 @@ body {
 
 :root {
   --header-h: 3.25rem;
+
+  /* 인트로가 어두워질 때 섞을 색 (사이트 다크 모드 값과 같음) */
+  --editor-background: #14151c;
+  --editor-background-card: #1c1d27;
+  --editor-foreground: #ecedf3;
+  --editor-foreground-muted: #a3a6b5;
+  --editor-line: #2c2e3b;
 }
 
 @theme {
@@ -117,4 +124,41 @@ body {
       opacity: 0;
     }
   }
+}
+
+/* 인트로가 스크롤에 따라 어두운 색으로 섞임. --intro-dark(0~1)는 JS가 넣음 */
+.intro-scene {
+  --intro-background: color-mix(
+    in srgb,
+    var(--editor-background) calc(var(--intro-dark, 0) * 100%),
+    var(--background)
+  );
+  --intro-foreground: color-mix(
+    in srgb,
+    var(--editor-foreground) calc(var(--intro-dark, 0) * 100%),
+    var(--foreground)
+  );
+  --intro-foreground-muted: color-mix(
+    in srgb,
+    var(--editor-foreground-muted) calc(var(--intro-dark, 0) * 100%),
+    var(--foreground-muted)
+  );
+  --intro-background-card: color-mix(
+    in srgb,
+    var(--editor-background-card) calc(var(--intro-dark, 0) * 100%),
+    var(--background-card)
+  );
+  --intro-line: color-mix(
+    in srgb,
+    var(--editor-line) calc(var(--intro-dark, 0) * 100%),
+    var(--line)
+  );
+  background: var(--intro-background);
+}
+.intro-scene > * {
+  --foreground: var(--intro-foreground);
+  --foreground-muted: var(--intro-foreground-muted);
+  --background-card: var(--intro-background-card);
+  --line: var(--intro-line);
+  color: var(--foreground);
 }
