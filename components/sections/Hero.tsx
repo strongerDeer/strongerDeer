@@ -51,6 +51,7 @@ const ALL_CHARS = LINES.flat();
 const TOTAL = ALL_CHARS.length;
 const TYPE_INTERVAL = 70;
 
+const TAG_LINE = 0; // 윗줄 (<strong>)
 const MAIN_LINE = 1; // 가운데 큰 줄 (De{sign||velop}er)
 const MAIN_FONT_SIZE = 'text-[clamp(30px,9.2vw,104px)] leading-tight';
 
@@ -80,12 +81,41 @@ const fallTiming = (index: number): Timing => {
 const KEPT_CHARS = ALL_CHARS.filter(({ keep }) => keep);
 const CLONE_START = 0.5; // 이 지점부터 원본 대신 복제본이 보임
 
+// 로고 조립 4단계: strong 뒤에 커서가 깜빡이다가 er을 타이핑해서 stronger
+const TYPE_E_AT = 0.58; // e가 쳐지는 지점
+const TYPE_R_AT = 0.66; // r이 쳐지는 지점
+const TYPING_CARET_END = 0.76; // 다음 단계(한 줄로 합치기)가 시작되면 커서를 숨긴다
+
+// 복제본 = 로고 글자 12개 (stronger + Deer)
+// from: 출발하는 원본 글자의 순번 / typedAt: 원본 없이 새로 타이핑되는 글자(er)가 쳐지는 지점
+type LogoLetter = {
+  char: string;
+  tone: Tone;
+  line: number;
+  from?: number;
+  typedAt?: number;
+};
+const keptLettersOf = (line: number): LogoLetter[] =>
+  KEPT_CHARS.filter((kept) => kept.line === line).map(
+    ({ char, tone, index }) => ({ char, tone, line, from: index })
+  );
+const STRONG_LETTERS = keptLettersOf(TAG_LINE); // s t r o n g
+const LOGO_LETTERS: LogoLetter[] = [
+  ...STRONG_LETTERS,
+  { char: 'e', tone: 'tag', line: TAG_LINE, typedAt: TYPE_E_AT },
+  { char: 'r', tone: 'tag', line: TAG_LINE, typedAt: TYPE_R_AT },
+  ...keptLettersOf(MAIN_LINE), // D e e r
+];
+
 // 복제본 자리: 화면 기준 글자 가운데 좌표 + 큰 글자 대비 크기 비율
 // meetX: De·er이 만나 Deer가 됐을 때의 x (strong 글자는 제자리 그대로)
 type ClonePlace = { x: number; y: number; scale: number; meetX: number };
 
 // 로고 조립 3단계: De는 오른쪽, er은 왼쪽으로 와서 가운데서 만나 Deer
 const DEER_MEET_TIMING: Timing = { start: CLONE_START, end: 0.72 };
+
+// strong 글자 사이 간격 (s → t). 고정폭 글꼴이라 윗줄 글자 간격은 모두 같다
+const strongLetterGap = (places: ClonePlace[]) => places[1].x - places[0].x;
 
 const fontSizeOf = (element: HTMLElement) =>
   parseFloat(getComputedStyle(element).fontSize);
@@ -103,6 +133,7 @@ export function Hero() {
   const charRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const caretRef = useRef<HTMLSpanElement>(null);
   const cloneRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const typingCaretRef = useRef<HTMLSpanElement>(null);
   // 복제본마다 '원본 글자가 있는 자리'. 한 번 재고 저장해 둔다
   const clonePlaces = useRef<ClonePlace[] | null>(null);
   // 알약마다 '가운데까지 거리'. 한 번 재고 저장해 둔다
@@ -136,21 +167,33 @@ export function Hero() {
     if (!firstMainChar) return null;
     const mainFontSize = fontSizeOf(firstMainChar);
 
-    const places = KEPT_CHARS.map(({ index }) => {
-      const char = charRefs.current[index];
-      if (!char) return { x: 0, y: 0, scale: 1, meetX: 0 };
+    const places: ClonePlace[] = [];
+    LOGO_LETTERS.forEach(({ from }, order) => {
+      // 타이핑 글자(er)는 원본이 없으니, 바로 앞 글자에서 한 칸 오른쪽에 놓는다
+      if (from === undefined) {
+        const previous = places[order - 1];
+        const x = previous.x + strongLetterGap(places);
+        places.push({ ...previous, x, meetX: x });
+        return;
+      }
+
+      const char = charRefs.current[from];
+      if (!char) {
+        places.push({ x: 0, y: 0, scale: 1, meetX: 0 });
+        return;
+      }
       const rect = char.getBoundingClientRect();
       const x = rect.left + rect.width / 2;
-      return {
+      places.push({
         x,
         y: rect.top + rect.height / 2,
         scale: fontSizeOf(char) / mainFontSize,
         meetX: x,
-      };
+      });
     });
 
     // Deer 자리: De와 er 사이 한가운데를 기준으로, 글자 간격만큼 나란히 놓는다
-    const deerOrders = KEPT_CHARS.flatMap(({ line }, order) =>
+    const deerOrders = LOGO_LETTERS.flatMap(({ line }, order) =>
       line === MAIN_LINE ? [order] : []
     );
     const firstX = places[deerOrders[0]].x; // D
@@ -236,12 +279,16 @@ export function Hero() {
     if (showClones) clonePlaces.current ??= measureClonePlaces();
     const places = clonePlaces.current;
     const deerMeet = ease(segment(scrolledScreens, DEER_MEET_TIMING));
-    KEPT_CHARS.forEach(({ index }, order) => {
-      const char = charRefs.current[index];
+    LOGO_LETTERS.forEach(({ from, typedAt }, order) => {
+      if (from !== undefined) {
+        const char = charRefs.current[from];
+        if (char) char.style.opacity = showClones ? '0' : '';
+      }
       const clone = cloneRefs.current[order];
-      if (char) char.style.opacity = showClones ? '0' : '';
       if (!clone) return;
-      clone.style.opacity = showClones ? '1' : '0';
+      // 타이핑 글자는 쳐진 뒤부터 보인다 (원본에서 온 글자는 처음부터)
+      const appeared = typedAt === undefined || scrolledScreens >= typedAt;
+      clone.style.opacity = showClones && appeared ? '1' : '0';
       if (!showClones || !places) return;
 
       const { x, y, scale, meetX } = places[order];
@@ -249,6 +296,19 @@ export function Hero() {
       // translate(-50%, -50%): 복제본의 가운데를 (currentX, y)에 맞춘다
       clone.style.transform = `translate(${currentX}px, ${y}px) translate(-50%, -50%) scale(${scale})`;
     });
+
+    // 타이핑 커서: strong 뒤에서 깜빡이다가, 글자가 쳐질 때마다 한 칸씩 오른쪽으로
+    const typingCaret = typingCaretRef.current;
+    if (typingCaret && places) {
+      const typedCount = LOGO_LETTERS.filter(
+        ({ typedAt }) => typedAt !== undefined && scrolledScreens >= typedAt
+      ).length;
+      const lastLetter = places[STRONG_LETTERS.length - 1 + typedCount]; // 지금 맨 끝 글자 (g → e → r)
+      const caretX = lastLetter.x + strongLetterGap(places) / 2; // 그 글자 오른쪽 끝
+      const showCaret = showClones && scrolledScreens < TYPING_CARET_END;
+      typingCaret.style.opacity = showCaret ? '1' : '0';
+      typingCaret.style.transform = `translate(${caretX}px, ${lastLetter.y}px) translate(-50%, -50%) scale(${lastLetter.scale})`;
+    }
 
     // 알약: 가운데로 모였다가(meet) → 아래로 가라앉으며 사라진다(sink)
     pillOffsets.current ??= measurePillOffsets();
@@ -349,9 +409,9 @@ export function Hero() {
         aria-hidden='true'
         className='pointer-events-none fixed inset-0 z-40 font-mono'
       >
-        {KEPT_CHARS.map(({ char, tone, line, index }, order) => (
+        {LOGO_LETTERS.map(({ char, tone, line }, order) => (
           <span
-            key={index}
+            key={order}
             ref={(el) => {
               cloneRefs.current[order] = el;
             }}
@@ -362,6 +422,12 @@ export function Hero() {
             {char}
           </span>
         ))}
+        <span
+          ref={typingCaretRef}
+          className={`absolute top-0 left-0 opacity-0 ${MAIN_FONT_SIZE}`}
+        >
+          <span className='block h-[1em] w-[0.08em] animate-blink bg-accent' />
+        </span>
       </div>
     </section>
   );
