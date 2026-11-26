@@ -11,6 +11,7 @@ type SectionProps = {
   title: string;
   description?: string;
   titleSize?: TitleSize;
+  className?: string; // 섹션마다 다른 높이·배치가 필요할 때 (예: 마지막 섹션 화면 가득)
   children?: ReactNode;
 };
 export function Section({
@@ -20,11 +21,12 @@ export function Section({
   children,
   description,
   titleSize,
+  className = '',
 }: SectionProps) {
   const titleId = `${id}-title`;
 
   return (
-    <section id={id} aria-labelledby={titleId} className='py-18'>
+    <section id={id} aria-labelledby={titleId} className={`py-18 ${className}`}>
       <div className='mx-auto w-full max-w-page px-4 text-center'>
         <SectionHeading
           label={label}
