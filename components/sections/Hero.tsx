@@ -109,7 +109,18 @@ const LOGO_LETTERS: LogoLetter[] = [
 
 // 복제본 자리: 화면 기준 글자 가운데 좌표 + 큰 글자 대비 크기 비율
 // meetX: De·er이 만나 Deer가 됐을 때의 x (strong 글자는 제자리 그대로)
-type ClonePlace = { x: number; y: number; scale: number; meetX: number };
+// lineX·lineY: strongerDeer 한 줄이 됐을 때의 자리
+type ClonePlace = {
+  x: number;
+  y: number;
+  scale: number;
+  meetX: number;
+  lineX: number;
+  lineY: number;
+};
+
+// 로고 조립 5단계: stronger가 내려와 Deer 앞에 붙어 strongerDeer 한 줄
+const LINE_JOIN_TIMING: Timing = { start: TYPING_CARET_END, end: 0.95 };
 
 // 로고 조립 3단계: De는 오른쪽, er은 왼쪽으로 와서 가운데서 만나 Deer
 const DEER_MEET_TIMING: Timing = { start: CLONE_START, end: 0.72 };
@@ -179,7 +190,7 @@ export function Hero() {
 
       const char = charRefs.current[from];
       if (!char) {
-        places.push({ x: 0, y: 0, scale: 1, meetX: 0 });
+        places.push({ x: 0, y: 0, scale: 1, meetX: 0, lineX: 0, lineY: 0 });
         return;
       }
       const rect = char.getBoundingClientRect();
@@ -189,6 +200,8 @@ export function Hero() {
         y: rect.top + rect.height / 2,
         scale: fontSizeOf(char) / mainFontSize,
         meetX: x,
+        lineX: 0, // 아래에서 채운다
+        lineY: 0,
       });
     });
 
@@ -203,6 +216,16 @@ export function Hero() {
     const middlePosition = (deerOrders.length - 1) / 2; // 4글자면 1.5번째가 가운데
     deerOrders.forEach((order, position) => {
       places[order].meetX = centerX + (position - middlePosition) * letterGap;
+    });
+
+    // strongerDeer 한 줄 자리: 12글자를 화면 가운데 기준으로, 큰 글자 간격만큼 나란히
+    // 높이는 Deer가 있는 줄
+    const screenCenterX = window.innerWidth / 2;
+    const lineMiddle = (LOGO_LETTERS.length - 1) / 2; // 12글자면 5.5번째가 가운데
+    const deerY = places[deerOrders[0]].y;
+    places.forEach((place, order) => {
+      place.lineX = screenCenterX + (order - lineMiddle) * letterGap;
+      place.lineY = deerY;
     });
 
     return places;
@@ -279,6 +302,7 @@ export function Hero() {
     if (showClones) clonePlaces.current ??= measureClonePlaces();
     const places = clonePlaces.current;
     const deerMeet = ease(segment(scrolledScreens, DEER_MEET_TIMING));
+    const lineJoin = ease(segment(scrolledScreens, LINE_JOIN_TIMING));
     LOGO_LETTERS.forEach(({ from, typedAt }, order) => {
       if (from !== undefined) {
         const char = charRefs.current[from];
@@ -291,10 +315,14 @@ export function Hero() {
       clone.style.opacity = showClones && appeared ? '1' : '0';
       if (!showClones || !places) return;
 
-      const { x, y, scale, meetX } = places[order];
-      const currentX = lerp(x, meetX, deerMeet); // 원래 자리 → Deer 자리
-      // translate(-50%, -50%): 복제본의 가운데를 (currentX, y)에 맞춘다
-      clone.style.transform = `translate(${currentX}px, ${y}px) translate(-50%, -50%) scale(${scale})`;
+      const { x, y, scale, meetX, lineX, lineY } = places[order];
+      const afterMeetX = lerp(x, meetX, deerMeet); // 3단계: 원래 자리 → Deer 자리
+      // 5단계: 그 자리 → 한 줄 자리. 작은 stronger는 커지면서 내려온다
+      const currentX = lerp(afterMeetX, lineX, lineJoin);
+      const currentY = lerp(y, lineY, lineJoin);
+      const currentScale = lerp(scale, 1, lineJoin);
+      // translate(-50%, -50%): 복제본의 가운데를 (currentX, currentY)에 맞춘다
+      clone.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%) scale(${currentScale})`;
     });
 
     // 타이핑 커서: strong 뒤에서 깜빡이다가, 글자가 쳐질 때마다 한 칸씩 오른쪽으로
