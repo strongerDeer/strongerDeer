@@ -121,6 +121,11 @@ type ClonePlace = {
 
 // 로고 조립 5단계: stronger가 내려와 Deer 앞에 붙어 strongerDeer 한 줄
 const LINE_JOIN_TIMING: Timing = { start: TYPING_CARET_END, end: 0.95 };
+// 5-2: 합쳐지는 동안 12글자를 '흰색·보통 굵기' 한 줄로 맞춘다
+// 도착할 로고(6단계)가 가는 글자라서, 굵은 Deer를 보통으로 내려 로고 쪽에 가깝게
+// 코드 글꼴(Roboto Mono)이 가변 글꼴이라 굵기도 색처럼 서서히 바꿀 수 있다
+const DEER_START_WEIGHT = 700; // 코드 화면의 Deer (font-bold)
+const LINE_WEIGHT = 400; // 한 줄이 됐을 때 (보통)
 
 // 로고 조립 3단계: De는 오른쪽, er은 왼쪽으로 와서 가운데서 만나 Deer
 const DEER_MEET_TIMING: Timing = { start: CLONE_START, end: 0.72 };
@@ -303,7 +308,7 @@ export function Hero() {
     const places = clonePlaces.current;
     const deerMeet = ease(segment(scrolledScreens, DEER_MEET_TIMING));
     const lineJoin = ease(segment(scrolledScreens, LINE_JOIN_TIMING));
-    LOGO_LETTERS.forEach(({ from, typedAt }, order) => {
+    LOGO_LETTERS.forEach(({ from, typedAt, line }, order) => {
       if (from !== undefined) {
         const char = charRefs.current[from];
         if (char) char.style.opacity = showClones ? '0' : '';
@@ -323,6 +328,16 @@ export function Hero() {
       const currentScale = lerp(scale, 1, lineJoin);
       // translate(-50%, -50%): 복제본의 가운데를 (currentX, currentY)에 맞춘다
       clone.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%) scale(${currentScale})`;
+
+      // 색: 윗줄에서 온 글자(stronger)만 회색 → 흰색 (Deer는 원래 흰색)
+      if (line === TAG_LINE) {
+        clone.style.color = `color-mix(in srgb, var(--foreground) ${lineJoin * 100}%, var(--foreground-muted))`;
+      }
+      // 굵기: 가운데 줄에서 온 글자(Deer)만 굵게 → 보통 (stronger는 원래 보통)
+      if (line === MAIN_LINE) {
+        const weight = lerp(DEER_START_WEIGHT, LINE_WEIGHT, lineJoin);
+        clone.style.fontWeight = String(Math.round(weight));
+      }
     });
 
     // 타이핑 커서: strong 뒤에서 깜빡이다가, 글자가 쳐질 때마다 한 칸씩 오른쪽으로
