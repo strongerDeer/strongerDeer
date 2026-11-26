@@ -131,7 +131,12 @@ const LINE_WEIGHT = 400; // 한 줄이 됐을 때 (보통)
 
 // 로고 조립 6단계: 한 줄이 이름 장면의 로고(strongerDeer) 자리로 날아가 바꿔치기
 // 이름 장면이 아래에서 올라오는 동안 날아가서, 거의 다 올라왔을 때 도착
-const FLY_TIMING: Timing = { start: 1.0, end: 1.85 };
+const FLY_TIMING: Timing = { start: 1.0, end: 1.72 };
+// 6-2: 도착한 뒤 복제본은 흐려지고 진짜 로고는 선명해진다 (크로스페이드)
+// 한 번에 바꾸면 글꼴이 달라(코드 글꼴 → Pretendard) 툭 바뀌어 보여서 겹쳐 넘긴다
+// 날아가는 도중에 겹치면 두 글자가 어긋나 보여서, 로고 위에 다 내려앉은 뒤에 시작한다
+// 겹쳐 보이는 시간이 길면 지저분해서 짧게 (스크롤 0.04화면 ≈ 휠 한 번)
+const LANDING_FADE_TIMING: Timing = { start: FLY_TIMING.end, end: 1.76 };
 
 // 로고 조립 3단계: De는 오른쪽, er은 왼쪽으로 와서 가운데서 만나 Deer
 const DEER_MEET_TIMING: Timing = { start: CLONE_START, end: 0.72 };
@@ -254,6 +259,7 @@ export function Hero() {
         x: rect.left + rect.width / 2,
         y: rect.top + rect.height / 2,
         scale: fontSizeOf(letter) / cloneFontSize, // 로고 글자 크기에 맞춘 비율
+        weight: Number(getComputedStyle(letter).fontWeight), // 로고 글자 굵기 (가는 200)
       };
     });
   };
@@ -332,16 +338,19 @@ export function Hero() {
     const lineJoin = ease(segment(scrolledScreens, LINE_JOIN_TIMING));
     const deerMakeRoom = ease(segment(scrolledScreens, DEER_MAKE_ROOM_TIMING));
 
-    // 6단계: 로고 자리로 날아가기. 도착하면 복제본은 숨기고 진짜 로고를 보인다
+    // 6단계: 로고 자리로 날아가기
     const fly = ease(segment(scrolledScreens, FLY_TIMING));
-    const landed = scrolledScreens >= FLY_TIMING.end;
+    // 6-2: 도착 직전에 복제본 → 진짜 로고로 서서히 넘긴다 (0 = 복제본만, 1 = 로고만)
+    const landingFade = segment(scrolledScreens, LANDING_FADE_TIMING);
     const firstClone = cloneRefs.current[0];
     const logoTargets =
       fly > 0 && firstClone ? measureLogoTargets(fontSizeOf(firstClone)) : null;
-    // 복제본이 떠 있는 동안 로고는 숨김 (CSS 변수로 이름 장면에 알려 준다)
+    // 복제본이 떠 있는 동안 로고는 숨겼다가, 도착 구간에서 서서히 보인다
+    // (CSS 변수로 이름 장면에 알려 준다. 복제본 전에는 원래대로 1)
+    const logoReveal = showClones ? landingFade : 1;
     document.documentElement.style.setProperty(
       '--logo-reveal',
-      showClones && !landed ? '0' : '1'
+      String(logoReveal)
     );
     LOGO_LETTERS.forEach(({ from, typedAt, line }, order) => {
       if (from !== undefined) {
@@ -352,7 +361,9 @@ export function Hero() {
       if (!clone) return;
       // 타이핑 글자는 쳐진 뒤부터 보인다 (원본에서 온 글자는 처음부터)
       const appeared = typedAt === undefined || scrolledScreens >= typedAt;
-      clone.style.opacity = showClones && appeared && !landed ? '1' : '0';
+      // 로고가 선명해지는 만큼 복제본은 흐려진다 (둘을 더하면 항상 1)
+      const cloneOpacity = showClones && appeared ? 1 - landingFade : 0;
+      clone.style.opacity = String(cloneOpacity);
       if (!showClones || !places) return;
 
       const { x, y, scale, meetX, lineX, lineY } = places[order];
@@ -379,11 +390,14 @@ export function Hero() {
           : 'var(--foreground)';
       // 6단계에서 전부 흰색 → 로고 글자색 (밝은 이름 장면 위에서도 보이게)
       clone.style.color = `color-mix(in srgb, var(--page-foreground) ${fly * 100}%, ${lineColor})`;
-      // 굵기: 가운데 줄에서 온 글자(Deer)만 굵게 → 보통 (stronger는 원래 보통)
-      if (line === MAIN_LINE) {
-        const weight = lerp(DEER_START_WEIGHT, LINE_WEIGHT, lineJoin);
-        clone.style.fontWeight = String(Math.round(weight));
-      }
+      // 굵기 5단계: 가운데 줄에서 온 글자(Deer)만 굵게 → 보통 (stronger는 원래 보통)
+      const lineWeight =
+        line === MAIN_LINE
+          ? lerp(DEER_START_WEIGHT, LINE_WEIGHT, lineJoin)
+          : LINE_WEIGHT;
+      // 굵기 6단계: 보통 → 로고 글자 굵기 (겹칠 때 굵은 복제본이 가는 로고 위에 진하게 남지 않게)
+      const weight = target ? lerp(lineWeight, target.weight, fly) : lineWeight;
+      clone.style.fontWeight = String(Math.round(weight));
     });
 
     // 타이핑 커서: strong 뒤에서 깜빡이다가, 글자가 쳐질 때마다 한 칸씩 오른쪽으로
