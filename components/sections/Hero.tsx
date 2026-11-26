@@ -137,6 +137,11 @@ const FLY_TIMING: Timing = { start: 1.0, end: 1.72 };
 // 날아가는 도중에 겹치면 두 글자가 어긋나 보여서, 로고 위에 다 내려앉은 뒤에 시작한다
 // 겹쳐 보이는 시간이 길면 지저분해서 짧게 (스크롤 0.04화면 ≈ 휠 한 번)
 const LANDING_FADE_TIMING: Timing = { start: FLY_TIMING.end, end: 1.76 };
+// 6-3: 날아가는 한 줄이 검정 배경에서 흰 배경(이름 장면)으로 넘어가는 순간 코드 글꼴 → 로고 글꼴(Pretendard)
+// 글꼴은 굵기처럼 서서히 바꿀 수 없어서, 배경이 바뀌는 순간에 바꿔 눈에 덜 띄게 한다
+// 1.3 = 1280·390 화면 모두에서 한 줄이 흰 배경 경계를 지나는 때 (화면으로 확인한 값)
+const LOGO_FONT_SWITCH_AT = 1.3;
+const LOGO_FONT = 'var(--font-pretendard)';
 
 // 로고 조립 3단계: De는 오른쪽, er은 왼쪽으로 와서 가운데서 만나 Deer
 const DEER_MEET_TIMING: Timing = { start: CLONE_START, end: 0.72 };
@@ -398,6 +403,9 @@ export function Hero() {
       // 굵기 6단계: 보통 → 로고 글자 굵기 (겹칠 때 굵은 복제본이 가는 로고 위에 진하게 남지 않게)
       const weight = target ? lerp(lineWeight, target.weight, fly) : lineWeight;
       clone.style.fontWeight = String(Math.round(weight));
+      // 글꼴: 날아가기 시작하면 로고와 같은 글꼴로 (빈 값 = 원래 클래스의 코드 글꼴)
+      const useLogoFont = scrolledScreens >= LOGO_FONT_SWITCH_AT;
+      clone.style.fontFamily = useLogoFont ? LOGO_FONT : '';
     });
 
     // 타이핑 커서: strong 뒤에서 깜빡이다가, 글자가 쳐질 때마다 한 칸씩 오른쪽으로
