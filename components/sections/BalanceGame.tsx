@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { Button } from '@/components/common/Button';
 import { Section } from '@/components/common/Section';
@@ -8,15 +8,20 @@ import { BalanceResult } from '@/components/sections/balance/BalanceResult';
 import { ChoiceCard } from '@/components/sections/balance/ChoiceCard';
 import { type Choice, GAMES } from '@/data/games';
 
+// 모든 문항을 "아직 안 고름(null)" 상태로
+function createEmptyAnswers(): (Choice | null)[] {
+  return GAMES.map(() => null);
+}
+
 export function BalanceGame() {
   // 지금 보고 있는 문항 번호 (0부터)
   const [currentIndex, setCurrentIndex] = useState(0);
   // 마지막 문항에서 "결과 보기"를 누르면 true
   const [isResultOpen, setIsResultOpen] = useState(false);
   // 문항마다 고른 답. 아직 안 고른 문항은 null
-  const [answers, setAnswers] = useState<(Choice | null)[]>(() =>
-    GAMES.map(() => null)
-  );
+  const [answers, setAnswers] = useState(createEmptyAnswers);
+  // 결과가 열리거나 다시 시작할 때, 화면을 게임 상자 맨 위로 맞추는 데 씀
+  const gameBoxRef = useRef<HTMLDivElement>(null);
 
   const { id, title, a, b } = GAMES[currentIndex];
   const pickedCount = answers.filter((answer) => answer !== null).length;
@@ -34,12 +39,35 @@ export function BalanceGame() {
     setCurrentIndex((index) => index - 1);
   }
 
+  // 상자는 결과 화면·문항 화면 모두에 그대로 있어서, 렌더 전에 바로 옮겨도 된다
+  function moveToGameBox() {
+    const box = gameBoxRef.current;
+    if (!box) return;
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+    box.scrollIntoView({
+      block: 'start',
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    });
+    // 누른 버튼이 사라지므로 키보드 포커스를 상자로 옮긴다
+    box.focus({ preventScroll: true });
+  }
+
   function goNext() {
     if (isLastGame) {
       setIsResultOpen(true);
+      moveToGameBox();
       return;
     }
     setCurrentIndex((index) => index + 1);
+  }
+
+  function restart() {
+    setAnswers(createEmptyAnswers());
+    setCurrentIndex(0);
+    setIsResultOpen(false);
+    moveToGameBox();
   }
 
   return (
@@ -49,9 +77,13 @@ export function BalanceGame() {
       title='몇 개의 취향이 저와 겹칠까요?'
       description='재미로 보는 밸런스 게임. 끌리는 쪽을 고르면 마지막에 제 선택과 비교해 드려요. 고른 답은 언제든 바꿀 수 있어요.'
     >
-      <div className='mx-auto mt-8 max-w-4xl rounded-[28px] bg-background-soft px-[max(16px,4vw)] py-7 text-left'>
+      <div
+        ref={gameBoxRef}
+        tabIndex={-1}
+        className='mx-auto mt-8 max-w-4xl scroll-mt-20 rounded-[28px] bg-background-soft px-[max(16px,4vw)] py-7 text-left outline-none'
+      >
         {isResultOpen ? (
-          <BalanceResult answers={answers} />
+          <BalanceResult answers={answers} onRestart={restart} />
         ) : (
           <>
             <div className='mb-3 flex items-center justify-between text-sm text-foreground-muted tabular-nums'>
