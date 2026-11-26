@@ -8,7 +8,7 @@ import {
 type SectionProps = {
   id: string;
   label?: string;
-  title: string;
+  title: ReactNode;
   description?: string;
   titleSize?: TitleSize;
   className?: string; // 섹션마다 다른 높이·배치가 필요할 때 (예: 마지막 섹션 화면 가득)
