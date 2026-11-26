@@ -118,10 +118,12 @@ export function StrongerDeer() {
       <div className='sticky top-(--header-h) flex h-[calc(100svh-var(--header-h))] flex-col items-center justify-center gap-5 px-4 py-10 motion-reduce:static'>
         <p className='text-[clamp(28px,6vw,48px)] tracking-tight'>
           <span className='sr-only'>strongerDeer</span>
-          <span aria-hidden='true'>
+          {/* 인트로의 복제본이 날아오는 동안은 Hero가 --logo-reveal을 0으로 둬서 숨긴다 */}
+          <span aria-hidden='true' style={{ opacity: 'var(--logo-reveal, 1)' }}>
             {LETTERS.map(({ char }, index) => (
               <span
                 key={index}
+                data-logo-letter // Hero가 이 글자들의 위치를 찾아 복제본을 보낸다
                 ref={(el) => {
                   letterRefs.current[index] = el;
                 }}
