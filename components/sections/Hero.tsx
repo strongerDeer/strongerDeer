@@ -129,6 +129,10 @@ const DEER_MAKE_ROOM_TIMING: Timing = { start: TYPING_CARET_END, end: 0.86 };
 const DEER_START_WEIGHT = 700; // 코드 화면의 Deer (font-bold)
 const LINE_WEIGHT = 400; // 한 줄이 됐을 때 (보통)
 
+// 로고 조립 6단계: 한 줄이 이름 장면의 로고(strongerDeer) 자리로 날아가 바꿔치기
+// 이름 장면이 아래에서 올라오는 동안 날아가서, 거의 다 올라왔을 때 도착
+const FLY_TIMING: Timing = { start: 1.0, end: 1.85 };
+
 // 로고 조립 3단계: De는 오른쪽, er은 왼쪽으로 와서 가운데서 만나 Deer
 const DEER_MEET_TIMING: Timing = { start: CLONE_START, end: 0.72 };
 
@@ -238,6 +242,22 @@ export function Hero() {
     return places;
   };
 
+  // 이름 장면 로고 글자마다 화면 어디에 있는지 잰다
+  // 이름 장면이 스크롤에 따라 올라오는 중이라, 처음 한 번이 아니라 매 프레임 다시 잰다
+  const measureLogoTargets = (cloneFontSize: number) => {
+    const logoLetters =
+      document.querySelectorAll<HTMLElement>('[data-logo-letter]');
+    if (logoLetters.length !== LOGO_LETTERS.length) return null;
+    return [...logoLetters].map((letter) => {
+      const rect = letter.getBoundingClientRect();
+      return {
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2,
+        scale: fontSizeOf(letter) / cloneFontSize, // 로고 글자 크기에 맞춘 비율
+      };
+    });
+  };
+
   // 알약마다 '묶음 가운데까지 거리'를 잰다
   // 움직이는 중이면 transform 때문에 위치가 틀어지므로, 잠깐 지우고 잰 뒤 되돌린다
   const measurePillOffsets = (): Offset[] | null => {
@@ -311,6 +331,18 @@ export function Hero() {
     const deerMeet = ease(segment(scrolledScreens, DEER_MEET_TIMING));
     const lineJoin = ease(segment(scrolledScreens, LINE_JOIN_TIMING));
     const deerMakeRoom = ease(segment(scrolledScreens, DEER_MAKE_ROOM_TIMING));
+
+    // 6단계: 로고 자리로 날아가기. 도착하면 복제본은 숨기고 진짜 로고를 보인다
+    const fly = ease(segment(scrolledScreens, FLY_TIMING));
+    const landed = scrolledScreens >= FLY_TIMING.end;
+    const firstClone = cloneRefs.current[0];
+    const logoTargets =
+      fly > 0 && firstClone ? measureLogoTargets(fontSizeOf(firstClone)) : null;
+    // 복제본이 떠 있는 동안 로고는 숨김 (CSS 변수로 이름 장면에 알려 준다)
+    document.documentElement.style.setProperty(
+      '--logo-reveal',
+      showClones && !landed ? '0' : '1'
+    );
     LOGO_LETTERS.forEach(({ from, typedAt, line }, order) => {
       if (from !== undefined) {
         const char = charRefs.current[from];
@@ -320,7 +352,7 @@ export function Hero() {
       if (!clone) return;
       // 타이핑 글자는 쳐진 뒤부터 보인다 (원본에서 온 글자는 처음부터)
       const appeared = typedAt === undefined || scrolledScreens >= typedAt;
-      clone.style.opacity = showClones && appeared ? '1' : '0';
+      clone.style.opacity = showClones && appeared && !landed ? '1' : '0';
       if (!showClones || !places) return;
 
       const { x, y, scale, meetX, lineX, lineY } = places[order];
@@ -330,13 +362,23 @@ export function Hero() {
       const currentX = lerp(afterMeetX, lineX, joinX);
       const currentY = lerp(y, lineY, lineJoin);
       const currentScale = lerp(scale, 1, lineJoin);
-      // translate(-50%, -50%): 복제본의 가운데를 (currentX, currentY)에 맞춘다
-      clone.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%) scale(${currentScale})`;
+      // 6단계: 한 줄 자리 → 로고 글자 자리 (로고 위치를 못 찾으면 한 줄 자리에 그대로)
+      const target = logoTargets?.[order];
+      const flyX = target ? lerp(currentX, target.x, fly) : currentX;
+      const flyY = target ? lerp(currentY, target.y, fly) : currentY;
+      const flyScale = target
+        ? lerp(currentScale, target.scale, fly)
+        : currentScale;
+      // translate(-50%, -50%): 복제본의 가운데를 (flyX, flyY)에 맞춘다
+      clone.style.transform = `translate(${flyX}px, ${flyY}px) translate(-50%, -50%) scale(${flyScale})`;
 
-      // 색: 윗줄에서 온 글자(stronger)만 회색 → 흰색 (Deer는 원래 흰색)
-      if (line === TAG_LINE) {
-        clone.style.color = `color-mix(in srgb, var(--foreground) ${lineJoin * 100}%, var(--foreground-muted))`;
-      }
+      // 색: 5단계에서 stronger만 회색 → 흰색 (Deer는 원래 흰색)
+      const lineColor =
+        line === TAG_LINE
+          ? `color-mix(in srgb, var(--foreground) ${lineJoin * 100}%, var(--foreground-muted))`
+          : 'var(--foreground)';
+      // 6단계에서 전부 흰색 → 로고 글자색 (밝은 이름 장면 위에서도 보이게)
+      clone.style.color = `color-mix(in srgb, var(--page-foreground) ${fly * 100}%, ${lineColor})`;
       // 굵기: 가운데 줄에서 온 글자(Deer)만 굵게 → 보통 (stronger는 원래 보통)
       if (line === MAIN_LINE) {
         const weight = lerp(DEER_START_WEIGHT, LINE_WEIGHT, lineJoin);

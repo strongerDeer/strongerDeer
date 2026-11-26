@@ -116,6 +116,10 @@ body {
   --editor-foreground: #ecedf3;
   --editor-foreground-muted: #a3a6b5;
   --editor-line: #2c2e3b;
+
+  /* 사이트 원래 글자색. .intro-scene 안에서는 --foreground가 인트로 색으로 덮이므로
+     인트로 밖(이름 장면) 글자색이 필요할 때 쓴다 (로고 조립 6단계: 복제본이 로고 색으로) */
+  --page-foreground: var(--foreground);
 }
 
 @theme {
