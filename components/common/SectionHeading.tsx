@@ -1,8 +1,19 @@
+import type { ReactNode } from 'react';
+
+// 제목 크기: 보통 섹션 제목(display) / 페이지 마지막 한 문장(closing)
+export type TitleSize = 'display' | 'closing';
+
+const TITLE_SIZE_CLASS: Record<TitleSize, string> = {
+  display: 'text-display',
+  closing: 'max-w-[16em] mx-auto text-closing',
+};
+
 type SectionHeadingProps = {
   label?: string;
-  title: string;
+  title: ReactNode; // 보통은 글자, 효과가 필요하면 컴포넌트 (예: TypingText)
   headingLevel?: 'h2' | 'h3';
   titleId: string;
+  titleSize?: TitleSize;
 };
 
 export function SectionHeading({
@@ -10,6 +21,7 @@ export function SectionHeading({
   title,
   headingLevel,
   titleId,
+  titleSize = 'display',
 }: SectionHeadingProps) {
   const Heading = headingLevel ?? 'h2';
 
@@ -22,7 +34,7 @@ export function SectionHeading({
       )}
       <Heading
         id={titleId}
-        className='mb-3 text-display tracking-[-0.02em] text-balance'
+        className={`mb-3 tracking-[-0.02em] text-balance ${TITLE_SIZE_CLASS[titleSize]}`}
       >
         {title}
       </Heading>
