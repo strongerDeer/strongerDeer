@@ -61,6 +61,12 @@
     3rem
   ); /* 28px → 48px, 섹션 제목 */
   --text-display--line-height: 1.3;
+  --text-closing: clamp(
+    1.875rem,
+    1.141rem + 3.261vw,
+    3.75rem
+  ); /* 30px → 60px, 페이지 마지막 문장 */
+  --text-closing--line-height: 1.3;
 }
 /* 시스템 다크모드 */
 @media (prefers-color-scheme: dark) {

@@ -7,6 +7,7 @@ export function Contact() {
     <Section
       id='contact'
       title='취향이 같아도 달라도, 같이 만들어볼 이야기가 궁금하지 않으세요?'
+      titleSize='closing'
     >
       <div className='mt-10 flex flex-wrap items-center justify-center gap-2'>
         <a
