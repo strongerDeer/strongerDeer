@@ -8,7 +8,8 @@ import { ChoiceCard } from '@/components/sections/balance/ChoiceCard';
 import { type Choice, GAMES } from '@/data/games';
 
 export function BalanceGame() {
-  const currentIndex = 0;
+  // 지금 보고 있는 문항 번호 (0부터)
+  const [currentIndex, setCurrentIndex] = useState(0);
   // 문항마다 고른 답. 아직 안 고른 문항은 null
   const [answers, setAnswers] = useState<(Choice | null)[]>(() =>
     GAMES.map(() => null)
@@ -16,11 +17,22 @@ export function BalanceGame() {
 
   const { id, title, a, b } = GAMES[currentIndex];
   const pickedCount = answers.filter((answer) => answer !== null).length;
+  const isFirstGame = currentIndex === 0;
+  const isLastGame = currentIndex === GAMES.length - 1;
+  const hasPickedCurrent = answers[currentIndex] !== null;
 
   function pick(choice: Choice) {
     setAnswers((prev) =>
       prev.map((answer, index) => (index === currentIndex ? choice : answer))
     );
+  }
+
+  function goPrev() {
+    setCurrentIndex((index) => index - 1);
+  }
+
+  function goNext() {
+    setCurrentIndex((index) => index + 1);
   }
 
   return (
@@ -32,7 +44,9 @@ export function BalanceGame() {
     >
       <div className='mx-auto mt-8 max-w-4xl rounded-[28px] bg-background-soft px-[max(16px,4vw)] py-7 text-left'>
         <div className='mb-3 flex items-center justify-between text-sm text-foreground-muted tabular-nums'>
-          <span>1 / {GAMES.length}</span>
+          <span>
+            {currentIndex + 1} / {GAMES.length}
+          </span>
           <span>{pickedCount}개 골랐어요</span>
         </div>
         <div className='mb-6 h-1.5 overflow-hidden rounded-full bg-line'>
@@ -73,11 +87,22 @@ export function BalanceGame() {
         </fieldset>
 
         <div className='mt-6 flex flex-wrap justify-between gap-2.5'>
-          <Button size='sm' disabled className='disabled:opacity-40'>
+          <Button
+            size='sm'
+            disabled={isFirstGame}
+            onClick={goPrev}
+            className='disabled:opacity-40'
+          >
             이전
           </Button>
-          <Button variant='solid' size='sm'>
-            다음
+          <Button
+            variant='solid'
+            size='sm'
+            disabled={!hasPickedCurrent || isLastGame}
+            onClick={goNext}
+            className='disabled:opacity-40'
+          >
+            {isLastGame ? '결과 보기' : '다음'}
           </Button>
         </div>
       </div>
