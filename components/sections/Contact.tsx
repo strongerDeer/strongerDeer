@@ -1,3 +1,5 @@
+import { ChartColumn } from 'lucide-react';
+
 import { Button } from '@/components/common/Button';
 import { ButtonLink } from '@/components/common/ButtonLink';
 import { Section } from '@/components/common/Section';
@@ -17,9 +19,12 @@ export function Contact() {
           stronger_deer@naver.com
         </a>
 
-        <Button size='sm'>주소복사</Button>
+        <Button size='sm'>주소 복사</Button>
         <div className='flex flex-wrap gap-2'>
-          <Button size='sm'>내 방문 기록 보기</Button>
+          <Button size='sm'>
+            <ChartColumn aria-hidden='true' className='size-[1.15em]' />내 방문
+            기록 보기
+          </Button>
 
           <ButtonLink
             href='https://github.com/strongerDeer'
