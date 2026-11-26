@@ -121,6 +121,8 @@ type ClonePlace = {
 
 // 로고 조립 5단계: stronger가 내려와 Deer 앞에 붙어 strongerDeer 한 줄
 const LINE_JOIN_TIMING: Timing = { start: TYPING_CARET_END, end: 0.95 };
+// 5-3: Deer는 stronger보다 빨리 오른쪽으로 비켜 준다 (같이 움직이면 중간에 글자가 겹침)
+const DEER_MAKE_ROOM_TIMING: Timing = { start: TYPING_CARET_END, end: 0.86 };
 // 5-2: 합쳐지는 동안 12글자를 '흰색·보통 굵기' 한 줄로 맞춘다
 // 도착할 로고(6단계)가 가는 글자라서, 굵은 Deer를 보통으로 내려 로고 쪽에 가깝게
 // 코드 글꼴(Roboto Mono)이 가변 글꼴이라 굵기도 색처럼 서서히 바꿀 수 있다
@@ -308,6 +310,7 @@ export function Hero() {
     const places = clonePlaces.current;
     const deerMeet = ease(segment(scrolledScreens, DEER_MEET_TIMING));
     const lineJoin = ease(segment(scrolledScreens, LINE_JOIN_TIMING));
+    const deerMakeRoom = ease(segment(scrolledScreens, DEER_MAKE_ROOM_TIMING));
     LOGO_LETTERS.forEach(({ from, typedAt, line }, order) => {
       if (from !== undefined) {
         const char = charRefs.current[from];
@@ -323,7 +326,8 @@ export function Hero() {
       const { x, y, scale, meetX, lineX, lineY } = places[order];
       const afterMeetX = lerp(x, meetX, deerMeet); // 3단계: 원래 자리 → Deer 자리
       // 5단계: 그 자리 → 한 줄 자리. 작은 stronger는 커지면서 내려온다
-      const currentX = lerp(afterMeetX, lineX, lineJoin);
+      const joinX = line === MAIN_LINE ? deerMakeRoom : lineJoin; // Deer만 먼저 비켜 준다
+      const currentX = lerp(afterMeetX, lineX, joinX);
       const currentY = lerp(y, lineY, lineJoin);
       const currentScale = lerp(scale, 1, lineJoin);
       // translate(-50%, -50%): 복제본의 가운데를 (currentX, currentY)에 맞춘다
