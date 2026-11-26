@@ -32,6 +32,7 @@ export function Shelf({
           <li key={id} className='shrink-0'>
             <button
               type='button'
+              id={`book-${id}`}
               aria-pressed={id === selectedBookId}
               aria-label={`${title}, ${author}`}
               onClick={() => onSelect(id)}
