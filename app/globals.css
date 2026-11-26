@@ -32,6 +32,7 @@
   --color-info-soft: var(--info-soft);
   --shadow-card: var(--shadow);
   --font-sans: var(--font-pretendard);
+  --font-mono: var(--font-roboto-mono);
 }
 /* 글자 크기: 360px → 1280px 사이에서 부드럽게 커짐 (최소·최대는 rem이라 브라우저 확대를 따라감) */
 @theme {
