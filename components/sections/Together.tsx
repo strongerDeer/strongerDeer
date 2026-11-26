@@ -31,7 +31,7 @@ export function Together() {
       label='같이 일하면'
       title='이런 팀이면 신나게 일해요'
     >
-      <ul className='m-auto mt-4 flex w-full max-w-3xl flex-col gap-3'>
+      <ul className='reveal-in-turn m-auto mt-4 flex w-full max-w-3xl flex-col gap-3'>
         {TEAM_TRAITS.map(({ icon: Icon, text }) => (
           <li
             key={text}
