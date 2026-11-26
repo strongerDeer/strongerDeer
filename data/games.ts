@@ -1,4 +1,4 @@
-type Choice = 'a' | 'b';
+export type Choice = 'a' | 'b';
 
 type Card = {
   image: string; // public/images/balance/balance-<image>.webp

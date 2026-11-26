@@ -1,12 +1,14 @@
 import Image from 'next/image';
 
-import type { Game } from '@/data/games';
+import type { Choice, Game } from '@/data/games';
 import { asset } from '@/lib/asset';
 
 type ChoiceCardProps = {
   gameId: string;
-  side: 'a' | 'b';
+  side: Choice;
   card: Game['a'];
+  checked: boolean;
+  onPick: (side: Choice) => void;
 };
 
 const sideClass = {
@@ -24,7 +26,7 @@ const pinColor = {
   b: { dark: '#4f4bd6', light: '#8f8cff' },
 };
 
-function Pin({ side }: { side: 'a' | 'b' }) {
+function Pin({ side }: { side: Choice }) {
   const { dark, light } = pinColor[side];
   return (
     <svg
@@ -55,7 +57,13 @@ function Pin({ side }: { side: 'a' | 'b' }) {
   );
 }
 
-export function ChoiceCard({ gameId, side, card }: ChoiceCardProps) {
+export function ChoiceCard({
+  gameId,
+  side,
+  card,
+  checked,
+  onPick,
+}: ChoiceCardProps) {
   const inputId = `game-${gameId}-${side}`;
 
   return (
@@ -64,6 +72,8 @@ export function ChoiceCard({ gameId, side, card }: ChoiceCardProps) {
         type='radio'
         name={`game-${gameId}`}
         id={inputId}
+        checked={checked}
+        onChange={() => onPick(side)}
         className='peer sr-only'
       />
       <label

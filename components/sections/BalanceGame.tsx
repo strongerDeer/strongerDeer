@@ -1,11 +1,27 @@
+'use client';
+
+import { useState } from 'react';
+
 import { Button } from '@/components/common/Button';
 import { Section } from '@/components/common/Section';
 import { ChoiceCard } from '@/components/sections/balance/ChoiceCard';
-import { GAMES } from '@/data/games';
+import { type Choice, GAMES } from '@/data/games';
 
 export function BalanceGame() {
-  const { id, title, a, b } = GAMES[0];
-  const pickedCount = 0;
+  const currentIndex = 0;
+  // 문항마다 고른 답. 아직 안 고른 문항은 null
+  const [answers, setAnswers] = useState<(Choice | null)[]>(() =>
+    GAMES.map(() => null)
+  );
+
+  const { id, title, a, b } = GAMES[currentIndex];
+  const pickedCount = answers.filter((answer) => answer !== null).length;
+
+  function pick(choice: Choice) {
+    setAnswers((prev) =>
+      prev.map((answer, index) => (index === currentIndex ? choice : answer))
+    );
+  }
 
   return (
     <Section
@@ -32,7 +48,13 @@ export function BalanceGame() {
           </legend>
 
           <div className='grid grid-cols-1 items-center gap-3 sm:grid-cols-[1fr_auto_1fr] sm:gap-4'>
-            <ChoiceCard gameId={id} side='a' card={a} />
+            <ChoiceCard
+              gameId={id}
+              side='a'
+              card={a}
+              checked={answers[currentIndex] === 'a'}
+              onPick={pick}
+            />
             <span
               aria-hidden='true'
               className='px-[0.12em] text-center text-[44px] leading-none font-black tracking-[-0.06em] italic sm:text-6xl'
@@ -40,7 +62,13 @@ export function BalanceGame() {
               <span className='text-info'>V</span>
               <span className='text-accent'>S</span>
             </span>
-            <ChoiceCard gameId={id} side='b' card={b} />
+            <ChoiceCard
+              gameId={id}
+              side='b'
+              card={b}
+              checked={answers[currentIndex] === 'b'}
+              onPick={pick}
+            />
           </div>
         </fieldset>
 
