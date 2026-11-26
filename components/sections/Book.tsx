@@ -10,6 +10,7 @@ import { Shelf } from '@/components/sections/book/Shelf';
 import { BOOKS } from '@/data/books';
 import { asset } from '@/lib/asset';
 import { findBookByTitle } from '@/lib/findBookByTitle';
+import { sendBookRecommend } from '@/lib/sendBookRecommend';
 
 const EMAIL = 'stronger_deer@naver.com';
 
@@ -37,6 +38,8 @@ export function Book() {
     }
 
     const matchedBook = findBookByTitle(query);
+    sendBookRecommend(query, matchedBook !== undefined);
+
     if (!matchedBook) {
       setRecommendResult({ kind: 'newBook', title: query });
       return;
