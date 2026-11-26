@@ -1,17 +1,22 @@
 import Image from 'next/image';
 
+import { Button } from '@/components/common/Button';
 import { ButtonLink } from '@/components/common/ButtonLink';
 import { type Choice, GAMES } from '@/data/games';
 import { asset } from '@/lib/asset';
 
 type BalanceResultProps = {
   answers: (Choice | null)[];
+  onRestart: () => void;
 };
 
 // 겹친 비율이 이 값 이상이면 해당 문구 (위에서부터 차례로 확인)
 const RESULT_MESSAGES = [
   { minRatio: 1, text: '혹시 저세요? 점심 단골집 같이 가요.' },
-  { minRatio: 0.66, text: '꽤 겹치네요. 노동요 플레이리스트 공유해 주세요.' },
+  {
+    minRatio: 0.66,
+    text: '꽤 겹치네요. 같이 일하면 손발이 잘 맞을 것 같아요.',
+  },
   {
     minRatio: 0.34,
     text: '반반이네요. 서로 취향 소개하며 친해지기 딱 좋아요.',
@@ -26,7 +31,7 @@ function pickResultMessage(sameRatio: number) {
   return matched?.text ?? '';
 }
 
-export function BalanceResult({ answers }: BalanceResultProps) {
+export function BalanceResult({ answers, onRestart }: BalanceResultProps) {
   const differentGames = GAMES.filter(
     (game, index) => answers[index] !== game.hj
   );
@@ -81,6 +86,11 @@ export function BalanceResult({ answers }: BalanceResultProps) {
           전부 겹쳤어요. 이유까지 같을지 궁금하네요!
         </p>
       )}
+      <div className='mt-6 flex justify-center'>
+        <Button size='sm' onClick={onRestart}>
+          처음부터 다시
+        </Button>
+      </div>
     </div>
   );
 }
