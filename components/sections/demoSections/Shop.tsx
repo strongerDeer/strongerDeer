@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { useState } from 'react';
 
 import { Button } from '@/components/common/Button';
 import { DemoCard } from '@/components/sections/demoSections/DemoCard';
@@ -6,7 +9,20 @@ import { TagList } from '@/components/sections/demoSections/TagList';
 import { SHOP_TAGS } from '@/data/shop';
 import { asset } from '@/lib/asset';
 
+const GUIDE_NOTE = '연타해 보세요. 담는 중에 누른 건 한 번으로 쳐요.';
+const LIKED_NOTE = '아앗 감사합니다!';
+
 export function Shop() {
+  const [isLiked, setIsLiked] = useState(false);
+  // 버튼 아래 한 줄 안내. 좋아요·장바구니가 같은 자리를 함께 쓴다
+  const [note, setNote] = useState(GUIDE_NOTE);
+
+  function toggleLike() {
+    const nextIsLiked = !isLiked;
+    setIsLiked(nextIsLiked);
+    setNote(nextIsLiked ? LIKED_NOTE : GUIDE_NOTE);
+  }
+
   return (
     <DemoCard
       index={3}
@@ -63,8 +79,12 @@ export function Shop() {
           </dl>
 
           <div className='col-span-2 row-start-6 flex gap-2 sm:mt-auto'>
-            <Button className='flex-1' aria-pressed={false}>
-              <Heart />
+            <Button
+              className='flex-1 aria-pressed:border-accent aria-pressed:text-accent'
+              aria-pressed={isLiked}
+              onClick={toggleLike}
+            >
+              <Heart isFilled={isLiked} />
               좋아요
             </Button>
             <Button className='flex-1' variant='solid'>
@@ -75,7 +95,7 @@ export function Shop() {
             aria-live='polite'
             className='col-span-2 row-start-7 min-h-[1.6em] text-[13px] text-foreground-muted'
           >
-            연타해 보세요. 담는 중에 누른 건 한 번으로 쳐요.
+            {note}
           </p>
         </div>
       </div>
@@ -83,12 +103,12 @@ export function Shop() {
   );
 }
 
-function Heart() {
+function Heart({ isFilled }: { isFilled: boolean }) {
   return (
     <svg
       viewBox='0 0 24 24'
       className='size-[1em]'
-      fill='none'
+      fill={isFilled ? 'currentColor' : 'none'}
       stroke='currentColor'
       strokeWidth={2}
       strokeLinecap='round'
