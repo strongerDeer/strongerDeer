@@ -8,7 +8,6 @@ import { ButtonLink } from '@/components/common/ButtonLink';
 import { Section } from '@/components/common/Section';
 import { Shelf } from '@/components/sections/book/Shelf';
 import { BOOKS } from '@/data/books';
-import { EMAIL } from '@/data/contact';
 import { asset } from '@/lib/asset';
 import { findBookByTitle } from '@/lib/findBookByTitle';
 import { sendBookRecommend } from '@/lib/sendBookRecommend';
@@ -17,12 +16,16 @@ import { sendBookRecommend } from '@/lib/sendBookRecommend';
 type RecommendResult =
   | { kind: 'empty' } // 아무것도 안 적음
   | { kind: 'alreadyRead' } // 제 책장에 있는 책
-  | { kind: 'newBook'; title: string }; // 아직 없는 책 → 메일로 추천받기
+  | { kind: 'newBook' }; // 아직 없는 책 (시트에 저장됨)
 
 export function Book() {
   // 책장에서 고른 책 (두 단이 같이 씀). 아직 안 골랐으면 null
   const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
   const selectedBook = BOOKS.find((book) => book.id === selectedBookId);
+  // 이번 방문에서 이미 투표한 책 (같은 책 연타로 여러 줄 쌓이지 않게)
+  const [votedBookIds, setVotedBookIds] = useState<string[]>([]);
+  const hasVotedSelected =
+    selectedBookId !== null && votedBookIds.includes(selectedBookId);
   const [recommendResult, setRecommendResult] =
     useState<RecommendResult | null>(null);
 
@@ -37,10 +40,14 @@ export function Book() {
     }
 
     const matchedBook = findBookByTitle(query);
-    sendBookRecommend(query, matchedBook !== undefined);
+    sendBookRecommend({
+      title: query,
+      alreadyRead: matchedBook !== undefined,
+      source: 'input',
+    });
 
     if (!matchedBook) {
-      setRecommendResult({ kind: 'newBook', title: query });
+      setRecommendResult({ kind: 'newBook' });
       return;
     }
 
@@ -55,6 +62,16 @@ export function Book() {
       inline: 'center',
       behavior: prefersReducedMotion ? 'auto' : 'smooth',
     });
+  }
+
+  function voteSelectedBook() {
+    if (!selectedBook || hasVotedSelected) return;
+    sendBookRecommend({
+      title: selectedBook.title,
+      alreadyRead: true,
+      source: 'vote',
+    });
+    setVotedBookIds((prev) => [...prev, selectedBook.id]);
   }
 
   return (
@@ -94,6 +111,15 @@ export function Book() {
               <b className='text-foreground'>{selectedBook.title}</b>
               <br />
               {selectedBook.author}
+              <br />
+              <Button
+                size='sm'
+                onClick={voteSelectedBook}
+                disabled={hasVotedSelected}
+                className='mt-2 disabled:opacity-60'
+              >
+                {hasVotedSelected ? '투표했어요 ✓' : '내 인생 책에 투표'}
+              </Button>
             </span>
           </>
         )}
@@ -129,17 +155,8 @@ export function Book() {
           {recommendResult?.kind === 'empty' && '책 제목을 적어 주세요.'}
           {recommendResult?.kind === 'alreadyRead' &&
             '어! 저도 읽었어요. 취향이 통하네요!'}
-          {recommendResult?.kind === 'newBook' && (
-            <>
-              제 서재엔 아직 없는 책이에요! 추천해 주시면 읽고 꽂아 둘게요.{' '}
-              <a
-                href={`mailto:${EMAIL}?subject=${encodeURIComponent(`인생 개발책 추천: ${recommendResult.title}`)}`}
-                className='font-bold text-accent underline underline-offset-2'
-              >
-                메일로 추천하기
-              </a>
-            </>
-          )}
+          {recommendResult?.kind === 'newBook' &&
+            '추천 고마워요! 아직 없는 책이라 읽어 보고 꽂아 둘게요.'}
         </p>
       </form>
 
