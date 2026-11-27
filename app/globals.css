@@ -352,3 +352,205 @@ body {
     }
   }
 }
+
+/* Shop 카드 그림: 같은 그림 4장(바탕·얼굴·왼손·오른손)을 겹치고
+   얼굴·손 자리만 마스크로 잘라 움직인다. 위치 %는 정사각형 그림 기준 */
+.hj-figure {
+  position: absolute;
+  inset: 0;
+}
+.hj-layer {
+  position: absolute;
+  inset: 0;
+  background: var(--hj-image) center / 100% 100% no-repeat;
+}
+/* mask: 검은 부분만 보이고 투명한 부분은 잘린다. 가장자리는 흐리게 해서 겹친 선이 안 보이게 */
+.hj-head {
+  mask: radial-gradient(ellipse 33% 28% at 53% 34%, #000 84%, transparent 100%);
+}
+.hj-hand-left {
+  mask: radial-gradient(
+    ellipse 5.4% 4.6% at 51.8% 75.2%,
+    #000 60%,
+    transparent 100%
+  );
+}
+.hj-hand-right {
+  mask: radial-gradient(
+    ellipse 6.4% 4.6% at 60.4% 75.6%,
+    #000 60%,
+    transparent 100%
+  );
+}
+
+/* 전구: 아이디어 표정일 때 머리 위에 나타남 */
+.hj-bulb {
+  position: absolute;
+  top: 8%; /* 시안 4%에서 아래로 약 20px (PC 그림 약 354px 기준, 2.8% ≈ 10px) */
+  left: 58%; /* 시안 58%에서 오른쪽으로 약 30px */
+  width: 15%;
+  aspect-ratio: 1;
+  color: #e7a500;
+  opacity: 0;
+  --bulb-tilt: 30deg; /* 오른쪽으로 기울임. 뾱 애니메이션도 이 각도를 기준으로 흔들린다 */
+  rotate: var(--bulb-tilt);
+}
+.hj-bulb-icon {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: #ffe48a;
+}
+/* 선은 전구보다 2배 큰 판(사방 50%씩 여유)에 그려서 전구 밖으로 퍼지게 */
+.hj-bulb-rays {
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  transform-origin: 50% 43.75%; /* 전구 유리 가운데 */
+}
+[data-face="idea"] .hj-bulb {
+  opacity: 1;
+}
+/* 음표: 이어폰 근처에 숨겨 두고, 노래 표정일 때 위로 떠오르게 */
+.hj-note {
+  position: absolute;
+  top: 36%;
+  left: 66%;
+  width: 11%;
+  height: auto;
+  color: var(--accent);
+  opacity: 0;
+}
+.hj-note circle {
+  fill: currentColor;
+}
+.hj-note-2 {
+  width: 9%;
+  color: var(--info);
+}
+
+/* '동작 줄이기' 설정이면 멈춘 그림 그대로 */
+@media (prefers-reduced-motion: no-preference) {
+  /* 코딩 중: 화면 쪽으로 살짝 숙이고, 양손 번갈아 타건 */
+  [data-face="focus"] .hj-head {
+    animation: hj-nod 2.2s ease-in-out infinite;
+  }
+  [data-face="focus"] .hj-hand-left {
+    animation: hj-tap 0.32s ease-in-out infinite;
+  }
+  [data-face="focus"] .hj-hand-right {
+    animation: hj-tap 0.32s ease-in-out 0.16s infinite;
+  }
+  /* 아이디어: 고개를 톡 든다 */
+  [data-face="idea"] .hj-head {
+    translate: 0 -0.4%;
+    transition: translate 0.3s cubic-bezier(0.2, 1.6, 0.4, 1);
+  }
+  /* 노래: 박자에 맞춰 끄덕, 손은 느리게 */
+  [data-face="smile"] .hj-head {
+    animation: hj-bop 1s ease-in-out infinite;
+  }
+  [data-face="smile"] .hj-hand-left {
+    animation: hj-tap 0.5s ease-in-out infinite;
+  }
+  [data-face="smile"] .hj-hand-right {
+    animation: hj-tap 0.5s ease-in-out 0.25s infinite;
+  }
+  /* 전구 '뾱': 작게 시작해 크게 튀었다가, 살짝 흔들리며 제자리로 */
+  [data-face="idea"] .hj-bulb {
+    animation: hj-pop 0.5s ease-out;
+  }
+  /* 전구가 뾱 튀어나온 뒤에 선이 퍼짐 */
+  [data-face="idea"] .hj-bulb-rays {
+    animation: hj-rays 0.6s ease-out;
+  }
+  /* 음표 3개가 0.5초씩 차이를 두고 떠오름 (2번째는 다른 방향으로) */
+  [data-face="smile"] .hj-note {
+    animation: hj-note-float 1.5s ease-out infinite;
+  }
+  [data-face="smile"] .hj-note-2 {
+    animation-name: hj-note-float-2;
+    animation-delay: 0.5s;
+  }
+  [data-face="smile"] .hj-note-3 {
+    animation-delay: 1s;
+  }
+}
+/* 아래로만 살짝 움직여서 잘린 가장자리가 드러나지 않게 */
+@keyframes hj-tap {
+  50% {
+    translate: 0 0.45%;
+  }
+}
+@keyframes hj-nod {
+  50% {
+    translate: 0 0.35%;
+  }
+}
+@keyframes hj-bop {
+  25%,
+  75% {
+    translate: 0 0.6%;
+  }
+}
+@keyframes hj-note-float {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) rotate(-12deg);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(110%, -260%) scale(1.05) rotate(14deg);
+  }
+}
+@keyframes hj-note-float-2 {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) rotate(10deg);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(190%, -170%) rotate(-10deg);
+  }
+}
+@keyframes hj-pop {
+  0% {
+    scale: 0.3;
+    rotate: calc(var(--bulb-tilt) - 15deg);
+  }
+  45% {
+    scale: 1.25;
+    rotate: calc(var(--bulb-tilt) + 8deg);
+  }
+  70% {
+    scale: 0.92;
+    rotate: calc(var(--bulb-tilt) - 4deg);
+  }
+  100% {
+    scale: 1;
+    rotate: var(--bulb-tilt);
+  }
+}
+@keyframes hj-rays {
+  0%,
+  40% {
+    opacity: 0;
+    scale: 0.6;
+  }
+  75% {
+    opacity: 1;
+    scale: 1.15;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}

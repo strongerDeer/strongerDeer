@@ -11,7 +11,7 @@ const SECTION_COUNT = 9;
 export function Dashboard() {
   return (
     <DemoCard
-      index={2}
+      index={3}
       id='dashboard'
       category='NOVERA 대시보드'
       title='내 방문 대시보드'

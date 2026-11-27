@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { Button } from '@/components/common/Button';
+// import { Button } from '@/components/common/Button';
 import logo from '@/public/strongerDeer.svg';
 
 export function Footer() {
@@ -15,9 +15,10 @@ export function Footer() {
             De<span className='text-accent'>{'{sign || velop}'}</span>er
           </code>
         </p>
+        {/* 방문 대시보드 여는 버튼: 대시보드와 같이 1차 배포 뒤에 붙인다
         <Button variant='solid' size='sm' className='fixed right-4 bottom-4'>
           내 방문 기록
-        </Button>
+        </Button> */}
       </div>
     </footer>
   );
