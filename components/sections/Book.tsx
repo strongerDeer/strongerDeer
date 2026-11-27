@@ -8,11 +8,10 @@ import { ButtonLink } from '@/components/common/ButtonLink';
 import { Section } from '@/components/common/Section';
 import { Shelf } from '@/components/sections/book/Shelf';
 import { BOOKS } from '@/data/books';
+import { EMAIL } from '@/data/contact';
 import { asset } from '@/lib/asset';
 import { findBookByTitle } from '@/lib/findBookByTitle';
 import { sendBookRecommend } from '@/lib/sendBookRecommend';
-
-const EMAIL = 'stronger_deer@naver.com';
 
 // 추천하기를 누른 뒤 보여줄 결과. 누르기 전엔 null
 type RecommendResult =
