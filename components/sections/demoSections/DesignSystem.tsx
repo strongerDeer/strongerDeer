@@ -1,12 +1,39 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+
 import { Button } from '@/components/common/Button';
 import { DemoCard } from '@/components/sections/demoSections/DemoCard';
 import { RadioGroup } from '@/components/sections/demoSections/RadioGroup';
 import { ACCENTS } from '@/data/accents';
+import {
+  CONTRAST_OPTIONS,
+  DEFAULT_SETTINGS,
+  DisplaySettings,
+  FONT_OPTIONS,
+  THEME_OPTIONS,
+} from '@/data/displaySettings';
+import { applyDisplaySettings } from '@/lib/applyDisplaySettings';
 
 const RAINBOW =
   'conic-gradient(#f43f5e,#f59e0b,#22c55e,#06b6d4,#6366f1,#d946ef,#f43f5e)';
 
 export function DesignSystem() {
+  const [settings, setSettings] = useState<DisplaySettings>(DEFAULT_SETTINGS);
+
+  // 설정이 바뀔 때마다 <html data-*>에 반영 → 페이지 전체 토큰이 같이 바뀐다
+  useEffect(() => {
+    applyDisplaySettings(settings);
+  }, [settings]);
+
+  // 키 하나만 바꾸고 나머지 설정은 그대로 둔다
+  function changeSetting<K extends keyof DisplaySettings>(
+    key: K,
+    value: DisplaySettings[K]
+  ) {
+    setSettings((prev) => ({ ...prev, [key]: value }));
+  }
+
   return (
     <DemoCard
       index={1}
@@ -28,12 +55,16 @@ export function DesignSystem() {
         <RadioGroup
           legend='테마'
           name='theme'
-          options={['시스템', '라이트', '다크']}
+          options={THEME_OPTIONS}
+          value={settings.theme}
+          onChange={(value) => changeSetting('theme', value)}
         />
         <RadioGroup
           legend='대비'
           name='contrast'
-          options={['기본', '고대비']}
+          options={CONTRAST_OPTIONS}
+          value={settings.contrast}
+          onChange={(value) => changeSetting('contrast', value)}
         />
 
         <fieldset>
@@ -41,17 +72,18 @@ export function DesignSystem() {
             강조색
           </legend>
           <div className='flex items-center gap-1.5'>
-            {ACCENTS.map(({ name, color }, index) => (
+            {ACCENTS.map(({ id, name, color }) => (
               <label
-                key={name}
+                key={id}
                 title={name}
                 className='group grid size-8 cursor-pointer place-items-center rounded-full border-2 border-transparent has-checked:border-foreground has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-accent'
               >
                 <input
                   type='radio'
                   name='accent'
-                  value={name}
-                  defaultChecked={index === 0}
+                  value={id}
+                  checked={settings.accent === id}
+                  onChange={() => changeSetting('accent', id)}
                   className='sr-only'
                 />
                 <span
@@ -114,7 +146,9 @@ export function DesignSystem() {
         <RadioGroup
           legend='폰트'
           name='font'
-          options={['고딕', '명조', '기기 기본']}
+          options={FONT_OPTIONS}
+          value={settings.font}
+          onChange={(value) => changeSetting('font', value)}
         />
 
         <details className='text-sm'>
