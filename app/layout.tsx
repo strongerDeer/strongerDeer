@@ -7,6 +7,7 @@ import localFont from 'next/font/local';
 import { Footer } from '@/components/common/Footer';
 import { Header } from '@/components/common/Header';
 import { SectionDots } from '@/components/common/SectionDots';
+import { Toaster } from '@/components/common/Toaster';
 import { DISPLAY_SETTINGS_SCRIPT } from '@/lib/displaySettingsScript';
 
 const pretendard = localFont({
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         <SectionDots />
         {children}
         <Footer />
+        <Toaster />
       </body>
     </html>
   );
