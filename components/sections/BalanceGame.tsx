@@ -104,7 +104,8 @@ export function BalanceGame() {
                 Feat. {title}
               </legend>
 
-              <div className='grid grid-cols-1 items-center gap-3 sm:grid-cols-[1fr_auto_1fr] sm:gap-4'>
+              {/* 모바일도 두 카드를 나란히: 위아래로 쌓으면 한 화면에 둘 다 안 보여서 비교가 안 된다 */}
+              <div className='grid grid-cols-[1fr_auto_1fr] items-center gap-1.5 sm:gap-4'>
                 <ChoiceCard
                   gameId={id}
                   side='a'
@@ -114,7 +115,7 @@ export function BalanceGame() {
                 />
                 <span
                   aria-hidden='true'
-                  className='px-[0.12em] text-center text-[44px] leading-none font-black tracking-[-0.06em] italic sm:text-6xl'
+                  className='px-[0.12em] text-center text-[26px] leading-none font-black tracking-[-0.06em] italic sm:text-6xl'
                 >
                   <span className='text-info'>V</span>
                   <span className='text-accent'>S</span>

@@ -32,7 +32,7 @@ function Pin({ side }: { side: Choice }) {
     <svg
       aria-hidden='true'
       viewBox='0 0 44 44'
-      className='absolute -top-4 left-3.5 size-9.5 drop-shadow-[0_2px_2px_rgba(0,0,0,0.12)] sm:left-1/2 sm:-translate-x-1/2'
+      className='absolute -top-3.5 left-1/2 size-8 -translate-x-1/2 drop-shadow-[0_2px_2px_rgba(0,0,0,0.12)] sm:-top-4 sm:size-9.5'
     >
       <ellipse cx='26' cy='27' rx='13' ry='11' fill='rgba(30,30,60,.16)' />
       <circle cx='21' cy='21' r='12' fill={dark} />
@@ -78,7 +78,7 @@ export function ChoiceCard({
       />
       <label
         htmlFor={inputId}
-        className={`relative flex min-h-55 cursor-pointer flex-col items-center justify-center gap-3 rounded-card border-2 border-line bg-background-card px-4 pt-7 pb-5 text-center shadow-card transition-transform ${tiltClass[side]} peer-checked:scale-[1.02] peer-checked:rotate-0 peer-checked:border-accent peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent hover:-translate-y-1 hover:rotate-0`}
+        className={`relative flex cursor-pointer flex-col items-center justify-center gap-2 rounded-card border-2 border-line bg-background-card px-2 pt-6 pb-3 text-center sm:min-h-55 sm:gap-3 sm:px-4 sm:pt-7 sm:pb-5 shadow-card transition-transform ${tiltClass[side]} peer-checked:scale-[1.02] peer-checked:rotate-0 peer-checked:border-accent peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent hover:-translate-y-1 hover:rotate-0`}
       >
         <Pin side={side} />
         <Image
@@ -88,7 +88,7 @@ export function ChoiceCard({
           height={450}
           className='aspect-4/3 h-auto w-full max-w-65 rounded-xl object-cover'
         />
-        <span className='text-lg leading-snug font-bold'>{card.text}</span>
+        <span className='text-sm leading-snug font-bold sm:text-lg'>{card.text}</span>
         <span
           className={`rounded-pill px-2.5 py-0.5 text-xs font-bold ${sideClass[side]}`}
         >
