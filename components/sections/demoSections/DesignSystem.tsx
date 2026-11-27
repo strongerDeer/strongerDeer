@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useSyncExternalStore } from 'react';
+import { useSyncExternalStore } from 'react';
 
 import { Button } from '@/components/common/Button';
 import { DemoCard } from '@/components/sections/demoSections/DemoCard';
@@ -12,7 +12,6 @@ import {
   FONT_OPTIONS,
   THEME_OPTIONS,
 } from '@/data/displaySettings';
-import { applyDisplaySettings } from '@/lib/applyDisplaySettings';
 import {
   getServerSettings,
   getSettings,
@@ -31,11 +30,6 @@ export function DesignSystem() {
     getSettings,
     getServerSettings
   );
-
-  // 설정이 바뀔 때마다 <html data-*>에 반영 → 페이지 전체 토큰이 같이 바뀐다
-  useEffect(() => {
-    applyDisplaySettings(settings);
-  }, [settings]);
 
   // 키 하나만 바꾸고 나머지 설정은 그대로 둔다
   function changeSetting<K extends keyof DisplaySettings>(
