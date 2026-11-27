@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/common/Button';
 import { Section } from '@/components/common/Section';
-import { EMAIL } from '@/data/contact';
+import { EMAIL, EMAIL_COPIED_TOAST } from '@/data/contact';
 import { SPEED_STEPS } from '@/data/speedSteps';
 import { copyText } from '@/lib/copyText';
+import { showToast } from '@/lib/toastStore';
 
 // 반응을 보여 준 뒤 다음 단계 버튼이 나오기까지의 시간
 const NEXT_STEP_DELAY_MS = 300;
@@ -98,7 +99,9 @@ export function ResponseTime() {
     timerRef.current = setTimeout(async () => {
       setPhase('reacted');
       if (copyPromise) {
-        setResult({ kind: 'endured', isCopied: await copyPromise });
+        const isCopied = await copyPromise;
+        setResult({ kind: 'endured', isCopied });
+        if (isCopied) showToast(EMAIL_COPIED_TOAST);
         return;
       }
 

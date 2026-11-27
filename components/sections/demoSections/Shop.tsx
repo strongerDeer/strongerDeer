@@ -7,10 +7,11 @@ import { CopyEmailButton } from '@/components/common/CopyEmailButton';
 import { DemoCard } from '@/components/sections/demoSections/DemoCard';
 import { HjFigure } from '@/components/sections/demoSections/HjFigure';
 import { TagList } from '@/components/sections/demoSections/TagList';
-import { EMAIL } from '@/data/contact';
+import { EMAIL, EMAIL_COPIED_TOAST } from '@/data/contact';
 import { SHOP_TAGS } from '@/data/shop';
 import { useHjSequence } from '@/hooks/useHjSequence';
 import { copyText } from '@/lib/copyText';
+import { showToast } from '@/lib/toastStore';
 
 const GUIDE_NOTE = '연타해 보세요. 담는 중에 누른 건 한 번으로 쳐요.';
 const LIKED_NOTE = '아앗 감사합니다!';
@@ -87,7 +88,9 @@ export function Shop() {
 
     timerRef.current = setTimeout(async () => {
       isPendingRef.current = false;
-      setIsEmailCopied(await copyPromise);
+      const isCopied = await copyPromise;
+      setIsEmailCopied(isCopied);
+      if (isCopied) showToast(EMAIL_COPIED_TOAST);
       setCartStatus('added');
       // ref는 늘 최신 값이라 기다리는 동안 늘어난 클릭 수까지 읽힌다
       setNote(addedNote(clickCountRef.current, requestCountRef.current));
@@ -180,21 +183,16 @@ export function Shop() {
           >
             {note}
           </p>
-          {/* 담긴 뒤 안내. 복사가 막혔으면 주소와 복사 버튼을 보여 준다 */}
-          {cartStatus === 'added' &&
-            (isEmailCopied ? (
-              <p className='col-span-2 row-start-8 text-sm font-bold'>
-                주소가 복사됐어요. 메일 주세요 ✉️
-              </p>
-            ) : (
-              <p className='col-span-2 row-start-8 flex flex-wrap items-center gap-2 text-sm'>
-                메일 주세요 ✉️
-                <span id='shop-email' className='font-bold'>
-                  {EMAIL}
-                </span>
-                <CopyEmailButton emailElementId='shop-email' />
-              </p>
-            ))}
+          {/* 복사에 성공하면 토스트로 알리고, 막혔을 때만 주소와 복사 버튼을 보여 준다 */}
+          {cartStatus === 'added' && !isEmailCopied && (
+            <p className='col-span-2 row-start-8 flex flex-wrap items-center gap-2 text-sm'>
+              메일 주세요 ✉️
+              <span id='shop-email' className='font-bold'>
+                {EMAIL}
+              </span>
+              <CopyEmailButton emailElementId='shop-email' />
+            </p>
+          )}
         </div>
       </div>
     </DemoCard>
