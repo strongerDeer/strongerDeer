@@ -1,5 +1,6 @@
 import { DEFAULT_SETTINGS, DisplaySettings } from '@/data/displaySettings';
 import { applyDisplaySettings } from '@/lib/applyDisplaySettings';
+import { measureAccentContrast } from '@/lib/colorContrast';
 
 // 화면 설정을 이 기기(localStorage)에 저장하고, 바뀌면 구독한 컴포넌트에 알린다.
 // React 바깥 저장소라서 컴포넌트는 useSyncExternalStore로 읽는다
@@ -10,6 +11,8 @@ export const STORAGE_KEY = 'display-settings';
 // 브라우저에서 처음 읽을 때 채운다. 같은 값이면 같은 객체를 돌려줘야 React가 무한 렌더하지 않는다
 let currentSettings: DisplaySettings | null = null;
 const listeners = new Set<() => void>();
+// 강조색과 배경의 대비율. 실제로 칠해진 색을 재야 해서, 화면에 반영한 직후에 잰다
+let currentAccentContrast: number | null = null;
 
 // 저장된 설정이 없을 때 기본값. 대비는 OS의 '대비 증가' 설정을 따른다
 function getSystemDefaults(): DisplaySettings {
@@ -62,6 +65,7 @@ export function updateSettings(nextSettings: DisplaySettings) {
     // 저장이 막혀도 이번 방문 동안은 바뀐 설정 그대로 쓴다
   }
   applyDisplaySettings(nextSettings);
+  currentAccentContrast = measureAccentContrast();
   notify();
 }
 
@@ -73,5 +77,19 @@ export function resetSettings() {
   }
   currentSettings = getSystemDefaults();
   applyDisplaySettings(currentSettings);
+  currentAccentContrast = measureAccentContrast();
   notify();
+}
+
+// 첫 화면은 head 스크립트가 이미 설정을 붙여 둔 상태라, 처음 읽을 때 한 번 잰다
+export function getAccentContrast(): number | null {
+  if (currentAccentContrast === null) {
+    currentAccentContrast = measureAccentContrast();
+  }
+  return currentAccentContrast;
+}
+
+// 서버엔 화면이 없어서 잴 수 없다
+export function getServerAccentContrast(): number | null {
+  return null;
 }

@@ -12,7 +12,10 @@ import {
   FONT_OPTIONS,
   THEME_OPTIONS,
 } from '@/data/displaySettings';
+import { MIN_TEXT_CONTRAST, pickTextColor } from '@/lib/colorContrast';
 import {
+  getAccentContrast,
+  getServerAccentContrast,
   getServerSettings,
   getSettings,
   resetSettings,
@@ -38,6 +41,22 @@ export function DesignSystem() {
   ) {
     updateSettings({ ...settings, [key]: value });
   }
+
+  function pickCustomAccent(color: string) {
+    updateSettings({
+      ...settings,
+      accent: 'custom',
+      customAccent: { color, textColor: pickTextColor(color) },
+    });
+  }
+
+  const accentContrast = useSyncExternalStore(
+    subscribeSettings,
+    getAccentContrast,
+    getServerAccentContrast
+  );
+
+  const isCustomAccent = settings.accent === 'custom';
 
   return (
     <DemoCard
@@ -103,28 +122,35 @@ export function DesignSystem() {
             ))}
             <label
               title='직접 고르기'
-              className='relative inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-full border-2 border-transparent pr-2.5 pl-1 has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-accent'
+              className={`relative inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-full border-2 pr-2.5 pl-1 has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-accent ${isCustomAccent ? 'border-foreground' : 'border-transparent'}`}
             >
               <input
                 type='color'
-                defaultValue='#615ef0'
+                value={settings.customAccent.color}
+                onChange={(event) => pickCustomAccent(event.target.value)}
                 aria-label='강조색 직접 고르기'
                 className='absolute inset-0 size-full cursor-pointer opacity-0'
               />
+              {/* 직접 고른 뒤에는 무지개 대신 고른 색을 보여 준다 */}
               <span
                 aria-hidden='true'
                 className='size-5.5 rounded-full'
-                style={{ background: RAINBOW }}
+                style={{
+                  background: isCustomAccent
+                    ? settings.customAccent.color
+                    : RAINBOW,
+                }}
               />
               <span aria-hidden='true' className='text-xs font-semibold'>
                 직접
               </span>
             </label>
           </div>
-          <p
-            aria-live='polite'
-            className='mt-2 text-xs text-foreground-muted'
-          />
+          <p aria-live='polite' className='mt-2 text-xs text-foreground-muted'>
+            {accentContrast !== null && (
+              <AccentContrastNote ratio={accentContrast} />
+            )}
+          </p>
         </fieldset>
 
         <fieldset>
@@ -156,17 +182,32 @@ export function DesignSystem() {
           onChange={(value) => changeSetting('font', value)}
         />
 
+        {/* 토큰 값 직접 고치기: 우선순위 최하
         <details className='text-sm'>
           <summary className='cursor-pointer py-1 font-bold text-foreground-muted'>
             토큰 값 직접 고치기{' '}
             <small className='font-normal'>(입력 후 Enter)</small>
           </summary>
         </details>
+        */}
 
         <Button size='sm' className='self-start' onClick={resetSettings}>
           처음 설정으로
         </Button>
       </div>
     </DemoCard>
+  );
+}
+
+function AccentContrastNote({ ratio }: { ratio: number }) {
+  const ratioText = `${ratio.toFixed(1)}:1`;
+  if (ratio >= MIN_TEXT_CONTRAST) {
+    return <>배경 대비 {ratioText} ✓ 작은 글자도 잘 읽혀요</>;
+  }
+  return (
+    <>
+      배경 대비 {ratioText} · 작은 글자는 읽기 어려울 수 있어요 (권장{' '}
+      {MIN_TEXT_CONTRAST}:1)
+    </>
   );
 }

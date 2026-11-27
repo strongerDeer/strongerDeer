@@ -4,19 +4,32 @@ export type Theme = 'system' | 'light' | 'dark';
 export type Contrast = 'normal' | 'high';
 export type FontId = 'sans' | 'serif' | 'system';
 
-// 화면 설정 한 묶음. 키 이름이 그대로 <html data-키="값"> 속성 이름이 된다
+// 직접 고른 강조색. 글자색은 고를 때 계산해 같이 저장한다
+// (새로고침 직후 head 스크립트가 계산 없이 바로 쓸 수 있게)
+export type CustomAccent = { color: string; textColor: string };
+
 export type DisplaySettings = {
   theme: Theme;
   contrast: Contrast;
-  accent: AccentId;
+  accent: AccentId | 'custom';
   font: FontId;
+  customAccent: CustomAccent;
 };
+
+// <html data-키="값"> 속성이 되는 설정들
+export const DATA_ATTRIBUTE_KEYS = [
+  'theme',
+  'contrast',
+  'accent',
+  'font',
+] as const;
 
 export const DEFAULT_SETTINGS: DisplaySettings = {
   theme: 'system',
   contrast: 'normal',
   accent: 'purple',
   font: 'sans',
+  customAccent: { color: '#615ef0', textColor: '#ffffff' },
 };
 
 export type Option<T extends string> = { value: T; label: string };
