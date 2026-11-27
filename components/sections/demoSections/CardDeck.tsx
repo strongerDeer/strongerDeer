@@ -107,6 +107,26 @@ export function CardDeck({ heading, children }: CardDeckProps) {
       const scale = 1 - coveredBy * STACK_SCALE_STEP;
       card.style.transform = `translateY(${y.toFixed(1)}px) scale(${scale.toFixed(4)})`;
       card.style.setProperty('--covered', coveredBy.toFixed(3));
+
+      // 나보다 짧은 카드가 덮으면 내 아래쪽이 그 밑으로 삐져나온다 → 덮은 카드 높이에 맞춰 잘라 낸다
+      const coverCard = cardRefs.current[index + 1];
+      if (coverCard) {
+        // 위로 밀린 만큼(STACK_LIFT_PX)은 보여야 겹친 모양이 난다. scale로 작아진 만큼 되돌려 계산
+        const keepHeight =
+          (coverCard.offsetHeight + coveredBy * STACK_LIFT_PX) / scale;
+        const overflowHeight = Math.max(0, card.offsetHeight - keepHeight);
+        // 덮는 카드가 올라오는 만큼 조금씩 자른다
+        const clipBottom = overflowHeight * enterAmounts[index + 1];
+        // 잘린 아래 모서리도 카드와 같은 둥글기로 (모서리 설정을 바꿔도 따라가게 실제 값을 읽는다)
+        const cardRadius = card.firstElementChild
+          ? getComputedStyle(card.firstElementChild).borderTopLeftRadius
+          : '0px';
+        // 자를 게 없으면 clip을 걸지 않는다 (걸면 카드 그림자까지 잘림)
+        card.style.clipPath =
+          clipBottom > 0
+            ? `inset(0 0 ${clipBottom.toFixed(1)}px 0 round ${cardRadius})`
+            : '';
+      }
     });
   }
 
@@ -116,6 +136,7 @@ export function CardDeck({ heading, children }: CardDeckProps) {
     cardRefs.current.forEach((card) => {
       card?.style.removeProperty('transform');
       card?.style.removeProperty('--covered');
+      card?.style.removeProperty('clip-path');
     });
   }
 
