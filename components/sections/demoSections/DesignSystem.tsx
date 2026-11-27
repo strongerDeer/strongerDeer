@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 
 import { Button } from '@/components/common/Button';
 import { DemoCard } from '@/components/sections/demoSections/DemoCard';
@@ -8,18 +8,29 @@ import { RadioGroup } from '@/components/sections/demoSections/RadioGroup';
 import { ACCENTS } from '@/data/accents';
 import {
   CONTRAST_OPTIONS,
-  DEFAULT_SETTINGS,
   DisplaySettings,
   FONT_OPTIONS,
   THEME_OPTIONS,
 } from '@/data/displaySettings';
 import { applyDisplaySettings } from '@/lib/applyDisplaySettings';
+import {
+  getServerSettings,
+  getSettings,
+  resetSettings,
+  subscribeSettings,
+  updateSettings,
+} from '@/lib/displaySettingsStore';
 
 const RAINBOW =
   'conic-gradient(#f43f5e,#f59e0b,#22c55e,#06b6d4,#6366f1,#d946ef,#f43f5e)';
 
 export function DesignSystem() {
-  const [settings, setSettings] = useState<DisplaySettings>(DEFAULT_SETTINGS);
+  // 설정은 이 기기 저장소에 있다. 서버에선 기본값, 브라우저에선 저장된 값을 읽는다
+  const settings = useSyncExternalStore(
+    subscribeSettings,
+    getSettings,
+    getServerSettings
+  );
 
   // 설정이 바뀔 때마다 <html data-*>에 반영 → 페이지 전체 토큰이 같이 바뀐다
   useEffect(() => {
@@ -31,7 +42,7 @@ export function DesignSystem() {
     key: K,
     value: DisplaySettings[K]
   ) {
-    setSettings((prev) => ({ ...prev, [key]: value }));
+    updateSettings({ ...settings, [key]: value });
   }
 
   return (
@@ -158,7 +169,7 @@ export function DesignSystem() {
           </summary>
         </details>
 
-        <Button size='sm' className='self-start'>
+        <Button size='sm' className='self-start' onClick={resetSettings}>
           처음 설정으로
         </Button>
       </div>
