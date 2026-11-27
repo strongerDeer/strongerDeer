@@ -10,6 +10,7 @@ import {
   CONTRAST_OPTIONS,
   DisplaySettings,
   FONT_OPTIONS,
+  RADIUS_SCALE_RANGE,
   THEME_OPTIONS,
 } from '@/data/displaySettings';
 import { MIN_TEXT_CONTRAST, pickTextColor } from '@/lib/colorContrast';
@@ -161,15 +162,18 @@ export function DesignSystem() {
             <input
               type='range'
               id='radius-range'
-              min={0}
-              max={2}
-              step={0.1}
-              defaultValue={1}
+              min={RADIUS_SCALE_RANGE.min}
+              max={RADIUS_SCALE_RANGE.max}
+              step={RADIUS_SCALE_RANGE.step}
+              value={settings.radiusScale}
+              onChange={(event) =>
+                changeSetting('radiusScale', Number(event.target.value))
+              }
               aria-label='모서리 둥글기 배율'
               className='min-w-0 flex-1 accent-accent'
             />
             <output htmlFor='radius-range' className='font-mono text-sm'>
-              1.0
+              × {settings.radiusScale.toFixed(1)}
             </output>
           </div>
         </fieldset>

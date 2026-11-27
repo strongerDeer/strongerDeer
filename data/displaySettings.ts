@@ -14,7 +14,11 @@ export type DisplaySettings = {
   accent: AccentId | 'custom';
   font: FontId;
   customAccent: CustomAccent;
+  // 모서리 둥글기 배율 (0 = 각짐, 1 = 기본, 2 = 두 배)
+  radiusScale: number;
 };
+
+export const RADIUS_SCALE_RANGE = { min: 0, max: 2, step: 0.1 };
 
 // <html data-키="값"> 속성이 되는 설정들
 export const DATA_ATTRIBUTE_KEYS = [
@@ -30,6 +34,7 @@ export const DEFAULT_SETTINGS: DisplaySettings = {
   accent: 'purple',
   font: 'sans',
   customAccent: { color: '#615ef0', textColor: '#ffffff' },
+  radiusScale: 1,
 };
 
 export type Option<T extends string> = { value: T; label: string };

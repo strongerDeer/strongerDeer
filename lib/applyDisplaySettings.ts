@@ -33,4 +33,11 @@ export function applyDisplaySettings(settings: DisplaySettings) {
   } else {
     CUSTOM_ACCENT_TOKENS.forEach((token) => root.style.removeProperty(token));
   }
+
+  // 모서리 배율도 숫자라 data-* 프리셋 대신 토큰 값을 바로 덮어쓴다
+  if (settings.radiusScale === DEFAULT_SETTINGS.radiusScale) {
+    root.style.removeProperty('--radius-scale');
+  } else {
+    root.style.setProperty('--radius-scale', String(settings.radiusScale));
+  }
 }

@@ -26,6 +26,9 @@ export const DISPLAY_SETTINGS_SCRIPT = `
       root.style.setProperty('--accent-soft', 'color-mix(in srgb, ' + color + ' 16%, var(--background))');
       root.style.setProperty('--on-accent', settings.customAccent.textColor);
     }
+    if (settings.radiusScale !== defaults.radiusScale) {
+      root.style.setProperty('--radius-scale', String(settings.radiusScale));
+    }
   } catch (error) {}
 })();
 `;
