@@ -122,7 +122,7 @@ export function DesignSystem() {
             ))}
             <label
               title='직접 고르기'
-              className={`relative inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-full border-2 pr-2.5 pl-1 has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-accent ${isCustomAccent ? 'border-foreground' : 'border-transparent'}`}
+              className={`relative inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-pill border-2 pr-2.5 pl-1 has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-accent ${isCustomAccent ? 'border-foreground' : 'border-transparent'}`}
             >
               <input
                 type='color'

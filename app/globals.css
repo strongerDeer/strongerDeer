@@ -14,6 +14,9 @@
   --accent: var(--accent-base);
   --accent-soft: #efeefe;
 
+  /* 모서리 둥글기 배율. 화면 설정의 모서리 슬라이더가 이 값만 바꾼다 (0 = 각진 모서리) */
+  --radius-scale: 1;
+
   /* 본문 글꼴. 화면 설정의 폰트(data-font)가 이 값만 바꾼다 */
   --font-body: var(--font-pretendard), system-ui, sans-serif;
 
@@ -41,6 +44,21 @@
 }
 /* 글자 크기: 360px → 1280px 사이에서 부드럽게 커짐 (최소·최대는 rem이라 브라우저 확대를 따라감) */
 @theme {
+  /* 모서리: Tailwind 기본 크기에 배율을 곱해서 rounded-lg 등이 슬라이더를 따라가게 한다 */
+  --radius: calc(0.25rem * var(--radius-scale));
+  --radius-sm: calc(0.25rem * var(--radius-scale));
+  --radius-lg: calc(0.5rem * var(--radius-scale));
+  --radius-xl: calc(0.75rem * var(--radius-scale));
+  --radius-2xl: calc(1rem * var(--radius-scale));
+  --radius-3xl: calc(1.5rem * var(--radius-scale));
+  /* 시안 크기 그대로 쓰던 값들: rounded-tile 10px, rounded-card 20px, rounded-panel 28px */
+  --radius-tile: calc(0.625rem * var(--radius-scale));
+  --radius-card: calc(1.25rem * var(--radius-scale));
+  --radius-panel: calc(1.75rem * var(--radius-scale));
+  /* 알약 모양(버튼·칩). rounded-full은 배율을 곱해도 늘 동그래서 따로 둔다.
+     점·색 동그라미처럼 늘 원이어야 하는 곳은 rounded-full 그대로. 2rem이면 높이 64px까지 완전한 알약 */
+  --radius-pill: calc(2rem * var(--radius-scale));
+
   /* 콘텐츠 최대 폭: max-w-page */
   --container-page: 55rem; /* 880px */
 

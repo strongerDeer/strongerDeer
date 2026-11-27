@@ -24,7 +24,7 @@ export function RadioGroup<T extends string>({
         {options.map((option) => (
           <label
             key={option.value}
-            className='inline-flex cursor-pointer items-center rounded-full border border-line bg-background px-3 py-1 text-sm font-semibold whitespace-nowrap has-checked:border-accent has-checked:bg-accent-soft has-checked:inset-ring has-checked:inset-ring-accent has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-accent'
+            className='inline-flex cursor-pointer items-center rounded-pill border border-line bg-background px-3 py-1 text-sm font-semibold whitespace-nowrap has-checked:border-accent has-checked:bg-accent-soft has-checked:inset-ring has-checked:inset-ring-accent has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-accent'
           >
             <input
               type='radio'

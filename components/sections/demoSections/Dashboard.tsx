@@ -39,7 +39,7 @@ export function Dashboard() {
           {KPIS.map(({ label, value }) => (
             <span
               key={label}
-              className='block rounded-[10px] bg-background-card px-2.5 py-2'
+              className='block rounded-tile bg-background-card px-2.5 py-2'
             >
               <span className='block text-xs text-foreground-muted'>
                 {label}

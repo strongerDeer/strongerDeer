@@ -1,4 +1,5 @@
 // WCAG 대비율 계산. 강조색 위 글자색 고르기와 '배경 대비' 안내에 쓴다
+// 공식은 WCAG 2.x 정의(상대 휘도·대비율)를 그대로 옮김: https://www.w3.org/TR/WCAG22/#dfn-contrast-ratio
 
 type Rgb = [number, number, number];
 

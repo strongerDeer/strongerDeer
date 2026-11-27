@@ -6,7 +6,7 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 const base =
   'font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent inline-flex items-center justify-center gap-1 cursor-pointer disabled:cursor-default';
 
-const boxed = 'rounded-full px-[1.2em] py-[0.7em]';
+const boxed = 'rounded-pill px-[1.2em] py-[0.7em]';
 
 const variantClass: Record<ButtonVariant, string> = {
   solid: `${boxed} bg-accent text-on-accent`,

@@ -134,7 +134,7 @@ export function ResponseTime() {
       description="버튼을 누를 때마다 반응이 조금씩 늦어져요. 답답해지는 순간 '여기서부터 답답해요!'를 눌러 주세요."
     >
       <div className='mx-auto mt-6 flex max-w-140 flex-col items-center gap-4'>
-        <div className='flex w-full max-w-90 flex-col items-center gap-3.5 rounded-[20px] border border-line bg-background-card px-5 py-7 shadow-card'>
+        <div className='flex w-full max-w-90 flex-col items-center gap-3.5 rounded-card border border-line bg-background-card px-5 py-7 shadow-card'>
           <p
             aria-live='polite'
             className='text-sm text-foreground-muted tabular-nums'

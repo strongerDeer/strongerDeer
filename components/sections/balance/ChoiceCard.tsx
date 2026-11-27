@@ -78,7 +78,7 @@ export function ChoiceCard({
       />
       <label
         htmlFor={inputId}
-        className={`relative flex min-h-55 cursor-pointer flex-col items-center justify-center gap-3 rounded-[20px] border-2 border-line bg-background-card px-4 pt-7 pb-5 text-center shadow-card transition-transform ${tiltClass[side]} peer-checked:scale-[1.02] peer-checked:rotate-0 peer-checked:border-accent peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent hover:-translate-y-1 hover:rotate-0`}
+        className={`relative flex min-h-55 cursor-pointer flex-col items-center justify-center gap-3 rounded-card border-2 border-line bg-background-card px-4 pt-7 pb-5 text-center shadow-card transition-transform ${tiltClass[side]} peer-checked:scale-[1.02] peer-checked:rotate-0 peer-checked:border-accent peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent hover:-translate-y-1 hover:rotate-0`}
       >
         <Pin side={side} />
         <Image
@@ -90,7 +90,7 @@ export function ChoiceCard({
         />
         <span className='text-lg leading-snug font-bold'>{card.text}</span>
         <span
-          className={`rounded-full px-2.5 py-0.5 text-xs font-bold ${sideClass[side]}`}
+          className={`rounded-pill px-2.5 py-0.5 text-xs font-bold ${sideClass[side]}`}
         >
           {side.toUpperCase()}
         </span>

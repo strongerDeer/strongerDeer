@@ -22,7 +22,7 @@ export function Contact() {
         <a
           id='contact-email'
           href={`mailto:${EMAIL}`}
-          className='rounded-full bg-background-soft px-4 py-2'
+          className='rounded-pill bg-background-soft px-4 py-2'
         >
           {EMAIL}
         </a>
