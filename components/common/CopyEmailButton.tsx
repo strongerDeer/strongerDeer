@@ -3,9 +3,10 @@
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/common/Button';
-import { EMAIL } from '@/data/contact';
+import { EMAIL, EMAIL_COPIED_TOAST } from '@/data/contact';
 import { copyText } from '@/lib/copyText';
 import { selectElementText } from '@/lib/selectElementText';
+import { showToast } from '@/lib/toastStore';
 
 // 복사 결과 문구를 보여 준 뒤 원래 글자로 돌아가기까지의 시간
 const FEEDBACK_DURATION_MS = 2000;
@@ -37,6 +38,7 @@ export function CopyEmailButton({ emailElementId }: CopyEmailButtonProps) {
     const isCopied = await copyText(EMAIL);
     if (isCopied) {
       setStatus('copied');
+      showToast(EMAIL_COPIED_TOAST);
       return;
     }
 

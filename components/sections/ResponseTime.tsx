@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/common/Button';
 import { Section } from '@/components/common/Section';
-import { EMAIL } from '@/data/contact';
+import { EMAIL, EMAIL_COPIED_TOAST } from '@/data/contact';
 import { SPEED_STEPS } from '@/data/speedSteps';
 import { copyText } from '@/lib/copyText';
+import { showToast } from '@/lib/toastStore';
 
 // 반응을 보여 준 뒤 다음 단계 버튼이 나오기까지의 시간
 const NEXT_STEP_DELAY_MS = 300;
@@ -98,7 +99,9 @@ export function ResponseTime() {
     timerRef.current = setTimeout(async () => {
       setPhase('reacted');
       if (copyPromise) {
-        setResult({ kind: 'endured', isCopied: await copyPromise });
+        const isCopied = await copyPromise;
+        setResult({ kind: 'endured', isCopied });
+        if (isCopied) showToast(EMAIL_COPIED_TOAST);
         return;
       }
 
@@ -129,6 +132,8 @@ export function ResponseTime() {
   return (
     <Section
       id='response-time'
+      // 헤더 아래 한 화면을 꽉 채우고 내용은 세로 가운데 (체험에만 집중하게)
+      className='flex min-h-[calc(100svh-var(--header-h))] flex-col justify-center'
       label='0.1초 체험'
       title='언제부터 답답해질까요?'
       description="버튼을 누를 때마다 반응이 조금씩 늦어져요. 답답해지는 순간 '여기서부터 답답해요!'를 눌러 주세요."

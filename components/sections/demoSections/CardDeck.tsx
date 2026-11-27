@@ -19,21 +19,27 @@ const END_PAUSE = 0.4;
 // 위에 한 장 덮일 때마다 아래 카드가 위로 밀리는 거리·작아지는 비율
 const STACK_LIFT_PX = 14;
 const STACK_SCALE_STEP = 0.045;
-// 올라올 카드가 출발하는 곳: 카드 칸 아래 끝에서 40px 더 아래 (화면 밖)
+// 올라올 카드가 출발하는 곳: 무대 아래 끝에서 40px 더 아래 (화면 밖)
 const RISE_START_GAP_PX = 40;
-// 무대 안에서 카드가 쓸 수 없는 세로 여백 (무대 위아래 py-5 + 카드 위 pt-8)
+// 무대 안에서 제목·카드가 쓸 수 없는 세로 여백 (무대 위아래 py-5 + 제목과 카드 사이 pt-8)
 const STAGE_SPACING_PX = 40 + 32;
 
 // stack: 섹션이 화면에 멈추고 카드가 한 장씩 올라와 쌓임
 // flat: 그냥 차례로 놓음 (첫 렌더·동작 줄이기·카드가 화면보다 큰 작은 화면)
 type Layout = 'stack' | 'flat';
 
-export function CardDeck({ children }: { children: ReactNode }) {
+type CardDeckProps = {
+  heading?: ReactNode; // 섹션 제목. 무대 안에 넣어서 카드와 같이 화면 가운데에 온다
+  children: ReactNode;
+};
+
+export function CardDeck({ heading, children }: CardDeckProps) {
   const cards = Children.toArray(children);
   const [layout, setLayout] = useState<Layout>('flat');
 
   const scrollBoxRef = useRef<HTMLDivElement>(null); // 스크롤 길이를 만드는 바깥 상자
   const stageRef = useRef<HTMLDivElement>(null); // 화면에 멈춰 있는 무대
+  const headingRef = useRef<HTMLDivElement>(null); // 무대 맨 위 섹션 제목
   const deckRef = useRef<HTMLDivElement>(null); // 카드가 겹쳐 놓이는 칸
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -41,8 +47,9 @@ export function CardDeck({ children }: { children: ReactNode }) {
   useEffect(() => {
     const decideLayout = () => {
       const headerHeight = document.querySelector('header')?.offsetHeight ?? 0;
+      const headingHeight = headingRef.current?.offsetHeight ?? 0;
       const availableHeight =
-        window.innerHeight - headerHeight - STAGE_SPACING_PX;
+        window.innerHeight - headerHeight - headingHeight - STAGE_SPACING_PX;
       const tallestCard = Math.max(
         ...cardRefs.current.map(
           (card) => card?.firstElementChild?.scrollHeight ?? 0
@@ -83,7 +90,11 @@ export function CardDeck({ children }: { children: ReactNode }) {
     const enterAmounts = cards.map((_, index) =>
       index === 0 ? 1 : ease(clamp01(progress - (index - 1)))
     );
-    const riseDistance = deck.clientHeight + RISE_START_GAP_PX;
+    // 카드 칸 위쪽부터 무대 아래 끝까지 + 여유 = 화면 밖에서 출발
+    const riseDistance =
+      stage.getBoundingClientRect().bottom -
+      deck.getBoundingClientRect().top +
+      RISE_START_GAP_PX;
 
     cardRefs.current.forEach((card, index) => {
       if (!card) return;
@@ -128,17 +139,14 @@ export function CardDeck({ children }: { children: ReactNode }) {
         ref={stageRef}
         className={
           isStack
-            ? 'sticky top-(--header-h) flex h-[calc(100svh-var(--header-h))] flex-col overflow-clip py-5'
+            ? 'sticky top-(--header-h) flex h-[calc(100svh-var(--header-h))] flex-col justify-center overflow-clip py-5'
             : ''
         }
       >
+        {heading && <div ref={headingRef}>{heading}</div>}
         <div
           ref={deckRef}
-          className={
-            isStack
-              ? 'grid min-h-0 flex-1 content-start pt-8'
-              : 'flex flex-col gap-6'
-          }
+          className={isStack ? 'grid pt-8' : 'mt-8 flex flex-col gap-6'}
         >
           {cards.map((card, index) => (
             <div
@@ -147,9 +155,10 @@ export function CardDeck({ children }: { children: ReactNode }) {
                 cardRefs.current[index] = element;
               }}
               // 쌓기: 모든 카드를 같은 칸에 겹쳐 놓는다. 덮인 만큼 어둡게 (::after 덮개)
+              // self-start: 짧은 카드를 긴 카드 높이에 맞춰 늘리지 않는다 (늘리면 아래가 비어 보임)
               className={`relative mx-auto grid w-full max-w-4xl origin-top ${
                 isStack
-                  ? '[grid-area:1/1] after:pointer-events-none after:absolute after:inset-0 after:rounded-3xl after:bg-foreground after:opacity-[calc(var(--covered,0)*0.06)]'
+                  ? 'self-start [grid-area:1/1] after:pointer-events-none after:absolute after:inset-0 after:rounded-3xl after:bg-foreground after:opacity-[calc(var(--covered,0)*0.06)]'
                   : ''
               }`}
             >

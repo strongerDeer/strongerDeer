@@ -215,6 +215,16 @@
     system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 }
 
+/* 바로가기로 이동했을 때 섹션 제목이 고정 헤더에 가려지지 않게 */
+section[id] {
+  scroll-margin-top: var(--header-h);
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
