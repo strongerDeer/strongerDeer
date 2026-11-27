@@ -9,8 +9,13 @@
   --foreground-muted: #6b7080;
 
   --line: #e6e6ef;
-  --accent: #615ef0;
+  /* 고른 강조색 원본. 실제로 쓰는 --accent는 여기서 계산 (고대비면 더 진하게) */
+  --accent-base: #615ef0;
+  --accent: var(--accent-base);
   --accent-soft: #efeefe;
+
+  /* 본문 글꼴. 화면 설정의 폰트(data-font)가 이 값만 바꾼다 */
+  --font-body: var(--font-pretendard), system-ui, sans-serif;
 
   --on-accent: #ffffff;
   --info: #1270cf;
@@ -31,7 +36,7 @@
   --color-info: var(--info);
   --color-info-soft: var(--info-soft);
   --shadow-card: var(--shadow);
-  --font-sans: var(--font-pretendard);
+  --font-sans: var(--font-body);
   --font-mono: var(--font-roboto-mono);
 }
 /* 글자 크기: 360px → 1280px 사이에서 부드럽게 커짐 (최소·최대는 rem이라 브라우저 확대를 따라감) */
@@ -79,7 +84,7 @@
     --foreground-muted: #a3a6b5;
 
     --line: #2c2e3b;
-    --accent: #8b88ff;
+    --accent-base: #8b88ff;
     --accent-soft: #25244a;
 
     --on-accent: #14151c;
@@ -98,7 +103,7 @@
   --foreground-muted: #a3a6b5;
 
   --line: #2c2e3b;
-  --accent: #8b88ff;
+  --accent-base: #8b88ff;
   --accent-soft: #25244a;
 
   --on-accent: #14151c;
@@ -110,42 +115,86 @@
 /* 강조색 프리셋: 화면 설정에서 <html data-accent="...">로 고른다 (퍼플은 기본이라 규칙 없음)
    다크 모드 조합은 선택자가 더 구체적이어야 위의 다크 기본 퍼플을 이긴다 */
 :root[data-accent="blue"] {
-  --accent: #1f6fd1;
+  --accent-base: #1f6fd1;
   --accent-soft: #e8f0fb;
 }
 :root[data-accent="green"] {
-  --accent: #0e7f58;
+  --accent-base: #0e7f58;
   --accent-soft: #e3f4ed;
 }
 :root[data-accent="orange"] {
-  --accent: #c2410c;
+  --accent-base: #c2410c;
   --accent-soft: #fbede4;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"])[data-accent="blue"] {
-    --accent: #6aa8f5;
+    --accent-base: #6aa8f5;
     --accent-soft: #18283b;
   }
   :root:not([data-theme="light"])[data-accent="green"] {
-    --accent: #4cc79a;
+    --accent-base: #4cc79a;
     --accent-soft: #15302a;
   }
   :root:not([data-theme="light"])[data-accent="orange"] {
-    --accent: #ff9a5c;
+    --accent-base: #ff9a5c;
     --accent-soft: #3a2418;
   }
 }
 :root[data-theme="dark"][data-accent="blue"] {
-  --accent: #6aa8f5;
+  --accent-base: #6aa8f5;
   --accent-soft: #18283b;
 }
 :root[data-theme="dark"][data-accent="green"] {
-  --accent: #4cc79a;
+  --accent-base: #4cc79a;
   --accent-soft: #15302a;
 }
 :root[data-theme="dark"][data-accent="orange"] {
-  --accent: #ff9a5c;
+  --accent-base: #ff9a5c;
   --accent-soft: #3a2418;
+}
+
+/* 고대비: 회색 글자·흐린 선을 없애고, 강조색은 고른 색을 더 진하게 (다크는 더 밝게)
+   다크 조합은 강조색과 같은 이유로 선택자를 더 구체적으로 */
+:root[data-contrast="high"] {
+  --foreground: #000;
+  --foreground-muted: #1f1f1f;
+  --line: #000;
+  --background-soft: #fff;
+  --background-card: #fff;
+  --shadow: none;
+  --accent: color-mix(in oklab, var(--accent-base) 70%, #000);
+  --info: #0b4f9c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-contrast="high"] {
+    --background: #000;
+    --foreground: #fff;
+    --foreground-muted: #ececec;
+    --line: #fff;
+    --background-soft: #000;
+    --background-card: #000;
+    --accent: color-mix(in oklab, var(--accent-base) 70%, #fff);
+    --info: #9cc8ff;
+  }
+}
+:root[data-theme="dark"][data-contrast="high"] {
+  --background: #000;
+  --foreground: #fff;
+  --foreground-muted: #ececec;
+  --line: #fff;
+  --background-soft: #000;
+  --background-card: #000;
+  --accent: color-mix(in oklab, var(--accent-base) 70%, #fff);
+  --info: #9cc8ff;
+}
+
+/* 폰트: 명조·기기 기본은 글꼴 파일을 더 받지 않고 기기에 있는 글꼴을 쓴다 */
+:root[data-font="serif"] {
+  --font-body: "AppleMyungjo", "Noto Serif KR", "Batang", serif;
+}
+:root[data-font="system"] {
+  --font-body:
+    system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 }
 
 body {
