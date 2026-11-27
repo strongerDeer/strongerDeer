@@ -96,7 +96,7 @@ export function Shop() {
 
   return (
     <DemoCard
-      index={3}
+      index={2}
       id='shop'
       category='NOVERA Shop · 쇼핑몰'
       title='이 개발자, 장바구니에 담아 보실래요?'
