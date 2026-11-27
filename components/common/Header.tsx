@@ -1,4 +1,5 @@
 import { ButtonLink } from '@/components/common/ButtonLink';
+import { SectionTabs } from '@/components/common/SectionTabs';
 import { PORTFOLIO_PDF_URL } from '@/data/contact';
 
 export function Header() {
@@ -10,6 +11,7 @@ export function Header() {
           포트폴리오 PDF
         </ButtonLink>
       </div>
+      <SectionTabs />
     </header>
   );
 }
