@@ -352,3 +352,79 @@ body {
     }
   }
 }
+
+/* Shop 카드 그림: 같은 그림 4장(바탕·얼굴·왼손·오른손)을 겹치고
+   얼굴·손 자리만 마스크로 잘라 움직인다. 위치 %는 정사각형 그림 기준 */
+.hj-figure {
+  position: absolute;
+  inset: 0;
+}
+.hj-layer {
+  position: absolute;
+  inset: 0;
+  background: var(--hj-image) center / 100% 100% no-repeat;
+}
+/* mask: 검은 부분만 보이고 투명한 부분은 잘린다. 가장자리는 흐리게 해서 겹친 선이 안 보이게 */
+.hj-head {
+  mask: radial-gradient(ellipse 33% 28% at 53% 34%, #000 84%, transparent 100%);
+}
+.hj-hand-left {
+  mask: radial-gradient(
+    ellipse 5.4% 4.6% at 51.8% 75.2%,
+    #000 60%,
+    transparent 100%
+  );
+}
+.hj-hand-right {
+  mask: radial-gradient(
+    ellipse 6.4% 4.6% at 60.4% 75.6%,
+    #000 60%,
+    transparent 100%
+  );
+}
+
+/* '동작 줄이기' 설정이면 멈춘 그림 그대로 */
+@media (prefers-reduced-motion: no-preference) {
+  /* 코딩 중: 화면 쪽으로 살짝 숙이고, 양손 번갈아 타건 */
+  [data-face="focus"] .hj-head {
+    animation: hj-nod 2.2s ease-in-out infinite;
+  }
+  [data-face="focus"] .hj-hand-left {
+    animation: hj-tap 0.32s ease-in-out infinite;
+  }
+  [data-face="focus"] .hj-hand-right {
+    animation: hj-tap 0.32s ease-in-out 0.16s infinite;
+  }
+  /* 아이디어: 고개를 톡 든다 */
+  [data-face="idea"] .hj-head {
+    translate: 0 -0.4%;
+    transition: translate 0.3s cubic-bezier(0.2, 1.6, 0.4, 1);
+  }
+  /* 노래: 박자에 맞춰 끄덕, 손은 느리게 */
+  [data-face="smile"] .hj-head {
+    animation: hj-bop 1s ease-in-out infinite;
+  }
+  [data-face="smile"] .hj-hand-left {
+    animation: hj-tap 0.5s ease-in-out infinite;
+  }
+  [data-face="smile"] .hj-hand-right {
+    animation: hj-tap 0.5s ease-in-out 0.25s infinite;
+  }
+}
+/* 아래로만 살짝 움직여서 잘린 가장자리가 드러나지 않게 */
+@keyframes hj-tap {
+  50% {
+    translate: 0 0.45%;
+  }
+}
+@keyframes hj-nod {
+  50% {
+    translate: 0 0.35%;
+  }
+}
+@keyframes hj-bop {
+  25%,
+  75% {
+    translate: 0 0.6%;
+  }
+}

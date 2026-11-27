@@ -1,15 +1,14 @@
 'use client';
 
-import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/common/Button';
 import { CopyEmailButton } from '@/components/common/CopyEmailButton';
 import { DemoCard } from '@/components/sections/demoSections/DemoCard';
+import { HjFigure } from '@/components/sections/demoSections/HjFigure';
 import { TagList } from '@/components/sections/demoSections/TagList';
 import { EMAIL } from '@/data/contact';
 import { SHOP_TAGS } from '@/data/shop';
-import { asset } from '@/lib/asset';
 import { copyText } from '@/lib/copyText';
 
 const GUIDE_NOTE = '연타해 보세요. 담는 중에 누른 건 한 번으로 쳐요.';
@@ -107,13 +106,7 @@ export function Shop() {
           <span className='absolute top-3 left-3 z-10 rounded-lg bg-accent px-2 py-0.5 text-xs font-extrabold text-on-accent'>
             NEW
           </span>
-          <Image
-            src={asset('/images/hj/hj-01-focus.webp')}
-            alt=''
-            fill
-            sizes='(min-width: 640px) 360px, 150px'
-            className='object-cover'
-          />
+          <HjFigure face='focus' />
           <span
             aria-hidden='true'
             className='absolute right-2.5 bottom-2.5 rounded-lg bg-white/85 px-2 py-0.5 text-xs font-bold text-[#3a3340]'
