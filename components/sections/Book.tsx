@@ -103,9 +103,9 @@ export function Book() {
             <Image
               src={asset(`/images/books/${selectedBook.id}.webp`)}
               alt=''
-              width={60}
-              height={74}
-              className='h-18.5 w-auto shrink-0 rounded-[3px] shadow-md'
+              width={75}
+              height={112}
+              className='h-28 w-auto shrink-0 rounded-[3px] shadow-md'
             />
             <span>
               <b className='text-foreground'>{selectedBook.title}</b>
