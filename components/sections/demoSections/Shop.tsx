@@ -9,6 +9,7 @@ import { HjFigure } from '@/components/sections/demoSections/HjFigure';
 import { TagList } from '@/components/sections/demoSections/TagList';
 import { EMAIL } from '@/data/contact';
 import { SHOP_TAGS } from '@/data/shop';
+import { useHjSequence } from '@/hooks/useHjSequence';
 import { copyText } from '@/lib/copyText';
 
 const GUIDE_NOTE = '연타해 보세요. 담는 중에 누른 건 한 번으로 쳐요.';
@@ -35,6 +36,12 @@ function addedNote(clickCount: number, requestCount: number) {
 }
 
 export function Shop() {
+  const {
+    targetRef: hjTargetRef,
+    face: hjFace,
+    caption: hjCaption,
+    restart: restartHj,
+  } = useHjSequence<HTMLButtonElement>();
   const [isLiked, setIsLiked] = useState(false);
   // 버튼 아래 한 줄 안내. 좋아요·장바구니가 같은 자리를 함께 쓴다
   const [note, setNote] = useState(GUIDE_NOTE);
@@ -102,18 +109,25 @@ export function Shop() {
       direction='col'
     >
       <div className='grid grid-cols-[150px_minmax(0,1fr)] items-start gap-x-3.5 gap-y-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] sm:items-stretch sm:gap-5'>
-        <div className='relative col-start-1 row-span-4 row-start-1 aspect-square overflow-hidden rounded-2xl bg-background-soft sm:row-span-1'>
+        {/* 누르면 첫 표정부터 다시 */}
+        <button
+          ref={hjTargetRef}
+          type='button'
+          aria-label='그림 처음부터 다시 보기'
+          onClick={restartHj}
+          className='relative col-start-1 row-span-4 row-start-1 aspect-square cursor-pointer overflow-hidden rounded-2xl bg-background-soft sm:row-span-1'
+        >
           <span className='absolute top-3 left-3 z-10 rounded-lg bg-accent px-2 py-0.5 text-xs font-extrabold text-on-accent'>
             NEW
           </span>
-          <HjFigure face='focus' />
+          <HjFigure face={hjFace} />
           <span
             aria-hidden='true'
             className='absolute right-2.5 bottom-2.5 rounded-lg bg-white/85 px-2 py-0.5 text-xs font-bold text-[#3a3340]'
           >
-            코딩 중…
+            {hjCaption}
           </span>
-        </div>
+        </button>
 
         <div className='contents sm:flex sm:flex-col sm:gap-2.5'>
           <p className='col-start-2 row-start-1 text-[13px] font-bold text-foreground-muted'>
