@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/common/Button';
 import { DemoCard } from '@/components/sections/demoSections/DemoCard';
@@ -11,11 +11,74 @@ import { asset } from '@/lib/asset';
 
 const GUIDE_NOTE = '연타해 보세요. 담는 중에 누른 건 한 번으로 쳐요.';
 const LIKED_NOTE = '아앗 감사합니다!';
+const ALREADY_IN_CART_NOTE =
+  '이미 담겨 있어요. 연락은 이메일 복사로 편하게 주세요.';
+
+// 서버에 담기 요청을 보낸 척 기다리는 시간
+const FAKE_REQUEST_MS = 900;
+
+type CartStatus = 'idle' | 'pending' | 'added';
+
+const CART_LABEL: Record<CartStatus, string> = {
+  idle: '장바구니 담기',
+  pending: '담는 중…',
+  added: '담김 ✓',
+};
+
+function pendingNote(clickCount: number, requestCount: number) {
+  return `담는 중… (클릭 ${clickCount}번 · 요청 ${requestCount}번)`;
+}
+
+function addedNote(clickCount: number, requestCount: number) {
+  return `클릭 ${clickCount}번, 요청은 ${requestCount}번만 나갔어요.`;
+}
 
 export function Shop() {
   const [isLiked, setIsLiked] = useState(false);
   // 버튼 아래 한 줄 안내. 좋아요·장바구니가 같은 자리를 함께 쓴다
   const [note, setNote] = useState(GUIDE_NOTE);
+
+  const [cartStatus, setCartStatus] = useState<CartStatus>('idle');
+  // 연타 잠금은 ref로 한다. state는 다음 렌더 전까지 값이 안 바뀌어서
+  // 같은 순간 여러 번 눌리면 모두 'idle'로 읽고 요청이 여러 번 나간다
+  const isPendingRef = useRef(false);
+  // 화면에 바로 그리지 않고 문구 만들 때만 읽는 숫자라 ref에 둔다
+  const clickCountRef = useRef(0);
+  const requestCountRef = useRef(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // 담는 중에 섹션이 사라지면 타이머 정리
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  function addToCart() {
+    clickCountRef.current += 1;
+
+    if (cartStatus === 'added') {
+      setNote(ALREADY_IN_CART_NOTE);
+      return;
+    }
+    // 담는 중 클릭은 요청을 보내지 않고 횟수만 센다
+    if (isPendingRef.current) {
+      setNote(pendingNote(clickCountRef.current, requestCountRef.current));
+      return;
+    }
+
+    isPendingRef.current = true;
+    requestCountRef.current += 1;
+    setCartStatus('pending');
+    setNote(pendingNote(clickCountRef.current, requestCountRef.current));
+
+    timerRef.current = setTimeout(() => {
+      isPendingRef.current = false;
+      setCartStatus('added');
+      // ref는 늘 최신 값이라 기다리는 동안 늘어난 클릭 수까지 읽힌다
+      setNote(addedNote(clickCountRef.current, requestCountRef.current));
+    }, FAKE_REQUEST_MS);
+  }
 
   function toggleLike() {
     const nextIsLiked = !isLiked;
@@ -87,8 +150,13 @@ export function Shop() {
               <Heart isFilled={isLiked} />
               좋아요
             </Button>
-            <Button className='flex-1' variant='solid'>
-              장바구니 담기
+            <Button
+              className='flex-1 aria-busy:cursor-progress'
+              variant='solid'
+              aria-busy={cartStatus === 'pending'}
+              onClick={addToCart}
+            >
+              {CART_LABEL[cartStatus]}
             </Button>
           </div>
           <p
