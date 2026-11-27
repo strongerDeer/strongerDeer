@@ -4,15 +4,17 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/common/Button';
+import { CopyEmailButton } from '@/components/common/CopyEmailButton';
 import { DemoCard } from '@/components/sections/demoSections/DemoCard';
 import { TagList } from '@/components/sections/demoSections/TagList';
+import { EMAIL } from '@/data/contact';
 import { SHOP_TAGS } from '@/data/shop';
 import { asset } from '@/lib/asset';
+import { copyText } from '@/lib/copyText';
 
 const GUIDE_NOTE = '연타해 보세요. 담는 중에 누른 건 한 번으로 쳐요.';
 const LIKED_NOTE = '아앗 감사합니다!';
-const ALREADY_IN_CART_NOTE =
-  '이미 담겨 있어요. 연락은 이메일 복사로 편하게 주세요.';
+const ALREADY_IN_CART_NOTE = '이미 담겨 있어요. 메일로 편하게 연락 주세요.';
 
 // 서버에 담기 요청을 보낸 척 기다리는 시간
 const FAKE_REQUEST_MS = 900;
@@ -46,6 +48,8 @@ export function Shop() {
   const clickCountRef = useRef(0);
   const requestCountRef = useRef(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // 담긴 뒤 이메일 주소가 복사됐는지. 막히면 주소와 복사 버튼을 대신 보여 준다
+  const [isEmailCopied, setIsEmailCopied] = useState(false);
 
   // 담는 중에 섹션이 사라지면 타이머 정리
   useEffect(() => {
@@ -72,8 +76,12 @@ export function Shop() {
     setCartStatus('pending');
     setNote(pendingNote(clickCountRef.current, requestCountRef.current));
 
-    timerRef.current = setTimeout(() => {
+    // 복사는 클릭한 순간에 시작해야 한다 (0.9초 뒤면 사파리가 거부)
+    const copyPromise = copyText(EMAIL);
+
+    timerRef.current = setTimeout(async () => {
       isPendingRef.current = false;
+      setIsEmailCopied(await copyPromise);
       setCartStatus('added');
       // ref는 늘 최신 값이라 기다리는 동안 늘어난 클릭 수까지 읽힌다
       setNote(addedNote(clickCountRef.current, requestCountRef.current));
@@ -165,6 +173,21 @@ export function Shop() {
           >
             {note}
           </p>
+          {/* 담긴 뒤 안내. 복사가 막혔으면 주소와 복사 버튼을 보여 준다 */}
+          {cartStatus === 'added' &&
+            (isEmailCopied ? (
+              <p className='col-span-2 row-start-8 text-sm font-bold'>
+                주소가 복사됐어요. 메일 주세요 ✉️
+              </p>
+            ) : (
+              <p className='col-span-2 row-start-8 flex flex-wrap items-center gap-2 text-sm'>
+                메일 주세요 ✉️
+                <span id='shop-email' className='font-bold'>
+                  {EMAIL}
+                </span>
+                <CopyEmailButton emailElementId='shop-email' />
+              </p>
+            ))}
         </div>
       </div>
     </DemoCard>
