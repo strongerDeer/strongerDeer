@@ -502,7 +502,7 @@ export function Hero() {
                 ref={(el) => {
                   pillRefs.current[index] = el;
                 }}
-                className='rounded-full border border-line bg-background-card px-3.5 py-1.5 text-sm text-foreground-muted'
+                className='rounded-pill border border-line bg-background-card px-3.5 py-1.5 text-sm text-foreground-muted'
               >
                 <b className='text-foreground'>{role}</b> {text}
               </span>

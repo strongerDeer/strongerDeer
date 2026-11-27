@@ -6,6 +6,7 @@ import localFont from 'next/font/local';
 
 import { Footer } from '@/components/common/Footer';
 import { Header } from '@/components/common/Header';
+import { DISPLAY_SETTINGS_SCRIPT } from '@/lib/displaySettingsScript';
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -29,10 +30,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
+    // 스크립트가 React보다 먼저 data-*를 붙이므로, 서버 HTML과 다르다는 경고를 html에서만 끈다
     <html
       lang='ko'
+      suppressHydrationWarning
       className={`${pretendard.variable} ${robotoMono.variable} h-full antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: DISPLAY_SETTINGS_SCRIPT }} />
+      </head>
       <body className='flex min-h-full flex-col'>
         <Header />
         {children}

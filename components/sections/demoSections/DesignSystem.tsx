@@ -1,12 +1,64 @@
+'use client';
+
+import { useSyncExternalStore } from 'react';
+
 import { Button } from '@/components/common/Button';
 import { DemoCard } from '@/components/sections/demoSections/DemoCard';
 import { RadioGroup } from '@/components/sections/demoSections/RadioGroup';
 import { ACCENTS } from '@/data/accents';
+import {
+  CONTRAST_OPTIONS,
+  DisplaySettings,
+  FONT_OPTIONS,
+  RADIUS_SCALE_RANGE,
+  THEME_OPTIONS,
+} from '@/data/displaySettings';
+import { MIN_TEXT_CONTRAST, pickTextColor } from '@/lib/colorContrast';
+import {
+  getAccentContrast,
+  getServerAccentContrast,
+  getServerSettings,
+  getSettings,
+  resetSettings,
+  subscribeSettings,
+  updateSettings,
+} from '@/lib/displaySettingsStore';
 
 const RAINBOW =
   'conic-gradient(#f43f5e,#f59e0b,#22c55e,#06b6d4,#6366f1,#d946ef,#f43f5e)';
 
 export function DesignSystem() {
+  // 설정은 이 기기 저장소에 있다. 서버에선 기본값, 브라우저에선 저장된 값을 읽는다
+  const settings = useSyncExternalStore(
+    subscribeSettings,
+    getSettings,
+    getServerSettings
+  );
+
+  // 키 하나만 바꾸고 나머지 설정은 그대로 둔다
+  function changeSetting<K extends keyof DisplaySettings>(
+    key: K,
+    value: DisplaySettings[K]
+  ) {
+    updateSettings({ ...settings, [key]: value });
+  }
+
+  function pickCustomAccent(color: string) {
+    updateSettings({
+      ...settings,
+      accent: 'custom',
+      customAccent: { color, textColor: pickTextColor(color) },
+    });
+  }
+
+  const accentContrast = useSyncExternalStore(
+    subscribeSettings,
+    getAccentContrast,
+    getServerAccentContrast
+  );
+
+  const isCustomAccent = settings.accent === 'custom';
+
   return (
     <DemoCard
       index={1}
@@ -28,12 +80,16 @@ export function DesignSystem() {
         <RadioGroup
           legend='테마'
           name='theme'
-          options={['시스템', '라이트', '다크']}
+          options={THEME_OPTIONS}
+          value={settings.theme}
+          onChange={(value) => changeSetting('theme', value)}
         />
         <RadioGroup
           legend='대비'
           name='contrast'
-          options={['기본', '고대비']}
+          options={CONTRAST_OPTIONS}
+          value={settings.contrast}
+          onChange={(value) => changeSetting('contrast', value)}
         />
 
         <fieldset>
@@ -41,17 +97,18 @@ export function DesignSystem() {
             강조색
           </legend>
           <div className='flex items-center gap-1.5'>
-            {ACCENTS.map(({ name, color }, index) => (
+            {ACCENTS.map(({ id, name, color }) => (
               <label
-                key={name}
+                key={id}
                 title={name}
                 className='group grid size-8 cursor-pointer place-items-center rounded-full border-2 border-transparent has-checked:border-foreground has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-accent'
               >
                 <input
                   type='radio'
                   name='accent'
-                  value={name}
-                  defaultChecked={index === 0}
+                  value={id}
+                  checked={settings.accent === id}
+                  onChange={() => changeSetting('accent', id)}
                   className='sr-only'
                 />
                 <span
@@ -66,28 +123,35 @@ export function DesignSystem() {
             ))}
             <label
               title='직접 고르기'
-              className='relative inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-full border-2 border-transparent pr-2.5 pl-1 has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-accent'
+              className={`relative inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-pill border-2 pr-2.5 pl-1 has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-accent ${isCustomAccent ? 'border-foreground' : 'border-transparent'}`}
             >
               <input
                 type='color'
-                defaultValue='#615ef0'
+                value={settings.customAccent.color}
+                onChange={(event) => pickCustomAccent(event.target.value)}
                 aria-label='강조색 직접 고르기'
                 className='absolute inset-0 size-full cursor-pointer opacity-0'
               />
+              {/* 직접 고른 뒤에는 무지개 대신 고른 색을 보여 준다 */}
               <span
                 aria-hidden='true'
                 className='size-5.5 rounded-full'
-                style={{ background: RAINBOW }}
+                style={{
+                  background: isCustomAccent
+                    ? settings.customAccent.color
+                    : RAINBOW,
+                }}
               />
               <span aria-hidden='true' className='text-xs font-semibold'>
                 직접
               </span>
             </label>
           </div>
-          <p
-            aria-live='polite'
-            className='mt-2 text-xs text-foreground-muted'
-          />
+          <p aria-live='polite' className='mt-2 text-xs text-foreground-muted'>
+            {accentContrast !== null && (
+              <AccentContrastNote ratio={accentContrast} />
+            )}
+          </p>
         </fieldset>
 
         <fieldset>
@@ -98,15 +162,18 @@ export function DesignSystem() {
             <input
               type='range'
               id='radius-range'
-              min={0}
-              max={2}
-              step={0.1}
-              defaultValue={1}
+              min={RADIUS_SCALE_RANGE.min}
+              max={RADIUS_SCALE_RANGE.max}
+              step={RADIUS_SCALE_RANGE.step}
+              value={settings.radiusScale}
+              onChange={(event) =>
+                changeSetting('radiusScale', Number(event.target.value))
+              }
               aria-label='모서리 둥글기 배율'
               className='min-w-0 flex-1 accent-accent'
             />
             <output htmlFor='radius-range' className='font-mono text-sm'>
-              1.0
+              × {settings.radiusScale.toFixed(1)}
             </output>
           </div>
         </fieldset>
@@ -114,20 +181,37 @@ export function DesignSystem() {
         <RadioGroup
           legend='폰트'
           name='font'
-          options={['고딕', '명조', '기기 기본']}
+          options={FONT_OPTIONS}
+          value={settings.font}
+          onChange={(value) => changeSetting('font', value)}
         />
 
+        {/* 토큰 값 직접 고치기: 우선순위 최하
         <details className='text-sm'>
           <summary className='cursor-pointer py-1 font-bold text-foreground-muted'>
             토큰 값 직접 고치기{' '}
             <small className='font-normal'>(입력 후 Enter)</small>
           </summary>
         </details>
+        */}
 
-        <Button size='sm' className='self-start'>
+        <Button size='sm' className='self-start' onClick={resetSettings}>
           처음 설정으로
         </Button>
       </div>
     </DemoCard>
+  );
+}
+
+function AccentContrastNote({ ratio }: { ratio: number }) {
+  const ratioText = `${ratio.toFixed(1)}:1`;
+  if (ratio >= MIN_TEXT_CONTRAST) {
+    return <>배경 대비 {ratioText} ✓ 작은 글자도 잘 읽혀요</>;
+  }
+  return (
+    <>
+      배경 대비 {ratioText} · 작은 글자는 읽기 어려울 수 있어요 (권장{' '}
+      {MIN_TEXT_CONTRAST}:1)
+    </>
   );
 }

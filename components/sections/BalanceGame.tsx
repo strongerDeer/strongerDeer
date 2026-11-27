@@ -80,7 +80,7 @@ export function BalanceGame() {
       <div
         ref={gameBoxRef}
         tabIndex={-1}
-        className='mx-auto mt-8 max-w-4xl scroll-mt-20 rounded-[28px] bg-background-soft px-[max(16px,4vw)] py-7 text-left outline-none'
+        className='mx-auto mt-8 max-w-4xl scroll-mt-20 rounded-panel bg-background-soft px-[max(16px,4vw)] py-7 text-left outline-none'
       >
         {isResultOpen ? (
           <BalanceResult answers={answers} onRestart={restart} />
@@ -92,7 +92,7 @@ export function BalanceGame() {
               </span>
               <span>{pickedCount}개 골랐어요</span>
             </div>
-            <div className='mb-6 h-1.5 overflow-hidden rounded-full bg-line'>
+            <div className='mb-6 h-1.5 overflow-hidden rounded-pill bg-line'>
               <div
                 className='h-full bg-accent transition-[width] duration-300'
                 style={{ width: `${(pickedCount / GAMES.length) * 100}%` }}
