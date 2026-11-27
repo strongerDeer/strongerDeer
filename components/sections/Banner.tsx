@@ -30,9 +30,6 @@ export function Banner() {
             <span className='font-black'>
               page0127<span className='text-(--brand-mint)'>.</span>
             </span>
-            <span className='rounded-full border border-[#cfe0fb] bg-white px-2 py-0.5 text-xs font-extrabold tracking-[0.06em] text-(--brand)'>
-              BETA
-            </span>
           </p>
 
           <h2 id='banner-title' className='text-2xl'>

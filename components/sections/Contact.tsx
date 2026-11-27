@@ -2,8 +2,10 @@ import { ChartColumn } from 'lucide-react';
 
 import { Button } from '@/components/common/Button';
 import { ButtonLink } from '@/components/common/ButtonLink';
+import { CopyEmailButton } from '@/components/common/CopyEmailButton';
 import { Section } from '@/components/common/Section';
 import { TypingText } from '@/components/common/TypingText';
+import { EMAIL } from '@/data/contact';
 
 export function Contact() {
   return (
@@ -18,13 +20,14 @@ export function Contact() {
     >
       <div className='mt-10 flex flex-wrap items-center justify-center gap-2'>
         <a
-          href='mailto:stronger_deer@naver.com'
+          id='contact-email'
+          href={`mailto:${EMAIL}`}
           className='rounded-full bg-background-soft px-4 py-2'
         >
-          stronger_deer@naver.com
+          {EMAIL}
         </a>
 
-        <Button size='sm'>주소 복사</Button>
+        <CopyEmailButton emailElementId='contact-email' />
         <div className='flex flex-wrap gap-2'>
           <Button size='sm'>
             <ChartColumn aria-hidden='true' className='size-[1.15em]' />내 방문
