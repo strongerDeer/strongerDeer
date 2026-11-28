@@ -6,7 +6,7 @@ import logo from '@/public/strongerDeer.svg';
 export function Footer() {
   return (
     <footer className='border-t border-line'>
-      <div className='mx-auto flex w-full max-w-page flex-wrap items-center justify-between gap-2 px-4 pt-10 pb-24 text-sm text-foreground-muted'>
+      <div className='mx-auto flex h-(--footer-h) w-full max-w-page items-center justify-between gap-2 px-4 text-sm text-foreground-muted'>
         <p>
           <Image src={logo} alt='strongerDeer' className='h-5 w-auto' />
         </p>

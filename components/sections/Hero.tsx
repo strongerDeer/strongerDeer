@@ -445,7 +445,8 @@ export function Hero() {
       aria-label='소개'
       className='intro-scene -mt-(--header-h) h-[295svh] motion-reduce:mt-0 motion-reduce:h-auto'
     >
-      <div className='sticky top-0 flex h-svh flex-col items-center justify-center gap-6 px-4 text-center motion-reduce:static motion-reduce:min-h-[calc(100svh-var(--header-h))]'>
+      {/* pt-(--header-h): 헤더가 위를 덮으므로, 헤더 아래 남은 영역의 가운데에 오게 */}
+      <div className='sticky top-0 flex h-svh flex-col items-center justify-center gap-6 px-4 pt-(--header-h) text-center motion-reduce:static motion-reduce:min-h-[calc(100svh-var(--header-h))]'>
         <p className='font-mono'>
           <span className='sr-only'>De{'{sign||velop}'}er</span>
           <code

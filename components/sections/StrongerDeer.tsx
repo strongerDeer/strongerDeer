@@ -115,7 +115,8 @@ export function StrongerDeer() {
       aria-labelledby='hero-title'
       className='relative z-10 mt-[-100svh] h-[240svh] bg-background text-center motion-reduce:mt-0 motion-reduce:h-auto'
     >
-      <div className='sticky top-(--header-h) flex h-[calc(100svh-var(--header-h))] flex-col items-center justify-center gap-5 px-4 py-10 motion-reduce:static'>
+      {/* pb를 더 주는 이유: 아래쪽 font-weight 글 무게만큼 내용을 살짝 위로 올려 균형을 맞춘다 */}
+      <div className='sticky top-(--header-h) flex h-[calc(100svh-var(--header-h))] flex-col items-center justify-center gap-5 px-4 pt-10 pb-24 motion-reduce:static'>
         <p className='text-[clamp(28px,6vw,48px)] tracking-tight'>
           <span className='sr-only'>strongerDeer</span>
           {/* 인트로의 복제본이 날아오는 동안은 Hero가 --logo-reveal을 0으로 둬서 숨긴다 */}

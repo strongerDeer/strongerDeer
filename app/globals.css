@@ -228,11 +228,15 @@ section[id] {
 body {
   background: var(--background);
   color: var(--foreground);
+  /* 기본 글자 크기를 fluid 토큰으로 (안 정하면 브라우저 기본 16px 고정) */
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
   word-break: keep-all;
 }
 
 :root {
   --header-h: 3.25rem;
+  --footer-h: 5.25rem;
 
   /* 인트로가 어두워질 때 섞을 색 (사이트 다크 모드 값과 같음) */
   --editor-background: #14151c;
