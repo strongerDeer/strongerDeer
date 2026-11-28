@@ -96,19 +96,23 @@ export function Book() {
 
       <p
         aria-live='polite'
-        className='mx-auto mt-4 flex min-h-24 items-center justify-center gap-3.5 text-left text-foreground-muted'
+        // 높이를 고른 책 표지(h-28)만큼 잡아 둔다: 고를 때 아래 추천 폼이 밀리지 않게
+        className='mx-auto mt-4 flex min-h-28 items-center justify-center gap-3.5 text-left text-sm text-foreground-muted sm:text-base'
       >
+        {!selectedBook && (
+          <span className='text-sm'>책을 누르면 여기에 소개가 나와요 👆</span>
+        )}
         {selectedBook && (
           <>
             <Image
               src={asset(`/images/books/${selectedBook.id}.webp`)}
               alt=''
-              width={60}
-              height={74}
-              className='h-18.5 w-auto shrink-0 rounded-[3px] shadow-md'
+              width={75}
+              height={112}
+              className='h-28 w-auto shrink-0 rounded-[3px] shadow-md'
             />
             <span>
-              <b className='text-foreground'>{selectedBook.title}</b>
+              <b className='text-base text-foreground'>{selectedBook.title}</b>
               <br />
               {selectedBook.author}
               <br />

@@ -43,7 +43,7 @@ export function Shelf({
                 alt=''
                 width={80}
                 height={120}
-                className='h-30 w-auto'
+                className='h-21 w-auto sm:h-30'
               />
             </button>
           </li>

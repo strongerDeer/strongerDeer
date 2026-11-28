@@ -35,7 +35,7 @@ export function Section({
           titleSize={titleSize}
         />
         {description && (
-          <p className='mx-auto mb-7 max-w-[60ch] text-center text-balance break-keep text-foreground-muted'>
+          <p className='mx-auto mb-7 max-w-[60ch] text-center text-sm text-balance break-keep text-foreground-muted sm:text-base'>
             {description}
           </p>
         )}

@@ -15,8 +15,8 @@ export function Contact() {
         <TypingText text='취향이 같아도 달라도, 같이 만들어볼 이야기가 궁금하지 않으세요?' />
       }
       titleSize='closing'
-      // 페이지 마지막 장면: 화면을 거의 채우고 내용은 세로 가운데
-      className='flex min-h-[90svh] flex-col justify-center'
+      // 페이지 마지막 장면: 연락 + 푸터가 딱 한 화면. 내용은 그 안에서 세로 가운데
+      className='flex min-h-[calc(100svh-var(--header-h)-var(--footer-h))] flex-col justify-center'
     >
       <div className='mt-10 flex flex-wrap items-center justify-center gap-2'>
         <a
