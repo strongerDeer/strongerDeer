@@ -158,6 +158,7 @@ export function Hero() {
   const [typed, setTyped] = useState(0);
   const done = typed >= TOTAL;
 
+  const stageRef = useRef<HTMLDivElement>(null);
   const careersRef = useRef<HTMLDivElement>(null);
   const pillRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const orRef = useRef<HTMLSpanElement>(null);
@@ -171,12 +172,24 @@ export function Hero() {
   // 알약마다 '가운데까지 거리'. 한 번 재고 저장해 둔다
   const pillOffsets = useRef<Offset[] | null>(null);
 
+  // 글자가 떨어지기 시작하면 커서도 숨긴다
+  // 깜빡임 애니메이션이 opacity를 쓰고 있어서, 겹치지 않게 visibility로 숨김
+  const hideCaretWhileFalling = () => {
+    if (!caretRef.current) return;
+    const scrolledScreens = window.scrollY / window.innerHeight;
+    caretRef.current.style.visibility =
+      scrolledScreens >= FALL_START ? 'hidden' : '';
+  };
+
   useEffect(() => {
+    // 타이핑이 바뀌면 커서가 새로 그려지므로, 숨길 구간이면 바로 다시 숨긴다
+    hideCaretWhileFalling();
     if (done) return;
-    const reduce = prefersReducedMotion();
+    // 이미 내려간 상태(새로고침·스크롤 위치 복원)거나 '동작 줄이기'면 타이핑 없이 바로 다 보여 준다
+    const skipTyping = prefersReducedMotion() || window.scrollY > 0;
     const timer = setTimeout(
-      () => setTyped(reduce ? TOTAL : (n) => n + 1),
-      reduce ? 0 : TYPE_INTERVAL
+      () => setTyped(skipTyping ? TOTAL : (n) => n + 1),
+      skipTyping ? 0 : TYPE_INTERVAL
     );
     return () => clearTimeout(timer);
   }, [typed, done]);
@@ -194,10 +207,16 @@ export function Hero() {
   // 남은 글자마다 화면 어디에 있는지 잰다
   // 복제본은 모두 큰 글자 크기로 만들어 두고, 작은 글자는 scale로 줄여서 맞춘다
   // (나중에 크기가 바뀔 때 font-size 대신 transform만 바꾸려고)
+  // 화면 기준이 아니라 '무대(sticky) 기준'으로 잰다
+  // 무대가 화면에 붙어 있을 땐 무대 윗변 = 화면 윗변(0)이라 두 값이 같지만,
+  // 인트로보다 아래에 있을 때 다시 재면(새로고침·주소창 때문에 창 크기 변경) 무대가 화면 위로 올라가 있어서
+  // 화면 기준으로 재면 글자 자리가 화면 밖으로 저장된다 → 다시 올라왔을 때 글자가 안 보이던 원인
   const measureClonePlaces = (): ClonePlace[] | null => {
     const firstMainChar = charRefs.current[LINES[MAIN_LINE][0].index];
-    if (!firstMainChar) return null;
+    const stage = stageRef.current;
+    if (!firstMainChar || !stage) return null;
     const mainFontSize = fontSizeOf(firstMainChar);
+    const stageTop = stage.getBoundingClientRect().top;
 
     const places: ClonePlace[] = [];
     LOGO_LETTERS.forEach(({ from }, order) => {
@@ -218,7 +237,7 @@ export function Hero() {
       const x = rect.left + rect.width / 2;
       places.push({
         x,
-        y: rect.top + rect.height / 2,
+        y: rect.top + rect.height / 2 - stageTop,
         scale: fontSizeOf(char) / mainFontSize,
         meetX: x,
         lineX: 0, // 아래에서 채운다
@@ -327,12 +346,7 @@ export function Hero() {
       char.style.opacity = String(1 - fall);
     });
 
-    // 글자가 떨어지기 시작하면 커서도 숨긴다
-    // 깜빡임 애니메이션이 opacity를 쓰고 있어서, 겹치지 않게 visibility로 숨김
-    if (caretRef.current) {
-      caretRef.current.style.visibility =
-        scrolledScreens >= FALL_START ? 'hidden' : '';
-    }
+    hideCaretWhileFalling();
 
     // 복제본 바꿔치기: CLONE_START부터 원본은 숨기고, 같은 자리에 복제본을 보인다
     // 눈으로는 아무 변화가 없어야 성공
@@ -446,7 +460,10 @@ export function Hero() {
       className='intro-scene -mt-(--header-h) h-[295svh] motion-reduce:mt-0 motion-reduce:h-auto'
     >
       {/* pt-(--header-h): 헤더가 위를 덮으므로, 헤더 아래 남은 영역의 가운데에 오게 */}
-      <div className='sticky top-0 flex h-svh flex-col items-center justify-center gap-6 px-4 pt-(--header-h) text-center motion-reduce:static motion-reduce:min-h-[calc(100svh-var(--header-h))]'>
+      <div
+        ref={stageRef}
+        className='sticky top-0 flex h-svh flex-col items-center justify-center gap-6 px-4 pt-(--header-h) text-center motion-reduce:static motion-reduce:min-h-[calc(100svh-var(--header-h))]'
+      >
         <p className='font-mono'>
           <span className='sr-only'>De{'{sign||velop}'}er</span>
           <code
